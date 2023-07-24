@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particularidades</title>
+  <link rel="stylesheet" href="topLevelNavigation.css">
+</head>
+
+<body>
+<!-- 
+  OJO - Esta NavBar, No es Template, sino contenido a Reutilizar, en caso de ser necesario, ver en que ruta se vuelve a colocar, sino no van
+  a funcionar los enlaces ya colocados en las páginas -->
+
+  <pre class="script">
+    wiki.idfTemplate();</pre>
+    
+    <nav class="navbar navbar-menu-osde elm-header-logo-menu">
+    <div class="elm-header-nav-container elm-nav-container">
+    <ul class="navbar-header">
+        <li class="navbar-header-logo"><a href="/"><img alt="Logo de la empresa" src="/@api/deki/files/117/LogoOsde.png" /></a></li>
+        <li class="navbar-header-menu"><input class="nav-toggle" id="nav-toggle" type="checkbox" />
+        <ul>
+            <li class="has-submenu mt-style-conditional style-wrap" if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Editores_de_contenidos'] || user.groups['Comercial']"><a href="/Comercial"><img alt="Icono" src="/@api/deki/files/114/mindtouch_(1).png" />Comercial</a>
+            <ul class="submenu">
+                <li><a href="/Comercial/Gestionar_Leads_-_B2B">Gestionar Leads - B2B</a></li>
+                <li><a href="/Comercial/Gestionar_lead_B2C">Gestionar lead B2C</a></li>
+            </ul>
+            </li>
+            <li class="has-submenu  mt-style-conditional style-wrap" if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial'] "><a href="/Cobertura"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />Cobertura</a>
+            <ul class="submenu">
+                <li><a href="/Cobertura/Cirugias">Cirugías</a></li>
+                <li><a href="/Cobertura/Medicamentos">Medicamentos</a></li>
+                <li><a href="/Cobertura/practicas">Prácticas</a></li>
+            </ul>
+            </li>
+            <li class="has-submenu  mt-style-conditional style-wrap" if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial'] "><a href="/Afiliaciones"><img alt="Icono" src="/@api/deki/files/115/mindtouch_(2).png" />Afiliaciones</a>
+            <ul class="submenu">
+                <li><a href="/Afiliaciones/altas">Altas</a></li>
+                <li><a href="/Afiliaciones/Beneficios">Beneficios</a></li>
+                <li><a href="/Afiliaciones/Licencias">Licencias</a></li>
+                <li><a href="/PruebasVarias/Pruebas/Pruebas_de_edición/Movimiento_de_socios_y_empresas">Movimiento de socios y empresas</a></li>
+                <li><a href="/PruebasVarias/Pruebas/Pruebas_de_edición">Pruebas de edición</a></li>
+            </ul>
+            </li>
+            <li class="has-submenu mt-style-conditional style-wrap" if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial'] "><a href="/Cobranzas"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />Cobranzas</a>
+            <ul class="submenu">
+                <li><a href="/Cobranzas/Cuenta_corriente">Cuenta corriente</a></li>
+                <li><a href="/PruebasVarias/Pruebas/Deteccion_de_inconsistencias_de_padron_(carta_mpp)">Detección de inconsistencias de padrón</a></li>
+                <li><a href="/Cobranzas/Cuenta_corriente">Cuenta corriente</a></li>
+                <li><a href="/Cobranzas/Deuda_vencida">Deuda vencida</a></li>
+                <li><a href="/PruebasVarias/Pruebas/Medios_de_pago">Medios de pago</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </div>
+    </nav>
+    
+
+
+  <script src="topLevelNavigation.js"></script>
+</body>
+
+</html>
