@@ -1,0 +1,14 @@
+/* Oculta los contenidos */
+.collapse {
+    display: none;
+  }
+  
+  /* Muestra los contenidos cuando están activos */
+  .collapse.active {
+    display: block;
+  }
+  
+  /* Para distinguir los botones que van a quedar SIN contenido */
+  span.noContent button {
+    background-color: red;
+  }

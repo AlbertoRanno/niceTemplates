@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particularidades</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  
+  <p>&nbsp;</p>
+
+<div class="comment">
+<div class="mt-comment-meta">
+<div class="mt-comment-author">Alberto Ranno</div>
+<time class="mt-comment-datetime" datetime="2023-07-21T21:36:50.715Z">Jul 21, 2023, 6:36 PM</time></div>
+
+<div class="mt-comment-content">
+<p>Buen día Rodo! te dejo unos comentarios por si el finde me olvido xD</p>
+
+<p>*Luego de que los leas, borrá porfa la parte que va dedicada a vos, pero dejá la que dice&nbsp;"Indicaciones para la carga"</p>
+
+<p>*Estuve probando condicionales&nbsp;por el tema de que aplique&nbsp;por default el estilo a los botones sin contenido.. pero dado que siempre algo quedaba mal (muy aleatorio a como se borra, que etiquetas afecta, y ademas reemplaza los espacios en blaco por &amp;nbsp; y en diferentes etiquetas.. ) .. así que corté por lo sano, y &nbsp;me parece mejor que&nbsp;pinten&nbsp;los botones, y les pongan la clase "noContent" desde la botonera (como los Warnings)</p>
+
+<p>*Analía probó reemplazar los contenidos en cada caso y me dijo que&nbsp;va bien.. por lo que estimo que mas allá de algún ajuste, la estructura se mantendría..</p>
+
+<p>*como te habia dicho, deje clases puestas&nbsp;en el html,&nbsp;pero vacias:</p>
+
+<p>-particularidades</p>
+
+<p>-navbarLateral</p>
+
+<p>-contenidosRegiones</p>
+
+<p>-contenidosLocalidades</p>
+
+<p>*el CSS lo estuve usando desde acá para no tocar el gral mientras estuvieron con el tema de la carga,&nbsp;&nbsp;luego habría que pasarlo</p>
+
+<p><strong>Indicaciones para la carga</strong></p>
+
+<p>El contenido se debe cargar,&nbsp;reemplazando, en&nbsp;cada opción&nbsp;la parte que asi lo indique, por ej,&nbsp; "contenidoBahiaBlanca3"</p>
+
+<p>Los botones que queden sin contenido, deben ser seleccionados, y aplicársele la clase "noContent" (del mismo lugar donde aplican los Warnings)</p>
+</div>
+</div>
+
+<div class="particularidades">
+<nav class="navBarLateral"><button onclick="alternarCollapse('contenidoBuenosAires')" type="button">Buenos Aires</button><button onclick="alternarCollapse('contenidoCordoba')" type="button">Córdoba</button><button onclick="alternarCollapse('contenidoCuyo')" type="button">Cuyo</button><button onclick="alternarCollapse('contenidoMetropolitana')" type="button">Metropolitana</button><button onclick="alternarCollapse('contenidoNEA')" type="button">NEA</button><button onclick="alternarCollapse('contenidoNOA')" type="button">NOA</button><button onclick="alternarCollapse('contenidoSur')" type="button">Sur</button>
+
+<ul>
+</ul>
+</nav>
+
+<div class="contenidosRegiones">
+<div class="collapse" id="contenidoBuenosAires">
+<div>
+<div class="collapse-buttons"><button onclick="alternarCollapse('contenidoBahiaBlanca3')" type="button">Bahía Blanca</button><button onclick="alternarCollapse('contenidoBuenosAiresCentro3')" type="button">Buenos Aires Centro</button><button onclick="alternarCollapse('contenidoChivilcoy3')" type="button">Chivilcoy</button><button onclick="alternarCollapse('contenidoJunin3')" type="button">Junin</button><button onclick="alternarCollapse('contenidoLaPlata3')" type="button">La Plata</button><button onclick="alternarCollapse('contenidoLobos3')" type="button">Lobos</button><button onclick="alternarCollapse('contenidoMardelPlata3')" type="button">Mar del Plata</button><button onclick="alternarCollapse('contenidoPergamino3')" type="button">Pergamino</button><button onclick="alternarCollapse('contenidoTrenqueLauquen3')" type="button">Trenque Lauquen</button></div>
+
+<div class="contecontenidosLocalidades">
+<div class="collapse" id="contenidoBahiaBlanca3">
+<div>contenidoBahiaBlanca3</div>
+</div>
+
+<div class="collapse" id="contenidoBuenosAiresCentro3">
+<div>contenidoBuenosAiresCentro3</div>
+</div>
+
+<div class="collapse" id="contenidoChivilcoy3">
+<div>contenidoChivilcoy3</div>
+</div>
+
+<div class="collapse" id="contenidoJunin3">
+<div>contenidoJunin3</div>
+</div>
+
+<div class="collapse" id="contenidoLaPlata3">
+<div>contenidoLaPlata3</div>
+</div>
+
+<div class="collapse" id="contenidoLobos3">
+<div>contenidoLobos3</div>
+</div>
+
+<div class="collapse" id="contenidoMardelPlata3">
+<div>contenidoMardelPlata3</div>
+</div>
+
+<div class="collapse" id="contenidoPergamino3">
+<div>contenidoPergamino3</div>
+</div>
+
+<div class="collapse" id="contenidoTrenqueLauquen3">
+<div>contenidoTrenqueLauquen3</div>
+</div>
+</div>
+</div>
+
+<dl class="EXPAND_COLLAPSE">
+    <dt><strong>►Texto1</strong></dt>
+    <dd>
+    <dl class="EXPAND_COLLAPSE">
+        <dt><strong>►Titulo</strong></dt>
+        <dd>Descripción</dd>
+    </dl>
+
+    <div class="collapse-buttons"><button onclick="alternarCollapse('contenidoBahiaBlanca1')" type="button">Bahía Blanca</button><button onclick="alternarCollapse('contenidoBuenosAiresCentro1')" type="button">Buenos Aires Centro</button><button onclick="alternarCollapse('contenidoChivilcoy1')" type="button">Chivilcoy</button><button onclick="alternarCollapse('contenidoJunin1')" type="button">Junin</button><button onclick="alternarCollapse('contenidoLaPlata1')" type="button">La Plata</button><button onclick="alternarCollapse('contenidoLobos1')" type="button">Lobos</button><button onclick="alternarCollapse('contenidoMardelPlata1')" type="button">Mar del Plata</button><button onclick="alternarCollapse('contenidoPergamino1')" type="button">Pergamino</button><button onclick="alternarCollapse('contenidoTrenqueLauquen1')" type="button">Trenque Lauquen</button></div>
+
+    <div class="contecontenidosLocalidades">
+    <div class="collapse" id="contenidoBahiaBlanca1">
+    <div>contenidoBahiaBlanca1</div>
+    </div>
+
+    <div class="collapse" id="contenidoBuenosAiresCentro1">
+    <div>contenidoBuenosAiresCentro1</div>
+    </div>
+
+    <div class="collapse" id="contenidoChivilcoy1">
+    <div>contenidoChivilcoy1</div>
+    </div>
+
+    <div class="collapse" id="contenidoJunin1">
+    <div>contenidoJunin1</div>
+    </div>
+
+    <div class="collapse" id="contenidoLaPlata1">
+    <div>contenidoLaPlata1</div>
+    </div>
+
+    <div class="collapse" id="contenidoLobos1">
+    <div>contenidoLobos1</div>
+    </div>
+
+    <div class="collapse" id="contenidoMardelPlata1">
+    <div>contenidoMardelPlata1</div>
+    </div>
+
+    <div class="collapse" id="contenidoPergamino1">
+    <div>contenidoPergamino1</div>
+    </div>
+
+    <div class="collapse" id="contenidoTrenqueLauquen1">
+    <div>contenidoTrenqueLauquen1</div>
+    </div>
+    </div>
+    </dd>
+    <dt><strong>►Texto2</strong></dt>
+    <dd>
+    <div class="collapse-buttons"><button onclick="alternarCollapse('contenidoBahiaBlanca2')" type="button">Bahía Blanca</button><button onclick="alternarCollapse('contenidoBuenosAiresCentro2')" type="button">Buenos Aires Centro</button><button onclick="alternarCollapse('contenidoChivilcoy2')" type="button">Chivilcoy</button><button onclick="alternarCollapse('contenidoJunin2')" type="button">Junin</button><button onclick="alternarCollapse('contenidoLaPlata2')" type="button">La Plata</button><button onclick="alternarCollapse('contenidoLobos2')" type="button">Lobos</button><button onclick="alternarCollapse('contenidoMardelPlata2')" type="button">Mar del Plata</button><button onclick="alternarCollapse('contenidoPergamino2')" type="button">Pergamino</button><button onclick="alternarCollapse('contenidoTrenqueLauquen2')" type="button">Trenque Lauquen</button></div>
+
+    <div class="contecontenidosLocalidades">
+    <div class="collapse" id="contenidoBahiaBlanca2">
+    <div>contenidoBahiaBlanca2</div>
+    </div>
+
+    <div class="collapse" id="contenidoBuenosAiresCentro2">
+    <div>contenidoBuenosAiresCentro2</div>
+    </div>
+
+    <div class="collapse" id="contenidoChivilcoy2">
+    <div>contenidoChivilcoy2</div>
+    </div>
+
+    <div class="collapse" id="contenidoJunin2">
+    <div>contenidoJunin2</div>
+    </div>
+
+    <div class="collapse" id="contenidoLaPlata2">
+    <div>contenidoLaPlata2</div>
+    </div>
+
+    <div class="collapse" id="contenidoLobos2">
+    <div>contenidoLobos2</div>
+    </div>
+
+    <div class="collapse" id="contenidoMardelPlata2">
+    <div>contenidoMardelPlata2</div>
+    </div>
+
+    <div class="collapse" id="contenidoPergamino2">
+    <div>contenidoPergamino2</div>
+    </div>
+
+    <div class="collapse" id="contenidoTrenqueLauquen2">
+    <div>contenidoTrenqueLauquen2</div>
+    </div>
+    </div>
+    </dd>
+</dl>
+</div>
+
+<div class="collapse" id="contenidoCordoba">
+<div>
+<div class="collapse-buttons"><button onclick="alternarCollapse('contenidoCordobaCentro3')" type="button">Córdoba Centro</button><button onclick="alternarCollapse('contenidoRioCuarto3')" type="button">Río Cuarto</button><button onclick="alternarCollapse('contenidoVillaMaria3')" type="button">Villa María</button></div>
+
+<div class="contecontenidosLocalidades">
+<div class="collapse" id="contenidoCordobaCentro3">
+<div>contenidoCordobaCentro3</div>
+</div>
+
+<div class="collapse" id="contenidoRioCuarto3">
+<div>contenidoRioCuarto3</div>
+</div>
+
+<div class="collapse" id="contenidoVillaMaria3">
+<div>contenidoVillaMaria3</div>
+</div>
+</div>
+</div>
+
+<dl class="EXPAND_COLLAPSE">
+    <dt><strong>►Texto1</strong></dt>
+    <dd>
+    <dl class="EXPAND_COLLAPSE">
+        <dt><strong>►Titulo</strong></dt>
+        <dd>Descripción</dd>
+    </dl>
+
+    <div class="collapse-buttons"><button onclick="alternarCollapse('contenidoCordobaCentro1')" type="button">Córdoba Centro</button><button onclick="alternarCollapse('contenidoRioCuarto1')" type="button">Río Cuarto</button><button onclick="alternarCollapse('contenidoVillaMaria1')" type="button">Villa María</button></div>
+
+    <div class="contecontenidosLocalidades">
+    <div class="collapse" id="contenidoCordobaCentro1">
+    <div>contenidoCordobaCentro1</div>
+    </div>
+
+    <div class="collapse" id="contenidoRioCuarto1">
+    <div>contenidoRioCuarto1</div>
+    </div>
+
+    <div class="collapse" id="contenidoVillaMaria1">
+    <div>contenidoVillaMaria1</div>
+    </div>
+    </div>
+    </dd>
+    <dt><strong>►Texto2</strong></dt>
+    <dd>
+    <div class="collapse-buttons"><button onclick="alternarCollapse('contenidoCordobaCentro2')" type="button">Córdoba Centro</button><button onclick="alternarCollapse('contenidoRioCuarto2')" type="button">Río Cuarto</button><button onclick="alternarCollapse('contenidoVillaMaria2')" type="button">Villa María</button></div>
+
+    <div class="contecontenidosLocalidades">
+    <div class="collapse" id="contenidoCordobaCentro2">
+    <div>contenidoCordobaCentro2</div>
+    </div>
+
+    <div class="collapse" id="contenidoRioCuarto2">
+    <div>contenidoRioCuarto2</div>
+    </div>
+
+    <div class="collapse" id="contenidoVillaMaria2">
+    <div>contenidoVillaMaria2</div>
+    </div>
+    </div>
+    </dd>
+</dl>
+</div>
+
+<div class="collapse" id="contenidoCuyo">
+<div>
+<div class="collapse-buttons"><button onclick="alternarCollapse('contenidoMendoza3')" type="button">Mendoza</button><button onclick="alternarCollapse('contenidoSanJuan3')" type="button">San Juan</button><button onclick="alternarCollapse('contenidoSanLuis3')" type="button">San Luis</button></div>
+
+<div class="contecontenidosLocalidades">
+<div class="collapse" id="contenidoMendoza3">
+<div>contenidoMendoza3</div>
+</div>
+
+<div class="collapse" id="contenidoSanJuan3">
+<div>contenidoSanJuan3</div>
+</div>
+
+<div class="collapse" id="contenidoSanLuis3">
+<div>contenidoSanLuis3</div>
+</div>
+</div>
+</div>
+
+<dl class="EXPAND_COLLAPSE">
+    <dt><strong>►Texto1</strong></dt>
+    <dd>
+    <dl class="EXPAND_COLLAPSE">
+        <dt><strong>►Titulo</strong></dt>
+        <dd>Descripción</dd>
+    </dl>
+
+    <div class="collapse-buttons"><button onclick="alternarCollapse('contenidoMendoza1')" type="button">Mendoza</button><button onclick="alternarCollapse('contenidoSanJuan1')" type="button">San Juan</button><button onclick="alternarCollapse('contenidoSanLuis1')" type="button">San Luis</button></div>
+
+    <div class="contecontenidosLocalidades">
+    <div class="collapse" id="contenidoMendoza1">
+    <div>contenidoMendoza1</div>
+    </div>
+
+    <div class="collapse" id="contenidoSanJuan1">
+    <div>contenidoSanJuan1</div>
+    </div>
+
+    <div class="collapse" id="contenidoSanLuis1">
+    <div>contenidoSanLuis1</div>
+    </div>
+    </div>
+    </dd>
+    <dt><strong>►Texto2</strong></dt>
+    <dd>
+    <div class="collapse-buttons"><button onclick="alternarCollapse('contenidoMendoza2')" type="button">Mendoza</button><button onclick="alternarCollapse('contenidoSanJuan2')" type="button">San Juan</button><button onclick="alternarCollapse('contenidoSanLuis2')" type="button">San Luis</button></div>
+
+    <div class="contecontenidosLocalidades">
+    <div class="collapse" id="contenidoMendoza2">
+    <div>contenidoMendoza2</div>
+    </div>
+
+    <div class="collapse" id="contenidoSanJuan2">
+    <div>contenidoSanJuan2</div>
+    </div>
+
+    <div class="collapse" id="contenidoSanLuis2">
+    <div>contenidoSanLuis2</div>
+    </div>
+    </div>
+    </dd>
+</dl>
+</div>
+
+<div class="collapse" id="contenidoMetropolitana">
+<dl class="EXPAND_COLLAPSE">
+    <dt><strong>►Titulo</strong></dt>
+    <dd>Descripción</dd>
+    <dt><strong>►Titulo</strong></dt>
+    <dd>Descripción</dd>
+    <dt><strong>►Titulo</strong></dt>
+    <dd>Descripción</dd>
+    <dt><strong>►Titulo</strong></dt>
+    <dd>Descripción</dd>
+    <dt><strong>►Titulo</strong></dt>
+    <dd>Descripción</dd>
+    <dt><strong>►Titulo</strong></dt>
+    <dd>Descripción</dd>
+</dl>
+</div>
+
+<div class="collapse" id="contenidoNEA">
+<div>
+<div class="collapse-buttons"><button onclick="alternarCollapse('contenidoChaco3')" type="button">Chaco</button><button onclick="alternarCollapse('contenidoCorrientes3')" type="button">Corrientes</button><button onclick="alternarCollapse('contenidoDelParana3')" type="button">Del Paraná</button><button onclick="alternarCollapse('contenidoFormosa3')" type="button">Formosa</button><button onclick="alternarCollapse('contenidoMisiones3')" type="button">Misiones</button><button onclick="alternarCollapse('contenidoRioUruguay3')" type="button">Río Uruguay</button><button onclick="alternarCollapse('contenidoRosario3')" type="button">Rosario</button><button onclick="alternarCollapse('contenidoSantaFe3')" type="button">Santa Fé</button></div>
+
+<div class="contecontenidosLocalidades">
+<div class="collapse" id="contenidoChaco3">
+<div>contenidoChaco3</div>
+</div>
+
+<div class="collapse" id="contenidoCorrientes3">
+<div>contenidoCorrientes3</div>
+</div>
+
+<div class="collapse" id="contenidoDelParana3">
+<div>contenidoDelParana3</div>
+</div>
+
+<div class="collapse" id="contenidoFormosa3">
+<div>contenidoFormosa3</div>
+</div>
+
+<div class="collapse" id="contenidoMisiones3">
+<div>contenidoMisiones3</div>
+</div>
+
+<div class="collapse" id="contenidoRioUruguay3">
+<div>contenidoRioUruguay3</div>
+</div>
+
+<div class="collapse" id="contenidoRosario3">
+<div>contenidoRosario3</div>
+</div>
+
+<div class="collapse" id="contenidoSantaFe3">
+<div>contenidoSantaFe3</div>
+</div>
+</div>
+</div>
+
+<dl class="EXPAND_COLLAPSE">
+    <dt><strong>►Texto1</strong></dt>
+    <dd>
+    <dl class="EXPAND_COLLAPSE">
+        <dt><strong>►Titulo</strong></dt>
+        <dd>Descripción</dd>
+    </dl>
+
+    <div class="collapse-buttons"><button onclick="alternarCollapse('contenidoChaco1')" type="button">Chaco</button><button onclick="alternarCollapse('contenidoCorrientes1')" type="button">Corrientes</button><button onclick="alternarCollapse('contenidoDelParana1')" type="button">Del Paraná</button><button onclick="alternarCollapse('contenidoFormosa1')" type="button">Formosa</button><button onclick="alternarCollapse('contenidoMisiones1')" type="button">Misiones</button><button onclick="alternarCollapse('contenidoRioUruguay1')" type="button">Río Uruguay</button><button onclick="alternarCollapse('contenidoRosario1')" type="button">Rosario</button><button onclick="alternarCollapse('contenidoSantaFe1')" type="button">Santa Fé</button></div>
+
+    <div class="contecontenidosLocalidades">
+    <div class="collapse" id="contenidoChaco1">
+    <div>contenidoChaco1</div>
+    </div>
+
+    <div class="collapse" id="contenidoCorrientes1">
+    <div>contenidoCorrientes1</div>
+    </div>
+
+    <div class="collapse" id="contenidoDelParana1">
+    <div>contenidoDelParana1</div>
+    </div>
+
+    <div class="collapse" id="contenidoFormosa1">
+    <div>contenidoFormosa1</div>
+    </div>
+
+    <div class="collapse" id="contenidoMisiones1">
+    <div>contenidoMisiones1</div>
+    </div>
+
+    <div class="collapse" id="contenidoRioUruguay1">
+    <div>contenidoRioUruguay1</div>
+    </div>
+
+    <div class="collapse" id="contenidoRosario1">
+    <div>contenidoRosario1</div>
+    </div>
+
+    <div class="collapse" id="contenidoSantaFe1">
+    <div>contenidoSantaFe1</div>
+    </div>
+    </div>
+    </dd>
+    <dt><strong>►Texto2</strong></dt>
+    <dd>
+    <div class="collapse-buttons"><button onclick="alternarCollapse('contenidoChaco2')" type="button">Chaco</button><button onclick="alternarCollapse('contenidoCorrientes2')" type="button">Corrientes</button><button onclick="alternarCollapse('contenidoDelParana2')" type="button">Del Paraná</button><button onclick="alternarCollapse('contenidoFormosa2')" type="button">Formosa</button><button onclick="alternarCollapse('contenidoMisiones2')" type="button">Misiones</button><button onclick="alternarCollapse('contenidoRioUruguay2')" type="button">Río Uruguay</button><button onclick="alternarCollapse('contenidoRosario2')" type="button">Rosario</button><button onclick="alternarCollapse('contenidoSantaFe2')" type="button">Santa Fé</button></div>
+
+    <div class="contecontenidosLocalidades">
+    <div class="collapse" id="contenidoChaco2">
+    <div>contenidoChaco2</div>
+    </div>
+
+    <div class="collapse" id="contenidoCorrientes2">
+    <div>contenidoCorrientes2</div>
+    </div>
+
+    <div class="collapse" id="contenidoDelParana2">
+    <div>contenidoDelParana2</div>
+    </div>
+
+    <div class="collapse" id="contenidoFormosa2">
+    <div>contenidoFormosa2</div>
+    </div>
+
+    <div class="collapse" id="contenidoMisiones2">
+    <div>contenidoMisiones2</div>
+    </div>
+
+    <div class="collapse" id="contenidoRioUruguay2">
+    <div>contenidoRioUruguay2</div>
+    </div>
+
+    <div class="collapse" id="contenidoRosario2">
+    <div>contenidoRosario2</div>
+    </div>
+
+    <div class="collapse" id="contenidoSantaFe2">
+    <div>contenidoSantaFe2</div>
+    </div>
+    </div>
+    </dd>
+</dl>
+</div>
+
+<div class="collapse" id="contenidoNOA">
+<div>
+<div class="collapse-buttons"><button onclick="alternarCollapse('contenidoCatamarca3')" type="button">Catamarca</button><button onclick="alternarCollapse('contenidoJujuy3')" type="button">Jujuy</button><button onclick="alternarCollapse('contenidoLaRioja3')" type="button">La Rioja</button><button onclick="alternarCollapse('contenidoSalta3')" type="button">Salta</button><button onclick="alternarCollapse('contenidoSantiagoDelEstero3')" type="button">Santiago Del Estero</button><button onclick="alternarCollapse('contenidoTucuman3')" type="button">Tucumán</button></div>
+
+<div class="contecontenidosLocalidades">
+<div class="collapse" id="contenidoCatamarca3">
+<div>contenidoCatamarca3</div>
+</div>
+
+<div class="collapse" id="contenidoJujuy3">
+<div>contenidoJujuy3</div>
+</div>
+
+<div class="collapse" id="contenidoLaRioja3">
+<div>contenidoLaRioja3</div>
+</div>
+
+<div class="collapse" id="contenidoSalta3">
+<div>contenidoSalta3</div>
+</div>
+
+<div class="collapse" id="contenidoSantiagoDelEstero3">
+<div>contenidoSantiagoDelEstero3</div>
+</div>
+
+<div class="collapse" id="contenidoTucuman3">
+<div>contenidoTucuman3</div>
+</div>
+</div>
+</div>
+
+<dl class="EXPAND_COLLAPSE">
+    <dt><strong>►Texto1</strong></dt>
+    <dd>
+    <dl class="EXPAND_COLLAPSE">
+        <dt><strong>►Titulo</strong></dt>
+        <dd>Descripción</dd>
+    </dl>
+
+    <div class="collapse-buttons"><button onclick="alternarCollapse('contenidoCatamarca1')" type="button">Catamarca</button><button onclick="alternarCollapse('contenidoJujuy1')" type="button">Jujuy</button><button onclick="alternarCollapse('contenidoLaRioja1')" type="button">La Rioja</button><button onclick="alternarCollapse('contenidoSalta1')" type="button">Salta</button><button onclick="alternarCollapse('contenidoSantiagoDelEstero1')" type="button">Santiago Del Estero</button><button onclick="alternarCollapse('contenidoTucuman1')" type="button">Tucumán</button></div>
+
+    <div class="contecontenidosLocalidades">
+    <div class="collapse" id="contenidoCatamarca1">
+    <div>contenidoCatamarca1</div>
+    </div>
+
+    <div class="collapse" id="contenidoJujuy1">
+    <div>contenidoJujuy1</div>
+    </div>
+
+    <div class="collapse" id="contenidoLaRioja1">
+    <div>contenidoLaRioja1</div>
+    </div>
+
+    <div class="collapse" id="contenidoSalta1">
+    <div>contenidoSalta1</div>
+    </div>
+
+    <div class="collapse" id="contenidoSantiagoDelEstero1">
+    <div>contenidoSantiagoDelEstero1</div>
+    </div>
+
+    <div class="collapse" id="contenidoTucuman1">
+    <div>contenidoTucuman1</div>
+    </div>
+    </div>
+    </dd>
+    <dt><strong>►Texto2</strong></dt>
+    <dd>
+    <div class="collapse-buttons"><button onclick="alternarCollapse('contenidoCatamarca2')" type="button">Catamarca</button><button onclick="alternarCollapse('contenidoJujuy2')" type="button">Jujuy</button><button onclick="alternarCollapse('contenidoLaRioja2')" type="button">La Rioja</button><button onclick="alternarCollapse('contenidoSalta2')" type="button">Salta</button><button onclick="alternarCollapse('contenidoSantiagoDelEstero2')" type="button">Santiago Del Estero</button><button onclick="alternarCollapse('contenidoTucuman2')" type="button">Tucumán</button></div>
+
+    <div class="contecontenidosLocalidades">
+    <div class="collapse" id="contenidoCatamarca2">
+    <div>contenidoCatamarca2</div>
+    </div>
+
+    <div class="collapse" id="contenidoJujuy2">
+    <div>contenidoJujuy2</div>
+    </div>
+
+    <div class="collapse" id="contenidoLaRioja2">
+    <div>contenidoLaRioja2</div>
+    </div>
+
+    <div class="collapse" id="contenidoSalta2">
+    <div>contenidoSalta2</div>
+    </div>
+
+    <div class="collapse" id="contenidoSantiagoDelEstero2">
+    <div>contenidoSantiagoDelEstero2</div>
+    </div>
+
+    <div class="collapse" id="contenidoTucuman2">
+    <div>contenidoTucuman2</div>
+    </div>
+    </div>
+    </dd>
+</dl>
+</div>
+
+<div class="collapse" id="contenidoSur">
+<div>
+<div class="collapse-buttons"><button onclick="alternarCollapse('contenidoBariloche3')" type="button">Bariloche</button><button onclick="alternarCollapse('contenidoComodoroRivadavia3')" type="button">Comodoro Rivadavia</button><button onclick="alternarCollapse('contenidoLaPampa3')" type="button">La Pampa</button><button onclick="alternarCollapse('contenidoNorpatagónica3')" type="button">Norpatagónica</button><button onclick="alternarCollapse('contenidoSantaCruz3')" type="button">Santa Cruz</button><button onclick="alternarCollapse('contenidoTrelew3')" type="button">Trelew</button><button onclick="alternarCollapse('contenidoTierradelFuego3')" type="button">Tierra del Fuego</button></div>
+
+<div class="contecontenidosLocalidades">
+<div class="collapse" id="contenidoBariloche3">
+<div>contenidoBariloche3</div>
+</div>
+
+<div class="collapse" id="contenidoComodoroRivadavia3">
+<div>contenidoComodoroRivadavia3</div>
+</div>
+
+<div class="collapse" id="contenidoLaPampa3">
+<div>contenidoLaPampa3</div>
+</div>
+
+<div class="collapse" id="contenidoNorpatagónica3">
+<div>contenidoNorpatagónica3</div>
+</div>
+
+<div class="collapse" id="contenidoSantaCruz3">
+<div>contenidoSantaCruz3</div>
+</div>
+
+<div class="collapse" id="contenidoTrelew3">
+<div>contenidoTrelew3</div>
+</div>
+
+<div class="collapse" id="contenidoTierradelFuego3">
+<div>contenidoTierradelFuego3</div>
+</div>
+</div>
+</div>
+
+<dl class="EXPAND_COLLAPSE">
+    <dt><strong>►Texto1</strong></dt>
+    <dd>
+    <dl class="EXPAND_COLLAPSE">
+        <dt><strong>►Titulo</strong></dt>
+        <dd>Descripción</dd>
+    </dl>
+
+    <div class="collapse-buttons"><button onclick="alternarCollapse('contenidoBariloche1')" type="button">Bariloche</button><button onclick="alternarCollapse('contenidoComodoroRivadavia1')" type="button">Comodoro Rivadavia</button><button onclick="alternarCollapse('contenidoLaPampa1')" type="button">La Pampa</button><button onclick="alternarCollapse('contenidoNorpatagónica1')" type="button">Norpatagónica</button><button onclick="alternarCollapse('contenidoSantaCruz1')" type="button">Santa Cruz</button><button onclick="alternarCollapse('contenidoTrelew1')" type="button">Trelew</button><button onclick="alternarCollapse('contenidoTierradelFuego1')" type="button">Tierra del Fuego</button></div>
+
+    <div class="contecontenidosLocalidades">
+    <div class="collapse" id="contenidoBariloche1">
+    <div>contenidoBariloche1</div>
+    </div>
+
+    <div class="collapse" id="contenidoComodoroRivadavia1">
+    <div>contenidoComodoroRivadavia1</div>
+    </div>
+
+    <div class="collapse" id="contenidoLaPampa1">
+    <div>contenidoLaPampa1</div>
+    </div>
+
+    <div class="collapse" id="contenidoNorpatagónica1">
+    <div>contenidoNorpatagónica1</div>
+    </div>
+
+    <div class="collapse" id="contenidoSantaCruz1">
+    <div>contenidoSantaCruz1</div>
+    </div>
+
+    <div class="collapse" id="contenidoTrelew1">
+    <div>contenidoTrelew1</div>
+    </div>
+
+    <div class="collapse" id="contenidoTierradelFuego1">
+    <div>contenidoTierradelFuego1</div>
+    </div>
+    </div>
+    </dd>
+    <dt><strong>►Texto2</strong></dt>
+    <dd>
+    <div class="collapse-buttons"><button onclick="alternarCollapse('contenidoBariloche2')" type="button">Bariloche</button><button onclick="alternarCollapse('contenidoComodoroRivadavia2')" type="button">Comodoro Rivadavia</button><button onclick="alternarCollapse('contenidoLaPampa2')" type="button">La Pampa</button><button onclick="alternarCollapse('contenidoNorpatagónica2')" type="button">Norpatagónica</button><button onclick="alternarCollapse('contenidoSantaCruz2')" type="button">Santa Cruz</button><button onclick="alternarCollapse('contenidoTrelew2')" type="button">Trelew</button><button onclick="alternarCollapse('contenidoTierradelFuego2')" type="button">Tierra del Fuego</button></div>
+
+    <div class="contecontenidosLocalidades">
+    <div class="collapse" id="contenidoBariloche2">
+    <div>contenidoBariloche2</div>
+    </div>
+
+    <div class="collapse" id="contenidoComodoroRivadavia2">
+    <div>contenidoComodoroRivadavia2</div>
+    </div>
+
+    <div class="collapse" id="contenidoLaPampa2">
+    <div>contenidoLaPampa2</div>
+    </div>
+
+    <div class="collapse" id="contenidoNorpatagónica2">
+    <div>contenidoNorpatagónica2</div>
+    </div>
+
+    <div class="collapse" id="contenidoSantaCruz2">
+    <div>contenidoSantaCruz2</div>
+    </div>
+
+    <div class="collapse" id="contenidoTrelew2">
+    <div>contenidoTrelew2</div>
+    </div>
+
+    <div class="collapse" id="contenidoTierradelFuego2">
+    <div>contenidoTierradelFuego2</div>
+    </div>
+    </div>
+    </dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+  <script src="script.js"></script>
+</body>
+
+</html>
