@@ -1,0 +1,9 @@
+/* Estilo para ocultar los contenidos */
+.collapse {
+  display: none;
+}
+
+/* Estilo para mostrar los contenidos cuando están activos */
+.collapse.active {
+  display: block;
+}

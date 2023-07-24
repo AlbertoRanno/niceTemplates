@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particularidades</title>
+  <link rel="stylesheet" href="urgencias.css">
+</head>
+
+<body>
+  <div class="urgencias">
+        <dl class="EXPAND_COLLAPSE">
+        
+            <div class="collapse-buttons">
+              <button onclick="alternarCollapse('contenidoNodoMardelPlata')" type="button">Nodo Mar del plata</button>
+              <button onclick="alternarCollapse('contenidoNodoMendoza')" type="button">Nodo Mendoza</button>
+              <button onclick="alternarCollapse('contenidoNodoMetropolitana')" type="button">Nodo Metropolitana</button>
+              <button onclick="alternarCollapse('contenidoNodoNorpatagonica')" type="button">Nodo Norpatagónica</button>
+              <button onclick="alternarCollapse('contenidoNodoRosario')" type="button">Nodo Rosario</button>
+              <button onclick="alternarCollapse('contenidoNodoTucuman')" type="button">Nodo Tucumán</button>
+            </div>
+
+            <div class="contecontenidosLocalidades">
+
+              <div class="collapse" id="contenidoNodoMardelPlata">
+                <div>contenidoNodoMardelPlata</div>
+              </div>
+
+              <div class="collapse" id="contenidoNodoMendoza">
+                <div>contenidoNodoMendoza</div>
+              </div>
+
+              <div class="collapse" id="contenidoNodoMetropolitana">
+                <div>contenidoNodoMetropolitana</div>
+              </div>
+
+              <div class="collapse" id="contenidoNodoNorpatagonica">
+                <div>contenidoNodoNorpatagonica</div>
+              </div>
+
+              <div class="collapse" id="contenidoNodoRosario">
+                <div>contenidoNodoRosario</div>
+              </div>
+
+              <div class="collapse" id="contenidoNodoTucuman">
+                <div>contenidoNodoTucuman</div>
+              </div>
+
+            </div>
+          
+        </dl>
+  </div>
+
+
+  <script src="urgencias.js"></script>
+</body>
+
+</html>
