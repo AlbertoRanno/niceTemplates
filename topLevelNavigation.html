@@ -63,7 +63,21 @@
     wiki.idfTemplate();</pre>
     
     <pre class="script-jem">
-    $(function() { $('.EXPAND_COLLAPSE').find('dt').on('click', function() { $(this).next().toggle('350'); }); });</pre>
+    function alternarCollapse(id) {
+      const elemento = document.getElementById(id);
+    
+      if (elemento) {
+        elemento.classList.toggle('active');
+      }
+    }
+    
+    $(function() {
+      $('.EXPAND_COLLAPSE').find('dt').on('click', function() {
+          $(this).next().toggle('350');   
+       });
+    });</pre>
+    
+    <p>&nbsp;</p>
     
 
 
