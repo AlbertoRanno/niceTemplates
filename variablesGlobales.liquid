@@ -1,0 +1,55 @@
+Dado que el DEKISCRIPT, es propio de Nice, y como JS indica todo como error, instalé la extensión "Liquid Languages Support",
+que proporciona soporte para Liquid, un lenguaje similar a DekiScript que también se utiliza en plataformas de CMS como Shopify.
+Con lo cual puedo utilizar la extensión ".liquid" para mi archivo de código DekiScript. La extensión .liquid es similar a .js, 
+pero con resaltado de sintaxis y soporte para Liquid (y por ende, para la sintaxis similar de DekiScript).
+
+
+// En "Template:System":
+// let export = import("System/Variables", _, true);
+
+// En "Variables":
+// let export = {
+//     nombreVariable: "URL o contenido", 
+//     otraVariable: "separados por coma, salvo la ultima"
+// };
+
+let export = {
+    
+    //Idea para cuando esta seccion crezca: mantener un indice al comienzo:
+    
+    //Indice - orden en que aparecen los grupos de variables:
+    //URLs navBar
+    //Pruebas sintaxis
+    //...
+    
+    //URLs navBar
+    comercial:"https://osde-prod1.mindtouch.us/Comercial",
+    comercialB2b:"https://osde-prod1.mindtouch.us/Comercial/Gestionar_leads_B2B",
+    comercialB2c:"https://osde-prod1.mindtouch.us/Comercial/Gestionar_lead_B2C",
+    
+    cobertura:"https://osde-prod1.mindtouch.us/Cobertura",
+    coberturaCirugias:"https://osde-prod1.mindtouch.us/Cobertura/Cirugias",
+    coberturaMedicamentos:"https://osde-prod1.mindtouch.us/Cobertura/Medicamentos",
+    coberturaPracticas:"https://osde-prod1.mindtouch.us/Cobertura/practicas",
+    
+    afiliaciones:"https://osde-prod1.mindtouch.us/Afiliaciones",
+    afiliacionesAltas:"https://osde-prod1.mindtouch.us/Afiliaciones/altas",
+    afiliacionesBajas:"https://osde-prod1.mindtouch.us/Afiliaciones/Bajas",
+    afiliacionesLicencias:"https://osde-prod1.mindtouch.us/Afiliaciones/Licencias",
+    afiliacionesMovPadron:"https://osde-prod1.mindtouch.us/Afiliaciones/movimientos_padron",
+    
+    cobranzas:"https://osde-prod1.mindtouch.us/Cobranzas",
+    cobranzasCtaCte:"https://osde-prod1.mindtouch.us/Cobranzas/Cuenta_corriente",
+    cobranzasCtaDebAut:"https://osde-prod1.mindtouch.us/Cobranzas/Cuenta_debito_automatico",
+    cobranzasDeudaVencida:"https://osde-prod1.mindtouch.us/Cobranzas/Deuda_vencida", 
+    
+    //Pruebas sintaxis - luego borrarlas
+    coberturaMedicamentos:"https://osde-prod1.mindtouch.us/Cobertura/Medicamentos",
+    coberturaPracticas:"https://osde-prod1.mindtouch.us/Cobertura/practicas",
+    noun:"a name of a person, place, or thing",
+    verb:"an action word",    
+    productname:"Widgets Pro",
+    productversion:"3.0",
+    browser:"Chrome 11"
+
+};
