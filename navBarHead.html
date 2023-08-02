@@ -1,0 +1,94 @@
+<!--
+  IDEA:
+  Utilizar el head gral del sitio, para reemplazar el componente que viene por default:
+
+<div class="elm-header-logo-container">
+  <a href="https://osde-prod1.mindtouch.us" title="OSDE" aria-label="Link to home">
+  <img src="https://a.mtstatic.com/@public/production/site_13838/1668217454-logo.png" alt="OSDE"></a>
+</div> 
+
+  por la navBar!
+-->
+
+
+<!-- Código completo de la barra de navegación (topLevelNavigation) -->
+<nav class="navbar navbar-menu-osde elm-header-logo-menu">
+    <div class="elm-header-nav-container elm-nav-container">
+      <ul class="navbar-header">
+        <li class="navbar-header-logo"><a href="/"><img alt="Logo de la empresa" src="/@api/deki/files/117/LogoOsde.png" /></a></li>
+        <li class="navbar-header-menu"><input class="nav-toggle" id="nav-toggle" type="checkbox" />
+          <ul>
+            <li class="has-submenu mt-style-conditional style-wrap" if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Editores_de_contenidos'] || user.groups['Comercial']"><a href="/Comercial"><img alt="Icono" src="/@api/deki/files/114/mindtouch_(1).png" />Comercial</a>
+              <ul class="submenu">
+                <li><a href="/Comercial/Gestionar_leads_B2B">Gestionar leads B2B</a></li>
+                <li><a href="/Comercial/Gestionar_leads_B2C">Gestionar leads B2C</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu  mt-style-conditional style-wrap" if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial'] "><a href="/Cobertura"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />Cobertura</a>
+              <ul class="submenu">
+                <li><a href="/Cobertura/Cirugias">Cirugías</a></li>
+                <li><a href="/Cobertura/Medicamentos">Medicamentos</a></li>
+                <li><a href="/Cobertura/practicas">Prácticas</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu  mt-style-conditional style-wrap" if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial'] "><a href="/Afiliaciones"><img alt="Icono" src="/@api/deki/files/115/mindtouch_(2).png" />Afiliaciones</a>
+              <ul class="submenu">
+                <li><a href="/Afiliaciones/altas">Altas</a></li>
+                <li><a href="/Afiliaciones/Bajas">Bajas</a></li>
+                <li><a href="/Afiliaciones/Licencias">Licencias</a></li>
+                <li><a href="/Afiliaciones/movimientos_padron">Movimientos del padrón</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu mt-style-conditional style-wrap" if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial'] "><a href="/Cobranzas"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />Cobranzas</a>
+              <ul class="submenu">
+                <li><a href="/Cobranzas/Cuenta_corriente">Cuenta corriente</a></li>
+                <li><a href="/Cobranzas/Cuenta_debito_automatico">Cuenta débito automático</a></li>
+                <li><a href="/Cobranzas/Deuda_vencida">Deuda vencida</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- Código JavaScript para agregar el componente a la página de resultados de búsqueda -->
+  <script>
+    // Verificar si estamos en la página de resultados de búsqueda
+    if (window.location.href.includes('https://osde-prod1.mindtouch.us/Special:Search?type=wiki&query=')) {
+      // Obtener el contenedor elm-header-logo-container
+      var logoContainer = document.querySelector('.elm-header-logo-container');
+  
+      // Verificar si el contenedor existe
+      if (logoContainer) {
+        // Código completo del componente topLevelNavigation
+        var topLevelNavigationComponent = '<nav class="navbar navbar-menu-osde elm-header-logo-menu"> \
+  ... <!-- (Tu código completo de topLevelNavigation aquí) --> \
+  </nav>';
+  
+        // Agregar el componente topLevelNavigation al contenedor
+        logoContainer.innerHTML = topLevelNavigationComponent;
+      }
+    }
+  </script>
+
+
+
+<!-- Código JavaScript para capturar todas las URLs que comiencen con "https://osde-prod1.mindtouch.us/Special:Search" -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Obtener la URL actual
+    var currentURL = window.location.href;
+
+    // Verificar si la URL comienza con "https://osde-prod1.mindtouch.us/Special:Search"
+    if (currentURL.startsWith('https://osde-prod1.mindtouch.us/Special:Search')) {
+      // Aquí puedes colocar el código JavaScript que deseas aplicar a la página de resultados de búsqueda
+
+      // Por ejemplo, si deseas aplicar un borde rojo al div con la clase "elm-header-logo-container":
+      var logoContainer = document.querySelector('.elm-header-logo-container');
+      if (logoContainer) {
+        logoContainer.style.border = '5px solid red';
+      }
+    }
+  });
+</script>
