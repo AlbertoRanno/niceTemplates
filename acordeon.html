@@ -1,0 +1,27 @@
+<pre class="script-jem">
+    function toggleAccordion(collapseId) {
+          var accordionBody = document.getElementById(collapseId);
+          accordionBody.classList.toggle('show');
+          var accordionHeader = accordionBody.previousElementSibling
+          accordionHeader.classList.toggle('show');
+        }</pre>
+    
+        <div class="accordion">
+          <div class="accordion-item">
+          <div class="accordion-header"><span class="accordion-button" onclick="toggleAccordion('collapseOne')">Accordion Item #1</span></div>
+          
+          <div class="accordion-body" id="collapseOne"><strong>This is the first item's accordion body.</strong> It is shown by default. You can modify the content of the accordion body here.</div>
+          </div>
+          
+          <div class="accordion-item">
+          <div class="accordion-header"><span class="accordion-button" onclick="toggleAccordion('collapseTwo')">Accordion Item #2</span></div>
+          
+          <div class="accordion-body" id="collapseTwo"><strong>This is the second item's accordion body.</strong> It is hidden by default. You can modify the content of the accordion body here.</div>
+          </div>
+          
+          <div class="accordion-item">
+          <div class="accordion-header"><span class="accordion-button" onclick="toggleAccordion('collapseThree')">Accordion Item #3</span></div>
+          
+          <div class="accordion-body" id="collapseThree"><strong>This is the third item's accordion body.</strong> It is hidden by default. You can modify the content of the accordion body here.</div>
+          </div>
+          </div>
