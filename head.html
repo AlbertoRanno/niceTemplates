@@ -1,0 +1,26 @@
+<meta charset="UTF-8">
+<script>
+    //Funciones para colapsar/expandir los distintos elementos
+    function alternarCollapse(id) {
+      const elemento = document.getElementById(id);    
+      if (elemento) {
+        elemento.classList.toggle('active');
+      }
+    }
+    
+    function toggleAccordion(collapseId) {
+      var accordionBody = document.getElementById(collapseId);
+      accordionBody.classList.toggle('show');
+      var accordionHeader = accordionBody.previousElementSibling
+      accordionHeader.classList.toggle('show');
+    }
+    
+    $(function() {
+      $('.EXPAND_COLLAPSE').find('dt').on('click', function() {
+          $(this).next().toggle('350');   
+       });
+    });
+
+    //Continuar debajo...
+    
+</script>
