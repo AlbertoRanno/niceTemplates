@@ -1,0 +1,22 @@
+//Si no tuviéramos una página 404, el siguiente enlace devuelve unas sugerencias y un cartel de error, viene por default:
+//template('MindTouch/Views/PageNotFound');
+
+//Propio:
+var uri = site.api & 'pages/popular' & { limit: 15 };
+var api = wiki.api(uri);
+
+<div class="widget-popular">
+    <ul>
+    foreach(var pg in api['page'] ) {
+        <li>
+            web.link(pg / 'uri.ui', pg / 'title');
+            var viewcount = num.cast(pg / 'metrics/metric.views');
+            <span class="viewcount">
+                " (";
+                num.format(viewcount,"###,###,###");
+                " views)";
+            </span>
+        </li>
+    }
+    </ul>
+</div>
