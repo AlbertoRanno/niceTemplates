@@ -1,0 +1,72 @@
+<script>
+  function alternarCollapse(id) {
+    const elemento = document.getElementById(id);
+    if (elemento) {elemento.classList.toggle('active');}}
+  function toggleAccordion(collapseId) {
+    var accordionBody = document.getElementById(collapseId);
+    accordionBody.classList.toggle('show');
+    var accordionHeader = accordionBody.previousElementSibling
+    accordionHeader.classList.toggle('show');}
+  $(function () {$('.EXPAND_COLLAPSE').find('dt').on('click', function () {$(this).next().toggle('350');});});
+  
+ // Función para reemplazar el elemento original por el nuevo en las ubicaciones deseadas
+  function replaceElement() {
+    // Verifico, mediante la URL, si es una página de resultados de búsqueda
+    if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
+
+      // Capturo el elemento original
+      let originalElement = document.querySelector(".elm-header-logo-container");
+
+      // Creo el nuevo elemento
+      let newElement = document.createElement("nav");
+      newElement.className = "navbar navbar-menu-osde elm-header-logo-menu";
+      newElement.innerHTML = `
+      <div class="elm-header-nav-container elm-nav-container">
+      <ul class="navbar-header">
+        <li class="navbar-header-logo"><a href="/"><img alt="Logo de la empresa" src="/@api/deki/files/117/LogoOsde.png" /></a></li>
+        <li class="navbar-header-menu"><input class="nav-toggle" id="nav-toggle" type="checkbox" />
+          <ul>
+            <li class="has-submenu mt-style-conditional style-wrap" ><a href="/Comercial"><img alt="Icono" src="/@api/deki/files/114/mindtouch_(1).png" />Comercial</a>
+              <ul class="submenu">
+                <li><a href="/Comercial/Gestionar_leads_B2B">Gestionar leads B2B</a></li>
+                <li><a href="/Comercial/Gestionar_leads_B2C">Gestionar leads B2C</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu  mt-style-conditional style-wrap" ><a href="/Cobertura"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />Cobertura</a>
+              <ul class="submenu">
+                <li><a href="/Cobertura/Cirugias">Cirugias</a></li>
+                <li><a href="/Cobertura/Medicamentos">Medicamentos</a></li>
+                <li><a href="/Cobertura/practicas">Practicas</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu  mt-style-conditional style-wrap" ><a href="/Afiliaciones"><img alt="Icono" src="/@api/deki/files/115/mindtouch_(2).png" />Afiliaciones</a>
+              <ul class="submenu">
+                <li><a href="/Afiliaciones/altas">Altas</a></li>
+                <li><a href="/Afiliaciones/Bajas">Bajas</a></li>
+                <li><a href="/Afiliaciones/Licencias">Licencias</a></li>
+                <li><a href="/Afiliaciones/movimientos_padron">Movimientos del padron</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu mt-style-conditional style-wrap" ><a href="/Cobranzas"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />Cobranzas</a>
+              <ul class="submenu">
+                <li><a href="/Cobranzas/Cuenta_corriente">Cuenta corriente</a></li>
+                <li><a href="/Cobranzas/Cuenta_debito_automatico">Cuenta debito automatico</a></li>
+                <li><a href="/Cobranzas/Deuda_vencida">Deuda vencida</a></li>
+              </ul>
+            </li>
+          </ul>
+          <label for="nav-toggle" class="nav-toggle-label"><span></span></label>
+        </li>
+      </ul>
+    </div>`;      
+
+      // Reemplazo el elemento original con el nuevo
+      if (originalElement) {
+        originalElement.parentNode.replaceChild(newElement, originalElement);
+      }
+    }
+  }
+
+  // Ejecuto la función al cargar la página
+  window.onload = replaceElement;
+</script>

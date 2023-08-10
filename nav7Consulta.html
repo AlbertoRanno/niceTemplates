@@ -1,0 +1,397 @@
+trabajo en el cms mindtouch, en el mismo, en la seccion custom html, en la parte del head, he capturado un grupo de urls, en las cuales me interesa cambiar un elemento div, con cierto contenido, con el que viene, por otro elemento nav, el cual hace de barra de navegación en esas páginas. He comprobado que la idea, y el código funciona. Pero se presenta un error, en el cual necesito que me ayudes. Para que se entienda, primero te voy a poner en contexto:
+
+si coloco el siguiente codigo en el head mencionado, funciona correctamente:
+
+<script>
+    
+ // Función para reemplazar el elemento original por el nuevo en las ubicaciones deseadas
+  function replaceElement() {
+    // Verifico, mediante la URL, si es una página de resultados de búsqueda
+    if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
+
+      // Capturo el elemento original
+      let originalElement = document.querySelector(".elm-header-logo-container");
+
+      // Creo el nuevo elemento
+      let newElement = document.createElement("nav");
+      newElement.className = "navbar navbar-menu-osde elm-header-logo-menu";
+      newElement.innerHTML = `
+      <div class="elm-header-nav-container elm-nav-container">
+      <ul class="navbar-header">
+        <li class="navbar-header-logo"><a href="/"><img alt="Logo de la empresa" src="/@api/deki/files/117/LogoOsde.png" /></a></li>
+        <li class="navbar-header-menu"><input class="nav-toggle" id="nav-toggle" type="checkbox" />
+          <ul>
+            <li class="has-submenu mt-style-conditional style-wrap" ><a href="/Comercial"><img alt="Icono" src="/@api/deki/files/114/mindtouch_(1).png" />Comercial</a>
+            </li>
+            
+            <li class="has-submenu  mt-style-conditional style-wrap" ><a href="/Cobertura"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />Cobertura</a>
+             
+            </li>
+            <li class="has-submenu  mt-style-conditional style-wrap" ><a href="/Afiliaciones"><img alt="Icono" src="/@api/deki/files/115/mindtouch_(2).png" />Afiliaciones</a>
+             
+            </li>
+            <li class="has-submenu mt-style-conditional style-wrap" ><a href="/Cobranzas"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />Cobranzas</a>
+              
+            </li>
+          </ul>
+          <label for="nav-toggle" class="nav-toggle-label"><span></span></label>
+        </li>
+      </ul>
+    </div>`;      
+
+      // Reemplazo el elemento original con el nuevo
+      if (originalElement) {
+        originalElement.parentNode.replaceChild(newElement, originalElement);
+      }
+    }
+  }
+
+  // Ejecuto la función al cargar la página
+  window.onload = replaceElement;
+</script>
+
+El tema surge, cuando agrego un subnivel, es decir, otros UL, dentro de los LI internos, por ej, si pongo lo siguiente:
+
+<script>
+    
+ // Función para reemplazar el elemento original por el nuevo en las ubicaciones deseadas
+  function replaceElement() {
+    // Verifico, mediante la URL, si es una página de resultados de búsqueda
+    if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
+
+      // Capturo el elemento original
+      let originalElement = document.querySelector(".elm-header-logo-container");
+
+      // Creo el nuevo elemento
+      let newElement = document.createElement("nav");
+      newElement.className = "navbar navbar-menu-osde elm-header-logo-menu";
+      newElement.innerHTML = `
+      <div class="elm-header-nav-container elm-nav-container">
+      <ul class="navbar-header">
+        <li class="navbar-header-logo"><a href="/"><img alt="Logo de la empresa" src="/@api/deki/files/117/LogoOsde.png" /></a></li>
+        <li class="navbar-header-menu"><input class="nav-toggle" id="nav-toggle" type="checkbox" />
+          <ul>
+            <li class="has-submenu mt-style-conditional style-wrap" ><a href="/Comercial"><img alt="Icono" src="/@api/deki/files/114/mindtouch_(1).png" />Comercial</a>
+              <ul class="submenu">
+                <li><a href="/Comercial/Gestionar_leads_B2B">Gestionar leads B2B</a></li>
+                <li><a href="/Comercial/Gestionar_leads_B2C">Gestionar leads B2C</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu  mt-style-conditional style-wrap" ><a href="/Cobertura"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />Cobertura</a>
+             
+            </li>
+            <li class="has-submenu  mt-style-conditional style-wrap" ><a href="/Afiliaciones"><img alt="Icono" src="/@api/deki/files/115/mindtouch_(2).png" />Afiliaciones</a>
+             
+            </li>
+            <li class="has-submenu mt-style-conditional style-wrap" ><a href="/Cobranzas"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />Cobranzas</a>
+              
+            </li>
+          </ul>
+          <label for="nav-toggle" class="nav-toggle-label"><span></span></label>
+        </li>
+      </ul>
+    </div>`;      
+
+      // Reemplazo el elemento original con el nuevo
+      if (originalElement) {
+        originalElement.parentNode.replaceChild(newElement, originalElement);
+      }
+    }
+  }
+
+  // Ejecuto la función al cargar la página
+  window.onload = replaceElement;
+</script>
+
+me deforma las etiquetas:
+Es como si no le gustara la clase "submenu" dentro del UL interno. Al tenerla deforma las etiquetas a lo siguiente, dentro del <ul class="submenu">:
+      
+    
+      *********AGREGA      <a href="/Comercial"></a> 
+             <li>
+      *********AGREGA      <a href="/Comercial"></a> 
+              <a href="/Comercial/Gestionar_leads_B2B">Gestionar leads B2B</a></li>
+              <li><a href="/Comercial/Gestionar_leads_B2C">Gestionar leads B2C</a></li>
+
+      *********SACA EL <ul>
+      *********SE METE DENTRO:
+  <li class="has-submenu  mt-style-conditional style-wrap"><a href="/Cobertura"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png">Cobertura</a></li>
+
+  <li class="has-submenu  mt-style-conditional style-wrap"><a href="/Afiliaciones"><img alt="Icono" src="/@api/deki/files/115/mindtouch_(2).png">Afiliaciones</a></li>
+
+  <li class="has-submenu mt-style-conditional style-wrap"><a href="/Cobranzas"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png">Cobranzas
+
+      *********SACA EL </a></li>
+      *********SE METE DENTRO:
+                     
+          <label for="nav-toggle" class="nav-toggle-label"><span></span></label>
+
+      *********ACÁ UBICA LAS ETIQUETAS QUE SacÓ:
+    
+    </a></li></ul>
+
+    Este es el CSS:
+/* Navbar Header logo menu*/
+.elm-header-logo-menu .navbar-header-logo a {
+	display: block;
+}
+.elm-header-logo-menu .navbar-header-logo a img {
+	display: block;
+	height: 50px;
+}
+.elm-header-logo-menu {
+	background-color: var(--white);
+	color: var(--primary-blue);
+	height: 80px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 99999;
+}
+body[class*="search"] .elm-header-logo-menu{
+	position: relative;
+}
+
+.elm-header-logo-menu ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	z-index: 99999;
+}
+.elm-header-logo-menu ul.navbar-header {
+	display: flex;
+	align-items: center;
+}
+
+.elm-header-logo-menu li {
+	display: inline-block;
+	position: relative;
+}
+.elm-header-logo-menu .navbar-header-logo a {
+	padding: 0;
+}
+.elm-header-logo-menu .navbar-header-menu {
+	margin-left: auto;
+}
+
+.elm-header-logo-menu li.has-submenu a {
+	display: flex;
+	margin: 10px 15px;
+	color: var(--primary-black);
+	text-decoration: none;
+	align-items: center;
+}
+.elm-header-logo-menu li.has-submenu a img {
+	display: block;
+	margin: 0;
+	height: 40px;
+	z-index: 10;
+}
+
+.elm-header-logo-menu li.has-submenu a img {
+	display: none;
+}
+.elm-header-nav-container .nav-toggle-label::after {
+	display: none;
+}
+@media (min-width: 18.75em) {
+	.elm-header-nav-container .navbar-header-button {
+		margin-left: auto;
+	}
+	.elm-header-nav-container .nav-toggle {
+		display: none;
+	}
+
+	.elm-header-nav-container .nav-toggle-label {
+		position: relative;
+		margin: 0 1em 0 0;
+		height: 100%;
+		display: flex;
+		align-items: center;
+	}
+	.elm-header-nav-container .nav-toggle-label span,
+	.elm-header-nav-container .nav-toggle-label span::before,
+	.elm-header-nav-container .nav-toggle-label span::after {
+		display: block;
+		background-color: var(--primary-black);
+		height: 2px;
+		width: 29px;
+		border-radius: 2px;
+		position: relative;
+		box-sizing: border-box;
+		transform-origin: left center;
+		transition: all 200ms ease-in-out;
+	}
+	.elm-header-nav-container .nav-toggle-label span::before,
+	.elm-header-nav-container .nav-toggle-label span::after {
+		content: "";
+		position: absolute;
+	}
+	.elm-header-nav-container .nav-toggle-label span::before {
+		bottom: 10px;
+	}
+	.elm-header-nav-container .nav-toggle-label span::after {
+		top: 10px;
+	}
+	.elm-header-nav-container .nav-toggle:checked ~ .nav-toggle-label span {
+		background-color: unset;
+	}
+	.elm-header-nav-container
+		.nav-toggle:checked
+		~ .nav-toggle-label
+		span::before {
+		rotate: 45deg;
+	}
+	.elm-header-nav-container
+		.nav-toggle:checked
+		~ .nav-toggle-label
+		span::after {
+		rotate: -45deg;
+	}
+
+	.elm-header-nav-container .nav-toggle:checked ~ ul {
+		transform: scale(1, 1);
+	}
+
+	.elm-header-logo-menu .navbar-header-menu > ul {
+		transform: scale(1, 0);
+		transform-origin: top;
+		transition: transform 400ms ease-in-out;
+		position: absolute;
+		top: 30px;
+		right: 10px;
+		background-color: var(--white);
+		height: 75vh;
+		overflow: auto;
+		box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.29);
+	}
+	.elm-header-logo-menu li.has-submenu a img {
+		display: none;
+	}
+	.elm-header-logo-menu .has-submenu .submenu {
+		display: block;
+		position: relative;
+	}
+}
+@media (min-width: 37.5em) {
+	.elm-header-logo-container,
+	.elm-header-logo-menu {
+		height: 91px;
+	}
+	body[class*="search"] .elm-header-logo-menu,
+	body[class*="search"] .elm-header-logo-container{
+		height: 103px;
+	}
+	.elm-header-logo-menu .navbar-header-logo a img {
+		height: 40px;
+	}
+	.elm-header-nav-container .nav-toggle-label {
+		display: none;
+	}
+	.elm-header-logo-menu .navbar-header-menu > ul {
+		transform: scale(1, 1);
+		position: inherit;
+		top: inherit;
+		right: inherit;
+		background-color: none;
+		height: inherit;
+		overflow: inherit;
+		box-shadow: none;
+	}
+	.elm-header-logo-menu .navbar-header-menu > ul {
+		display: inherit;
+		border: none;
+	}
+	.elm-header-logo-menu li.has-submenu > a {
+		margin: 10px 5px;
+		flex-direction: column;
+	}
+	.elm-header-logo-menu li.has-submenu > a:before {
+		content: "";
+		width: 40px;
+		height: 40px;
+		background: var(--white);
+		position: absolute;
+		z-index: 1;
+	}
+	.elm-header-logo-menu li.has-submenu a img {
+		display: block;
+	}
+	.elm-header-logo-menu .has-submenu .submenu {
+		display: none;
+		position: absolute;
+		box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.29);
+		border-radius: 8px 0 8px 8px;
+	}
+}
+@media (min-width: 68.5em) {
+	.elm-header-logo-container,
+	.elm-header-logo-menu {
+		height: 80px;
+	}
+	body[class*="search"] .elm-header-logo-menu,
+	body[class*="search"] .elm-header-logo-container{
+		height: 90px;
+	}
+	.elm-header-logo-menu .navbar-header-logo a img {
+		height: 50px;
+	}
+	.elm-header-logo-menu li.has-submenu > a {
+		text-overflow: ellipsis;
+		flex-direction: row;
+		margin: 10px 15px;
+	}
+	.elm-header-logo-menu li.has-submenu > a:before {
+		display: none;
+	}
+	.elm-header-logo-menu li.has-submenu > a {
+		width: auto;
+	}
+	.elm-header-logo-menu li.has-submenu a img {
+		margin: 0 10px 0 0;
+	}
+}
+
+.elm-header-logo-menu li a:focus {
+	background-color: var(--background-light-blue);
+}
+
+.elm-header-logo-menu li.has-submenu:hover,
+.elm-header-logo-menu li a:hover {
+	background-color: var(--background-light-blue);
+}
+.elm-header-logo-menu li a:hover a {
+	background-color: var(--background-light-blue);
+}
+
+.elm-header-logo-menu li.has-submenu:hover .submenu {
+	display: block;
+}
+
+.elm-header-logo-menu .submenu {
+	display: none;
+	position: absolute;
+	top: 100%;
+	right: 0;
+	background-color: var(--background-light-blue-2);
+}
+
+.elm-header-logo-menu .submenu li {
+	width: 200px;
+	float: none;
+	display: list-item;
+	position: relative;
+}
+.elm-header-logo-menu .submenu li a {
+	color: var(--medium-gray);
+	border-bottom: 1px solid var(--medium-gray);
+	font-size: 14px;
+}
+.elm-header-logo-menu .submenu li a:hover {
+	background: var(--primary-blue);
+	color: var(--white);
+}
+
+
+Podrias explicarme por qué hace esos cambios al poner ese UL interno, con esa clase? y/o podrias decirme como lo soluciono?
