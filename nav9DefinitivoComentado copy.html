@@ -1,0 +1,319 @@
+<script>
+//****************************COLAPSABLES****************************
+
+  function alternarCollapse(id) {
+    const elemento = document.getElementById(id);
+    if (elemento) {
+      elemento.classList.toggle('active');
+    }
+  }
+  //alterna una clase CSS llamada 'active' en el elemento HTML que tiene el ID especificado.
+
+  function toggleAccordion(collapseId) {
+    var accordionBody = document.getElementById(collapseId);
+    accordionBody.classList.toggle('show');
+    var accordionHeader = accordionBody.previousElementSibling
+    accordionHeader.classList.toggle('show');
+  }
+  //Similar a la función anterior, esta función cambia las clases CSS 'show' en un elemento colapsado y su encabezado asociado para mostrar u ocultar el contenido.
+
+  $(function () {
+    $('.EXPAND_COLLAPSE').find('dt').on('click', function () {
+      $(this).next().toggle('350');
+    });
+  });
+  //Se utiliza la librería jQuery (incorporada en Nice) para seleccionar todos los elementos con la clase 'EXPAND_COLLAPSE' que tienen etiquetas dt (definición de términos). 
+  //Cuando se hace clic en un dt, se alterna la visibilidad del siguiente elemento (que se asume que es el contenido del colapso) usando un efecto de desvanecimiento.
+
+
+  /****************************NAVBAR****************************
+   
+  Cuando el evento DOMContentLoaded se dispara (cuando se carga la página), se crea una estructura de elementos HTML para construir la navbar
+  Se selecciona el contenedor HTML existente con la clase 'elm-header-logo-container' que contiene el logo y el enlace al home y se reemplaza 
+  con la nueva navbar generada en JS.
+
+  (El problema con las versiones anteriores, era por cómo estaba manipulando el DOM y generando la estructura HTML con JavaScript. 
+  El código funcionaba correctamente con un único nivel de links, pero cuando añadía un subnivel (otro ul dentro de cada li), 
+  se producían deformaciones en la estructura HTML (se pueden ver en el archivo "nav5Comparacion").
+
+  Este comportamiento por lo googleado, puede deberse a cómo el navegador interpreta y renderiza el HTML creado dinámicamente. 
+  Cuando manipulo el DOM con JavaScript, especialmente cuando inserto elementos anidados, es importante considerar el orden 
+  y la estructura en la que estoy generando los elementos.
+
+  La solución encontrada para evitar estos problemas fue generar todo el contenido HTML de manera más ordenada mediante JS.
+  En lugar de utilizar cadenas de texto con tantas líneas y elementos anidados, generé y agregué los elementos, paso a paso, en vez de
+  generar todo el contenido en una cadena de texto larga. (la variable topLevelNavigation con toda la navbar dentro: 
+  let topLevelNavigationComponent = `<nav class="navbar navbar-menu-osde elm-header-logo-menu"> ...... </nav> )*/
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    let topLevelNavigation = document.createElement('nav');
+    topLevelNavigation.classList.add('navbar', 'navbar-menu-osde', 'elm-header-logo-menu');
+    //<nav class="navbar navbar-menu-osde elm-header-logo-menu">
+
+    let divContenedor = document.createElement('div');
+    divContenedor.classList.add('elm-header-nav-container', 'elm-nav-container');
+    //<div class="elm-header-nav-container elm-nav-container">
+
+    let ulPrincipal = document.createElement('ul');
+    ulPrincipal.classList.add('navbar-header');
+    //<ul class="navbar-header">
+
+    // Creo los elementos li con las clases y atributos correspondientes y los agrego a la lista ul
+    let elementoLogo = document.createElement('li');
+    elementoLogo.classList.add('navbar-header-logo');
+    //<li class="navbar-header-logo">
+    let linkLogo = document.createElement('a');
+    linkLogo.href = "/";
+    //<a href="/">
+    let logoImg = document.createElement('img');
+    logoImg.alt = "Logo de la empresa";
+    logoImg.src = "/@api/deki/files/117/LogoOsde.png";
+    //<img alt="Logo de la empresa" src="/@api/deki/files/117/LogoOsde.png" />
+    linkLogo.appendChild(logoImg); // Agrego la imagen como hijo del enlace
+    elementoLogo.appendChild(linkLogo); // Agrego el enlace como hijo del elemento de la lista
+    ulPrincipal.appendChild(elementoLogo); // Agrego el elemento de lista al UL principal
+    //<li class="navbar-header-logo"><a href="/"><img alt="Logo de la empresa" src="/@api/deki/files/117/LogoOsde.png" /></a></li>
+
+    let elementoMenu = document.createElement('li');
+    elementoMenu.classList.add('navbar-header-menu');
+    //<li class="navbar-header-menu">
+    let inputCheckbox = document.createElement('input');
+    inputCheckbox.classList.add('nav-toggle');
+    inputCheckbox.id = "nav-toggle";
+    inputCheckbox.type = "checkbox";
+    //<input class="nav-toggle" id="nav-toggle" type="checkbox" />
+    elementoMenu.appendChild(inputCheckbox); // Agrego el input al elemento Menu
+    //<li class="navbar-header-menu"><input class="nav-toggle" id="nav-toggle" type="checkbox" />....
+
+    // Creo la lista ul secundaria para los elementos de la barra de navegación
+    let ulSubList = document.createElement('ul');
+    // <ul>
+
+    //****************************COMERCIAL**************************** 
+
+    let listItemComercial = document.createElement('li');
+    listItemComercial.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+    listItemComercial.setAttribute('if',
+      "user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Editores_de_contenidos'] || user.groups['Comercial']");
+    /*Añade un atributo "if" al LI, pero en HTML estándar, no existe un atributo "if". Es algo personalizado de Nice, que funciona en sus páginas,
+    desconozco si funcionará desde el Head... De funcionar, condiciona a que si el usuario pertenece a uno de estos grupos, este elemento se mostrará.*/
+    let linkComercial = document.createElement('a');
+    linkComercial.href = "/Comercial";
+    let imgComercial = document.createElement('img');
+    imgComercial.alt = "Icono";
+    imgComercial.src = "/@api/deki/files/114/mindtouch_(1).png";    
+    linkComercial.appendChild(imgComercial);
+    linkComercial.appendChild(document.createTextNode("Comercial"));
+    /*Esto permite que el enlace tenga un texto visible en la página, para que los usuarios entiendan a dónde los llevará.
+    No usé el textContent porque está la imagen también como contenido
+    Según el contenido y la estructura que necesite en los elementos, puedo usar:
+    -Cuando solo necesite agregar texto simple, .textContent es más conveniente. 
+    -Si necesito agregar contenido más complejo, como texto y otros elementos, .createTextNode() es la opción adecuada.
+    */
+    listItemComercial.appendChild(linkComercial);
+    // <li class="has-submenu mt-style-conditional style-wrap" if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Editores_de_contenidos'] 
+    // || user.groups['Comercial']"><a href="/Comercial"><img alt="Icono" src="/@api/deki/files/114/mindtouch_(1).png" />Comercial</a>
+
+    let ulSubListComercial = document.createElement('ul');
+    ulSubListComercial.classList.add('submenu');
+    // <ul class="submenu">
+
+    let listItemGestionarB2B = document.createElement('li');
+    let linkGestionarB2B = document.createElement('a');
+    linkGestionarB2B.href = "/Comercial/Gestionar_leads_B2B";
+    linkGestionarB2B.textContent = "Gestionar leads B2B";
+    //Agrego solo texto simple a la etiqueta, explicado arriba la diferencia con .createTextNode
+    listItemGestionarB2B.appendChild(linkGestionarB2B);
+    //<li><a href="/Comercial/Gestionar_leads_B2B">Gestionar leads B2B</a></li>
+
+    let listItemGestionarB2C = document.createElement('li');
+    let linkGestionarB2C = document.createElement('a');
+    linkGestionarB2C.href = "/Comercial/Gestionar_leads_B2C";
+    linkGestionarB2C.textContent = "Gestionar leads B2C";
+    listItemGestionarB2C.appendChild(linkGestionarB2C);
+    //<li><a href="/Comercial/Gestionar_leads_B2C">Gestionar leads B2C</a></li>
+
+    ulSubListComercial.appendChild(listItemGestionarB2B);
+    ulSubListComercial.appendChild(listItemGestionarB2C);
+    listItemComercial.appendChild(ulSubListComercial);
+
+    ulSubList.appendChild(listItemComercial);
+
+    //****************************COBERTURA****************************   
+
+    let listItemCobertura = document.createElement('li');
+    listItemCobertura.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+    listItemCobertura.setAttribute('if',
+      "user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial']"
+      );
+    let linkCobertura = document.createElement('a');
+    linkCobertura.href = "/Cobertura";
+    let imgCobertura = document.createElement('img');
+    imgCobertura.alt = "Icono";
+    imgCobertura.src = "/@api/deki/files/113/mindtouch.png";
+    linkCobertura.appendChild(imgCobertura);
+    linkCobertura.appendChild(document.createTextNode("Cobertura"));
+    listItemCobertura.appendChild(linkCobertura);
+    //<li class="has-submenu  mt-style-conditional style-wrap" if="user.groups['Administracion'] || user.groups['Data_entry'] 
+    //|| user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial'] "><a href="/Cobertura"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />Cobertura</a>
+
+    let ulSubListCobertura = document.createElement('ul');
+    ulSubListCobertura.classList.add('submenu');
+    // <ul class="submenu">
+
+    let listItemCirugias = document.createElement('li');
+    let linkCirugias = document.createElement('a');
+    linkCirugias.href = "/Cobertura/Cirugias";
+    linkCirugias.textContent = "Cirugias";
+    listItemCirugias.appendChild(linkCirugias);
+    //<li><a href="/Cobertura/Cirugias">Cirugías</a></li>
+
+    let listItemMedicamentos = document.createElement('li');
+    let linkMedicamentos = document.createElement('a');
+    linkMedicamentos.href = "/Cobertura/Medicamentos";
+    linkMedicamentos.textContent = "Medicamentos";
+    listItemMedicamentos.appendChild(linkMedicamentos);
+    //<li><a href="/Cobertura/Medicamentos">Medicamentos</a></li>
+
+    let listItemPracticas = document.createElement('li');
+    let linkPracticas = document.createElement('a');
+    linkPracticas.href = "/Cobertura/practicas";
+    linkPracticas.textContent = "Practicas";
+    listItemPracticas.appendChild(linkPracticas);
+    //<li><a href="/Cobertura/practicas">Prácticas</a></li>
+
+    ulSubListCobertura.appendChild(listItemCirugias);
+    ulSubListCobertura.appendChild(listItemMedicamentos);
+    ulSubListCobertura.appendChild(listItemPracticas);
+    listItemCobertura.appendChild(ulSubListCobertura);
+
+    ulSubList.appendChild(listItemCobertura);
+
+    //****************************AFILIACIONES****************************  
+
+    let listItemAfiliaciones = document.createElement('li');
+    listItemAfiliaciones.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+    listItemAfiliaciones.setAttribute('if',
+      "user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial']"
+      );
+    let linkAfiliaciones = document.createElement('a');
+    linkAfiliaciones.href = "/Afiliaciones";
+    let imgAfiliaciones = document.createElement('img');
+    imgAfiliaciones.alt = "Icono";
+    imgAfiliaciones.src = "/@api/deki/files/115/mindtouch_(2).png";
+    linkAfiliaciones.appendChild(imgAfiliaciones);
+    linkAfiliaciones.appendChild(document.createTextNode("Afiliaciones"));
+    listItemAfiliaciones.appendChild(linkAfiliaciones);
+    //<li class="has-submenu  mt-style-conditional style-wrap" if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] 
+    //|| user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial'] "><a href="/Afiliaciones"><img alt="Icono" src="/@api/deki/files/115/mindtouch_(2).png" />Afiliaciones</a>
+
+    let ulSubListAfiliaciones = document.createElement('ul');
+    ulSubListAfiliaciones.classList.add('submenu');
+    //<ul class="submenu">
+
+    let listItemAltas = document.createElement('li');
+    let linkAltas = document.createElement('a');
+    linkAltas.href = "/Afiliaciones/altas";
+    linkAltas.textContent = "Altas";
+    listItemAltas.appendChild(linkAltas);
+    //<li><a href="/Afiliaciones/altas">Altas</a></li>
+
+    let listItemBajas = document.createElement('li');
+    let linkBajas = document.createElement('a');
+    linkBajas.href = "/Afiliaciones/Bajas";
+    linkBajas.textContent = "Bajas";
+    listItemBajas.appendChild(linkBajas);
+    //<li><a href="/Afiliaciones/Bajas">Bajas</a></li>
+
+    let listItemLicencias = document.createElement('li');
+    let linkLicencias = document.createElement('a');
+    linkLicencias.href = "/Afiliaciones/Licencias";
+    linkLicencias.textContent = "Licencias";
+    listItemLicencias.appendChild(linkLicencias);
+    //<li><a href="/Afiliaciones/Licencias">Licencias</a></li>
+
+    let listItemMovimientosPadron = document.createElement('li');
+    let linkMovimientosPadron = document.createElement('a');
+    linkMovimientosPadron.href = "/Afiliaciones/movimientos_padron";
+    linkMovimientosPadron.textContent = "Movimientos del padron";
+    listItemMovimientosPadron.appendChild(linkMovimientosPadron);
+    //<li><a href="/Afiliaciones/movimientos_padron">Movimientos del padrón</a></li>
+
+    ulSubListAfiliaciones.appendChild(listItemAltas);
+    ulSubListAfiliaciones.appendChild(listItemBajas);
+    ulSubListAfiliaciones.appendChild(listItemLicencias);
+    ulSubListAfiliaciones.appendChild(listItemMovimientosPadron);
+    listItemAfiliaciones.appendChild(ulSubListAfiliaciones);
+
+    ulSubList.appendChild(listItemAfiliaciones);
+
+    //****************************COBRANZAS****************************
+
+    let listItemCobranzas = document.createElement('li');
+    listItemCobranzas.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+    listItemCobranzas.setAttribute('if',
+      "user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial']"
+      );
+    let linkCobranzas = document.createElement('a');
+    linkCobranzas.href = "/Cobranzas";
+    let imgCobranzas = document.createElement('img');
+    imgCobranzas.alt = "Icono";
+    imgCobranzas.src = "/@api/deki/files/113/mindtouch.png";
+    linkCobranzas.appendChild(imgCobranzas);
+    linkCobranzas.appendChild(document.createTextNode("Cobranzas"));
+    listItemCobranzas.appendChild(linkCobranzas);
+    //<li class="has-submenu mt-style-conditional style-wrap" if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] 
+    //|| user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial'] "><a href="/Cobranzas"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />Cobranzas</a>
+
+    let ulSubListCobranzas = document.createElement('ul');
+    ulSubListCobranzas.classList.add('submenu');
+    //<ul class="submenu">
+
+    let listItemCuentaCorriente = document.createElement('li');
+    let linkCuentaCorriente = document.createElement('a');
+    linkCuentaCorriente.href = "/Cobranzas/Cuenta_corriente";
+    linkCuentaCorriente.textContent = "Cuenta corriente";
+    listItemCuentaCorriente.appendChild(linkCuentaCorriente);
+    //<li><a href="/Cobranzas/Cuenta_corriente">Cuenta corriente</a></li>
+
+    let listItemCuentaDebitoAutomatico = document.createElement('li');
+    let linkCuentaDebitoAutomatico = document.createElement('a');
+    linkCuentaDebitoAutomatico.href = "/Cobranzas/Cuenta_debito_automatico";
+    linkCuentaDebitoAutomatico.textContent = "Cuenta debito automatico";
+    listItemCuentaDebitoAutomatico.appendChild(linkCuentaDebitoAutomatico);
+    //<li><a href="/Cobranzas/Cuenta_debito_automatico">Cuenta débito automático</a></li>
+
+    let listItemDeudaVencida = document.createElement('li');
+    let linkDeudaVencida = document.createElement('a');
+    linkDeudaVencida.href = "/Cobranzas/Deuda_vencida";
+    linkDeudaVencida.textContent = "Deuda vencida";
+    listItemDeudaVencida.appendChild(linkDeudaVencida);
+    //<li><a href="/Cobranzas/Deuda_vencida">Deuda vencida</a></li>
+
+    ulSubListCobranzas.appendChild(listItemCuentaCorriente);
+    ulSubListCobranzas.appendChild(listItemCuentaDebitoAutomatico);
+    ulSubListCobranzas.appendChild(listItemDeudaVencida);
+    listItemCobranzas.appendChild(ulSubListCobranzas);
+
+    ulSubList.appendChild(listItemCobranzas); //</li> a </ul>
+
+    elementoMenu.appendChild(ulSubList); //</ul> a </li>
+
+    // Agrego el segundo elemento li, donde se aloja el menu, a la lista ul principal
+    ulPrincipal.appendChild(elementoMenu); // </li> a </ul>
+
+    // Agrego la lista ul al div contenedor
+    divContenedor.appendChild(ulPrincipal); // </ul> a </div>
+
+    // Agrego el div contenedor al elemento nav
+    topLevelNavigation.appendChild(divContenedor); // </div> a </nav>
+
+    // Reemplazo el contenido del contenedor con la navbar
+    let logoContainer = document.querySelector('.elm-header-logo-container');
+    if (logoContainer) {
+      logoContainer.innerHTML = '';
+      logoContainer.appendChild(topLevelNavigation);
+    }
+  });
+</script>
