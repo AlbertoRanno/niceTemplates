@@ -1,0 +1,216 @@
+<script>
+//****************************COLAPSABLES****************************
+    function alternarCollapse(id) {
+    const elemento = document.getElementById(id);
+    if (elemento) {elemento.classList.toggle('active');}}
+    function toggleAccordion(collapseId) {
+    var accordionBody = document.getElementById(collapseId);
+    accordionBody.classList.toggle('show');
+    var accordionHeader = accordionBody.previousElementSibling
+    accordionHeader.classList.toggle('show');}
+  $(function () {$('.EXPAND_COLLAPSE').find('dt').on('click', function () {$(this).next().toggle('350');});});
+
+//****************************NAVBAR**************************** 
+    document.addEventListener('DOMContentLoaded', function () {
+
+    let topLevelNavigation = document.createElement('nav');
+    topLevelNavigation.classList.add('navbar', 'navbar-menu-osde', 'elm-header-logo-menu');
+    let divContenedor = document.createElement('div');
+    divContenedor.classList.add('elm-header-nav-container', 'elm-nav-container');
+    let ulPrincipal = document.createElement('ul');
+    ulPrincipal.classList.add('navbar-header');
+  
+    let elementoLogo = document.createElement('li');
+    elementoLogo.classList.add('navbar-header-logo');
+    let linkLogo = document.createElement('a');
+    linkLogo.href = "/";
+    let logoImg = document.createElement('img');
+    logoImg.alt = "Logo de la empresa";
+    logoImg.src = "/@api/deki/files/117/LogoOsde.png";
+    linkLogo.appendChild(logoImg); 
+    elementoLogo.appendChild(linkLogo); 
+    ulPrincipal.appendChild(elementoLogo);
+
+    let elementoMenu = document.createElement('li');
+    elementoMenu.classList.add('navbar-header-menu');    
+    let inputCheckbox = document.createElement('input');
+    inputCheckbox.classList.add('nav-toggle');
+    inputCheckbox.id = "nav-toggle";
+    inputCheckbox.type = "checkbox";
+    elementoMenu.appendChild(inputCheckbox);
+    let ulSubList = document.createElement('ul');
+
+      //****************************CONSEJOS**************************** 
+
+      let listItemConsejos = document.createElement('li');
+    listItemConsejos.classList.add('has-submenu');
+    let linkConsejos = document.createElement('a');
+    linkConsejos.href= "#";
+    linkConsejos.textContent = "Consejos Busqueda";
+    listItemConsejos.appendChild(linkConsejos);
+
+
+    let ulSubListConsejos = document.createElement('ul');
+    ulSubListConsejos.classList.add('submenu');
+
+    let listItemConsejo1 = document.createElement('li');
+    let listItemConsejo1p = document.createElement('p');
+    listItemConsejo1p.textContent = "Busque una frase entre comillas, como \"trabajo posterior a la llamada\", en lugar de buscar: \"trabajo posterior a la llamada\".";
+    listItemConsejo1.appendChild(listItemConsejo1p);
+
+    //****************************************************************
+   
+    let listItemComercial = document.createElement('li');
+    listItemComercial.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+    listItemComercial.setAttribute('if',
+      "user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Editores_de_contenidos'] || user.groups['Comercial']");
+    let linkComercial = document.createElement('a');
+    linkComercial.href = "/Comercial";
+    let imgComercial = document.createElement('img');
+    imgComercial.alt = "Icono";
+    imgComercial.src = "/@api/deki/files/114/mindtouch_(1).png";    
+    linkComercial.appendChild(imgComercial);
+    linkComercial.appendChild(document.createTextNode("Comercial"));
+    listItemComercial.appendChild(linkComercial);
+    let ulSubListComercial = document.createElement('ul');
+    ulSubListComercial.classList.add('submenu');
+    let listItemGestionarB2B = document.createElement('li');
+    let linkGestionarB2B = document.createElement('a');
+    linkGestionarB2B.href = "/Comercial/Gestionar_leads_B2B";
+    linkGestionarB2B.textContent = "Gestionar leads B2B";
+    listItemGestionarB2B.appendChild(linkGestionarB2B);
+    let listItemGestionarB2C = document.createElement('li');
+    let linkGestionarB2C = document.createElement('a');
+    linkGestionarB2C.href = "/Comercial/Gestionar_leads_B2C";
+    linkGestionarB2C.textContent = "Gestionar leads B2C";
+    listItemGestionarB2C.appendChild(linkGestionarB2C);
+    ulSubListComercial.appendChild(listItemGestionarB2B);
+    ulSubListComercial.appendChild(listItemGestionarB2C);
+    listItemComercial.appendChild(ulSubListComercial);
+    ulSubList.appendChild(listItemComercial);
+
+    let listItemCobertura = document.createElement('li');
+    listItemCobertura.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+    listItemCobertura.setAttribute('if',
+      "user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial']"
+      );
+    let linkCobertura = document.createElement('a');
+    linkCobertura.href = "/Cobertura";
+    let imgCobertura = document.createElement('img');
+    imgCobertura.alt = "Icono";
+    imgCobertura.src = "/@api/deki/files/113/mindtouch.png";
+    linkCobertura.appendChild(imgCobertura);
+    linkCobertura.appendChild(document.createTextNode("Cobertura"));
+    listItemCobertura.appendChild(linkCobertura);
+    let ulSubListCobertura = document.createElement('ul');
+    ulSubListCobertura.classList.add('submenu');
+    let listItemCirugias = document.createElement('li');
+    let linkCirugias = document.createElement('a');
+    linkCirugias.href = "/Cobertura/Cirugias";
+    linkCirugias.textContent = "Cirugias";
+    listItemCirugias.appendChild(linkCirugias);
+    let listItemMedicamentos = document.createElement('li');
+    let linkMedicamentos = document.createElement('a');
+    linkMedicamentos.href = "/Cobertura/Medicamentos";
+    linkMedicamentos.textContent = "Medicamentos";
+    listItemMedicamentos.appendChild(linkMedicamentos);
+    let listItemPracticas = document.createElement('li');
+    let linkPracticas = document.createElement('a');
+    linkPracticas.href = "/Cobertura/practicas";
+    linkPracticas.textContent = "Practicas";
+    listItemPracticas.appendChild(linkPracticas);
+    ulSubListCobertura.appendChild(listItemCirugias);
+    ulSubListCobertura.appendChild(listItemMedicamentos);
+    ulSubListCobertura.appendChild(listItemPracticas);
+    listItemCobertura.appendChild(ulSubListCobertura);
+    ulSubList.appendChild(listItemCobertura);
+
+    let listItemAfiliaciones = document.createElement('li');
+    listItemAfiliaciones.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+    listItemAfiliaciones.setAttribute('if',
+      "user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial']"
+      );
+    let linkAfiliaciones = document.createElement('a');
+    linkAfiliaciones.href = "/Afiliaciones";
+    let imgAfiliaciones = document.createElement('img');
+    imgAfiliaciones.alt = "Icono";
+    imgAfiliaciones.src = "/@api/deki/files/115/mindtouch_(2).png";
+    linkAfiliaciones.appendChild(imgAfiliaciones);
+    linkAfiliaciones.appendChild(document.createTextNode("Afiliaciones"));
+    listItemAfiliaciones.appendChild(linkAfiliaciones);    
+    let ulSubListAfiliaciones = document.createElement('ul');
+    ulSubListAfiliaciones.classList.add('submenu');
+    let listItemAltas = document.createElement('li');
+    let linkAltas = document.createElement('a');
+    linkAltas.href = "/Afiliaciones/altas";
+    linkAltas.textContent = "Altas";
+    listItemAltas.appendChild(linkAltas);
+    let listItemBajas = document.createElement('li');
+    let linkBajas = document.createElement('a');
+    linkBajas.href = "/Afiliaciones/Bajas";
+    linkBajas.textContent = "Bajas";
+    listItemBajas.appendChild(linkBajas);
+    let listItemLicencias = document.createElement('li');
+    let linkLicencias = document.createElement('a');
+    linkLicencias.href = "/Afiliaciones/Licencias";
+    linkLicencias.textContent = "Licencias";
+    listItemLicencias.appendChild(linkLicencias);
+    let listItemMovimientosPadron = document.createElement('li');
+    let linkMovimientosPadron = document.createElement('a');
+    linkMovimientosPadron.href = "/Afiliaciones/movimientos_padron";
+    linkMovimientosPadron.textContent = "Movimientos del padron";
+    listItemMovimientosPadron.appendChild(linkMovimientosPadron);
+    ulSubListAfiliaciones.appendChild(listItemAltas);
+    ulSubListAfiliaciones.appendChild(listItemBajas);
+    ulSubListAfiliaciones.appendChild(listItemLicencias);
+    ulSubListAfiliaciones.appendChild(listItemMovimientosPadron);
+    listItemAfiliaciones.appendChild(ulSubListAfiliaciones);
+    ulSubList.appendChild(listItemAfiliaciones);
+
+    let listItemCobranzas = document.createElement('li');
+    listItemCobranzas.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+    listItemCobranzas.setAttribute('if',
+      "user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial']"
+      );
+    let linkCobranzas = document.createElement('a');
+    linkCobranzas.href = "/Cobranzas";
+    let imgCobranzas = document.createElement('img');
+    imgCobranzas.alt = "Icono";
+    imgCobranzas.src = "/@api/deki/files/113/mindtouch.png";
+    linkCobranzas.appendChild(imgCobranzas);
+    linkCobranzas.appendChild(document.createTextNode("Cobranzas"));
+    listItemCobranzas.appendChild(linkCobranzas);   
+    let ulSubListCobranzas = document.createElement('ul');
+    ulSubListCobranzas.classList.add('submenu');
+    let listItemCuentaCorriente = document.createElement('li');
+    let linkCuentaCorriente = document.createElement('a');
+    linkCuentaCorriente.href = "/Cobranzas/Cuenta_corriente";
+    linkCuentaCorriente.textContent = "Cuenta corriente";
+    listItemCuentaCorriente.appendChild(linkCuentaCorriente);
+    let listItemCuentaDebitoAutomatico = document.createElement('li');
+    let linkCuentaDebitoAutomatico = document.createElement('a');
+    linkCuentaDebitoAutomatico.href = "/Cobranzas/Cuenta_debito_automatico";
+    linkCuentaDebitoAutomatico.textContent = "Cuenta debito automatico";
+    listItemCuentaDebitoAutomatico.appendChild(linkCuentaDebitoAutomatico);
+    let listItemDeudaVencida = document.createElement('li');
+    let linkDeudaVencida = document.createElement('a');
+    linkDeudaVencida.href = "/Cobranzas/Deuda_vencida";
+    linkDeudaVencida.textContent = "Deuda vencida";
+    listItemDeudaVencida.appendChild(linkDeudaVencida);
+    ulSubListCobranzas.appendChild(listItemCuentaCorriente);
+    ulSubListCobranzas.appendChild(listItemCuentaDebitoAutomatico);
+    ulSubListCobranzas.appendChild(listItemDeudaVencida);
+    listItemCobranzas.appendChild(ulSubListCobranzas);
+    ulSubList.appendChild(listItemCobranzas); 
+
+    elementoMenu.appendChild(ulSubList); 
+    ulPrincipal.appendChild(elementoMenu);
+    divContenedor.appendChild(ulPrincipal);
+    topLevelNavigation.appendChild(divContenedor);
+    let logoContainer = document.querySelector('.elm-header-logo-container');
+    if (logoContainer) {
+      logoContainer.innerHTML = '';
+      logoContainer.appendChild(topLevelNavigation);
+    }
+  });
+</script>
