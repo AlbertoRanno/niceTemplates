@@ -40,23 +40,51 @@
     elementoMenu.appendChild(inputCheckbox);
     let ulSubList = document.createElement('ul');
 
-      //****************************CONSEJOS**************************** 
+    //****************************CONSEJOS**************************** 
 
-      let listItemConsejos = document.createElement('li');
+    let listItemConsejos = document.createElement('li');
     listItemConsejos.classList.add('has-submenu');
     let linkConsejos = document.createElement('a');
     linkConsejos.href= "#";
-    linkConsejos.textContent = "Consejos Busqueda";
+    linkConsejos.textContent = "Consejos de busqueda";
     listItemConsejos.appendChild(linkConsejos);
 
-
     let ulSubListConsejos = document.createElement('ul');
-    ulSubListConsejos.classList.add('submenu');
+    ulSubListConsejos.classList.add('submenu');    
 
     let listItemConsejo1 = document.createElement('li');
     let listItemConsejo1p = document.createElement('p');
-    listItemConsejo1p.textContent = "Busque una frase entre comillas, como \"trabajo posterior a la llamada\", en lugar de buscar: \"trabajo posterior a la llamada\".";
+    listItemConsejo1p.textContent = "***Ingrese palabras clave, no lenguaje natural.***";
     listItemConsejo1.appendChild(listItemConsejo1p);
+    let espacio1 = document.createElement('br');
+    listItemConsejo1.appendChild(espacio1);
+
+    let listItemConsejo2 = document.createElement('li');
+    let listItemConsejo2p = document.createElement('p');
+    listItemConsejo2p.textContent = "***Combine dos terminos usando operadores como AND OR NOT. Ejemplo: medicamentos NOT descuentos.***";
+    listItemConsejo2.appendChild(listItemConsejo2p);
+    let espacio2 = document.createElement('br');
+    listItemConsejo2.appendChild(espacio2);
+
+    let listItemConsejo3 = document.createElement('li');
+    let listItemConsejo3p = document.createElement('p');
+    listItemConsejo3p.textContent = "***Muestre los resultados de un area especifica, o de cierto tipo de documentacion, mediante los filtros en las paginas de busqueda.***";
+    listItemConsejo3.appendChild(listItemConsejo3p);
+    let espacio3 = document.createElement('br');
+    listItemConsejo3.appendChild(espacio3);
+
+    let listItemConsejo4 = document.createElement('li');
+    let listItemConsejo4p = document.createElement('p');
+    listItemConsejo4p.textContent = "***Buscar con comillas dobles alrededor de un termino o una frase para que coincidan exactamente con las palabras. Sin las ellas, se traeran todas las paginas que contienen al menos uno de los terminos.***";
+    listItemConsejo4.appendChild(listItemConsejo4p);
+
+    ulSubListConsejos.appendChild(listItemConsejo1);
+    ulSubListConsejos.appendChild(listItemConsejo2);
+    ulSubListConsejos.appendChild(listItemConsejo3);
+    ulSubListConsejos.appendChild(listItemConsejo4);
+    listItemConsejos.appendChild(ulSubListConsejos);
+
+    ulSubList.appendChild(listItemConsejos);
 
     //****************************************************************
    
@@ -84,6 +112,8 @@
     linkGestionarB2C.href = "/Comercial/Gestionar_leads_B2C";
     linkGestionarB2C.textContent = "Gestionar leads B2C";
     listItemGestionarB2C.appendChild(linkGestionarB2C);
+
+
     ulSubListComercial.appendChild(listItemGestionarB2B);
     ulSubListComercial.appendChild(listItemGestionarB2C);
     listItemComercial.appendChild(ulSubListComercial);
