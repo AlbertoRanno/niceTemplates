@@ -13,6 +13,8 @@
 //****************************NAVBAR**************************** 
     document.addEventListener('DOMContentLoaded', function () {
 
+      if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
+
     let topLevelNavigation = document.createElement('nav');
     topLevelNavigation.classList.add('navbar', 'navbar-menu-osde', 'elm-header-logo-menu');
     let divContenedor = document.createElement('div');
@@ -242,5 +244,5 @@
       logoContainer.innerHTML = '';
       logoContainer.appendChild(topLevelNavigation);
     }
-  });
+  }});
 </script>
