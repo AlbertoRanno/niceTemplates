@@ -42,6 +42,13 @@
     elementoMenu.appendChild(inputCheckbox);
     let ulSubList = document.createElement('ul');
 
+    //Menu responsive: <label for="nav-toggle" class="nav-toggle-label"><span></span></label>
+    let labelResponsive = document.createElement('label');
+    labelResponsive.setAttribute('for', 'nav-toggle');
+    labelResponsive.classList.add('nav-toggle-label');
+    let spanResponsive = document.createElement('span');
+    labelResponsive.appendChild(spanResponsive);
+
     //****************************CONSEJOS**************************** 
 
     let listItemConsejos = document.createElement('li');
@@ -234,7 +241,9 @@
     listItemCobranzas.appendChild(ulSubListCobranzas);
     ulSubList.appendChild(listItemCobranzas); 
 
-    elementoMenu.appendChild(ulSubList); 
+    
+    elementoMenu.appendChild(labelResponsive);
+    elementoMenu.appendChild(ulSubList);    
     ulPrincipal.appendChild(elementoMenu);
     divContenedor.appendChild(ulPrincipal);
     topLevelNavigation.appendChild(divContenedor);
