@@ -1,20 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Particularidades</title>
-  <link rel="stylesheet" href="topLevelNavigation.css">
-</head>
-
 <body>
-  <!-- 
-  OJO:
-  *Esta NavBar, No es Template, sino contenido a Reutilizar, en caso de ser necesario, ver en que ruta se vuelve a colocar, sino no van
-  a funcionar los enlaces ya colocados en las páginas
-  *Al editar en Nice, lo último que hay que hacer, antes de guardar, es volver a pegarle la etiqueta label, que Nice la borra al editar... 
-  y es la que hace la navbar responsive -->
 
   <nav class="navbar navbar-menu-osde elm-header-logo-menu">
     <div class="elm-header-nav-container elm-nav-container">
@@ -93,22 +80,7 @@
   <pre class="script">
     wiki.idfTemplate();</pre>
 
-  <pre class="script-jem">
-    function alternarCollapse(id) {
-      const elemento = document.getElementById(id);
-    
-      if (elemento) {
-        elemento.classList.toggle('active');
-      }
-    }
-    
-    $(function() {
-      $('.EXPAND_COLLAPSE').find('dt').on('click', function() {
-          $(this).next().toggle('350');   
-       });
-    });</pre>
 
-  <script src="topLevelNavigation.js"></script>
 </body>
 
 </html>
