@@ -4,34 +4,41 @@
     <li class="navbar-header-logo"><a href="/"><img alt="Logo de la empresa" src="/@api/deki/files/117/LogoOsde.png" /></a></li>
     <li class="navbar-header-menu"><input class="nav-toggle" id="nav-toggle" type="checkbox" />
     <ul>
-        <li class="has-submenu mt-style-conditional style-wrap" if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Editores_de_contenidos'] || user.groups['Comercial']"><a href=(comercial)><img alt="Icono" src="/@api/deki/files/114/mindtouch_(1).png" />'Comercial'</a>
+        if(user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Editores_de_contenidos'] || user.groups['Comercial']){
+        <li class="has-submenu mt-style-conditional style-wrap"><a href=(comercial)><img alt="Icono" src="/@api/deki/files/114/mindtouch_(1).png" />'Comercial'</a>
         <ul class="submenu">
             <li><a href=(comercialB2b)>'Gestionar leads B2B'</a></li>
             <li><a href=(comercialB2c)>'Gestionar leads B2C'</a></li>
         </ul>
-        </li>
-        <li class="has-submenu  mt-style-conditional style-wrap" if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial'] "><a href=(cobertura)><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />'Cobertura'</a>
+        </li>}
+        
+        if(user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Vista_atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Vista_afiliaciones'] || user.groups['Vista_cobranzas'] || user.groups['Comercial']){
+        <li class="has-submenu  mt-style-conditional style-wrap"><a href=(cobertura)><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />'Cobertura'</a>
         <ul class="submenu">
             <li><a href=(coberturaCirugias)>'Cirugías'</a></li>
             <li><a href=(coberturaMedicamentos)>'Medicamentos'</a></li>
             <li><a href=(coberturaPracticas)>'Prácticas'</a></li>
         </ul>
-        </li>
-        <li class="has-submenu  mt-style-conditional style-wrap" if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial'] "><a href=(afiliaciones)><img alt="Icono" src="/@api/deki/files/115/mindtouch_(2).png" />'Afiliaciones'</a>
+        </li>}
+
+        if(user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Vista_atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Vista_afiliaciones'] || user.groups['Vista_cobranzas'] || user.groups['Comercial']){
+        <li class="has-submenu  mt-style-conditional style-wrap"><a href=(afiliaciones)><img alt="Icono" src="/@api/deki/files/115/mindtouch_(2).png" />'Afiliaciones'</a>
         <ul class="submenu">
             <li><a href=(afiliacionesAltas)>'Altas'</a></li>
             <li><a href=(afiliacionesBajas)>'Bajas'</a></li>
             <li><a href=(afiliacionesLicencias)>'Licencias'</a></li>
             <li><a href=(afiliacionesMovPadron)>'Movimientos del padrón'</a></li>
         </ul>
-        </li>
-        <li class="has-submenu mt-style-conditional style-wrap" if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial'] "><a href=(cobranzas)><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />'Cobranzas'</a>
+        </li>}
+
+        if(user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Vista_atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Vista_afiliaciones'] || user.groups['Vista_cobranzas'] || user.groups['Comercial'] ){
+        <li class="has-submenu mt-style-conditional style-wrap"><a href=(cobranzas)><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />'Cobranzas'</a>
         <ul class="submenu">
             <li><a href=(cobranzasCtaCte)>'Cuenta corriente'</a></li>
             <li><a href=(cobranzasCtaDebAut)>'Cuenta débito automático'</a></li>
             <li><a href=(cobranzasDeudaVencida)>'Deuda vencida'</a></li>
         </ul>
-        </li>
+        </li>}
     </ul>
     </li>
 </ul>

@@ -33,7 +33,7 @@
                     de búsqueda y/o en cada página, resaltará las mismas.</a>
                 </li>
               </ul>
-            </li>
+            </li> 
             <li class="has-submenu mt-style-conditional style-wrap"
               if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Editores_de_contenidos'] || user.groups['Comercial']">
               <a href="/Comercial"><img alt="Icono" src="/@api/deki/files/114/mindtouch_(1).png" />Comercial</a>
@@ -43,7 +43,7 @@
               </ul>
             </li>
             <li class="has-submenu  mt-style-conditional style-wrap"
-              if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial'] ">
+              if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Vista_atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Vista_afiliaciones'] || user.groups['Vista_cobranzas'] || user.groups['Comercial'] ">
               <a href="/Cobertura"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />Cobertura</a>
               <ul class="submenu">
                 <li><a href="/Cobertura/Cirugias">Cirugías</a></li>
@@ -52,7 +52,7 @@
               </ul>
             </li>
             <li class="has-submenu  mt-style-conditional style-wrap"
-              if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial'] ">
+              if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Vista_atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Vista_afiliaciones'] || user.groups['Vista_cobranzas'] || user.groups['Comercial'] ">
               <a href="/Afiliaciones"><img alt="Icono" src="/@api/deki/files/115/mindtouch_(2).png" />Afiliaciones</a>
               <ul class="submenu">
                 <li><a href="/Afiliaciones/altas">Altas</a></li>
@@ -62,7 +62,7 @@
               </ul>
             </li>
             <li class="has-submenu mt-style-conditional style-wrap"
-              if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Visualizador_Atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Visualizador_Afiliaciones'] || user.groups['Visualizador_Cobranzas'] || user.groups['Comercial'] ">
+              if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Vista_atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Vista_afiliaciones'] || user.groups['Vista_cobranzas'] || user.groups['Comercial'] ">
               <a href="/Cobranzas"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />Cobranzas</a>
               <ul class="submenu">
                 <li><a href="/Cobranzas/Cuenta_corriente">Cuenta corriente</a></li>
@@ -79,6 +79,11 @@
 
   <pre class="script">
     wiki.idfTemplate();</pre>
+    
+    <pre class="script-css">
+    .accordion-body, .particularidades .hidden, .EXPAND_COLLAPSE dd  {
+       display: none; 
+    }</pre>   
 
 
 </body>
