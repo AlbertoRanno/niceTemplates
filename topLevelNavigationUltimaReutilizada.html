@@ -1,0 +1,83 @@
+<nav class="navbar navbar-menu-osde elm-header-logo-menu">
+  <div class="elm-header-nav-container elm-nav-container">
+    <ul class="navbar-header">
+      <li class="navbar-header-logo"><a href="/"><img alt="Logo de la empresa"
+            src="/@api/deki/files/117/LogoOsde.png" /></a></li>
+      <li class="navbar-header-menu"><input class="nav-toggle" id="nav-toggle" type="checkbox" />
+        <ul>
+          <li class="has-submenu mt-style-conditional style-wrap"
+            if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Editores_de_contenidos'] || user.groups['Comercial']">
+            <a href="/Comercial"><img alt="Icono" src="/@api/deki/files/114/mindtouch_(1).png" />Comercial</a>
+            <ul class="submenu">
+              <li><a href="/Comercial/Gestionar_leads_B2B">Gestionar leads B2B</a></li>
+              <li><a href="/Comercial/Gestionar_lead_B2C">Gestionar leads B2C</a></li>
+            </ul>
+          </li>
+          <li class="has-submenu  mt-style-conditional style-wrap"
+            if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Vista_atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Vista_afiliaciones'] || user.groups['Vista_cobranzas'] || user.groups['Comercial'] ">
+            <a href="/Cobertura"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />Cobertura</a>
+            <ul class="submenu">
+              <li><a href="/Cobertura/Cirugias">Cirugías</a></li>
+              <li><a href="/Cobertura/Medicamentos">Medicamentos</a></li>
+              <li><a href="/Cobertura/practicas">Prácticas</a></li>
+            </ul>
+          </li>
+          <li class="has-submenu  mt-style-conditional style-wrap"
+            if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Vista_atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Vista_afiliaciones'] || user.groups['Vista_cobranzas'] || user.groups['Comercial'] ">
+            <a href="/Afiliaciones"><img alt="Icono" src="/@api/deki/files/115/mindtouch_(2).png" />Afiliaciones</a>
+            <ul class="submenu">
+              <li><a href="/Afiliaciones/altas">Altas</a></li>
+              <li><a href="/Afiliaciones/Bajas">Bajas</a></li>
+              <li><a href="/Afiliaciones/Licencias">Licencias</a></li>
+              <li><a href="/Afiliaciones/movimientos_padron">Movimientos del padrón</a></li>
+            </ul>
+          </li>
+          <li class="has-submenu mt-style-conditional style-wrap"
+            if="user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Vista_atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Vista_afiliaciones'] || user.groups['Vista_cobranzas'] || user.groups['Comercial'] ">
+            <a href="/Cobranzas"><img alt="Icono" src="/@api/deki/files/113/mindtouch.png" />Cobranzas</a>
+            <ul class="submenu">
+              <li><a href="/Cobranzas/Cuenta_corriente">Cuenta corriente</a></li>
+              <li><a href="/Cobranzas/Cuenta_debito_automatico">Cuenta débito automático</a></li>
+              <li><a href="/Cobranzas/Deuda_vencida">Deuda vencida</a></li>
+            </ul>
+          </li>
+        </ul>
+        <label for="nav-toggle" class="nav-toggle-label"><span></span></label>
+      </li>
+    </ul>
+  </div>
+  <div class="consejo-busqueda-area">
+    <div class="elm-content-container">
+      <ul class="navbar-header">
+        <li class="has-submenu">
+          <a>Consejos de búsqueda</a>
+          <ul class="submenu">
+            <li>
+              Ingrese <b>palabras clave</b>, no lenguaje natural.
+            </li>
+            <li>
+              Combine dos términos usando operadores como <b>AND</b>, <b>OR</b> o <b>NOT</b>. Ejemplo: medicamentos NOT descuentos.
+            </li>
+            <li>
+              Muestre los resultados de un área específica, o de cierto tipo de documentación, mediante los <b>filtros</b> en las páginas de búsqueda.
+            </li>
+            <li>
+              Buscar con <b>comillas dobles</b> alrededor de un término o una frase para que coincidan exactamente con las palabras. Sin ellas, se traerán todas las páginas que contienen al menos uno de los términos.
+            </li>
+            <li>
+              Presionar: <b>CTRL + F</b>, e introducir nuevamente las palabras claves, ya sea en la página de resultados de búsqueda y/o en cada página, resaltará las mismas.
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<pre class="script">
+  wiki.idfTemplate();</pre>
+    
+<pre class="script-css">
+  .accordion-body, .particularidades .hidden, .EXPAND_COLLAPSE dd  {
+      display: none; 
+  }</pre>
+    
