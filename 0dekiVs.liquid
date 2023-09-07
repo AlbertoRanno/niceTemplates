@@ -172,3 +172,73 @@ if (user.admin) {
 */
 
 user.admin;
+/*user.admin;
+
+var uri = site.api & 'pages/popular' & { limit: 10 };
+var api = wiki.api(uri);
+
+<div class="widget-popular">
+    <ul>
+    foreach(var pg in api['page'] ) {
+        <li>
+            web.link(pg / 'uri.ui', pg / 'title');
+            var viewcount = num.cast(pg / 'metrics/metric.views');
+            <span class="viewcount">
+                " (";
+                num.format(viewcount,"###,###,###");
+                " views)";
+            </span>
+        </li>
+    }
+    </ul>
+</div>
+
+// Object with property	    Function
+// user.name	            Displays the name of users
+// user.anonymous           Displays anonymous users
+// page.title	            Displays the page title
+// page.author	            Displays the author of the page
+// site.uri	                Displays the URL of the site
+// site.name	            Displays the name of the site
+
+if(user.groups['Administracion'] || user.groups['Data_entry'] || user.groups['Vista_atencion'] || user.groups['Editores_de_contenidos'] || user.groups['Vista_afiliaciones'] || user.groups['Vista_cobranzas'] || user.groups['Comercial'] ){}
+
+
+//-----------------------------------------------------------------------------------------
+
+
+var uri = site.api + 'pages/popular' + { limit: 15 };
+var api = wiki.api(uri);
+var userGroups = user.groups; // Obtener grupos del usuario
+
+var allowedPageUrlStartsWith = {
+    "group1": "home/afiliaciones/", // Definir el comienzo de las URLs permitidas para cada grupo
+    "group2": "home/otra_ruta/",
+    // Agregar más grupos y comienzos de URL según sea necesario
+};
+
+<div class="widget-popular">
+    <ul>
+    foreach (var pg in api['page']) {
+        var pageUrl = pg / 'uri.ui';
+        var pageGroup = pg / 'group'; // Supongamos que hay una propiedad "group" en la página
+
+        // Comprobar si el usuario pertenece al grupo de la página
+        if (userGroups.contains(pageGroup) && isPageAllowed(pageUrl, pageGroup)) {
+            <li>
+                web.link(pageUrl, pg / 'title');
+                var viewcount = num.cast(pg / 'metrics/metric.views');
+                <span class="viewcount">
+                    " (";
+                    num.format(viewcount, "###,###,###");
+                    " views)";
+                </span>
+            </li>
+        }
+    }
+    </ul>
+</div>
+
+@function isPageAllowed(pageUrl, pageGroup) {
+    // Verificar si la página comienza con la URL permitida para el grupo
+    return pageUrl.startsWith(allowedPageUrlStartsWith[pageGroup]);*/

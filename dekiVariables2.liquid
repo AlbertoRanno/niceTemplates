@@ -140,3 +140,39 @@ page.viewcount;
 "Cantidad de páginas en Nice hasta el momento: ";
 site.pagecount;
 <br/><br/><br/><br/><br/><br/>
+
+
+---------
+//wiki.toc();
+page.author.displayname;
+page.toc;
+page.id
+---------
+
+EN EL HTML DIRECTO:
+
+<p>This content is about {{productname}}, version {{productversion}}.</p>
+
+<p>Hi {{ User.Name }}, today is {{ Date.DayName(Date.Now) }}.</p>
+
+<p>Hi {{ User.Anonymous ? 'stranger' : User.Name }}, today is {{ Date.DayName(Date.Now) }}.</p>
+
+<p>{{coberturaMedicamentos}} ({{coberturaMedicamentos}})</p>
+
+<p>{{ var output = "Hello World"; // Set the output variable output; // Print the output let output = "Hello Universe"; // Reset the ouput variable output; // Print the output }}</p>
+
+<p>'This is just a string.'; <a href="/(coberturaMedicamentos)" target="_blank"> 'con comillas, barra y parentesis' </a></p>
+
+<p>'This is just a string.'; <a href="/(coberturaMedicamentos)" target="_blank"> 'sin barra, sin parentesis' </a></p>
+
+<p>'This is just a string.'; <a href="/(coberturaMedicamentos)" target="_blank"> 'barra parentesis' </a></p>
+
+<p>'This is just a string.'; <a href="/(coberturaMedicamentos)" target="_blank"> 'comillas parentesis' </a></p>
+
+<p>'This is just a string.'; <a href="/%7B%7B(coberturaMedicamentos)%7D%7D" target="_blank"> 'con comillas, barra y parentesis' </a></p>
+
+<p>'This is just a string.'; {{ 'sin barra, sin parentesis' }}</p>
+
+<p>{{'This is just a string.'; 'barra parentesis' }}</p>
+
+<p>'This is just a string.'; <a href="/(%7B%7BcoberturaMedicamentos%7D%7D)" target="_blank"> 'comillas parentesis' </a></p>

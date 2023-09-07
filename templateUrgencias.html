@@ -1,0 +1,165 @@
+<pre class="script-jem">
+    function alternarCollapse(id) {
+      const elemento = document.getElementById(id);
+    
+      if (elemento) {
+        elemento.classList.toggle('active');
+      }
+    }
+    
+    $(function() {
+      $('.EXPAND_COLLAPSE').find('dt').on('click', function() {
+          $(this).next().toggle('350');   
+       });
+    });</pre>
+    
+    <pre class="script-css">
+    /* Estilo para ocultar los contenidos */
+    .collapse {
+      display: none;
+    }
+    
+    /* Estilo para mostrar los contenidos cuando están activos */
+    .collapse.active {
+      display: block;
+    }</pre>
+    
+    <div class="mt-contentreuse-widget" data-page="Contenido_a_Reutilizar/En_desarrollo/TopLevelNavigation" data-section="" data-show="false">
+    <pre class="script">
+    wiki.page("Contenido_a_Reutilizar/En_desarrollo/TopLevelNavigation", NULL)</pre>
+    </div>
+    
+    <p>&nbsp;</p>
+    
+    <div class="urgencias">
+    <div class="collapse-buttons"><button onclick="alternarCollapse('contenidoNodoMardelPlata')" type="button">Nodo Mar del plata</button><button onclick="alternarCollapse('contenidoNodoMendoza')" type="button">Nodo Mendoza</button><button onclick="alternarCollapse('contenidoNodoMetropolitana')" type="button">Nodo Metropolitana</button><button onclick="alternarCollapse('contenidoNodoNorpatagonica')" type="button">Nodo Norpatagónica</button><button onclick="alternarCollapse('contenidoNodoRosario')" type="button">Nodo Rosario</button><button onclick="alternarCollapse('contenidoNodoTucuman')" type="button">Nodo Tucumán</button></div>
+    
+    <div class="contecontenidosLocalidades">
+    <div class="collapse" id="contenidoNodoMardelPlata">
+    <div>
+    <p>Filiales que componen el nodo:</p>
+    
+    <ul>
+        <li>Bahía Blanca</li>
+        <li>Buenos Aires centro (ex Olavarría)</li>
+        <li>Chivilcoy</li>
+        <li>Junín</li>
+        <li>Lobos</li>
+        <li>Mar del Plata</li>
+        <li>Pergamino</li>
+        <li>Trenque Lauquen</li>
+    </ul>
+    
+    <div class="warningRegistration style-wrap">
+    <p>Situado en: Mar del Plata<br />
+    Número de interno: 3510 - 3511 -3512 - 3513 - 3514 - 3515 - 3516(coordinación)&nbsp;</p>
+    </div>
+    </div>
+    </div>
+    
+    <div class="collapse" id="contenidoNodoMendoza">
+    <div>
+    <p>Filiales que componen el nodo:</p>
+    
+    <ul>
+        <li>Mendoza</li>
+        <li>San Juan</li>
+        <li>San Luis</li>
+    </ul>
+    
+    <div class="warningRegistration style-wrap">
+    <p>Situado en: Mendoza<br />
+    Número de interno: 3588 - 3484</p>
+    </div>
+    </div>
+    </div>
+    
+    <div class="collapse" id="contenidoNodoMetropolitana">
+    <div>
+    <p>Filiales que componen el nodo:</p>
+    
+    <ul>
+        <li>Río Uruguay</li>
+        <li>Del Paraná</li>
+        <li>Misiones</li>
+        <li>Corrientes</li>
+        <li>La Plata</li>
+        <li>Metropolitana</li>
+    </ul>
+    
+    <div class="warningRegistration style-wrap">
+    <p>Situado en: Capital Federal<br />
+    Número de interno: 7663 - 7664 - 7670</p>
+    </div>
+    </div>
+    </div>
+    
+    <div class="collapse" id="contenidoNodoNorpatagonica">
+    <div>
+    <p>Filiales que componen el nodo:</p>
+    
+    <ul>
+        <li>La Pampa</li>
+        <li>Comodoro Rivadavia</li>
+        <li>Norpatagónica</li>
+        <li>Bariloche</li>
+        <li>Santa Cruz</li>
+        <li>Tierra del Fuego</li>
+        <li>Trelew</li>
+    </ul>
+    
+    <div class="warningRegistration style-wrap">
+    <p>Situado en: Neuquén<br />
+    Número de interno: 3884 - 3885 - 3888 - 3889 / Coordinación: 3883</p>
+    </div>
+    </div>
+    </div>
+    
+    <div class="collapse" id="contenidoNodoRosario">
+    <div>
+    <p>Filiales que componen el nodo:</p>
+    
+    <ul>
+        <li>Córdoba</li>
+        <li>Río Cuarto</li>
+        <li>Rosario</li>
+        <li>Santa Fe</li>
+        <li>Villa María</li>
+    </ul>
+    
+    <div class="warningRegistration style-wrap">
+    <p>Situado en: Rosario&nbsp;</p>
+    
+    <p>Número de interno: 7661 Alternativos: 3004 - 3006 - 3008</p>
+    </div>
+    </div>
+    </div>
+    
+    <div class="collapse" id="contenidoNodoTucuman">
+    <div>
+    <p>Filiales que componen el nodo:</p>
+    
+    <ul>
+        <li>Catamarca</li>
+        <li>Chaco</li>
+        <li>Formosa</li>
+        <li>Jujuy</li>
+        <li>La Rioja</li>
+        <li>Salta</li>
+        <li>Santiago del Estero</li>
+        <li>Tucumán</li>
+    </ul>
+    
+    <div class="warningRegistration style-wrap">
+    <p>Situado en: Tucumán</p>
+    
+    <p>Número de interno: 3811 / 3813</p>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    <dl class="EXPAND_COLLAPSE">
+    </dl>
+    </div>
+    

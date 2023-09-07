@@ -1,0 +1,60 @@
+<pre class="script-jem">
+    /*// URL de la API de páginas populares con un límite de 10 páginas
+    var uri = 'https://osde-prod1.mindtouch.us/api/site/pages/popular?limit=10';
+    
+    // Hacer una llamada a la API utilizando fetch (requiere un entorno con soporte para fetch)
+    fetch(uri)
+      .then(response =&gt; response.json())
+      .then(data =&gt; {
+        // Crear un contenedor para mostrar la lista de páginas populares
+        var popularPagesContainer = document.createElement('div');
+        popularPagesContainer.className = 'widget-popular';
+    
+        // Crear una lista para mostrar las páginas populares
+        var popularPagesList = document.createElement('ul');
+    
+        // Iterar sobre cada página en la respuesta de la API y construir la lista
+        data.page.forEach(function(pg) {
+          // Crear un elemento de lista para cada página
+          var listItem = document.createElement('li');
+    
+          // Crear un enlace a la página utilizando el atributo 'uri.ui' como href y el atributo 'title' como texto del enlace
+          var pageLink = document.createElement('a');
+          pageLink.href = pg['uri.ui'];
+          pageLink.textContent = pg['title'];
+    
+          // Obtener el número de vistas utilizando el atributo 'metrics/metric.views'
+          var viewCount = parseInt(pg['metrics/metric.views']);
+    
+          // Crear un elemento span para mostrar el número de vistas formateado
+          var viewCountSpan = document.createElement('span');
+          viewCountSpan.className = 'viewcount';
+          viewCountSpan.textContent = ' (' + viewCount.toLocaleString() + ' views)';
+    
+          // Agregar el enlace y el número de vistas al elemento de lista
+          listItem.appendChild(pageLink);
+          listItem.appendChild(viewCountSpan);
+    
+          // Agregar el elemento de lista a la lista de páginas populares
+          popularPagesList.appendChild(listItem);
+        });
+    
+        // Agregar la lista de páginas populares al contenedor
+        popularPagesContainer.appendChild(popularPagesList);
+    
+        // Agregar el contenedor al documento
+        document.body.appendChild(popularPagesContainer);
+      })
+      .catch(error =&gt; {
+        console.error('Error al obtener los datos:', error);
+      });*/</pre>
+    
+    <pre class="script-css">
+    .widget-popular .viewcount {
+        margin:0 0 0 10px;
+        font-size:10px;
+        color:#999;
+    }</pre>
+    
+    <p>&nbsp;</p>
+    

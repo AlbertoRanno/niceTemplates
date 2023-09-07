@@ -1,3 +1,74 @@
+-----------------------------------------------------------------------------------------
+ACTUAL - FILTRANDO POR GRUPOS
+
+var uri = site.api & 'pages/popular' & { limit: 30 };
+var api = wiki.api(uri);
+
+<div class="widget-popular">
+    <ul>
+    foreach(var pg in api['page'] ) {
+        var pageUri = pg / 'uri.ui';
+
+        // Verifica si el usuario es administrador o si la página comienza con las URL permitidas
+        if (user.admin || pageUri.startsWith('https://osde-prod1.mindtouch.us/Comercial') || pageUri.startsWith('https://osde-prod1.mindtouch.us/Cobertura') || pageUri.startsWith('https://osde-prod1.mindtouch.us/Afiliaciones1') || pageUri.startsWith('https://osde-prod1.mindtouch.us/Cobranzas')) {
+            <li>
+                web.link(pageUri, pg / 'title');
+                var viewcount = num.cast(pg / 'metrics/metric.views');
+                <span class="viewcount">
+                    " (";
+                    num.format(viewcount,"###,###,###");
+                    " views)";
+                </span>
+            </li>
+        }
+    }
+    </ul>
+</div>
+
+
+-----------------------------------------------------------------------------------------
+ACTUAL - COMENTADO
+
+// Defino la URL para obtener las páginas populares (esto solicita la API de MindTouch)
+var uri = site.api & 'pages/popular' & { limit: 30 };
+var api = wiki.api(uri);
+
+// Creo una sección HTML para mostrar las páginas populares
+<div class="widget-popular">
+    <ul>
+    // Itero a través de las páginas obtenidas de la API
+    foreach(var pg in api['page'] ) {
+        // Obtengo la URL de la página actual
+        var pageUri = pg / 'uri.ui';
+
+        // Verifico si el usuario actual es administrador o si la página comienza con una de las URL permitidas
+        if (user.admin || 
+            pageUri.startsWith('https://osde-prod1.mindtouch.us/Comercial') || 
+            pageUri.startsWith('https://osde-prod1.mindtouch.us/Cobertura') || 
+            pageUri.startsWith('https://osde-prod1.mindtouch.us/Afiliaciones1') || 
+            pageUri.startsWith('https://osde-prod1.mindtouch.us/Cobranzas')) {
+            // Si el usuario es administrador o la página está en la lista de URL permitidas, se muestra en la lista
+            <li>
+                // Creo un enlace a la página con su título
+                web.link(pageUri, pg / 'title');
+                // Obtengo el número de vistas de la página
+                var viewcount = num.cast(pg / 'metrics/metric.views');
+                <span class="viewcount">
+                    // Muestro el número de vistas formateado
+                    " (";
+                    num.format(viewcount,"###,###,###");
+                    " views)";
+                </span>
+            </li>
+        }
+    }
+    </ul>
+</div>
+
+
+
+-----------------------------------------------------------------------------------------
+
 var uri = site.api & 'pages/popular' & { limit: 10 };
 var api = wiki.api(uri);
 
@@ -67,3 +138,197 @@ var allowedPageUrlStartsWith = {
     // Verificar si la página comienza con la URL permitida para el grupo
     return pageUrl.startsWith(allowedPageUrlStartsWith[pageGroup]);
 }
+
+/*var uri = site.api & 'pages/popular' & { limit: 10 };
+var api = wiki.api(uri);
+
+<div class="widget-popular">
+    <ul>
+    foreach(var pg in api['page'] ) {
+        var pageUri = pg / 'uri.ui';
+        
+        // Verifica si "user.admin" es false y si la página comienza con la URL específica
+        if (!user.admin && pageUri.startsWith('https://osde-prod1.mindtouch.us/PruebasVarias/')) {
+            continue; // Saltar esta página
+        }
+        
+        <li>
+            web.link(pageUri, pg / 'title');
+            var viewcount = num.cast(pg / 'metrics/metric.views');
+            <span class="viewcount">
+                " (";
+                num.format(viewcount,"###,###,###");
+                " views)";
+            </span>
+        </li>
+    }
+    </ul>
+</div>
+}
+
+*/
+
+/*
+var uri = site.api & 'pages/popular' & { limit: 10 };
+var api = wiki.api(uri);
+
+<div class="widget-popular">
+    <ul>
+    foreach(var pg in api['page'] ) {
+        <li>
+            web.link(pg / 'uri.ui', pg / 'title');
+            var viewcount = num.cast(pg / 'metrics/metric.views');
+            <span class="viewcount">
+                " (";
+                num.format(viewcount,"###,###,###");
+                " views)";
+            </span>
+        </li>
+    }
+    </ul>
+</div>
+*/
+/*
+
+ if (user.admin){
+    var uri = site.api & 'pages/popular' & { limit: 10 };
+    var api = wiki.api(uri);
+
+    <div class="widget-popular">
+        <ul>
+        foreach(var pg in api['page'] ) {
+            <li>
+                web.link(pg / 'uri.ui', pg / 'title');
+                var viewcount = num.cast(pg / 'metrics/metric.views');
+                <span class="viewcount">
+                    " (";
+                    num.format(viewcount,"###,###,###");
+                    " views)";
+                </span>
+            </li>
+        }
+        </ul>
+    </div>
+}*/
+/*
+if (user.admin){
+    var uri = site.api & 'pages/popular' & { limit: 10 };
+    var api = wiki.api(uri);
+
+    <div class="widget-popular">
+        <ul>
+        foreach(var pg in api['page'] ) {
+            var pageUri = pg / 'uri.ui';
+            
+            // Verifica si la página comienza con la URL específica
+            if (!pageUri.startsWith('https://osde-prod1.mindtouch.us/PruebasVarias/')) {
+                <li>
+                    web.link(pageUri, pg / 'title');
+                    var viewcount = num.cast(pg / 'metrics/metric.views');
+                    <span class="viewcount">
+                        " (";
+                        num.format(viewcount,"###,###,###");
+                        " views)";
+                    </span>
+                </li>
+            }
+        }
+        </ul>
+    </div>
+} else {
+    var uri = site.api & 'pages/popular' & { limit: 10 };
+    var api = wiki.api(uri);
+
+    <div class="widget-popular">
+        <ul>
+        foreach(var pg in api['page'] ) {
+            var pageUri = pg / 'uri.ui';
+            
+            // Verifica si la página comienza con la URL específica
+            if (!pageUri.startsWith('https://osde-prod1.mindtouch.us/PruebasVarias/')) {
+                <li>
+                    web.link(pageUri, pg / 'title');
+                    var viewcount = num.cast(pg / 'metrics/metric.views');
+                    <span class="viewcount">
+                        " (";
+                        num.format(viewcount,"###,###,###");
+                        " views)";
+                    </span>
+                </li>
+            }
+        }
+        </ul>
+    </div>
+}*/
+/*
+var uri = site.api & 'pages/popular' & { limit: 10 };
+var api = wiki.api(uri);
+
+<div class="widget-popular">
+    <ul>
+    foreach(var pg in api['page'] ) {
+        var pageUri = pg / 'uri.ui';
+
+        // Verifica si la página comienza con la URL específica
+        if (user.admin || !pageUri.startsWith('https://osde-prod1.mindtouch.us/PruebasVarias/')) {
+            <li>
+                web.link(pageUri, pg / 'title');
+                var viewcount = num.cast(pg / 'metrics/metric.views');
+                <span class="viewcount">
+                    " (";
+                    num.format(viewcount,"###,###,###");
+                    " views)";
+                </span>
+            </li>
+        }
+    }
+    </ul>
+</div>*/
+/*
+var uri = site.api & 'pages/popular' & { limit: 10 };
+var api = wiki.api(uri);
+
+<div class="widget-popular">
+    <ul>
+    foreach(var pg in api['page'] ) {
+        var pageUri = pg / 'uri.ui';
+
+        // Verifica si la página comienza con la URL específica
+        if (user.admin || !pageUri.startsWith('https://osde-prod1.mindtouch.us/PruebasVarias/')) {
+            <li>
+                web.link(pageUri, pg / 'title');
+                var viewcount = num.cast(pg / 'metrics/metric.views');
+                <span class="viewcount">
+                    " (";
+                    num.format(viewcount,"###,###,###");
+                    " views)";
+                </span>
+            </li>
+        }
+    }
+    </ul>
+</div>*/
+/*
+var uri = site.api & 'pages/popular' & { limit: 30 };
+var api = wiki.api(uri);
+
+<div class="widget-popular">
+    <ul>
+    foreach(var pg in api['page'] ) {
+        var pageUri = pg / 'uri.ui';
+
+        // Verifica si el usuario es administrador o si la página comienza con las URL permitidas
+        if (user.admin || pageUri.startsWith('https://osde-prod1.mindtouch.us/Comercial') || pageUri.startsWith('https://osde-prod1.mindtouch.us/Cobertura') || pageUri.startsWith('https://osde-prod1.mindtouch.us/Afiliaciones1') || pageUri.startsWith('https://osde-prod1.mindtouch.us/Cobranzas')) {
+            <li>
+                web.link(pageUri, pg / 'title');
+                var viewcount = num.cast(pg / 'metrics/metric.views');
+                <span class="viewcount">
+                    " (";
+                    num.format(viewcount,"###,###,###");
+                    " views)";
+                </span>
+            </li>
+        }
+    }
+    </ul>
+</div>*/

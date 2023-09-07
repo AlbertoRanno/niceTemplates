@@ -1,0 +1,44 @@
+<p class="mt-script-comment">Page summary display: overview and page thumbnail</p>
+
+<pre class="script">
+template('MindTouch/Controls/PageOverview');</pre>
+
+<p>&nbsp;</p>
+
+<pre class="script-css">
+.mt-guide-content .mt-toggle-collapse:before,
+.mt-learningpath-widget .mt-toggle-collapse:before {
+   content: '';
+}
+.mt-guide-content .mt-lp-path-container .mt-lp-pages-container .mt-summary-toggle,
+.mt-learningpath-widget .mt-lp-path-container .mt-lp-pages-container .mt-summary-toggle {
+   display: none;
+}
+.mt-guide-content .mt-lp-pages-container.mt-toggle-container .mt-collapsible-section,
+.mt-learningpath-widget .mt-lp-pages-container.mt-toggle-container .mt-collapsible-section {
+   display: block !important;
+   max-height: 2000px !important;
+}
+.mt-guide-content .mt-lp-path-container .mt-listing-detailed,
+.mt-learningpath-widget .mt-lp-path-container .mt-listing-detailed {
+   padding: 0;
+}</pre>
+
+<div class="mt-style-conditional style-wrap" if="user.groups['Comercial']" title="Contenido condicional">
+
+
+
+
+<p>¿Qué es un lead?</p>
+
+<p>¿Qué es gestionar un lead?</p>
+
+<p>¿Qué objetivo se busca al gestionar un lead?</p>
+
+<p>¿Qué tipo de leads busca la empresa?</p>
+</div>
+
+<pre class="script">
+wiki.idfTemplate();</pre>
+
+<p>&nbsp;</p>

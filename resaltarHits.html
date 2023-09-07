@@ -1,0 +1,42 @@
+<h5>Definición del servicio</h5>
+
+<p>Desarrollar aquí la definición&nbsp;</p>
+
+<p>habixxxx</p>
+
+<h5>Sujetos que acceden al servicio</h5>
+
+<pre class="script-jem">
+const contenidoOriginal = document.querySelector('article#elm-main-content').innerHTML;
+const contenido = document.querySelector('article#elm-main-content');
+const searchInput = document.getElementById('mt-site-search-input');
+let searchText = "";
+
+searchInput.addEventListener('input', function () {
+    searchText = this.value.trim();
+    if (searchText !== "") {
+        searchText = escapeHTML(searchText);
+        highlightText(searchText);
+    } else {
+        contenido.innerHTML = contenidoOriginal;
+    }
+});
+
+function highlightText(searchText) {
+    const regex = new RegExp(escapeRegExp(searchText), 'gi');
+    contenido.innerHTML = contenidoOriginal.replace(regex, match =&gt; {
+        return `&lt;span style="background-color: yellow"&gt;${match}&lt;/span&gt;`;
+    });
+}
+
+function escapeHTML(text) {
+    return text.replace(/[&lt;&gt;&amp;]/g, match =&gt; {
+        return {'&lt;': '&amp;lt;', '&gt;': '&amp;gt;', '&amp;': '&amp;amp;'}[match];
+    });
+}
+
+function escapeRegExp(text) {
+    return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&amp;');
+}</pre>
+
+<p>&nbsp;</p>

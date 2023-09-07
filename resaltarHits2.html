@@ -1,0 +1,74 @@
+<pre class="script-jem">
+    const contenidoOriginal = document.querySelector('article#elm-main-content').innerHTML;
+    const contenido = document.querySelector('article#elm-main-content');
+    const searchInput = document.getElementById('mt-site-search-input');
+    let searchText = "";
+    
+    searchInput.addEventListener('input', function () {
+        searchText = this.value.trim();
+        if (searchText !== "") {
+            searchText = escapeHTML(searchText);
+            highlightText(searchText);
+        } else {
+            contenido.innerHTML = contenidoOriginal;
+        }
+    });
+    
+    function highlightText(searchText) {
+        const regex = new RegExp(escapeRegExp(searchText), 'gi');
+        contenido.innerHTML = contenidoOriginal.replace(regex, match =&gt; {
+            return `&lt;span style="background-color: yellow"&gt;${match}&lt;/span&gt;`;
+        });
+    }
+    
+    function escapeHTML(text) {
+        return text.replace(/[&lt;&gt;&amp;]/g, match =&gt; {
+            return {'&lt;': '&amp;lt;', '&gt;': '&amp;gt;', '&amp;': '&amp;amp;'}[match];
+        });
+    }
+    
+    function escapeRegExp(text) {
+        return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&amp;');
+    }</pre>
+
+<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus
+    enim inventore quisquam facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum
+    dolor sit amet consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim
+    inventore quisquam facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum dolor
+    sit amet consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim inventore
+    quisquam facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum dolor sit amet
+    consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim inventore quisquam
+    facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum dolor sit amet
+    consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim inventore quisquam
+    facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum dolor sit amet
+    consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim inventore quisquam
+    facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum dolor sit amet
+    consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim inventore quisquam
+    facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum dolor sit amet
+    consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim inventore quisquam
+    facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum dolor sit amet
+    consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim inventore quisquam
+    facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum dolor sit amet
+    consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim inventore quisquam
+    facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum dolor sit amet
+    consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim inventore quisquam
+    facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum dolor sit amet
+    consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim inventore quisquam
+    facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.</p>
+
+<p>&nbsp;</p>
+
+<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus
+    enim inventore quisquam facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum
+    dolor sit amet consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim
+    inventore quisquam facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum dolor
+    sit amet consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim inventore
+    quisquam facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum dolor sit amet
+    consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim inventore quisquam
+    facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum dolor sit amet
+    consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim inventore quisquam
+    facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum dolor sit amet
+    consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim inventore quisquam
+    facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.Lorem ipsum dolor sit amet
+    consectetur, adipisicing elit. Sed iste mollitia, rem ex eaque unde perspiciatis accusamus enim inventore quisquam
+    facere magnam iure nulla exercitationem vel voluptas architecto quo distinctio.</p>
