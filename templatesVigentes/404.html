@@ -1,0 +1,23 @@
+<p>Puede que la página que estés buscando No exista, o No tengas los permisos requeridos para la misma.</p>
+
+<p>Podés regresar a la <a href="/" title="/">home</a> o quizás te sirva&nbsp;algunas de estas páginas que son las más visitadas:</p>
+
+<pre class="script">
+var uri = site.api &amp; 'pages/popular' &amp; { limit: 15 };
+var api = wiki.api(uri);
+
+&lt;div class="widget-popular"&gt;
+    &lt;ul&gt;
+    foreach(var pg in api['page'] ) {
+        &lt;li&gt;
+            web.link(pg / 'uri.ui', pg / 'title');
+            var viewcount = num.cast(pg / 'metrics/metric.views');
+            &lt;span class="viewcount"&gt;
+                " (";
+                num.format(viewcount,"###,###,###");
+                " views)";
+            &lt;/span&gt;
+        &lt;/li&gt;
+    }
+    &lt;/ul&gt;
+&lt;/div&gt;</pre>
