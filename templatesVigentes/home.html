@@ -1,0 +1,27 @@
+var uri = site.api & 'pages/popular' & { limit: 30 };
+var api = wiki.api(uri);
+
+<div class="widget-popular">
+    <ul>
+        foreach(var pg in api['page'] ) {
+        var pageUri = pg / 'uri.ui';
+
+        // Verifica si el usuario es administrador o si la página comienza con las URL permitidas
+        if (user.admin || pageUri.startsWith('https://osde-prod1.mindtouch.us/Comercial') ||
+        pageUri.startsWith('https://osde-prod1.mindtouch.us/Cobertura') ||
+        pageUri.startsWith('https://osde-prod1.mindtouch.us/Afiliaciones1') ||
+        pageUri.startsWith('https://osde-prod1.mindtouch.us/Cobranzas') ||
+        pageUri.startsWith('https://osde-prod1.mindtouch.us/Prestaciones')) {
+        <li>
+            web.link(pageUri, pg / 'title');
+            var viewcount = num.cast(pg / 'metrics/metric.views');
+            <span class="viewcount">
+                " (";
+                num.format(viewcount,"###,###,###");
+                " views)";
+            </span>
+        </li>
+        }
+        }
+    </ul>
+</div>
