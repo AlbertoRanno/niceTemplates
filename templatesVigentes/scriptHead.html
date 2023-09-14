@@ -1,227 +1,260 @@
 <script>
   //****************************COLAPSABLES****************************
-      function alternarCollapse(id) {
-      const elemento = document.getElementById(id);
-      if (elemento) {elemento.classList.toggle('active');}}
-      function toggleAccordion(collapseId) {
-      var accordionBody = document.getElementById(collapseId);
-      accordionBody.classList.toggle('show');
-      var accordionHeader = accordionBody.previousElementSibling
-      accordionHeader.classList.toggle('show');}
-    $(function () {$('.EXPAND_COLLAPSE').find('dt').on('click', function () {$(this).next().toggle('350');});});
-  
-  //****************************NAVBAR*********************************
-      document.addEventListener('DOMContentLoaded', function () {
-  
-      let topLevelNavigation = document.createElement('nav');
-      topLevelNavigation.classList.add('navbar', 'navbar-menu-osde', 'elm-header-logo-menu');
-      let divContenedor = document.createElement('div');
-      divContenedor.classList.add('elm-header-nav-container', 'elm-nav-container');
-      let ulPrincipal = document.createElement('ul');
-      ulPrincipal.classList.add('navbar-header');
-    
-      let elementoLogo = document.createElement('li');
-      elementoLogo.classList.add('navbar-header-logo');
-      let linkLogo = document.createElement('a');
-      linkLogo.href = "/";
-      let logoImg = document.createElement('img');
-      logoImg.alt = "Logo de la empresa";
-      logoImg.src = "/@api/deki/files/117/LogoOsde.png";
-      linkLogo.appendChild(logoImg); 
-      elementoLogo.appendChild(linkLogo); 
-      ulPrincipal.appendChild(elementoLogo);
-  
-      let elementoMenu = document.createElement('li');
-      elementoMenu.classList.add('navbar-header-menu');    
-      let inputCheckbox = document.createElement('input');
-      inputCheckbox.classList.add('nav-toggle');
-      inputCheckbox.id = "nav-toggle";
-      inputCheckbox.type = "checkbox";
-      elementoMenu.appendChild(inputCheckbox);
-      let ulSubList = document.createElement('ul');
-  
-      let labelResponsive = document.createElement('label');
-      labelResponsive.setAttribute('for', 'nav-toggle');
-      labelResponsive.classList.add('nav-toggle-label');
-      let spanResponsive = document.createElement('span');
-      labelResponsive.appendChild(spanResponsive);
-  
-      let divConsejos = document.createElement('div');
-      divConsejos.classList.add('consejo-busqueda-area');
-      let divInternoConsejos = document.createElement('div');
-      divInternoConsejos.classList.add('elm-content-container');
-      let ulConsejos = document.createElement('ul');
-      ulConsejos.classList.add('navbar-header');
-      let liConsejos = document.createElement('li');
-      liConsejos.classList.add('has-submenu');
-      let aConsejos = document.createElement('a');
-      aConsejos.textContent = 'Consejos para usar el buscador';
-      let ulSubmenu = document.createElement('ul');
-      ulSubmenu.classList.add('submenu');   
-      let li1 = document.createElement('li');
-      li1.textContent = 'Ingrese PALABRAS CLAVE, no lenguaje natural.';
-      let li2 = document.createElement('li');
-      li2.textContent = 'Combine dos palabras usando operadores como AND, OR o NOT. Ejemplo: medicamentos NOT descuentos.';
-      let li3 = document.createElement('li');
-      li3.textContent = 'Muestre los resultados de una zona particular, o de cierto tipo de registros, mediante los FILTROS, ubicados a la izquierda, en la lista de resultados.';
-      let li4 = document.createElement('li');
-      li4.textContent = 'Buscar con COMILLAS DOBLES alrededor de una palabra o una frase para que coincidan exactamente. Sin ellas, se traen todos los documentos que contienen al menos una de las palabras.';
-      let li5 = document.createElement('li');
-      li5.textContent = 'Para resaltar las palabras claves, ya sea en la lista de resultados y/o en cada documento, utilice: CTRL + F, e ingrese nuevamente las mismas.';
-      liConsejos.appendChild(aConsejos);
-      ulSubmenu.appendChild(li1);
-      ulSubmenu.appendChild(li2);
-      ulSubmenu.appendChild(li3);
-      ulSubmenu.appendChild(li4);
-      ulSubmenu.appendChild(li5);
-      liConsejos.appendChild(ulSubmenu);
-      ulConsejos.appendChild(liConsejos);
-      divInternoConsejos.appendChild(ulConsejos);
-      divConsejos.appendChild(divInternoConsejos);    
-        
-      let listItemComercial = document.createElement('li');
-      listItemComercial.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
-      let linkComercial = document.createElement('a');
-      linkComercial.href = "/Comercial";
-      let imgComercial = document.createElement('img');
-      imgComercial.alt = "Icono";
-      imgComercial.src = "/@api/deki/files/215/comercial.png";    
-      linkComercial.appendChild(imgComercial);
-      linkComercial.appendChild(document.createTextNode("Comercial"));
-      listItemComercial.appendChild(linkComercial);
-      let ulSubListComercial = document.createElement('ul');
-      ulSubListComercial.classList.add('submenu');
-      let listItemGestionarB2B = document.createElement('li');
-      let linkGestionarB2B = document.createElement('a');
-      linkGestionarB2B.href = "/Comercial/Gestionar_leads_B2B";
-      linkGestionarB2B.textContent = "Gestionar leads B2B";
-      listItemGestionarB2B.appendChild(linkGestionarB2B);
-      let listItemGestionarB2C = document.createElement('li');
-      let linkGestionarB2C = document.createElement('a');
-      linkGestionarB2C.href = "/Comercial/Gestionar_leads_B2C";
-      linkGestionarB2C.textContent = "Gestionar leads B2C";
-      listItemGestionarB2C.appendChild(linkGestionarB2C);
-      ulSubListComercial.appendChild(listItemGestionarB2B);
-      ulSubListComercial.appendChild(listItemGestionarB2C);
-      listItemComercial.appendChild(ulSubListComercial);
-      ulSubList.appendChild(listItemComercial);
-  
-      let listItemCobertura = document.createElement('li');
-      listItemCobertura.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
-      let linkCobertura = document.createElement('a');
-      linkCobertura.href = "/Cobertura";
-      let imgCobertura = document.createElement('img');
-      imgCobertura.alt = "Icono";
-      imgCobertura.src = "/@api/deki/files/213/cobertura.png";
-      linkCobertura.appendChild(imgCobertura);
-      linkCobertura.appendChild(document.createTextNode("Cobertura"));
-      listItemCobertura.appendChild(linkCobertura);
-      let ulSubListCobertura = document.createElement('ul');
-      ulSubListCobertura.classList.add('submenu');
-      let listItemCirugias = document.createElement('li');
-      let linkCirugias = document.createElement('a');
-      linkCirugias.href = "/Cobertura/Cirugias";
-      linkCirugias.textContent = "Cirugias";
-      listItemCirugias.appendChild(linkCirugias);
-      let listItemMedicamentos = document.createElement('li');
-      let linkMedicamentos = document.createElement('a');
-      linkMedicamentos.href = "/Cobertura/Medicamentos";
-      linkMedicamentos.textContent = "Medicamentos";
-      listItemMedicamentos.appendChild(linkMedicamentos);
-      let listItemPracticas = document.createElement('li');
-      let linkPracticas = document.createElement('a');
-      linkPracticas.href = "/Cobertura/practicas";
-      linkPracticas.textContent = "Practicas";
-      listItemPracticas.appendChild(linkPracticas);
-      ulSubListCobertura.appendChild(listItemCirugias);
-      ulSubListCobertura.appendChild(listItemMedicamentos);
-      ulSubListCobertura.appendChild(listItemPracticas);
-      listItemCobertura.appendChild(ulSubListCobertura);
-      ulSubList.appendChild(listItemCobertura);
-  
-      let listItemAfiliaciones = document.createElement('li');
-      listItemAfiliaciones.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
-      let linkAfiliaciones = document.createElement('a');
-      linkAfiliaciones.href = "/Afiliaciones";
-      let imgAfiliaciones = document.createElement('img');
-      imgAfiliaciones.alt = "Icono";
-      imgAfiliaciones.src = "/@api/deki/files/214/afiliaciones.png";
-      linkAfiliaciones.appendChild(imgAfiliaciones);
-      linkAfiliaciones.appendChild(document.createTextNode("Afiliaciones"));
-      listItemAfiliaciones.appendChild(linkAfiliaciones);    
-      let ulSubListAfiliaciones = document.createElement('ul');
-      ulSubListAfiliaciones.classList.add('submenu');
-      let listItemAltas = document.createElement('li');
-      let linkAltas = document.createElement('a');
-      linkAltas.href = "/Afiliaciones/altas";
-      linkAltas.textContent = "Altas";
-      listItemAltas.appendChild(linkAltas);
-      let listItemBajas = document.createElement('li');
-      let linkBajas = document.createElement('a');
-      linkBajas.href = "/Afiliaciones/Bajas";
-      linkBajas.textContent = "Bajas";
-      listItemBajas.appendChild(linkBajas);
-      let listItemLicencias = document.createElement('li');
-      let linkLicencias = document.createElement('a');
-      linkLicencias.href = "/Afiliaciones/Licencias";
-      linkLicencias.textContent = "Licencias";
-      listItemLicencias.appendChild(linkLicencias);
-      let listItemMovimientosPadron = document.createElement('li');
-      let linkMovimientosPadron = document.createElement('a');
-      linkMovimientosPadron.href = "/Afiliaciones/movimientos_padron";
-      linkMovimientosPadron.textContent = "Movimientos del padron";
-      listItemMovimientosPadron.appendChild(linkMovimientosPadron);
-      ulSubListAfiliaciones.appendChild(listItemAltas);
-      ulSubListAfiliaciones.appendChild(listItemBajas);
-      ulSubListAfiliaciones.appendChild(listItemLicencias);
-      ulSubListAfiliaciones.appendChild(listItemMovimientosPadron);
-      listItemAfiliaciones.appendChild(ulSubListAfiliaciones);
-      ulSubList.appendChild(listItemAfiliaciones);
-  
-      let listItemCobranzas = document.createElement('li');
-      listItemCobranzas.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
-      let linkCobranzas = document.createElement('a');
-      linkCobranzas.href = "/Cobranzas";
-      let imgCobranzas = document.createElement('img');
-      imgCobranzas.alt = "Icono";
-      imgCobranzas.src = "/@api/deki/files/212/cobranzas.png";
-      linkCobranzas.appendChild(imgCobranzas);
-      linkCobranzas.appendChild(document.createTextNode("Cobranzas"));
-      listItemCobranzas.appendChild(linkCobranzas);   
-      let ulSubListCobranzas = document.createElement('ul');
-      ulSubListCobranzas.classList.add('submenu');
-      let listItemCuentaCorriente = document.createElement('li');
-      let linkCuentaCorriente = document.createElement('a');
-      linkCuentaCorriente.href = "/Cobranzas/Cuenta_corriente";
-      linkCuentaCorriente.textContent = "Cuenta corriente";
-      listItemCuentaCorriente.appendChild(linkCuentaCorriente);
-      let listItemCuentaDebitoAutomatico = document.createElement('li');
-      let linkCuentaDebitoAutomatico = document.createElement('a');
-      linkCuentaDebitoAutomatico.href = "/Cobranzas/Cuenta_debito_automatico";
-      linkCuentaDebitoAutomatico.textContent = "Cuenta debito automatico";
-      listItemCuentaDebitoAutomatico.appendChild(linkCuentaDebitoAutomatico);
-      let listItemDeudaVencida = document.createElement('li');
-      let linkDeudaVencida = document.createElement('a');
-      linkDeudaVencida.href = "/Cobranzas/Deuda_vencida";
-      linkDeudaVencida.textContent = "Deuda vencida";
-      listItemDeudaVencida.appendChild(linkDeudaVencida);
-      ulSubListCobranzas.appendChild(listItemCuentaCorriente);
-      ulSubListCobranzas.appendChild(listItemCuentaDebitoAutomatico);
-      ulSubListCobranzas.appendChild(listItemDeudaVencida);
-      listItemCobranzas.appendChild(ulSubListCobranzas);
-      ulSubList.appendChild(listItemCobranzas); 
-      
-      elementoMenu.appendChild(labelResponsive);
-      elementoMenu.appendChild(ulSubList);    
-      ulPrincipal.appendChild(elementoMenu);
-      divContenedor.appendChild(ulPrincipal);
-      topLevelNavigation.appendChild(divContenedor);
-      topLevelNavigation.appendChild(divConsejos);
-      let logoContainer = document.querySelector('.elm-header-logo-container');
-      if (logoContainer) {
-        logoContainer.innerHTML = '';
-        logoContainer.appendChild(topLevelNavigation);
-      }
-    
+  function alternarCollapse(id) {
+    const elemento = document.getElementById(id);
+    if (elemento) {
+      elemento.classList.toggle('active');
+    }
+  }
+
+  function toggleAccordion(collapseId) {
+    var accordionBody = document.getElementById(collapseId);
+    accordionBody.classList.toggle('show');
+    var accordionHeader = accordionBody.previousElementSibling
+    accordionHeader.classList.toggle('show');
+  }
+  $(function () {
+    $('.EXPAND_COLLAPSE').find('dt').on('click', function () {
+      $(this).next().toggle('350');
     });
-  </script>
+  });
+
+  //****************************NAVBAR*********************************
+  document.addEventListener('DOMContentLoaded', function () {
+
+    if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
+      setTimeout(function () {
+        var results = document.querySelectorAll("li.result");
+        results.forEach(function (result) {
+          var link = result.querySelector("a.go.result-spacer.mt-tracked-result");
+          var moreButton = result.querySelector("button.mt-help-more-content");
+
+          if (link) {
+            var originalUrl = link.getAttribute("href");
+            result.addEventListener("click", function (event) {
+              if (!moreButton || event.target !== moreButton) {
+                // Redirige solo si no se hizo clic en el botón "Más"
+                window.location.href = originalUrl;
+              }
+            });
+          }
+        });
+      }, 1000);
+    }
+
+    let topLevelNavigation = document.createElement('nav');
+    topLevelNavigation.classList.add('navbar', 'navbar-menu-osde', 'elm-header-logo-menu');
+    let divContenedor = document.createElement('div');
+    divContenedor.classList.add('elm-header-nav-container', 'elm-nav-container');
+    let ulPrincipal = document.createElement('ul');
+    ulPrincipal.classList.add('navbar-header');
+
+    let elementoLogo = document.createElement('li');
+    elementoLogo.classList.add('navbar-header-logo');
+    let linkLogo = document.createElement('a');
+    linkLogo.href = "/";
+    let logoImg = document.createElement('img');
+    logoImg.alt = "Logo de la empresa";
+    logoImg.src = "/@api/deki/files/118/LogoOsde.png";
+    linkLogo.appendChild(logoImg);
+    elementoLogo.appendChild(linkLogo);
+    ulPrincipal.appendChild(elementoLogo);
+
+    let elementoMenu = document.createElement('li');
+    elementoMenu.classList.add('navbar-header-menu');
+    let inputCheckbox = document.createElement('input');
+    inputCheckbox.classList.add('nav-toggle');
+    inputCheckbox.id = "nav-toggle";
+    inputCheckbox.type = "checkbox";
+    elementoMenu.appendChild(inputCheckbox);
+    let ulSubList = document.createElement('ul');
+
+    let labelResponsive = document.createElement('label');
+    labelResponsive.setAttribute('for', 'nav-toggle');
+    labelResponsive.classList.add('nav-toggle-label');
+    let spanResponsive = document.createElement('span');
+    labelResponsive.appendChild(spanResponsive);
+
+    let divConsejos = document.createElement('div');
+    divConsejos.classList.add('consejo-busqueda-area');
+    let divInternoConsejos = document.createElement('div');
+    divInternoConsejos.classList.add('elm-content-container');
+    let ulConsejos = document.createElement('ul');
+    ulConsejos.classList.add('navbar-header');
+    let liConsejos = document.createElement('li');
+    liConsejos.classList.add('has-submenu');
+    let aConsejos = document.createElement('a');
+    aConsejos.textContent = 'Consejos para usar el buscador';
+    let ulSubmenu = document.createElement('ul');
+    ulSubmenu.classList.add('submenu');
+    let li1 = document.createElement('li');
+    li1.textContent = 'Ingrese PALABRAS CLAVE, no lenguaje natural.';
+    let li2 = document.createElement('li');
+    li2.textContent =
+      'Combine dos palabras usando operadores como AND, OR o NOT. Ejemplo: medicamentos NOT descuentos.';
+    let li3 = document.createElement('li');
+    li3.textContent =
+      'Muestre los resultados de una zona particular, o de cierto tipo de registros, mediante los FILTROS, ubicados a la izquierda, en la lista de resultados.';
+    let li4 = document.createElement('li');
+    li4.textContent =
+      'Buscar con COMILLAS DOBLES alrededor de una palabra o una frase para que coincidan exactamente. Sin ellas, se traen todos los documentos que contienen al menos una de las palabras.';
+    let li5 = document.createElement('li');
+    li5.textContent =
+      'Para resaltar las palabras claves, ya sea en la lista de resultados y/o en cada documento, utilice: CTRL + F, e ingrese nuevamente las mismas.';
+    liConsejos.appendChild(aConsejos);
+    ulSubmenu.appendChild(li1);
+    ulSubmenu.appendChild(li2);
+    ulSubmenu.appendChild(li3);
+    ulSubmenu.appendChild(li4);
+    ulSubmenu.appendChild(li5);
+    liConsejos.appendChild(ulSubmenu);
+    ulConsejos.appendChild(liConsejos);
+    divInternoConsejos.appendChild(ulConsejos);
+    divConsejos.appendChild(divInternoConsejos);
+
+    let listItemComercial = document.createElement('li');
+    listItemComercial.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+    let linkComercial = document.createElement('a');
+    linkComercial.href = "/Comercial";
+    let imgComercial = document.createElement('img');
+    imgComercial.alt = "Icono";
+    imgComercial.src = "/@api/deki/files/215/comercial.png";
+    linkComercial.appendChild(imgComercial);
+    linkComercial.appendChild(document.createTextNode("Comercial"));
+    listItemComercial.appendChild(linkComercial);
+    let ulSubListComercial = document.createElement('ul');
+    ulSubListComercial.classList.add('submenu');
+    let listItemGestionarB2B = document.createElement('li');
+    let linkGestionarB2B = document.createElement('a');
+    linkGestionarB2B.href = "/Comercial/Gestionar_leads_B2B";
+    linkGestionarB2B.textContent = "Gestionar leads B2B";
+    listItemGestionarB2B.appendChild(linkGestionarB2B);
+    let listItemGestionarB2C = document.createElement('li');
+    let linkGestionarB2C = document.createElement('a');
+    linkGestionarB2C.href = "/Comercial/Gestionar_leads_B2C";
+    linkGestionarB2C.textContent = "Gestionar leads B2C";
+    listItemGestionarB2C.appendChild(linkGestionarB2C);
+    ulSubListComercial.appendChild(listItemGestionarB2B);
+    ulSubListComercial.appendChild(listItemGestionarB2C);
+    listItemComercial.appendChild(ulSubListComercial);
+    ulSubList.appendChild(listItemComercial);
+
+    let listItemCobertura = document.createElement('li');
+    listItemCobertura.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+    let linkCobertura = document.createElement('a');
+    linkCobertura.href = "/Cobertura";
+    let imgCobertura = document.createElement('img');
+    imgCobertura.alt = "Icono";
+    imgCobertura.src = "/@api/deki/files/213/cobertura.png";
+    linkCobertura.appendChild(imgCobertura);
+    linkCobertura.appendChild(document.createTextNode("Cobertura"));
+    listItemCobertura.appendChild(linkCobertura);
+    let ulSubListCobertura = document.createElement('ul');
+    ulSubListCobertura.classList.add('submenu');
+    let listItemCirugias = document.createElement('li');
+    let linkCirugias = document.createElement('a');
+    linkCirugias.href = "/Cobertura/Cirugias";
+    linkCirugias.textContent = "Cirugias";
+    listItemCirugias.appendChild(linkCirugias);
+    let listItemMedicamentos = document.createElement('li');
+    let linkMedicamentos = document.createElement('a');
+    linkMedicamentos.href = "/Cobertura/Medicamentos";
+    linkMedicamentos.textContent = "Medicamentos";
+    listItemMedicamentos.appendChild(linkMedicamentos);
+    let listItemPracticas = document.createElement('li');
+    let linkPracticas = document.createElement('a');
+    linkPracticas.href = "/Cobertura/practicas";
+    linkPracticas.textContent = "Practicas";
+    listItemPracticas.appendChild(linkPracticas);
+    ulSubListCobertura.appendChild(listItemCirugias);
+    ulSubListCobertura.appendChild(listItemMedicamentos);
+    ulSubListCobertura.appendChild(listItemPracticas);
+    listItemCobertura.appendChild(ulSubListCobertura);
+    ulSubList.appendChild(listItemCobertura);
+
+    let listItemAfiliaciones = document.createElement('li');
+    listItemAfiliaciones.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+    let linkAfiliaciones = document.createElement('a');
+    linkAfiliaciones.href = "/Afiliaciones";
+    let imgAfiliaciones = document.createElement('img');
+    imgAfiliaciones.alt = "Icono";
+    imgAfiliaciones.src = "/@api/deki/files/214/afiliaciones.png";
+    linkAfiliaciones.appendChild(imgAfiliaciones);
+    linkAfiliaciones.appendChild(document.createTextNode("Afiliaciones"));
+    listItemAfiliaciones.appendChild(linkAfiliaciones);
+    let ulSubListAfiliaciones = document.createElement('ul');
+    ulSubListAfiliaciones.classList.add('submenu');
+    let listItemAltas = document.createElement('li');
+    let linkAltas = document.createElement('a');
+    linkAltas.href = "/Afiliaciones/altas";
+    linkAltas.textContent = "Altas";
+    listItemAltas.appendChild(linkAltas);
+    let listItemBajas = document.createElement('li');
+    let linkBajas = document.createElement('a');
+    linkBajas.href = "/Afiliaciones/Bajas";
+    linkBajas.textContent = "Bajas";
+    listItemBajas.appendChild(linkBajas);
+    let listItemLicencias = document.createElement('li');
+    let linkLicencias = document.createElement('a');
+    linkLicencias.href = "/Afiliaciones/Licencias";
+    linkLicencias.textContent = "Licencias";
+    listItemLicencias.appendChild(linkLicencias);
+    let listItemMovimientosPadron = document.createElement('li');
+    let linkMovimientosPadron = document.createElement('a');
+    linkMovimientosPadron.href = "/Afiliaciones/movimientos_padron";
+    linkMovimientosPadron.textContent = "Movimientos del padron";
+    listItemMovimientosPadron.appendChild(linkMovimientosPadron);
+    ulSubListAfiliaciones.appendChild(listItemAltas);
+    ulSubListAfiliaciones.appendChild(listItemBajas);
+    ulSubListAfiliaciones.appendChild(listItemLicencias);
+    ulSubListAfiliaciones.appendChild(listItemMovimientosPadron);
+    listItemAfiliaciones.appendChild(ulSubListAfiliaciones);
+    ulSubList.appendChild(listItemAfiliaciones);
+
+    let listItemCobranzas = document.createElement('li');
+    listItemCobranzas.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+    let linkCobranzas = document.createElement('a');
+    linkCobranzas.href = "/Cobranzas";
+    let imgCobranzas = document.createElement('img');
+    imgCobranzas.alt = "Icono";
+    imgCobranzas.src = "/@api/deki/files/212/cobranzas.png";
+    linkCobranzas.appendChild(imgCobranzas);
+    linkCobranzas.appendChild(document.createTextNode("Cobranzas"));
+    listItemCobranzas.appendChild(linkCobranzas);
+    let ulSubListCobranzas = document.createElement('ul');
+    ulSubListCobranzas.classList.add('submenu');
+    let listItemCuentaCorriente = document.createElement('li');
+    let linkCuentaCorriente = document.createElement('a');
+    linkCuentaCorriente.href = "/Cobranzas/Cuenta_corriente";
+    linkCuentaCorriente.textContent = "Cuenta corriente";
+    listItemCuentaCorriente.appendChild(linkCuentaCorriente);
+    let listItemCuentaDebitoAutomatico = document.createElement('li');
+    let linkCuentaDebitoAutomatico = document.createElement('a');
+    linkCuentaDebitoAutomatico.href = "/Cobranzas/Cuenta_debito_automatico";
+    linkCuentaDebitoAutomatico.textContent = "Cuenta debito automatico";
+    listItemCuentaDebitoAutomatico.appendChild(linkCuentaDebitoAutomatico);
+    let listItemDeudaVencida = document.createElement('li');
+    let linkDeudaVencida = document.createElement('a');
+    linkDeudaVencida.href = "/Cobranzas/Deuda_vencida";
+    linkDeudaVencida.textContent = "Deuda vencida";
+    listItemDeudaVencida.appendChild(linkDeudaVencida);
+    ulSubListCobranzas.appendChild(listItemCuentaCorriente);
+    ulSubListCobranzas.appendChild(listItemCuentaDebitoAutomatico);
+    ulSubListCobranzas.appendChild(listItemDeudaVencida);
+    listItemCobranzas.appendChild(ulSubListCobranzas);
+    ulSubList.appendChild(listItemCobranzas);
+
+    elementoMenu.appendChild(labelResponsive);
+    elementoMenu.appendChild(ulSubList);
+    ulPrincipal.appendChild(elementoMenu);
+    divContenedor.appendChild(ulPrincipal);
+    topLevelNavigation.appendChild(divContenedor);
+    topLevelNavigation.appendChild(divConsejos);
+    let logoContainer = document.querySelector('.elm-header-logo-container');
+    if (logoContainer) {
+      logoContainer.innerHTML = '';
+      logoContainer.appendChild(topLevelNavigation);
+    }
+
+  });
+</script>
