@@ -35,12 +35,13 @@
             row.className = "row";
             var colLeft = document.createElement("div");
             colLeft.className = "colLeft";
-            var logo = document.createElement("img");
-            logo.src = "@api/deki/files/118/LogoOsde.png";
-            logo.alt = "logo OSDE";
+            var logoLink = document.createElement("a");
+            logoLink.href = "https://osde-prod1.mindtouch.us"; 
+            logoLink.innerHTML = '<img src="@api/deki/files/118/LogoOsde.png" alt="logoOSDE">'; 
+            logoLink.className = "logoOSDE";
             var copyright = document.createElement("p");
             copyright.innerHTML = 'Copyright 2023 OSDE';
-            colLeft.appendChild(logo);
+            colLeft.appendChild(logoLink);
             colLeft.appendChild(copyright);
             var colRight = document.createElement("div");
             colRight.className = "colRight";
