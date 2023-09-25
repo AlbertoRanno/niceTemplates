@@ -29,8 +29,8 @@
             var colLeft = document.createElement("div");
             colLeft.className = "colLeft";
             var logoLink = document.createElement("a");
-            logoLink.href = "https://osde-prod1.mindtouch.us"; 
-            logoLink.innerHTML = '<img src="@api/deki/files/118/LogoOsde.png" alt="logoOSDE">'; 
+            logoLink.href = "https://osde-prod2.mindtouch.us"; 
+            logoLink.innerHTML = '<img src="@api/deki/files/5/LogoOsde.png" alt="logoOSDE">'; 
             logoLink.className = "logoOSDE";
             var copyright = document.createElement("p");
             copyright.innerHTML = 'Copyright 2023 OSDE';
@@ -42,7 +42,7 @@
             ul.className = "footer-links";
             var link1 = document.createElement("li");
             var link1Anchor = document.createElement("a");
-            link1Anchor.href = "https://osde-prod1.mindtouch.us/tutoriales";
+            link1Anchor.href = "#";
             link1Anchor.textContent = "Tutoriales";
             link1.appendChild(link1Anchor);
             var link2 = document.createElement("li");
@@ -60,8 +60,8 @@
             footerDefault.parentNode.replaceChild(footerPropio, footerDefault);
         }
 
-        //****************************LINKS************************************
-        if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
+        //****************************LINKS*********************************
+        if (window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:Search")) {
             setTimeout(function () {
                 var results = document.querySelectorAll("li.result");
                 results.forEach(function (result) {
@@ -72,10 +72,11 @@
                         var originalUrl = link.getAttribute("href");
                         result.addEventListener("click", function (event) {
                             if (!moreButton || event.target !== moreButton) {
-                                window.location.href = originalUrl;}});}});
+                                // Redirige solo si no se hizo clic en el botón "Más"
+                                window.location.href = originalUrl; }});}});
             }, 1000);}
 
-        //****************************NAVBAR**********************************
+        //****************************NAVBAR*********************************
         let topLevelNavigation = document.createElement('nav');
         topLevelNavigation.classList.add('navbar', 'navbar-menu-osde', 'elm-header-logo-menu');
         let divContenedor = document.createElement('div');
@@ -89,7 +90,7 @@
         linkLogo.href = "/";
         let logoImg = document.createElement('img');
         logoImg.alt = "Logo de la empresa";
-        logoImg.src = "/@api/deki/files/118/LogoOsde.png";
+        logoImg.src = "/@api/deki/files/5/LogoOsde.png";
         linkLogo.appendChild(logoImg);
         elementoLogo.appendChild(linkLogo);
         ulPrincipal.appendChild(elementoLogo);
@@ -152,7 +153,7 @@
         linkComercial.href = "/Comercial";
         let imgComercial = document.createElement('img');
         imgComercial.alt = "Icono";
-        imgComercial.src = "/@api/deki/files/215/comercial.png";
+        imgComercial.src = "/@api/deki/files/3/comercial.png";
         linkComercial.appendChild(imgComercial);
         linkComercial.appendChild(document.createTextNode("Comercial"));
         listItemComercial.appendChild(linkComercial);
@@ -179,7 +180,7 @@
         linkCobertura.href = "/Cobertura";
         let imgCobertura = document.createElement('img');
         imgCobertura.alt = "Icono";
-        imgCobertura.src = "/@api/deki/files/213/cobertura.png";
+        imgCobertura.src = "/@api/deki/files/2/cobertura.png";
         linkCobertura.appendChild(imgCobertura);
         linkCobertura.appendChild(document.createTextNode("Cobertura"));
         listItemCobertura.appendChild(linkCobertura);
@@ -212,7 +213,7 @@
         linkAfiliaciones.href = "/Afiliaciones";
         let imgAfiliaciones = document.createElement('img');
         imgAfiliaciones.alt = "Icono";
-        imgAfiliaciones.src = "/@api/deki/files/214/afiliaciones.png";
+        imgAfiliaciones.src = "/@api/deki/files/4/afiliaciones.png";
         linkAfiliaciones.appendChild(imgAfiliaciones);
         linkAfiliaciones.appendChild(document.createTextNode("Afiliaciones"));
         listItemAfiliaciones.appendChild(linkAfiliaciones);
@@ -251,9 +252,9 @@
         linkCobranzas.href = "/Cobranzas";
         let imgCobranzas = document.createElement('img');
         imgCobranzas.alt = "Icono";
-        imgCobranzas.src = "/@api/deki/files/212/cobranzas.png";
+        imgCobranzas.src = "/@api/deki/files/1/cobranzas.png";
         linkCobranzas.appendChild(imgCobranzas);
-        linkCobranzas.appendChild(document.createTextNode("Cobranzas"));
+        linkCobranzas.appendChild(document.createTextNode("Facturacion"));
         listItemCobranzas.appendChild(linkCobranzas);
         let ulSubListCobranzas = document.createElement('ul');
         ulSubListCobranzas.classList.add('submenu');
@@ -287,7 +288,8 @@
         let logoContainer = document.querySelector('.elm-header-logo-container');
         if (logoContainer) {
             logoContainer.innerHTML = '';
-            logoContainer.appendChild(topLevelNavigation);}
-    });
+            logoContainer.appendChild(topLevelNavigation);
+        }
 
+    });
 </script>
