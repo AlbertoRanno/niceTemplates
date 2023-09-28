@@ -24,7 +24,19 @@
 
     document.addEventListener('DOMContentLoaded', function () {
 
-        //****************************FOOTER********************************
+        //******************EVITO DOBLE BUSCADOR HOME************************
+        if (window.location.href === 'https://osde-prod1.mindtouch.us/') {
+        var searchElement = document.querySelector('li.elm-global-search');
+        if (searchElement) {
+        var searchContent = searchElement.querySelector('.mt-quick-search-container');
+        if (searchContent) {
+        searchContent.style.display = 'none';}}}
+
+        //******************BORRO PLACEHOLDERS DEFAULTS**********************    
+        var searchField = document.getElementById('mt-site-search-input');
+        if (searchField) {searchField.placeholder = '';}
+
+       //****************************FOOTER********************************
         var footerDefault = document.querySelector(".elm-footer");
         if (footerDefault) {
             var footerPropio = document.createElement("footer");
@@ -37,14 +49,9 @@
             colLeft.className = "colLeft";
             var logoLink = document.createElement("a");
             logoLink.href = "https://osde-prod1.mindtouch.us"; 
-            logoLink.innerHTML = '<img src="@api/deki/files/118/LogoOsde.png" alt="logoOSDE">'; 
+            logoLink.innerHTML = '<img src="@api/deki/files/218/osde-logo-white.png" alt="logoOSDE">'; 
             logoLink.className = "logoOSDE";
-            var copyright = document.createElement("p");
-            copyright.innerHTML = 'Copyright 2023 OSDE';
-            colLeft.appendChild(logoLink);
-            colLeft.appendChild(copyright);
-            var colRight = document.createElement("div");
-            colRight.className = "colRight";
+
             var ul = document.createElement("ul");
             ul.className = "footer-links";
             var link1 = document.createElement("li");
@@ -55,11 +62,19 @@
             var link2 = document.createElement("li");
             var link2Anchor = document.createElement("a");
             link2Anchor.href = "#";
-            link2Anchor.textContent = "Mas consejos para el buscador";
+            link2Anchor.textContent = "M\u00e1s consejos para el buscador";
             link2.appendChild(link2Anchor);
             ul.appendChild(link1);
             ul.appendChild(link2);
-            colRight.appendChild(ul);
+            colLeft.appendChild(logoLink);
+            colLeft.appendChild(ul);
+
+            var colRight = document.createElement("div");
+            colRight.className = "colRight";
+            var copyright = document.createElement("p");
+            copyright.innerHTML = '&copy;OSDE 2023 - Todos los derechos reservados. CUIT: 30-54674125-3 - Av. Leandro N. Alem 1067 - Piso 9 - C1001AAF - Buenos Aires. Superintendencia de Servicios de Salud - &Oacute;rgano de Control de Obras Sociales y Entidades de Medicina Prepaga - 0800-222-SALUD (72583) - www.sssalud.gob.ar - R.N.E.M.P. (Prov.) 1408 - R.N.O.S. 4-0080-0';
+            colRight.appendChild(copyright);
+            
             row.appendChild(colLeft);
             row.appendChild(colRight);
             container.appendChild(row);
@@ -72,14 +87,13 @@
             setTimeout(function () {
                 var results = document.querySelectorAll("li.result");
                 results.forEach(function (result) {
-                    var link = result.querySelector("a.go.result-spacer.mt-tracked-result");
-                    var moreButton = result.querySelector("button.mt-help-more-content");
-
-                    if (link) {
-                        var originalUrl = link.getAttribute("href");
-                        result.addEventListener("click", function (event) {
-                            if (!moreButton || event.target !== moreButton) {
-                                window.location.href = originalUrl;}});}});
+                var link = result.querySelector("a.go.result-spacer.mt-tracked-result");
+                var moreButton = result.querySelector("button.mt-help-more-content");
+                if (link) {
+                var originalUrl = link.getAttribute("href");
+                result.addEventListener("click", function (event) {
+                if (!moreButton || event.target !== moreButton) {
+                window.location.href = originalUrl;}});}});
             }, 1000);}
 
         //****************************NAVBAR**********************************
