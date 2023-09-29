@@ -36,6 +36,29 @@
         var searchField = document.getElementById('mt-site-search-input');
         if (searchField) {searchField.placeholder = '';}
 
+        //****************************LISTA RESULTADOS************************************
+        if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
+        setTimeout(function () {
+         var buscador = document.querySelector('form.mt-search-form-seated');
+         if (buscador) {
+            buscador.style.position = 'sticky';
+            buscador.style.top = '100px';}
+         var filtros = document.querySelector('ul.mt-search-filters-options');
+         if (filtros) {
+            filtros.style.position = 'sticky';
+            filtros.style.top = '100px';}
+
+         var results = document.querySelectorAll("li.result");
+         results.forEach(function (result) {
+            var link = result.querySelector("a.go.result-spacer.mt-tracked-result");
+            var moreButton = result.querySelector("button.mt-help-more-content");
+            if (link) {
+                var originalUrl = link.getAttribute("href");
+                result.addEventListener("click", function (event) {
+                    if (!moreButton || event.target !== moreButton) {
+                        window.location.href = originalUrl;}});}});
+    }, 1000);}
+
        //****************************FOOTER********************************
         var footerDefault = document.querySelector(".elm-footer");
         if (footerDefault) {
@@ -81,21 +104,7 @@
             footerPropio.appendChild(container);
             footerDefault.parentNode.replaceChild(footerPropio, footerDefault);
         }
-
-        //****************************LINKS************************************
-        if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
-            setTimeout(function () {
-                var results = document.querySelectorAll("li.result");
-                results.forEach(function (result) {
-                var link = result.querySelector("a.go.result-spacer.mt-tracked-result");
-                var moreButton = result.querySelector("button.mt-help-more-content");
-                if (link) {
-                var originalUrl = link.getAttribute("href");
-                result.addEventListener("click", function (event) {
-                if (!moreButton || event.target !== moreButton) {
-                window.location.href = originalUrl;}});}});
-            }, 1000);}
-
+            
         //****************************NAVBAR**********************************
         let topLevelNavigation = document.createElement('nav');
         topLevelNavigation.classList.add('navbar', 'navbar-menu-osde', 'elm-header-logo-menu');
@@ -309,6 +318,7 @@
         if (logoContainer) {
             logoContainer.innerHTML = '';
             logoContainer.appendChild(topLevelNavigation);}
+        
     });
 
 </script>
