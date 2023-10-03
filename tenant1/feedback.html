@@ -1,0 +1,46 @@
+ <div id="botonSugerirContenidos"><img src="/@api/deki/files/147/mail.png" alt="Imagen de enviar mail" />
+     <div id="texto">Sugerir nuevo contenido</div>
+ </div>
+
+ <pre class="script-css">
+    #texto {
+                display: none;        
+            }
+    #botonSugerirContenidos {
+                cursor: pointer;
+            }</pre>
+
+ <pre class="script-jem">
+    function abrirCorreo() {
+                var destinatario = "albertoranno@gmail.com";
+                var asunto = "Comentarios";
+                var cuerpo = "Lo que quisiera comentar es lo siguiente:";
+                var mailtoLink = "mailto:" + destinatario + "?subject=" + encodeURIComponent(asunto) + "&amp;body=" + encodeURIComponent(cuerpo);
+                window.location.href = mailtoLink;}
+                <!--
+                    un enlace "mailto:" se utiliza para abrir el cliente de correo predeterminado del usuario y preparar un nuevo correo electrónico con campos predefinidos.
+                    la var mailtoLink almacenará el enlace "mailto:"
+                "mailto:": es una URL especial que se usa para indicar que se va a componer un nuevo correo electrónico. Cuando se hace clic en un enlace "mailto:",
+                el navegador abrirá el cliente de correo predeterminado del usuario.
+                    ?subject=: Este es el parámetro "subject" del enlace "mailto:". Permite especificar el asunto del correo electrónico que se va a componer.
+                    encodeURIComponent(asunto): Aquí se toma el valor de la variable asunto (que es "Comentarios") y se utiliza la función encodeURIComponent() para codificarlo. 
+                Esto es importante porque los valores de los parámetros en una URL deben estar codificados correctamente para que funcionen en todos los navegadores. 
+                El resultado de esta parte del enlace será algo como "subject=Comentarios".
+                    &body=: Este es el parámetro "body" del enlace "mailto:". Permite especificar el cuerpo del correo electrónico que se va a componer.
+                    encodeURIComponent(cuerpo): De manera similar a la anterior, aquí se toma el valor de la variable cuerpo (que es "Lo que quisiera comentar es lo siguiente:")
+                y se codifica con encodeURIComponent(). El resultado será algo como "body=Lo%20que%20quisiera%20comentar%20es%20lo%20siguiente%3A".
+                Entonces, la línea completa crea un enlace "mailto:" con la dirección de correo electrónico del destinatario, el asunto y el cuerpo codificados correctamente.
+                    Finalmente, window.location.href = mailtoLink; se utiliza para redirigir la ventana actual del navegador a esta URL "mailto:", lo que provoca que 
+                se abra el cliente de correo predeterminado del usuario con los campos predefinidos, listos para enviar un correo electrónico a la dirección
+                 "albertoranno@gmail.com" con el asunto y el cuerpo especificados.
+                -->                
+    
+            var boton = document.getElementById("botonSugerirContenidos");
+            var texto = document.getElementById("texto");
+            boton.addEventListener("mouseover", function() {
+                texto.style.display = "block";});
+            boton.addEventListener("mouseout", function() {
+                texto.style.display = "none";});
+    
+            boton.addEventListener("click", function() {
+                abrirCorreo();});</pre>
