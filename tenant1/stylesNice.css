@@ -1226,6 +1226,7 @@ li.elm-pdf-export {
 	padding:0;
 	margin: 0;
 	display: flex;
+    flex-direction: column;
 	gap:40px;
 }
 .footer .footer-links::marker{
@@ -1235,7 +1236,8 @@ li.elm-pdf-export {
 /* Footer Teléfonos  */
 .cards_telefonos {
     display: flex;
-    justify-content:center
+    justify-content:space-around;
+    flex-basis: 600px;
 }
 .telefonos_card {
     text-align: center;
@@ -1247,4 +1249,7 @@ li.elm-pdf-export {
 .telefonos_content img {
     width: 15px; 
     height: auto;
+}
+.titulos_columnas {
+color: white!important; 
 }

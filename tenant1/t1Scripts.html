@@ -60,7 +60,7 @@
     }, 1000);}
 
        //****************************FOOTER********************************
-        var footerDefault = document.querySelector(".elm-footer");
+       var footerDefault = document.querySelector(".elm-footer");
         if (footerDefault) {
             var footerPropio = document.createElement("footer");
             footerPropio.className = "footer";
@@ -84,20 +84,27 @@
             link1.appendChild(link1Anchor);
             var link2 = document.createElement("li");
             var link2Anchor = document.createElement("a");
-            link2Anchor.href = "#";
-            link2Anchor.textContent = "M\u00e1s consejos para el buscador";
+            link2Anchor.href = "https://success.mindtouch.com/Manage/Search/MindTouch_Search/Advanced_search_options?mt-language=ES";
+            link2Anchor.textContent = "Tips avanzados de b\u00FAsqueda";
             link2.appendChild(link2Anchor);
+            var link3 = document.createElement("li");
+            var link3Anchor = document.createElement("a");
+            link3Anchor.href="https://www.osde.com.ar/index.html#!homepage.html";
+            link3Anchor.textContent = "www.osde.com.ar";
+            link3.appendChild(link3Anchor);
+            ul.appendChild(link3);
             ul.appendChild(link1);
             ul.appendChild(link2);
-
+          
             //Teléfonos
             var telefonos = document.createElement("div");
             telefonos.className = "cards_telefonos";
             //Asistencia médica
             var asistencia = document.createElement("div");
             asistencia.className = "telefonos_card asistencia_card";
-            var asistenciaH3 = document.createElement("h3");
-            asistenciaH3.textContent = "Asistencia m\u00E9dica";
+            var asistenciaH5 = document.createElement("h5");
+            asistenciaH5.textContent = "Asistencia m\u00E9dica";
+            asistenciaH5.className= "titulos_columnas"
             var asistenciaContent = document.createElement("div");
             asistenciaContent.className = "telefonos_content";
             var asistencialink1 = document.createElement("a");
@@ -129,13 +136,14 @@
             asistencialink4.className = "solicitar_online";
             asistencialink4.textContent = "Solicitar asistencia online";
             asistenciaContent.appendChild(asistencialink4);
-            asistencia.appendChild(asistenciaH3);
+            asistencia.appendChild(asistenciaH5);
             asistencia.appendChild(asistenciaContent);
             //Riesgo de vida
             var riesgo = document.createElement("div");
             riesgo.className = "telefonos_card riesgo_card";
-            var riesgoH3 = document.createElement("h3");
-            riesgoH3.textContent = "Riesgo de vida";
+            var riesgoH5 = document.createElement("h5");
+            riesgoH5.textContent = "Riesgo de vida";
+            riesgoH5.className= "titulos_columnas"
             var riesgoContent = document.createElement("div");
             riesgoContent.className = "telefonos_content";
             var riesgoLink = document.createElement("a");
@@ -146,13 +154,14 @@
             riesgoLink.appendChild(riesgoImg);
             riesgoLink.appendChild(riesgoText);
             riesgoContent.appendChild(riesgoLink);
-            riesgo.appendChild(riesgoH3);
+            riesgo.appendChild(riesgoH5);
             riesgo.appendChild(riesgoContent);
             //Atención al socio
             var atencion = document.createElement("div");
             atencion.className = "telefonos_card atencion_card";
-            var atencionH3 = document.createElement("h3");
-            atencionH3.textContent = "Atenci\u00F3n al socio";
+            var atencionH5 = document.createElement("h5");
+            atencionH5.textContent = "Atenci\u00F3n al socio";
+            atencionH5.className= "titulos_columnas"
             var atencionContent = document.createElement("div");
             atencionContent.className = "telefonos_content";
             var atencionHorarios = document.createElement("p");
@@ -193,7 +202,7 @@
             atencionContent.appendChild(atencionLink3);
             atencionContent.appendChild(atencionLink4);
             atencionContent.appendChild(atencionMail);
-            atencion.appendChild(atencionH3);
+            atencion.appendChild(atencionH5);
             atencion.appendChild(atencionContent);
             telefonos.appendChild(asistencia);
             telefonos.appendChild(riesgo);
@@ -201,7 +210,7 @@
 
             colLeft.appendChild(logoLink);
             colLeft.appendChild(ul);
-            colLeft.appendChild(telefonos);            
+            colLeft.appendChild(telefonos);  
 
             var colRight = document.createElement("div");
             colRight.className = "colRight";
