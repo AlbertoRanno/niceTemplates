@@ -1231,3 +1231,20 @@ li.elm-pdf-export {
 .footer .footer-links::marker{
 	display: none;
 }
+
+/* Footer Teléfonos  */
+.cards_telefonos {
+    display: flex;
+    justify-content:center
+}
+.telefonos_card {
+    text-align: center;
+}
+.telefonos_content a {
+    display: block;
+    text-decoration: none;
+} 
+.telefonos_content img {
+    width: 15px; 
+    height: auto;
+}

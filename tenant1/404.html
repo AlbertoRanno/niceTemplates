@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404</title>
+    <link rel="stylesheet" href="404.css">
+</head>
+
+<body>
+
+    <div class="errorNotFound"><b>Error 404 - Página No Encontrada</b></div>
+
+    <p class="warningImportant">La URL que estás buscando no existe, prueba en los siguientes enlaces:</p>
+
+    <pre class="script">
+        //template('MindTouch/Views/PageNotFound');
+        var uri = site.api &amp; 'pages/popular' &amp; { limit: 30 };
+        var api = wiki.api(uri);
+        
+        &lt;div class="widget-popular"&gt;
+            &lt;ul&gt;
+                foreach(var pg in api['page'] ) {
+                var pageUri = pg / 'uri.ui';
+        
+                // Verifica si el usuario es administrador o si la página comienza con las URL permitidas
+                if (user.admin || pageUri.startsWith('https://osde-prod1.mindtouch.us/Comercial') ||
+                pageUri.startsWith('https://osde-prod1.mindtouch.us/Cobertura') ||
+                pageUri.startsWith('https://osde-prod1.mindtouch.us/Afiliaciones1') ||
+                pageUri.startsWith('https://osde-prod1.mindtouch.us/Cobranzas') ||
+                pageUri.startsWith('https://osde-prod1.mindtouch.us/Prestaciones')) {
+                &lt;li&gt;
+                    web.link(pageUri, pg / 'title');
+                    var viewcount = num.cast(pg / 'metrics/metric.views');
+                    &lt;span class="viewcount"&gt;
+                        " (";
+                        num.format(viewcount,"###,###,###");
+                        " views)";
+                    &lt;/span&gt;
+                &lt;/li&gt;
+                }
+                }
+            &lt;/ul&gt;
+        &lt;/div&gt;</pre>
+
+</body>
+
+</html>
