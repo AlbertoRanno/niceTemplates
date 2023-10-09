@@ -270,7 +270,7 @@
         let aConsejos = document.createElement('a');
         aConsejos.textContent = 'Tips de b\u00FAsqueda';
         let ulSubmenu = document.createElement('ul');
-        ulSubmenu.classList.add('submenu');
+        ulSubmenu.classList.add('consejosDesplegables');
         let li1 = document.createElement('li');
         li1.textContent = 'Ingrese PALABRAS CLAVE, no lenguaje natural.';
         let li2 = document.createElement('li');
@@ -314,6 +314,8 @@
         var boton = document.getElementById("sugerirContenidoBoton");
         boton.addEventListener("click", function () {
             abrirCorreo();});
+        aConsejos.addEventListener('click', function () {
+            ulSubmenu.classList.toggle('consejosDesplegables');});
         }, 1000); 
         function abrirCorreo() {
         var destinatario = "albertoranno@gmail.com";
