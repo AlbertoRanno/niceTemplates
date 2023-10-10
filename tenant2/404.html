@@ -1,0 +1,62 @@
+<div class="errorNotFound"><b>Error 404 - Página No Encontrada</b></div>
+
+<p class="warningImportant">La URL que estás buscando no existe, prueba en los siguientes enlaces:</p>
+
+<pre class="script">
+//template('MindTouch/Views/PageNotFound');
+ var uri = site.api &amp; 'pages/popular' &amp; { limit: 30 };
+        var api = wiki.api(uri);
+        
+        &lt;div class="widget-popular"&gt;
+            &lt;ul class="popularLinks" &gt;
+                foreach(var pg in api['page'] ) {
+                var pageUri = pg / 'uri.ui';
+        
+                if (user.admin || pageUri.startsWith('https://osde-prod1.mindtouch.us/Comercial') ||
+                pageUri.startsWith('https://osde-prod1.mindtouch.us/Cobertura') ||
+                pageUri.startsWith('https://osde-prod1.mindtouch.us/Afiliaciones1') ||
+                pageUri.startsWith('https://osde-prod1.mindtouch.us/Cobranzas') ||
+                pageUri.startsWith('https://osde-prod1.mindtouch.us/Prestaciones')) {
+                &lt;li&gt;
+                    web.link(pageUri, pg / 'title');                    
+                &lt;/li&gt;
+                }
+                }
+            &lt;/ul&gt;
+        &lt;/div&gt;</pre>
+
+<pre class="script-css">
+.errorNotFound {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 5em; 
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: error404 2s ease-in-out forwards;
+}
+
+@keyframes error404 {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.popularLinks {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+    align-items: center;
+}
+
+.popularLinks li {
+  color: #007bff; 
+}
+
+.popularLinks li:hover {
+  color: #0056b3; 
+}</pre>
+
