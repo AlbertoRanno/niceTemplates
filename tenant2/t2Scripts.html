@@ -250,7 +250,7 @@
         labelResponsive.classList.add('nav-toggle-label');
         let spanResponsive = document.createElement('span');
         labelResponsive.appendChild(spanResponsive);
-
+ 
         let divConsejos = document.createElement('div');
         divConsejos.classList.add('consejo-busqueda-area');
         let divInternoConsejos = document.createElement('div');
@@ -260,9 +260,9 @@
         let liConsejos = document.createElement('li');
         liConsejos.classList.add('has-submenu');
         let aConsejos = document.createElement('a');
-        aConsejos.textContent = 'Consejos para usar el buscador';
+        aConsejos.textContent = 'Tips de b\u00FAsqueda';
         let ulSubmenu = document.createElement('ul');
-        ulSubmenu.classList.add('submenu');
+        ulSubmenu.classList.add('consejosDesplegables');
         let li1 = document.createElement('li');
         li1.textContent = 'Ingrese PALABRAS CLAVE, no lenguaje natural.';
         let li2 = document.createElement('li');
@@ -285,8 +285,36 @@
         ulSubmenu.appendChild(li5);
         liConsejos.appendChild(ulSubmenu);
         ulConsejos.appendChild(liConsejos);
+        //Sugerir nuevo contenido
+        let sugerirContenidoContenedor = document.createElement('li');
+        sugerirContenidoContenedor.classList.add('sugerirContenidoContenedor');
+        let sugerirContenidoBoton = document.createElement('div');
+        sugerirContenidoBoton.classList.add('sugerirContenidoBoton');
+        sugerirContenidoBoton.id = 'sugerirContenidoBoton';
+        sugerirContenidoBoton.textContent = "Sugerir nuevo contenido";
+        let sugerirContenidoImg = document.createElement('img');
+        sugerirContenidoImg.classList.add('sugerirContenidoImg');
+        sugerirContenidoImg.alt = "imagen de enviar mail";
+        sugerirContenidoImg.src = "/@api/deki/files/13/mail.png"
+        sugerirContenidoBoton.appendChild(sugerirContenidoImg);
+        sugerirContenidoContenedor.appendChild(sugerirContenidoBoton);
+        ulConsejos.appendChild(sugerirContenidoContenedor);
         divInternoConsejos.appendChild(ulConsejos);
         divConsejos.appendChild(divInternoConsejos);
+        
+        setTimeout(function () {
+        var boton = document.getElementById("sugerirContenidoBoton");
+        boton.addEventListener("click", function () {
+            abrirCorreo();});
+        aConsejos.addEventListener('click', function () {
+            ulSubmenu.classList.toggle('consejosDesplegables');});
+        }, 1000); 
+        function abrirCorreo() {
+        var destinatario = "albertoranno@gmail.com";
+        var asunto = "Comentarios";
+        var cuerpo = "Lo que quisiera comentar es lo siguiente:";
+        var mailtoLink = "mailto:" + destinatario + "?subject=" + encodeURIComponent(asunto) + "&amp;body=" + encodeURIComponent(cuerpo);
+        window.location.href = mailtoLink;}
 
         let listItemComercial = document.createElement('li');
         listItemComercial.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
@@ -330,7 +358,7 @@
         let listItemCirugias = document.createElement('li');
         let linkCirugias = document.createElement('a');
         linkCirugias.href = "/Cobertura/Cirugias";
-        linkCirugias.textContent = "Cirugias";
+        linkCirugias.textContent = "Cirug\u00EDas";
         listItemCirugias.appendChild(linkCirugias);
         let listItemMedicamentos = document.createElement('li');
         let linkMedicamentos = document.createElement('a');
@@ -340,7 +368,7 @@
         let listItemPracticas = document.createElement('li');
         let linkPracticas = document.createElement('a');
         linkPracticas.href = "/Cobertura/practicas";
-        linkPracticas.textContent = "Practicas";
+        linkPracticas.textContent = "Pr\u00E1cticas";
         listItemPracticas.appendChild(linkPracticas);
         ulSubListCobertura.appendChild(listItemCirugias);
         ulSubListCobertura.appendChild(listItemMedicamentos);
@@ -378,7 +406,7 @@
         let listItemMovimientosPadron = document.createElement('li');
         let linkMovimientosPadron = document.createElement('a');
         linkMovimientosPadron.href = "/Afiliaciones/movimientos_padron";
-        linkMovimientosPadron.textContent = "Movimientos del padron";
+        linkMovimientosPadron.textContent = "Movimientos del padr\u00F3n";
         listItemMovimientosPadron.appendChild(linkMovimientosPadron);
         ulSubListAfiliaciones.appendChild(listItemAltas);
         ulSubListAfiliaciones.appendChild(listItemBajas);
@@ -395,7 +423,7 @@
         imgCobranzas.alt = "Icono";
         imgCobranzas.src = "/@api/deki/files/1/cobranzas.png";
         linkCobranzas.appendChild(imgCobranzas);
-        linkCobranzas.appendChild(document.createTextNode("Facturacion"));
+        linkCobranzas.appendChild(document.createTextNode("Facturaci\u00F3n"));
         listItemCobranzas.appendChild(linkCobranzas);
         let ulSubListCobranzas = document.createElement('ul');
         ulSubListCobranzas.classList.add('submenu');
@@ -407,7 +435,7 @@
         let listItemCuentaDebitoAutomatico = document.createElement('li');
         let linkCuentaDebitoAutomatico = document.createElement('a');
         linkCuentaDebitoAutomatico.href = "/Cobranzas/Cuenta_debito_automatico";
-        linkCuentaDebitoAutomatico.textContent = "Cuenta debito automatico";
+        linkCuentaDebitoAutomatico.textContent = "Cuenta d\u00E9bito autom\u00E1tico";
         listItemCuentaDebitoAutomatico.appendChild(linkCuentaDebitoAutomatico);
         let listItemDeudaVencida = document.createElement('li');
         let linkDeudaVencida = document.createElement('a');
