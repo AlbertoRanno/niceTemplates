@@ -36,6 +36,14 @@
         var searchField = document.getElementById('mt-site-search-input');
         if (searchField) {searchField.placeholder = '';}
 
+        //******************PARA METRICAS TOC******************************** 
+        var elementNav = document.querySelector(".mt-toc-content");
+        var contenido;
+        elementNav.addEventListener("click", function(e){
+        if(e.target.tagName === "A" && e.target.parentNode.tagName === "LI"){
+        contenido = e.target.textContent;
+        console.log("Click en: " + contenido);}});
+
         //****************************LISTA RESULTADOS************************************
         if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
         setTimeout(function () {
