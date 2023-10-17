@@ -1,0 +1,179 @@
+<div class="mt-contentreuse-widget" data-page="Contenido_a_Reutilizar/En_desarrollo/TopLevelNavigation" data-section="" data-show="false">
+    <pre class="script">
+    wiki.page("Contenido_a_Reutilizar/En_desarrollo/TopLevelNavigation", NULL)</pre>
+    </div>
+    
+    <div class="warningImportant style-wrap">
+    <p>&nbsp;Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde earum fuga repudiandae, excepturi magni nihil molestiae sint! Praesentium veniam, dignissimos sint, vitae alias eligendi rem, debitis unde facere excepturi enim?</p>
+    </div>
+    
+    <div class="warningChannels style-wrap">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde earum fuga repudiandae, excepturi magni nihil molestiae sint! Praesentium veniam, dignissimos sint, vitae alias eligendi rem, debitis unde facere excepturi enim?</p>
+    </div>
+    
+    <div class="warningRegistration style-wrap">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde earum fuga repudiandae, excepturi magni nihil molestiae sint! Praesentium veniam, dignissimos sint, vitae alias eligendi rem, debitis unde facere excepturi enim?</p>
+    </div>
+    
+    <pre class="script">
+    // Explanation of the syntax 
+    // Syntax element       	Description
+    // ""	                    Designate the beginning and end of the custom text string you want to display
+    // ..	                    Designates the current page
+    // user.displayname 	    The object.property call
+    // ;	                    The operator indicating the end of a line of code (necessary)
+    // &lt;br/&gt;	                Forces a line break
+    
+    &lt;h2&gt;"Variables e Info, desde Deki "&lt;/h2&gt;
+    //Creo variable url:
+    var url = "http://www.mindtouch.com";
+    &lt;h3&gt;"Muestro el valor de la variable 'url': ";&lt;/h3&gt; //Notar comillas dobles externas, con simples internas
+    url;
+    &lt;br/&gt;&lt;br/&gt;
+    
+    //Cambio su valor:
+    let url = "https://osde-prod1.mindtouch.us/PruebasVarias";
+    &lt;h3&gt;"Cambio valor de la variable 'url': ";&lt;/h3&gt;
+    url;
+    &lt;br/&gt;&lt;br/&gt;
+    
+    &lt;h3&gt;"Link con variable : ";&lt;/h3&gt;
+    &lt;br/&gt; 
+    var linkURL = 'https://osde-prod1.mindtouch.us/Template:System/Variables';
+    &lt;a href=(linkURL) target='_blank'&gt;'Presiona para abrir el template de Variables en otra pestaña'&lt;/a&gt;
+    
+    
+    &lt;h3&gt;"Importo variables previamente seteadas: ";&lt;/h3&gt;
+    &lt;br/&gt;
+    'variable importada "proyecto": '; //Notar comillas simples externas, con dobles internas
+    proyecto;
+    &lt;br/&gt;&lt;br/&gt;
+    'variable importada "homeURL:" ';
+    homeURL;
+    &lt;br/&gt;&lt;br/&gt;
+    "Link con variable global : ";
+    &lt;a href=(url) target='_blank'&gt;'Abre la carpeta de pruebas varias'&lt;/a&gt;
+    &lt;br/&gt;&lt;br/&gt;
+    
+    
+    // Assign properties to objects
+    // The MindTouch DekiScript objects are:  user, page and site.
+    // Assign properties by adding a period . after the object followed by the property:
+    
+    // Object with property	    Function
+    
+    // user.anonymous           Displays anonymous users
+    // page.title	            Displays the page title
+    // page.author	            Displays the author of the page
+    // site.uri	                Displays the URL of the site
+    // site.name	            Displays the name of the site
+    &lt;h3&gt;"Datos obtenidos mediante Deki: ";&lt;/h3&gt;
+    &lt;h4&gt;"*Del usuario";&lt;/h4&gt;
+    &lt;br/&gt;&lt;br/&gt;
+    "Usuario: " ..user.name; " o " ..user.displayname;
+    &lt;br/&gt;&lt;br/&gt;
+    "Mail con el que se registró: " ..user.email;
+    &lt;br/&gt;&lt;br/&gt;
+    "Comentarios que ha hecho este usuario: " ..user.comments;
+    &lt;br/&gt;&lt;br/&gt;
+    "Grupos a los que pertenece: ";
+    user.groups;
+    &lt;br/&gt;&lt;br/&gt;
+    "Métricas del usuario: ";
+    user.metrics; //Contains a collection of metrics pertaining to the user, including a comment count,
+    //number of files added, number of pages created, number of pages edited, and number of ratings.
+    &lt;br/&gt;&lt;br/&gt;
+    "Propiedades del usuario: ";
+    user.properties;
+    &lt;br/&gt;&lt;br/&gt;
+    "Es propietario de Nice? " ..user.owner;
+    &lt;br/&gt;&lt;br/&gt;
+    "Este usuario es admin? ";
+    if(user.admin){"Si, es un administrador";}
+    &lt;br/&gt;&lt;br/&gt;
+    "Lo que sé de este usuario:";
+    var infoUser = user.api;
+    &lt;a href=(infoUser) target='_blank'&gt;'Presiona aquí'&lt;/a&gt;
+    &lt;br/&gt;&lt;br/&gt;
+    "Más sobre el usuario: ";
+    user.homepage;
+    &lt;br/&gt;&lt;br/&gt;
+    var perfilUser = user.uri;
+    &lt;a href=(perfilUser) target='_blank'&gt;'Se puede crear una página para el perfil de usuario?'&lt;/a&gt;
+    &lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+    &lt;h4&gt;"*Del sitio ";&lt;/h4&gt;
+    &lt;br/&gt;&lt;br/&gt;
+    "Título del artículo: ";
+    page.title;
+    &lt;br/&gt;&lt;br/&gt;
+    "En relación al Autor del mismo: ";
+    page.author;
+    &lt;br/&gt;&lt;br/&gt;
+    "Cantidad de visitas en esta página: ";
+    page.viewcount;
+    &lt;br/&gt;&lt;br/&gt;
+    "Nombre del sitio: " ..site.name;
+    &lt;br/&gt;&lt;br/&gt;
+    "URL del sitio: " ..site.uri;
+    &lt;br/&gt;&lt;br/&gt;
+    "Cantidad de páginas en Nice hasta el momento: ";
+    site.pagecount;
+    &lt;br/&gt;&lt;br/&gt;
+    
+    &lt;h3&gt;"Condicional en Deki:";&lt;/h3&gt;
+    &lt;br/&gt; 
+    var x =25; // Set the output variable
+    if (user.name == "Alberto")
+    {
+    "Hola Albert! Cómo has estado?? Por ser tu, la variable x es igual a ";
+    let x = 75; // Reset the ouput variable
+    }
+    x; // Print the output
+    &lt;br/&gt;&lt;br/&gt;
+    
+    &lt;h3&gt;"Condicional en template de variables:";&lt;/h3&gt;
+    &lt;br/&gt;&lt;br/&gt;
+    "Respecto a como llama Nice a los usuarios Pro o comunes: ";
+    sillas;
+    &lt;br/&gt;&lt;br/&gt;
+    "Respecto a la pertenencia o no a un grupo específico: ";
+    grupo;
+    
+    /* Cambio valor variable - Si lo siguiente, lo envuelvo en {{...}} y lo paso al html, funciona OK!
+    {{
+    var nombreVariable = "Hola Mundo!";		        
+    nombreVariable;					                
+    let nombreVariable = "Hola Universo!";  	    
+    nombreVariable; 				               
+    }} 
+    */</pre>
+    
+    <h2>Variables e Info, desde la carga de contenido</h2>
+    
+    <h3>Invocación de variables</h3>
+    
+    <p>Las variables, al cargar contenido desde esta sección, se deben invocar con doble llaves de apertura y de cierre, envolviendo el nombre de la misma.<br />
+    Por ejemplo: {{nombreVariable1}}.</p>
+    
+    <p>Otro ejemplo: {{nombreVariable2}}.</p>
+    
+    <h3>Gestión de variables:</h3>
+    
+    <p>Sus valores, se deben de administrar desde una página específica:&nbsp; <a href="/Template:System/Variables" target="_blank">'Template Variables' </a></p>
+    
+    <h3>Capturar info mediante Deki</h3>
+    
+    <p>Además, se pueden usar en conjunto con Deki,&nbsp;por ejemplo, para invocar el nombre del usuario que esté accediendo:</p>
+    
+    <p>Hola&nbsp;{{ User.Name }}, bienvenido, que tengas un excelente&nbsp;{{ Date.DayName(Date.Now) }}.</p>
+    
+    <p>Donde "User.Name" es el nombre del usuario, y "Date.DayName(Date.Now)", es una función default de&nbsp;Nice, mediante la cuál podemos capturar que día es.</p>
+    
+    <h3>Condicionales ternarios desde la carga de contenido</h3>
+    
+    <p>También pueden usar condicionales desde este sector, con la siguiente sintaxis:</p>
+    
+    <p>Hola {{ User.Anonymous ? 'visitante anónimo' : User.Name }} !</p>
+    
+    <p>La cual significa, que, si el usuario, efectivamente fuera anónimo, veremos "Hola visitante anónimo", por el contrario, si fuera un usuario registrado: "Hola Juan"</p>
+    

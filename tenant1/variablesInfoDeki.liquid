@@ -1,0 +1,153 @@
+// Explanation of the syntax 
+// Syntax element       	Description
+// ""	                    Designate the beginning and end of the custom text string you want to display
+// ..	                    Designates the current page
+// user.displayname 	    The object.property call
+// ;	                    The operator indicating the end of a line of code (necessary)
+// <br/>	                Forces a line break
+
+<h2>"Variables e Info, desde Deki "</h2>
+//Creo variable url:
+var url = "http://www.mindtouch.com";
+<h3>"Muestro el valor de la variable 'url': ";</h3> //Notar comillas dobles externas, con simples internas
+url;
+<br/><br/>
+
+//Cambio su valor:
+let url = "https://osde-prod1.mindtouch.us/PruebasVarias";
+<h3>"Cambio valor de la variable 'url': ";</h3>
+url;
+<br/><br/>
+
+<h3>"Link con variable : ";</h3>
+<br/> 
+var linkURL = 'https://osde-prod1.mindtouch.us/Template:System/Variables';
+<a href=(linkURL) target='_blank'>'Presiona para abrir el template de Variables en otra pestaña'</a>
+
+
+<h3>"Importo variables previamente seteadas: ";</h3>
+<br/>
+'variable importada "proyecto": '; //Notar comillas simples externas, con dobles internas
+proyecto;
+<br/><br/>
+'variable importada "homeURL:" ';
+homeURL;
+<br/><br/>
+"Link con variable global : ";
+<a href=(url) target='_blank'>'Abre la carpeta de pruebas varias'</a>
+<br/><br/>
+
+
+// Assign properties to objects
+// The MindTouch DekiScript objects are:  user, page and site.
+// Assign properties by adding a period . after the object followed by the property:
+
+// Object with property	    Function
+
+// user.anonymous           Displays anonymous users
+// page.title	            Displays the page title
+// page.author	            Displays the author of the page
+// site.uri	                Displays the URL of the site
+// site.name	            Displays the name of the site
+<h3>"Datos obtenidos mediante Deki: ";</h3>
+<h4>"*Del usuario";</h4>
+<br/><br/>
+"Usuario: " ..user.name; " o " ..user.displayname;
+<br/><br/>
+"Mail con el que se registró: " ..user.email;
+<br/><br/>
+"Comentarios que ha hecho este usuario: " ..user.comments;
+<br/><br/>
+"Grupos a los que pertenece: ";
+user.groups;
+<br/><br/>
+"Métricas del usuario: ";
+user.metrics; //Contains a collection of metrics pertaining to the user, including a comment count,
+//number of files added, number of pages created, number of pages edited, and number of ratings.
+<br/><br/>
+"Propiedades del usuario: ";
+user.properties;
+<br/><br/>
+"Es propietario de Nice? " ..user.owner;
+<br/><br/>
+"Este usuario es admin? ";
+if(user.admin){"Si, es un administrador";}
+<br/><br/>
+"Lo que sé de este usuario:";
+var infoUser = user.api;
+<a href=(infoUser) target='_blank'>'Presiona aquí'</a>
+<br/><br/>
+"Más sobre el usuario: ";
+user.homepage;
+<br/><br/>
+var perfilUser = user.uri;
+<a href=(perfilUser) target='_blank'>'Se puede crear una página para el perfil de usuario?'</a>
+<br/><br/><br/>
+<h4>"*Del sitio ";</h4>
+<br/><br/>
+"Título del artículo: ";
+page.title;
+<br/><br/>
+"En relación al Autor del mismo: ";
+page.author;
+<br/><br/>
+"Cantidad de visitas en esta página: ";
+page.viewcount;
+<br/><br/>
+"Nombre del sitio: " ..site.name;
+<br/><br/>
+"URL del sitio: " ..site.uri;
+<br/><br/>
+"Cantidad de páginas en Nice hasta el momento: ";
+site.pagecount;
+<br/><br/>
+
+<h3>"Condicional en Deki:";</h3>
+<br/> 
+var x =25; // Set the output variable
+if (user.name == "Alberto")
+{
+"Hola Albert! Cómo has estado?? Por ser tu, la variable x es igual a ";
+let x = 75; // Reset the ouput variable
+}
+x; // Print the output
+<br/><br/>
+
+<h3>"Condicional en template de variables:";</h3>
+<br/><br/>
+"Respecto a como llama Nice a los usuarios Pro o comunes: ";
+sillas;
+<br/><br/>
+"Respecto a la pertenencia o no a un grupo específico: ";
+grupo;
+
+/* Cambio valor variable - Si lo siguiente, lo envuelvo en {{...}} y lo paso al html, funciona OK!
+{{
+var nombreVariable = "Hola Mundo!";		        
+nombreVariable;					                
+let nombreVariable = "Hola Universo!";  	    
+nombreVariable; 				               
+}} 
+*/
+
+//EN EL TEMPLATE DE VARIABLES GLOBALES:
+let export = {
+    
+   proyecto:"OSDE",
+   homeURL: "https://osde-prod1.mindtouch.us",
+   nombreVariable1: "Esto es un ejemplo de variable para HTML",
+   nombreVariable2: "Este es el otro ejemplo de variable para HTML"
+};
+
+//Se pueden manejar condicionales dentro del Deki de cada página, o incluso desde lo que se exporta
+if (user.unseated) {
+    export.sillas = "No estás sentado, te vas a cansar...";
+}
+else
+{
+    export.sillas = "Sos un usuario sentado, que envidia...";
+}
+
+if (user.groups["Administracion"]) {
+    export.grupo = "Hola, vemos que sos un administrador! que increible debe ser!";
+};
