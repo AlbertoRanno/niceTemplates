@@ -1329,7 +1329,9 @@ li.elm-pdf-export {
 .titulos_columnas {
 color: white!important; 
 }
-
+.iconos_whatsapp {
+    width: 25px!important;
+}
 
 
 /* Menú Consejos Búsqueda */
@@ -1392,4 +1394,3 @@ color: white!important;
 .sugerirContenidoBoton .sugerirContenidoImg {
 	height: 20px;
 }
-
