@@ -28,6 +28,15 @@
         var searchField = document.getElementById('mt-site-search-input');
         if (searchField) {searchField.placeholder = '\u00BFC\u00F3mo puedo ayudarte?';}
 
+        //******************PARA METRICAS TOC******************************** 
+        var elementNav = document.querySelector(".mt-toc-content");
+        var contenido;
+
+        elementNav.addEventListener("click", function(e){
+        if(e.target.tagName === "A" && e.target.parentNode.tagName === "LI"){
+        contenido = e.target.textContent;
+        console.log("Click en: " + contenido);}});
+
         //****************************LISTA RESULTADOS************************************
         if (window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:Search")) {
         setTimeout(function () {
@@ -102,7 +111,8 @@
             var asistencialink1 = document.createElement("a");
             asistencialink1.href = "https://wa.me/5491148729100";
             var img1 = document.createElement("img");
-            img1.src = "https://osde-socios.grupoosdestatic.com.ar/hubfs/Telefono_Asistencia.svg";
+            img1.src = "/@api/deki/files/16/whatsapp.png";
+            img1.className = "iconos_whatsapp";
             var textNode1 = document.createTextNode("11.4872.9100");
             asistencialink1.appendChild(img1);
             asistencialink1.appendChild(textNode1);
@@ -110,7 +120,7 @@
             var asistencialink2 = document.createElement("a");
             asistencialink2.href = "tel:08108887788";
             var img2 = document.createElement("img");
-            img2.src = "https://osde-socios.grupoosdestatic.com.ar/hubfs/Tele%CC%81fono%20Asistencias.svg";
+            img2.src = "/@api/deki/files/17/telefono.png";
             var textNode2 = document.createTextNode("0810.888.7788");
             asistencialink2.appendChild(img2);
             asistencialink2.appendChild(textNode2);
@@ -118,7 +128,7 @@
             var asistencialink3 = document.createElement("a");
             asistencialink3.href = "tel:08109996300";
             var img3 = document.createElement("img");
-            img3.src = "https://osde-socios.grupoosdestatic.com.ar/hubfs/Tele%CC%81fono%20Asistencias.svg";
+            img3.src = "/@api/deki/files/17/telefono.png";
             var textNode3 = document.createTextNode("0810.999.6300");
             asistencialink3.appendChild(img3);
             asistencialink3.appendChild(textNode3);
@@ -141,7 +151,7 @@
             var riesgoLink = document.createElement("a");
             riesgoLink.href = "tel:08106661111";
             var riesgoImg = document.createElement("img");
-            riesgoImg.src = "https://osde-socios.grupoosdestatic.com.ar/hubfs/Telefono_Riesgo.svg";
+            riesgoImg.src = "/@api/deki/files/17/telefono.png";
             var riesgoText = document.createTextNode("0810.666.1111");
             riesgoLink.appendChild(riesgoImg);
             riesgoLink.appendChild(riesgoText);
@@ -161,28 +171,29 @@
             var atencionLink1 = document.createElement("a");
             atencionLink1.href = "https://wa.me/5491148729000";
             var atencionImg1 = document.createElement("img");
-            atencionImg1.src = "https://osde-socios.grupoosdestatic.com.ar/hubfs/Whatsapp_Atencion.svg";
+            atencionImg1.src = "/@api/deki/files/16/whatsapp.png";
+            atencionImg1.className = "iconos_whatsapp";
             var atencionText1 = document.createTextNode("11.4872.9000");
             atencionLink1.appendChild(atencionImg1);
             atencionLink1.appendChild(atencionText1);
             var atencionLink2 = document.createElement("a");
             atencionLink2.href = "tel:08105556733";
             var atencionImg2 = document.createElement("img");
-            atencionImg2.src = "https://osde-socios.grupoosdestatic.com.ar/hubfs/Telefono_Atencion.svg";
+            atencionImg2.src = "/@api/deki/files/17/telefono.png";
             var atencionText2 = document.createTextNode("0810.555.6733");
             atencionLink2.appendChild(atencionImg2);
             atencionLink2.appendChild(atencionText2);
             var atencionLink3 = document.createElement("a");
             atencionLink3.href = "tel:08005556733";
             var atencionImg3 = document.createElement("img");
-            atencionImg3.src = "https://osde-socios.grupoosdestatic.com.ar/hubfs/Telefono_Atencion.svg";
+            atencionImg3.src = "/@api/deki/files/17/telefono.png";
             var atencionText3 = document.createTextNode("0800.555.6733");
             atencionLink3.appendChild(atencionImg3);
             atencionLink3.appendChild(atencionText3);
             var atencionLink4 = document.createElement("a");
             atencionLink4.href = "https://www.osde.com.ar/index.html#!osde-caps-centros-atencion-personalizada.html";
             var img4 = document.createElement("img");
-            img4.src = "https://osde-socios.grupoosdestatic.com.ar/hubfs/Turnos.svg";
+            img4.src = "/@api/deki/files/15/calendario.png";
             var atencionText4 = document.createTextNode("Turnos en sucursal");
             atencionLink4.appendChild(img4);
             atencionLink4.appendChild(atencionText4);
@@ -288,7 +299,7 @@
         //Sugerir nuevo contenido
         let sugerirContenidoContenedor = document.createElement('li');
         sugerirContenidoContenedor.classList.add('sugerirContenidoContenedor');
-        let sugerirContenidoBoton = document.createElement('div');
+        let sugerirContenidoBoton = document.createElement('a');
         sugerirContenidoBoton.classList.add('sugerirContenidoBoton');
         sugerirContenidoBoton.id = 'sugerirContenidoBoton';
         sugerirContenidoBoton.textContent = "Sugerir nuevo contenido";

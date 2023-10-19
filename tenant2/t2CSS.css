@@ -527,6 +527,11 @@ p a {
 	color: var(--secondary-light-blue);
 }
 
+/*Necesario porque cuando oculto el input del buscador en el home, sin esto el menu se ve mal*/
+.elm-header-user-nav {
+    min-height: 45px;
+}
+
 /* Tablas y Listas Desplegables */
 .EXPAND_COLLAPSE dt {
 	color: var(--background-light-blue-2);
@@ -1138,10 +1143,26 @@ li.elm-pdf-export {
 /* Los más vistos Home */
 .columbia-page-home .widget-popular ul{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
 	grid-column-gap: 20px;
 	padding:0;
 }
+@media all and (min-width: 18.75em) {
+    .columbia-page-home .widget-popular ul {
+        grid-template-columns: 1fr;
+    }
+}
+@media all and (min-width: 37.5em) {
+    .columbia-page-home .widget-popular ul {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media all and (min-width: 83em) {
+    .columbia-page-home .widget-popular ul {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
 .columbia-page-home .widget-popular ul li{
 	margin-left: 20px;
 }
@@ -1169,26 +1190,35 @@ li.elm-pdf-export {
 	padding-bottom: 24px;
 	border-bottom: 1px solid var(--white);
 	margin-bottom: 24px;
-	display: flex;
+	display: grid;
 	gap: 40px;
-	align-items: center;
-justify-content:space-around;
+	grid-template-columns: 1fr 1fr 3fr;
 }
 
 @media all and (min-width: 18.75em) {
     .footer .container {
         padding:.65rem .65rem 4em
     }
+	.footer .container .colLeft{
+		grid-template-columns: 1fr 1fr;
+	}
+	
 }
 @media all and (min-width: 25em) {
     .footer .container {
         padding:.65rem .65rem 4em
     }
+	.footer .container .colLeft{
+		grid-template-columns: 1fr 1fr;
+	}
 }
 @media all and (min-width: 37.5em) {
     .footer .container {
         padding:1.3rem
     }
+	.footer .container .colLeft{
+		grid-template-columns: 1fr 1fr;
+	}
 }
 @media all and (min-width: 83em) {
     .footer .container {
@@ -1197,6 +1227,9 @@ justify-content:space-around;
         min-width: 80em;
         padding: 1.3rem 0
     }
+	.footer .container .colLeft{
+		grid-template-columns: 1fr 1fr 3fr;
+	}
 }
 
 
@@ -1218,8 +1251,9 @@ justify-content:space-around;
 	padding:0;
 	margin: 0;
 	display: flex;
-        flex-direction: column;
-	gap:40px;
+    flex-direction: column;
+	gap:20px;
+	list-style: none;
 }
 .footer .footer-links::marker{
 	display: none;
@@ -1227,30 +1261,136 @@ justify-content:space-around;
 
 /* Footer Teléfonos  */
 .cards_telefonos {
-    display: flex;
-    justify-content:space-around;
-    flex-basis: 600px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+	gap: 40px;
+}
+@media all and (min-width: 25em) {
+    .cards_telefonos {
+        grid-template-columns: 1fr;
+		grid-column-start: 1;
+    	grid-column-end: 3;
+    }
+}
+@media all and (min-width: 37.5em) {
+    .cards_telefonos {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+@media all and (min-width: 83em) {
+    .cards_telefonos {
+        grid-template-columns: 1fr 1fr 1fr;
+		grid-column-start:auto;
+    	grid-column-end: auto;
+    }
 }
 .telefonos_card {
     text-align: center;
+	border-left: 1px solid var(--white);
+	padding-left: 24px;
+}
+@media all and (min-width: 25em) {
+    .telefonos_card {
+        border: none;
+		padding: 0;
+    }
+}
+@media all and (min-width: 37.5em) {
+    .telefonos_card {
+		text-align: left;
+        border-left: 1px solid var(--white);
+		padding-left: 24px;
+    }
+}
+@media all and (min-width: 83em) {
+    .telefonos_card {
+		text-align: left;
+        border-left: 1px solid var(--white);
+		padding-left: 24px;
+    }
 }
 .telefonos_content a {
-    display: block;
+    display: flex;
     text-decoration: none;
+	align-items: center;
+	margin-bottom:16px;
+	justify-content: center;
 } 
+@media all and (min-width: 37.5em) {
+    .telefonos_content a {
+		justify-content: flex-start;
+    }
+}
 .telefonos_content img {
     width: 15px; 
     height: auto;
+	margin-right: 6px;
 }
 .titulos_columnas {
 color: white!important; 
 }
-
-/*Sugerir nuevo contenido*/
-.sugerirContenidoImg {
-max-height: 25px;
+.iconos_whatsapp {
+    width: 25px!important;
 }
 
+
+/* Menú Consejos Búsqueda */
 .consejosDesplegables {
   display: none;
+}
+.consejo-busqueda-area .navbar-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.consejo-busqueda-area ul ul{
+	background: var(--background-light-blue);
+	position: absolute;
+	box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.29);
+	border-radius: 0 8px 8px 8px;
+	width: 100%;
+	top:34px;
+	left:15px;
+	padding: 0.4em 0.8em;
+}
+
+@media all and (min-width: 25em) {
+    .consejo-busqueda-area ul ul {
+        width: 90%;
+    }
+}
+@media all and (min-width: 37.5em) {
+    .consejo-busqueda-area ul ul {
+        width: 500px;
+    }
+}
+
+.consejo-busqueda-area ul ul li{
+	border-bottom: 2px solid var(--white);
+	padding-bottom: 0.25em;
+}
+.consejo-busqueda-area ul ul li:last-child{
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+/*Sugerir nuevo contenido*/
+.sugerirContenidoBoton{
+	margin: 5px 15px;
+	display: flex !important;
+	align-items: center;
+	gap: 6px;
+	color: var(--white);
+	text-decoration: underline;
+	cursor: pointer;
+	flex-direction: row-reverse;
+	font-size: 14px;
+    line-height: 1.375em;
+    font-weight: 500;
+}
+.sugerirContenidoBoton:hover{
+	color:var(--secondary-light-blue);
+}
+.sugerirContenidoBoton .sugerirContenidoImg {
+	height: 20px;
 }
