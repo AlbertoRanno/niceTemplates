@@ -29,8 +29,7 @@
         var searchElement = document.querySelector('li.elm-global-search');
         if (searchElement) {
         var searchContent = searchElement.querySelector('.mt-quick-search-container');
-        if (searchContent) {
-        searchContent.style.display = 'none';}}}
+        if (searchContent) {searchContent.style.display = 'none';}}}
 
         //******************BORRO PLACEHOLDERS DEFAULTS**********************    
         var searchField = document.getElementById('mt-site-search-input');
@@ -67,6 +66,11 @@
                         window.location.href = originalUrl;}});}});
     }, 1000);}
 
+
+    //*******************************LOGIN********************************
+    if (!window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:UserLogin")) {
+        
+    
       //****************************FOOTER********************************
       var footerDefault = document.querySelector(".elm-footer");
         if (footerDefault) {
@@ -476,6 +480,16 @@
         if (logoContainer) {
             logoContainer.innerHTML = '';
             logoContainer.appendChild(topLevelNavigation);}
+
+        } else { //Si es el Login, entonces, oculto las palabras "header", "footer", y el buscador
+        var headerLogin = document.querySelector('.elm-header-custom a');
+        if (headerLogin) {headerLogin.style.display = 'none';}        
+        var footerLogin = document.querySelector('.elm-footer-custom a');
+        if (footerLogin) {footerLogin.style.display = 'none';}
+        var buscadorLogin = document.querySelector('.elm-global-search');
+        if (buscadorLogin) {buscadorLogin.style.display = 'none';}
+        var tituloLogin = document.querySelector('#title');
+        if (tituloLogin) {tituloLogin.textContent = 'Inicia sesi\u00F3n en Nice, la nueva base de conocimientos de OSDE';}}
         
     });
 
