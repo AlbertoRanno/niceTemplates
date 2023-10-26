@@ -29,15 +29,17 @@
         var searchElement = document.querySelector('li.elm-global-search');
         if (searchElement) {
         var searchContent = searchElement.querySelector('.mt-quick-search-container');
-        if (searchContent) {searchContent.style.display = 'none';}}}
+        if (searchContent) {
+        searchContent.style.display = 'none';}}}
 
         //******************BORRO PLACEHOLDERS DEFAULTS**********************    
         var searchField = document.getElementById('mt-site-search-input');
-        if (searchField) {searchField.placeholder = '';}
+        if (searchField) {searchField.placeholder = '\u00BFQu\u00E9 est\u00E1s buscando?';}
 
         //******************PARA METRICAS TOC******************************** 
         var elementNav = document.querySelector(".mt-toc-content");
         var contenido;
+
         elementNav.addEventListener("click", function(e){
         if(e.target.tagName === "A" && e.target.parentNode.tagName === "LI"){
         contenido = e.target.textContent;
@@ -54,6 +56,8 @@
          if (filtros) {
             filtros.style.position = 'sticky';
             filtros.style.top = '100px';}
+         var estadoBorradores = document.querySelector(".mt-search-filters-classification-estado");
+         if (estadoBorradores) {estadoBorradores.style.display = "none";}
 
          var results = document.querySelectorAll("li.result");
          results.forEach(function (result) {
@@ -69,8 +73,7 @@
 
     //*******************************LOGIN********************************
     if (!window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:UserLogin")) {
-        
-    
+
       //****************************FOOTER********************************
       var footerDefault = document.querySelector(".elm-footer");
         if (footerDefault) {
@@ -317,7 +320,7 @@
         let sugerirContenidoImg = document.createElement('img');
         sugerirContenidoImg.classList.add('sugerirContenidoImg');
         sugerirContenidoImg.alt = "imagen de enviar mail";
-        sugerirContenidoImg.src = "/@api/deki/files/147/mail.png"
+        sugerirContenidoImg.src = "/@api/deki/files/220/emailBlanco.png"
         sugerirContenidoBoton.appendChild(sugerirContenidoImg);
         sugerirContenidoContenedor.appendChild(sugerirContenidoBoton);
         ulConsejos.appendChild(sugerirContenidoContenedor);
@@ -470,7 +473,7 @@
         listItemCobranzas.appendChild(ulSubListCobranzas);
         ulSubList.appendChild(listItemCobranzas);
 
-        let listItemReintegro = document.createElement('li');
+           let listItemReintegro = document.createElement('li');
         listItemReintegro.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
         let linkReintegro = document.createElement('a');
         linkReintegro.href = "/Cobertura";
@@ -501,8 +504,8 @@
         ulSubListReintegro.appendChild(listItemReintegro2);
         ulSubListReintegro.appendChild(listItemReintegro3);
         listItemReintegro.appendChild(ulSubListReintegro);
-        ulSubList.appendChild(listItemReintegro)   
-        
+        ulSubList.appendChild(listItemReintegro);
+
         let listItemAdministracion = document.createElement('li');
         listItemAdministracion.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
         let linkAdministracion = document.createElement('a');
@@ -580,6 +583,7 @@
             logoContainer.innerHTML = '';
             logoContainer.appendChild(topLevelNavigation);}
 
+        
         } else { //Si es el Login, entonces, oculto las palabras "header", "footer", y el buscador
         var headerLogin = document.querySelector('.elm-header-custom a');
         if (headerLogin) {headerLogin.style.display = 'none';}        
@@ -588,8 +592,8 @@
         var buscadorLogin = document.querySelector('.elm-global-search');
         if (buscadorLogin) {buscadorLogin.style.display = 'none';}
         var tituloLogin = document.querySelector('#title');
-        if (tituloLogin) {tituloLogin.textContent = 'Inicia sesi\u00F3n en Nice, la nueva base de conocimientos de OSDE';}}
-        
+        if (tituloLogin) {tituloLogin.textContent = 'Nice: la nueva base de conocimientos de OSDE';}}
+
     });
 
 </script>
