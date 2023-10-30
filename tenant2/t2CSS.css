@@ -1153,7 +1153,7 @@ body[class*="pagenotfound"] pre.script:before{
    padding: 0;
 }
 
-#lp-pages-1, .mt-lp-progress-bar {
+.mt-lp-page-listings, .mt-lp-progress-bar {
     margin: 10px;
 }
 
