@@ -24,6 +24,17 @@
 
     document.addEventListener('DOMContentLoaded', function () {
 
+        //**************************** DEJAR COMENTARIO *************************************
+        var texto1DejarComentario = document.querySelector('.mt-feedback-rating-message');
+        if (texto1DejarComentario) {texto1DejarComentario.textContent = 'Texto 1';}
+        var texto2DejarComentario = document.querySelector('.mt-feedback-improve-label');
+        if (texto2DejarComentario) {texto2DejarComentario.textContent = 'Texto 2';}
+        var consentimientoCheckbox = document.querySelector('.mt-feedback-consent-checkbox');
+        var consentimientoLabel = document.querySelector('.mt-feedback-consent-label');
+        if (consentimientoCheckbox && consentimientoLabel) {
+            consentimientoCheckbox.style.display = 'none';
+            consentimientoLabel.style.display = 'none';}
+
         //******************EVITO DOBLE BUSCADOR HOME************************
         if (window.location.href === 'https://osde-prod1.mindtouch.us/') {
         var searchElement = document.querySelector('li.elm-global-search');

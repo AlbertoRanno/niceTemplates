@@ -1,0 +1,67 @@
+<div class="elm-article-feedback">
+    <div class="mt-feedback-rating-container" data-ga-action="Page rating" data-page-revision="1"
+        data-use-local-storage="false">
+        <ul class="mt-feedback-rating-controls">
+            <li class="mt-feedback-rating-message mt-feedback-rating-item">¿Le ha resultado útil este artículo?</li>
+            <li class="mt-rating-yes mt-feedback-rating-item"><button
+                    class="mt-rating-button-yes mt-feedback-rating-button ui-button-icon mt-icon-rating-yes"
+                    data-ga-label="Rate">Sí</button></li>
+            <li class="mt-rating-no mt-feedback-rating-item"><button
+                    class="mt-rating-button-no mt-feedback-rating-button ui-button-icon mt-icon-rating-no"
+                    data-ga-label="Rate">No</button></li>
+            <li class="mt-leave-feedback mt-feedback-rating-item"><button
+                    class="mt-feedback-button mt-feedback-rating-button ui-button-icon mt-icon-leave-feedback"
+                    data-ga-label="Feedback toggle">Dejar comentario</button></li>
+            <li class="mt-last-rating-date mt-feedback-rating-item"></li>
+        </ul>
+        <div id="mt-feedback-flash-message"></div>
+        <div class="mt-feedback-form" data-path="Afiliaciones/Altas/Alta_de_Certificado_de_discapacidad"
+            data-user-email="aranno@cdt.com.ar" data-page-title="Alta de Certificado de discapacidad"
+            data-site-url="https://osde-prod1.mindtouch.us/" style="display: block;">
+            <fieldset class="ui-dform-fieldset">
+                <legend class="ui-dform-legend">Dejar comentario</legend>
+                <div class="mt-field"><label class="mt-feedback-improve-label ui-dform-label"
+                        for="textarea-feedback">¿Cómo puedo mejorar este artículo?</label><textarea autocomplete="off"
+                        class="mt-feedback-improve-description ui-dform-textarea" id="textarea-feedback"
+                        spellcheck="false"></textarea></div>
+                <div class="mt-field"><input class="mt-feedback-consent-checkbox ui-dform-checkbox"
+                        data-ga-label="Feedback consent" id="mt-feedback-consent" type="checkbox"><label
+                        class="mt-feedback-consent-label mt-label-checkbox" data-ga-label="Feedback consent"
+                        for="mt-feedback-consent">Sí, puede ponerse en contacto conmigo en relación con este
+                        comentario.</label></div>
+                <div class="mt-field mt-submit"><button
+                        class="mt-feedback-submit mt-disabled ui-button ui-button-primary"
+                        data-ga-label="Submit feedback" id="deki-feedback-send">Enviar comentario</button></div>
+            </fieldset>
+        </div>
+    </div>
+    <script type="application/json" id="mt-localizations-feedback-rating">
+        /*<![CDATA[*/
+        {
+            "Page.FeedbackRating.label.last-rated": "-- La \u00faltima vez puntu\u00f3 este art\u00edculo con un {0}",
+            "Page.FeedbackRating.message.contact.no": "No",
+            "Page.FeedbackRating.message.contact.yes": "S\u00ed",
+            "Page.FeedbackRating.message.submit.error": "Se produjo un error al tratar de enviar su comentario.  Vuelva a intentarlo m\u00e1s tarde.",
+            "Page.FeedbackRating.message.submit.success": "Su comentario se ha enviado correctamente.  Puede enviar m\u00e1s comentarios en cualquier momento."
+        } /*]]>*/
+    </script>
+
+    <script>
+        //**************************** DEJAR COMENTARIO *************************************
+        // 1. Cambia el texto "¿Le ha resultado útil este artículo?" por "Texto 1"
+        var texto1DejarComentario = document.querySelector('.mt-feedback-rating-message');
+        if (texto1DejarComentario) {texto1DejarComentario.textContent = 'Texto 1';}
+        // 2. Cambia el texto "¿Cómo puedo mejorar este artículo?" por "Texto 2"
+        var texto2DejarComentario = document.querySelector('.mt-feedback-improve-label');
+        if (texto2DejarComentario) {texto2DejarComentario.textContent = 'Texto 2';}
+        // 3. Oculta el checkbox con su label
+        var consentimientoCheckbox = document.querySelector('.mt-feedback-consent-checkbox');
+        var consentimientoLabel = document.querySelector('.mt-feedback-consent-label');
+        if (consentimientoCheckbox && consentimientoLabel) {
+            consentimientoCheckbox.style.display = 'none';
+            consentimientoLabel.style.display = 'none';}
+    </script>
+
+
+
+</div>
