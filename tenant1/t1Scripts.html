@@ -103,24 +103,29 @@
 
             var ul = document.createElement("ul");
             ul.className = "footer-links";
-            var link1 = document.createElement("li");
-            var link1Anchor = document.createElement("a");
-            link1Anchor.href = "https://osde-prod1.mindtouch.us/tutoriales";
-            link1Anchor.textContent = "Tutoriales";
-            link1.appendChild(link1Anchor);
-            var link2 = document.createElement("li");
-            var link2Anchor = document.createElement("a");
-            link2Anchor.href = "https://osde-prod1.mindtouch.us/tutoriales/edicion/opciones_de_busqueda_avanzada";
-            link2Anchor.textContent = "Tips avanzados de b\u00FAsqueda";
-            link2.appendChild(link2Anchor);
+            // var link1 = document.createElement("li");
+            // var link1Anchor = document.createElement("a");
+            // link1Anchor.href = "https://osde-prod1.mindtouch.us/tutoriales";
+            // link1Anchor.textContent = "Tutoriales";
+            // link1.appendChild(link1Anchor);
+            // var link2 = document.createElement("li");
+            // var link2Anchor = document.createElement("a");
+            // link2Anchor.href = "https://osde-prod1.mindtouch.us/tutoriales/edicion/opciones_de_busqueda_avanzada";
+            // link2Anchor.textContent = "Tips avanzados de b\u00FAsqueda";
+            // link2.appendChild(link2Anchor);
             var link3 = document.createElement("li");
             var link3Anchor = document.createElement("a");
             link3Anchor.href="https://www.osde.com.ar/index.html#!homepage.html";
             link3Anchor.textContent = "www.osde.com.ar";
             link3.appendChild(link3Anchor);
+            var link4 = document.createElement("li");
+            var link4P = document.createElement("p");
+            link4P.innerHTML = "Para sugerir nuevo contenido envianos un mail a: aaaaaaaa\u0040rcpo.com.ar"
+            link4.appendChild(link4P);
             ul.appendChild(link3);
-            ul.appendChild(link1);
-            ul.appendChild(link2);
+            // ul.appendChild(link1);
+            // ul.appendChild(link2);
+            ul.appendChild(link4);
           
             //Teléfonos
             var telefonos = document.createElement("div");
@@ -313,12 +318,18 @@
         let li5 = document.createElement('li');
         li5.textContent =
             'Para resaltar las palabras claves, ya sea en la lista de resultados y/o en cada documento, utilice: CTRL + F, e ingrese nuevamente las mismas.';
+        let li6 = document.createElement('li');        
+        let li6Anchor = document.createElement("a");
+        li6Anchor.href = "https://osde-prod1.mindtouch.us/tutoriales/edicion/opciones_de_busqueda_avanzada";
+        li6Anchor.textContent = 'Accede aqu\u00ED para ver tips avanzados de b\u00FAsqueda';
+        li6.appendChild(li6Anchor);
         liConsejos.appendChild(aConsejos);
         ulSubmenu.appendChild(li1);
         ulSubmenu.appendChild(li2);
         ulSubmenu.appendChild(li3);
         ulSubmenu.appendChild(li4);
         ulSubmenu.appendChild(li5);
+        ulSubmenu.appendChild(li6);
         liConsejos.appendChild(ulSubmenu);
         ulConsejos.appendChild(liConsejos);
         //Sugerir nuevo contenido
