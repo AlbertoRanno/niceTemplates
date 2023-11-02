@@ -333,35 +333,34 @@
         liConsejos.appendChild(ulSubmenu);
         ulConsejos.appendChild(liConsejos);
         //Sugerir nuevo contenido
-        let sugerirContenidoContenedor = document.createElement('li');
-        sugerirContenidoContenedor.classList.add('sugerirContenidoContenedor');
-        let sugerirContenidoBoton = document.createElement('a');
-        sugerirContenidoBoton.classList.add('sugerirContenidoBoton');
-        sugerirContenidoBoton.id = 'sugerirContenidoBoton';
-        sugerirContenidoBoton.textContent = "Sugerir nuevo contenido";
-        let sugerirContenidoImg = document.createElement('img');
-        sugerirContenidoImg.classList.add('sugerirContenidoImg');
-        sugerirContenidoImg.alt = "imagen de enviar mail";
-        sugerirContenidoImg.src = "/@api/deki/files/220/emailBlanco.png"
-        sugerirContenidoBoton.appendChild(sugerirContenidoImg);
-        sugerirContenidoContenedor.appendChild(sugerirContenidoBoton);
-        ulConsejos.appendChild(sugerirContenidoContenedor);
+        // let sugerirContenidoContenedor = document.createElement('li');
+        // sugerirContenidoContenedor.classList.add('sugerirContenidoContenedor');
+        // let sugerirContenidoBoton = document.createElement('a');
+        // sugerirContenidoBoton.classList.add('sugerirContenidoBoton');
+        // sugerirContenidoBoton.id = 'sugerirContenidoBoton';
+        // sugerirContenidoBoton.textContent = "Sugerir nuevo contenido";
+        // let sugerirContenidoImg = document.createElement('img');
+        // sugerirContenidoImg.classList.add('sugerirContenidoImg');
+        // sugerirContenidoImg.alt = "imagen de enviar mail";
+        // sugerirContenidoImg.src = "/@api/deki/files/220/emailBlanco.png"
+        // sugerirContenidoBoton.appendChild(sugerirContenidoImg);
+        // sugerirContenidoContenedor.appendChild(sugerirContenidoBoton);
+        // ulConsejos.appendChild(sugerirContenidoContenedor);
         divInternoConsejos.appendChild(ulConsejos);
         divConsejos.appendChild(divInternoConsejos);
         
         setTimeout(function () {
-        var boton = document.getElementById("sugerirContenidoBoton");
-        boton.addEventListener("click", function () {
-            abrirCorreo();});
+        // var boton = document.getElementById("sugerirContenidoBoton");
+        // boton.addEventListener("click", function () {abrirCorreo();});
         aConsejos.addEventListener('click', function () {
             ulSubmenu.classList.toggle('consejosDesplegables');});
         }, 1000); 
-        function abrirCorreo() {
-        var destinatario = "albertoranno@gmail.com";
-        var asunto = "Comentarios";
-        var cuerpo = "Lo que quisiera comentar es lo siguiente:";
-        var mailtoLink = "mailto:" + destinatario + "?subject=" + encodeURIComponent(asunto) + "&amp;body=" + encodeURIComponent(cuerpo);
-        window.location.href = mailtoLink;}
+        // function abrirCorreo() {
+        // var destinatario = "albertoranno@gmail.com";
+        // var asunto = "Comentarios";
+        // var cuerpo = "Lo que quisiera comentar es lo siguiente:";
+        // var mailtoLink = "mailto:" + destinatario + "?subject=" + encodeURIComponent(asunto) + "&amp;body=" + encodeURIComponent(cuerpo);
+        // window.location.href = mailtoLink;}
 
         let listItemComercial = document.createElement('li');
         listItemComercial.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
