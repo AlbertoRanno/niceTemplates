@@ -16,6 +16,17 @@
 
     document.addEventListener('DOMContentLoaded', function () {
 
+        //**************************** DEJAR COMENTARIO *************************************
+        var texto1DejarComentario = document.querySelector('.mt-feedback-rating-message');
+        if (texto1DejarComentario) {texto1DejarComentario.textContent = 'Texto 1';}
+        var texto2DejarComentario = document.querySelector('.mt-feedback-improve-label');
+        if (texto2DejarComentario) {texto2DejarComentario.textContent = 'Texto 2';}
+        var consentimientoCheckbox = document.querySelector('.mt-feedback-consent-checkbox');
+        var consentimientoLabel = document.querySelector('.mt-feedback-consent-label');
+        if (consentimientoCheckbox && consentimientoLabel) {
+            consentimientoCheckbox.style.display = 'none';
+            consentimientoLabel.style.display = 'none';}
+
         //******************EVITO DOBLE BUSCADOR HOME************************
         if (window.location.href === 'https://osde-prod2.mindtouch.us/') {
         var searchElement = document.querySelector('li.elm-global-search');
@@ -48,6 +59,8 @@
          if (filtros) {
             filtros.style.position = 'sticky';
             filtros.style.top = '100px';}
+         var estadoBorradores = document.querySelector(".mt-search-filters-classification-estado");
+         if (estadoBorradores) {estadoBorradores.style.display = "none";}   
 
          var results = document.querySelectorAll("li.result");
          results.forEach(function (result) {
@@ -60,7 +73,11 @@
                         window.location.href = originalUrl;}});}});
     }, 1000);}
 
-       //****************************FOOTER********************************
+
+    //*******************************LOGIN********************************
+    if (!window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:UserLogin")) {  
+    
+    //****************************FOOTER********************************
         var footerDefault = document.querySelector(".elm-footer");
         if (footerDefault) {
             var footerPropio = document.createElement("footer");
@@ -78,24 +95,29 @@
 
             var ul = document.createElement("ul");
             ul.className = "footer-links";
-            var link1 = document.createElement("li");
-            var link1Anchor = document.createElement("a");
-            link1Anchor.href = "#";
-            link1Anchor.textContent = "Tutoriales";
-            link1.appendChild(link1Anchor);
-            var link2 = document.createElement("li");
-            var link2Anchor = document.createElement("a");
-            link2Anchor.href = "https://success.mindtouch.com/Manage/Search/MindTouch_Search/Advanced_search_options?mt-language=ES";
-            link2Anchor.textContent = "Tips avanzados de b\u00FAsqueda";
-            link2.appendChild(link2Anchor);
+            // var link1 = document.createElement("li");
+            // var link1Anchor = document.createElement("a");
+            // link1Anchor.href = "#";
+            // link1Anchor.textContent = "Tutoriales";
+            // link1.appendChild(link1Anchor);
+            // var link2 = document.createElement("li");
+            // var link2Anchor = document.createElement("a");
+            // link2Anchor.href = "https://success.mindtouch.com/Manage/Search/MindTouch_Search/Advanced_search_options?mt-language=ES";
+            // link2Anchor.textContent = "Tips avanzados de b\u00FAsqueda";
+            // link2.appendChild(link2Anchor);
             var link3 = document.createElement("li");
             var link3Anchor = document.createElement("a");
             link3Anchor.href="https://www.osde.com.ar/index.html#!homepage.html";
             link3Anchor.textContent = "www.osde.com.ar";
             link3.appendChild(link3Anchor);
+            var link4 = document.createElement("li");
+            var link4P = document.createElement("p");
+            link4P.innerHTML = "Para sugerir nuevo contenido envianos un mail a: aaaaaaaa\u0040rcpo.com.ar"
+            link4.appendChild(link4P);
             ul.appendChild(link3);
-            ul.appendChild(link1);
-            ul.appendChild(link2);
+            // ul.appendChild(link1);
+            // ul.appendChild(link2);
+            ul.appendChild(link4);
           
             //Teléfonos
             var telefonos = document.createElement("div");
@@ -288,44 +310,49 @@
         let li5 = document.createElement('li');
         li5.textContent =
             'Para resaltar las palabras claves, ya sea en la lista de resultados y/o en cada documento, utilice: CTRL + F, e ingrese nuevamente las mismas.';
+        let li6 = document.createElement('li');        
+        let li6Anchor = document.createElement("a");
+        li6Anchor.href = "https://osde-prod2.mindtouch.us/tutoriales/edicion/opciones_de_busqueda_avanzada";
+        li6Anchor.textContent = 'Accede aqu\u00ED para ver tips avanzados de b\u00FAsqueda';
+        li6.appendChild(li6Anchor);
         liConsejos.appendChild(aConsejos);
         ulSubmenu.appendChild(li1);
         ulSubmenu.appendChild(li2);
         ulSubmenu.appendChild(li3);
         ulSubmenu.appendChild(li4);
         ulSubmenu.appendChild(li5);
+        ulSubmenu.appendChild(li6);
         liConsejos.appendChild(ulSubmenu);
         ulConsejos.appendChild(liConsejos);
         //Sugerir nuevo contenido
-        let sugerirContenidoContenedor = document.createElement('li');
-        sugerirContenidoContenedor.classList.add('sugerirContenidoContenedor');
-        let sugerirContenidoBoton = document.createElement('a');
-        sugerirContenidoBoton.classList.add('sugerirContenidoBoton');
-        sugerirContenidoBoton.id = 'sugerirContenidoBoton';
-        sugerirContenidoBoton.textContent = "Sugerir nuevo contenido";
-        let sugerirContenidoImg = document.createElement('img');
-        sugerirContenidoImg.classList.add('sugerirContenidoImg');
-        sugerirContenidoImg.alt = "imagen de enviar mail";
-        sugerirContenidoImg.src = "/@api/deki/files/13/mail.png"
-        sugerirContenidoBoton.appendChild(sugerirContenidoImg);
-        sugerirContenidoContenedor.appendChild(sugerirContenidoBoton);
-        ulConsejos.appendChild(sugerirContenidoContenedor);
+        // let sugerirContenidoContenedor = document.createElement('li');
+        // sugerirContenidoContenedor.classList.add('sugerirContenidoContenedor');
+        // let sugerirContenidoBoton = document.createElement('a');
+        // sugerirContenidoBoton.classList.add('sugerirContenidoBoton');
+        // sugerirContenidoBoton.id = 'sugerirContenidoBoton';
+        // sugerirContenidoBoton.textContent = "Sugerir nuevo contenido";
+        // let sugerirContenidoImg = document.createElement('img');
+        // sugerirContenidoImg.classList.add('sugerirContenidoImg');
+        // sugerirContenidoImg.alt = "imagen de enviar mail";
+        // sugerirContenidoImg.src = "/@api/deki/files/13/mail.png"
+        // sugerirContenidoBoton.appendChild(sugerirContenidoImg);
+        // sugerirContenidoContenedor.appendChild(sugerirContenidoBoton);
+        // ulConsejos.appendChild(sugerirContenidoContenedor);
         divInternoConsejos.appendChild(ulConsejos);
         divConsejos.appendChild(divInternoConsejos);
         
         setTimeout(function () {
-        var boton = document.getElementById("sugerirContenidoBoton");
-        boton.addEventListener("click", function () {
-            abrirCorreo();});
+        // var boton = document.getElementById("sugerirContenidoBoton");
+        // boton.addEventListener("click", function () {abrirCorreo();});
         aConsejos.addEventListener('click', function () {
             ulSubmenu.classList.toggle('consejosDesplegables');});
         }, 1000); 
-        function abrirCorreo() {
-        var destinatario = "albertoranno@gmail.com";
-        var asunto = "Comentarios";
-        var cuerpo = "Lo que quisiera comentar es lo siguiente:";
-        var mailtoLink = "mailto:" + destinatario + "?subject=" + encodeURIComponent(asunto) + "&amp;body=" + encodeURIComponent(cuerpo);
-        window.location.href = mailtoLink;}
+        // function abrirCorreo() {
+        // var destinatario = "albertoranno@gmail.com";
+        // var asunto = "Comentarios";
+        // var cuerpo = "Lo que quisiera comentar es lo siguiente:";
+        // var mailtoLink = "mailto:" + destinatario + "?subject=" + encodeURIComponent(asunto) + "&amp;body=" + encodeURIComponent(cuerpo);
+        // window.location.href = mailtoLink;}
 
         let listItemComercial = document.createElement('li');
         listItemComercial.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
@@ -459,6 +486,105 @@
         listItemCobranzas.appendChild(ulSubListCobranzas);
         ulSubList.appendChild(listItemCobranzas);
 
+        let listItemReintegro = document.createElement('li');
+        listItemReintegro.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+        let linkReintegro = document.createElement('a');
+        linkReintegro.href = "/Cobertura";
+        let imgRCobertura = document.createElement('img');
+        imgRCobertura.alt = "Icono";
+        imgRCobertura.src = "/@api/deki/files/213/cobertura.png";
+        linkReintegro.appendChild(imgRCobertura);
+        linkReintegro.appendChild(document.createTextNode("Reintegro"));
+        listItemReintegro.appendChild(linkReintegro);
+        let ulSubListReintegro = document.createElement('ul');
+        ulSubListReintegro.classList.add('submenu');
+        let listItemReintegro1 = document.createElement('li');
+        let linkRCirugias = document.createElement('a');
+        linkRCirugias.href = "/Cobertura/Cirugias";
+        linkRCirugias.textContent = "Cirug\u00EDas";
+        listItemReintegro1.appendChild(linkRCirugias);
+        let listItemReintegro2 = document.createElement('li');
+        let linkRMedicamentos = document.createElement('a');
+        linkRMedicamentos.href = "/Cobertura/Medicamentos";
+        linkRMedicamentos.textContent = "Medicamentos";
+        listItemReintegro2.appendChild(linkRMedicamentos);
+        let listItemReintegro3 = document.createElement('li');
+        let linkRPracticas = document.createElement('a');
+        linkRPracticas.href = "/Cobertura/practicas";
+        linkRPracticas.textContent = "Pr\u00E1cticas";
+        listItemReintegro3.appendChild(linkRPracticas);
+        ulSubListReintegro.appendChild(listItemReintegro1);
+        ulSubListReintegro.appendChild(listItemReintegro2);
+        ulSubListReintegro.appendChild(listItemReintegro3);
+        listItemReintegro.appendChild(ulSubListReintegro);
+        ulSubList.appendChild(listItemReintegro);
+
+        let listItemAdministracion = document.createElement('li');
+        listItemAdministracion.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+        let linkAdministracion = document.createElement('a');
+        linkAdministracion.href = "/Cobertura";
+        let imgACobertura = document.createElement('img');
+        imgACobertura.alt = "Icono";
+        imgACobertura.src = "/@api/deki/files/213/cobertura.png";
+        linkAdministracion.appendChild(imgACobertura);
+        linkAdministracion.appendChild(document.createTextNode("Administraci\u00F3n"));
+        listItemAdministracion.appendChild(linkAdministracion);
+        let ulSubListAdministracion = document.createElement('ul');
+        ulSubListAdministracion.classList.add('submenu');
+        let ulSubListAdministracion1 = document.createElement('li');
+        let linkACirugias = document.createElement('a');
+        linkACirugias.href = "/Cobertura/Cirugias";
+        linkACirugias.textContent = "Cirug\u00EDas";
+        ulSubListAdministracion1.appendChild(linkACirugias);
+        let ulSubListAdministracion2 = document.createElement('li');
+        let linkAMedicamentos = document.createElement('a');
+        linkAMedicamentos.href = "/Cobertura/Medicamentos";
+        linkAMedicamentos.textContent = "Medicamentos";
+        ulSubListAdministracion2.appendChild(linkAMedicamentos);
+        let ulSubListAdministracion3 = document.createElement('li');
+        let linkAPracticas = document.createElement('a');
+        linkAPracticas.href = "/Cobertura/practicas";
+        linkAPracticas.textContent = "Pr\u00E1cticas";
+        ulSubListAdministracion3.appendChild(linkAPracticas);
+        ulSubListAdministracion.appendChild(ulSubListAdministracion1);
+        ulSubListAdministracion.appendChild(ulSubListAdministracion2);
+        ulSubListAdministracion.appendChild(ulSubListAdministracion3);
+        listItemAdministracion.appendChild(ulSubListAdministracion);
+        ulSubList.appendChild(listItemAdministracion);
+
+        let listItemLibre = document.createElement('li');
+        listItemLibre.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+        let linkLibre = document.createElement('a');
+        linkLibre.href = "/Cobertura";
+        let imgLCobertura = document.createElement('img');
+        imgLCobertura.alt = "Icono";
+        imgLCobertura.src = "/@api/deki/files/213/cobertura.png";
+        linkLibre.appendChild(imgLCobertura);
+        linkLibre.appendChild(document.createTextNode("Libre"));
+        listItemLibre.appendChild(linkLibre);
+        let ulSubListLibre = document.createElement('ul');
+        ulSubListLibre.classList.add('submenu');
+        let ulSubListLibre1 = document.createElement('li');
+        let linkLCirugias = document.createElement('a');
+        linkLCirugias.href = "/Cobertura/Cirugias";
+        linkLCirugias.textContent = "Cirug\u00EDas";
+        ulSubListLibre1.appendChild(linkLCirugias);
+        let ulSubListLibre2 = document.createElement('li');
+        let linkLMedicamentos = document.createElement('a');
+        linkLMedicamentos.href = "/Cobertura/Medicamentos";
+        linkLMedicamentos.textContent = "Medicamentos";
+        ulSubListLibre2.appendChild(linkLMedicamentos);
+        let ulSubListLibre3 = document.createElement('li');
+        let linkLPracticas = document.createElement('a');
+        linkLPracticas.href = "/Cobertura/practicas";
+        linkLPracticas.textContent = "Pr\u00E1cticas";
+        ulSubListLibre3.appendChild(linkLPracticas);
+        ulSubListLibre.appendChild(ulSubListLibre1);
+        ulSubListLibre.appendChild(ulSubListLibre2);
+        ulSubListLibre.appendChild(ulSubListLibre3);
+        listItemLibre.appendChild(ulSubListLibre);
+        ulSubList.appendChild(listItemLibre);
+
         elementoMenu.appendChild(labelResponsive);
         elementoMenu.appendChild(ulSubList);
         ulPrincipal.appendChild(elementoMenu);
@@ -468,8 +594,19 @@
         let logoContainer = document.querySelector('.elm-header-logo-container');
         if (logoContainer) {
             logoContainer.innerHTML = '';
-            logoContainer.appendChild(topLevelNavigation);
-        }
+            logoContainer.appendChild(topLevelNavigation);}
+
+
+        } else { 
+        var headerLogin = document.querySelector('.elm-header-custom a');
+        if (headerLogin) {headerLogin.style.display = 'none';}        
+        var footerLogin = document.querySelector('.elm-footer-custom a');
+        if (footerLogin) {footerLogin.style.display = 'none';}
+        var buscadorLogin = document.querySelector('.elm-global-search');
+        if (buscadorLogin) {buscadorLogin.style.display = 'none';}
+        var tituloLogin = document.querySelector('#title');
+        if (tituloLogin) {tituloLogin.textContent = 'Nice: la nueva base de conocimientos de OSDE';}}   
 
     });
+    
 </script>

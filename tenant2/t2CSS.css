@@ -101,14 +101,18 @@ h1 span {
 	color: var(--primary-blue) !important;
 }
 /* Tamaño de fuente del encabezado h2 */
+h2 span,
 h2 {
 	font-size: 24px !important;
 	line-height: 1.41667em;
+	color: var(--primary-blue) !important;
 }
 /* Tamaño de fuente del encabezado h3 */
+h3 span,
 h3 {
 	font-size: 20px !important;
 	line-height: 1.3em;
+	color:var(--primary-gray) !important;
 }
 /* Tamaño de fuente del encabezado h4 */
 h4 {
@@ -463,6 +467,11 @@ p a {
 	.elm-header-logo-menu li.has-submenu img {
 		margin: 0 10px 0 0;
 	}
+
+	.mt-editor-default .elm-header-logo-container, 
+	.mt-editor-default .elm-header-logo-menu{
+		height: 107px;
+	}
 }
 
 .elm-header-logo-menu li a:focus {
@@ -743,11 +752,11 @@ thead {
 	right: 16px;
 	top: 50%;
 	transform: translate(0, -50%);
-	background: url(/@api/deki/files/132/downArrowBlue.png) no-repeat 0 0;
+	background: url(/@api/deki/files/22/downArrowBlue.png) no-repeat 0 0;
 	background-size: contain;
 }
 .accordion-header.show::after {
-	background-image: url(/@api/deki/files/126/downArrowWhite.png);
+	background-image: url(/@api/deki/files/21/upArrowWhite.png);
 }
 
 .accordion-button {
@@ -1042,7 +1051,7 @@ body[class*="pagenotfound"] pre.script:before{
 }
 .consejo-busqueda-area .navbar-header .has-submenu > a:hover{
 	background: none;
-
+	color: var(--secondary-light-blue);
 }
 .consejo-busqueda-area .navbar-header .has-submenu .submenu{
 	border-radius: 8px;
@@ -1102,7 +1111,6 @@ body[class*="pagenotfound"] pre.script:before{
 }
 
 /*Etiquetas del PATH o paso a paso */
-
 .mt-lp-progress-bar a{
 	height: auto;
 	max-width: 11em;
@@ -1221,7 +1229,7 @@ body[class*="pagenotfound"] pre.script:before{
 }
 
 .mt-lp-page-listings, .mt-lp-progress-bar {
-    margin: 10px;
+    margin: 10px 10px 40px;
 }
 
 .mt-lp-progress-container {
@@ -1281,7 +1289,7 @@ li.elm-pdf-export {
 }
 .footer .container .colLeft{
 	padding-bottom: 24px;
-	border-bottom: 1px solid var(--white);
+	/* border-bottom: 1px solid var(--white); */
 	margin-bottom: 24px;
 	display: grid;
 	gap: 40px;
@@ -1405,9 +1413,9 @@ li.elm-pdf-export {
 .telefonos_content a {
     display: flex;
     text-decoration: none;
-	align-items: center;
 	margin-bottom:16px;
 	justify-content: center;
+	font-size: 14px;
 } 
 @media all and (min-width: 37.5em) {
     .telefonos_content a {
@@ -1424,6 +1432,7 @@ color: white!important;
 }
 .iconos_whatsapp {
     width: 25px!important;
+	margin: -6px 0 -6px -6px;
 }
 
 
@@ -1488,3 +1497,16 @@ color: white!important;
 	height: 20px;
 }
 
+.colRight{
+	display: none;
+}
+
+/*Oculto las URL de la lista de Resultados*/
+div.meta>div.url {
+	display: none;
+}
+
+/*Oculto paginado del Path, y de los pie de página*/
+.mt-article-pagination {
+	display: none !important;
+}
