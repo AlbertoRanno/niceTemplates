@@ -18,9 +18,9 @@
 
         //**************************** DEJAR COMENTARIO *************************************
         var texto1DejarComentario = document.querySelector('.mt-feedback-rating-message');
-        if (texto1DejarComentario) {texto1DejarComentario.textContent = 'Texto 1';}
+        if (texto1DejarComentario) {texto1DejarComentario.textContent = '\u00BFEncontraste la informaci\u00F3n que buscabas en este art\u00EDculo?';}
         var texto2DejarComentario = document.querySelector('.mt-feedback-improve-label');
-        if (texto2DejarComentario) {texto2DejarComentario.textContent = 'Texto 2';}
+        if (texto2DejarComentario) {texto2DejarComentario.textContent = 'Contanos c\u00F3mo podemos mejorarlo.';}
         var consentimientoCheckbox = document.querySelector('.mt-feedback-consent-checkbox');
         var consentimientoLabel = document.querySelector('.mt-feedback-consent-label');
         if (consentimientoCheckbox && consentimientoLabel) {
@@ -112,7 +112,7 @@
             link3.appendChild(link3Anchor);
             var link4 = document.createElement("li");
             var link4P = document.createElement("p");
-            link4P.innerHTML = "Para sugerir nuevo contenido envianos un mail a: contenidos\u0040osde.com.ar"
+            link4P.innerHTML = "Para sugerir un nuevo art\u00EDculo, escribinos a contenidos\u0040osde.com.ar desde tu cuenta de email.";
             link4.appendChild(link4P);
             ul.appendChild(link3);
             // ul.appendChild(link1);
@@ -297,19 +297,19 @@
         let ulSubmenu = document.createElement('ul');
         ulSubmenu.classList.add('consejosDesplegables');
         let li1 = document.createElement('li');
-        li1.textContent = 'Ingrese PALABRAS CLAVE, no lenguaje natural.';
+        li1.textContent = 'En lugar de frases, us\u00E1 dos o m\u00E1s palabras clave.';
         let li2 = document.createElement('li');
         li2.textContent =
-            'Combine dos palabras usando operadores como AND, OR o NOT. Ejemplo: medicamentos NOT descuentos.';
+            'Combinalas con los conectores AND, OR o NOT para sumarlas o excluirlas entre s\u00ED. Por ejemplo: X NOT X.';
         let li3 = document.createElement('li');
         li3.textContent =
-            'Muestre los resultados de una zona particular, o de cierto tipo de registros, mediante los FILTROS, ubicados a la izquierda, en la lista de resultados.';
+            'Us\u00E1 comillas para buscar frases o palabras exactas.';
         let li4 = document.createElement('li');
         li4.textContent =
-            'Buscar con COMILLAS DOBLES alrededor de una palabra o una frase para que coincidan exactamente. Sin ellas, se traen todos los documentos que contienen al menos una de las palabras.';
+            'Una vez que hayas realizado la b\u00FAsqueda, en el margen izquierdo vas a poder filtrar por categor\u00EDa o caracter\u00EDsticas del art\u00EDculo.';
         let li5 = document.createElement('li');
         li5.textContent =
-            'Para resaltar las palabras claves, ya sea en la lista de resultados y/o en cada documento, utilice: CTRL + F, e ingrese nuevamente las mismas.';
+            'Para buscar palabras estando dentro del art\u00EDculo o en la lista de resultados, pod\u00E9s usar CTRL+F.';
         let li6 = document.createElement('li');        
         let li6Anchor = document.createElement("a");
         li6Anchor.classList.add('linkBusquedaAvanzada');
