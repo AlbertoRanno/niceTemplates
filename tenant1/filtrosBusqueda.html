@@ -151,11 +151,10 @@
 </div>
 
 <script>
-    //OCULTAR BOTONES
+    /*CAMBIO LOS NOMBRES MOSTRADOS: (OJO, SI BORRO FILTRO, VUELVE A NOMBRES ORIGINALES Y COLAPSADO. Esto se debe estimo, a que estoy poniendo el código,
+    dentro del evento de carga de página, y no reinicia la página cuando borro los filtros. Habría que probar por fuera del evento, o recapturarlas )
 
-    /*CAMBIO LOS NOMBRES MOSTRADOS:
-
-    Si hacía lo de siempre: cambiaba el li actual que tiene un boton y un UL dentro, por un li que solo tenia la palabra, por eso no sirve
+    Si hacía lo de siempre: cambiaba el li actual que tiene un boton y un UL dentro, por un li que solo tenia la palabra, por eso lo siguiente no sirve:
     var filtroUbicacion = document.querySelector('.mt-search-filters-option-location');
     if (filtroUbicacion) {filtroUbicacion.textContent = 'Categor\u00EDas';}
     var filtroClasificacion = document.querySelector('.mt-search-filters-option-classifications');
@@ -193,7 +192,16 @@
         let ulColapsablesInternos = colapsable.querySelector('.mt-search-filters-sub-options');
         // Busco y guardo cada elemento con la clase CSS "mt-search-filters-sub-options" que es el UL que contiene a los colapsables internos
 
-        // Marco el botón como expandido y muestro las UL
+        // Al no perder la funcionalidad default por mis cambios, agrego un evento de clic para controlar el colapso/expansión
+        botonToggle.addEventListener('click', () => {
+            if (ulColapsablesInternos.style.display === 'none') {
+                ulColapsablesInternos.style.display = 'block';
+            } else {
+                ulColapsablesInternos.style.display = 'none';
+            }
+        });
+
+        // Marco el botón como expandido y muestro las UL (Esto hace que venga expandido al cargar la página)
         botonToggle.classList.add('expanded');
         // Se agrega la clase "expanded" al elemento botonToggle. Esto indica que se está expandiendo el elemento.
         botonToggle.setAttribute('aria-expanded', 'true');
@@ -203,15 +211,27 @@
         // Hago que se muestre en la página
 
         // Como hay elementos, que a su vez son expandibles, dentro de "Clasificación", realizo un nuevo bucle para recorrerlos (lo mismo, a un nivel más de profundidad)
-        let colapsablesInternos = ulColapsablesInternos.querySelectorAll('.mt-search-filters-classification-item');
+        let colapsablesInternos = ulColapsablesInternos.querySelectorAll(
+            '.mt-search-filters-classification-item');
 
         colapsablesInternos.forEach(colapsablesInterno => {
-            let botonToggleInterno = colapsablesInterno.querySelector('.mt-search-filters-classification-toggle');
+            let botonToggleInterno = colapsablesInterno.querySelector(
+                '.mt-search-filters-classification-toggle');
             // Busco y guardo cada botón de colapso (en este caso los "+")
-            let subUlColapsablesInternos = colapsablesInterno.querySelector('.mt-search-filters-sub-options-classification');
+            let subUlColapsablesInternos = colapsablesInterno.querySelector(
+                '.mt-search-filters-sub-options-classification');
             // Busco y guardo cada UL interna con sus items
 
-            // Marco el botón como expandido y muestro las UL internas
+            // Lo mismo que antes, agrego un evento de clic para controlar el colapso/expansión 
+            botonToggleInterno.addEventListener('click', () => {
+                if (subUlColapsablesInternos.style.display === 'none') {
+                    subUlColapsablesInternos.style.display = 'block';
+                } else {
+                    subUlColapsablesInternos.style.display = 'none';
+                }
+            });
+
+            // Marco el botón como expandido y muestro las UL internas (Lo mismo que antes, esto hace que venga expandido al cargar la página)
             botonToggleInterno.classList.add('expanded');
             botonToggleInterno.setAttribute('aria-expanded', 'true');
             subUlColapsablesInternos.style.display = 'block';
@@ -242,35 +262,49 @@
         En resumen, la principal diferencia radica en la flexibilidad en cuanto al tipo de datos y el tamaño dinámico. Los arrays tienden a ser más rígidos en cuanto al tipo de datos y pueden tener un tamaño fijo o dinámico, mientras que las listas son más flexibles en ambos aspectos. La elección entre una u otra depende de las necesidades específicas de tu programa y del lenguaje de programación que estés utilizando.
     */
 
-   /* VERSIÓN RESUMIDA:
-   
-   let ubicacion = document.querySelector(".mt-search-filters-option-location");
-    if (ubicacion) {
-        let textoEnNodo = ubicacion.childNodes[0];
-        textoEnNodo.nodeValue = "Categor\u00EDas";}
-    let clasificacion = document.querySelector(".mt-search-filters-option-classifications");
-    if (clasificacion) {
-        let textoEnNodo = clasificacion.childNodes[0];
-        textoEnNodo.nodeValue = "Caracter\u00EDsticas";}
+    /* VERSIÓN RESUMIDA:
+    
+     let ubicacion = document.querySelector(".mt-search-filters-option-location");
+     if (ubicacion) {
+         let textoEnNodo = ubicacion.childNodes[0];
+         textoEnNodo.nodeValue = "Categor\u00EDas";}
+     let clasificacion = document.querySelector(".mt-search-filters-option-classifications");
+     if (clasificacion) {
+         let textoEnNodo = clasificacion.childNodes[0];
+         textoEnNodo.nodeValue = "Caracter\u00EDsticas";}
 
-    let filtrosBuscador = document.getElementById('mt-search-spblls-filters');
-    let colapsablesPrincipales = filtrosBuscador.querySelectorAll('.mt-search-filters-option');
-    colapsablesPrincipales.forEach(colapsable => {
-        let botonToggle = colapsable.querySelector('.mt-search-filters-option-toggle');
-        let ulColapsablesInternos = colapsable.querySelector('.mt-search-filters-sub-options');
-        botonToggle.classList.add('expanded');
-        botonToggle.setAttribute('aria-expanded', 'true');
-        ulColapsablesInternos.style.display = 'block';
+     let filtrosBuscador = document.getElementById('mt-search-spblls-filters');
+     let colapsablesPrincipales = filtrosBuscador.querySelectorAll('.mt-search-filters-option');
+     colapsablesPrincipales.forEach(colapsable => {
+         let botonToggle = colapsable.querySelector('.mt-search-filters-option-toggle');
+         let ulColapsablesInternos = colapsable.querySelector('.mt-search-filters-sub-options');
 
-        let colapsablesInternos = ulColapsablesInternos.querySelectorAll('.mt-search-filters-classification-item');
-        colapsablesInternos.forEach(colapsablesInterno => {
-            let botonToggleInterno = colapsablesInterno.querySelector('.mt-search-filters-classification-toggle');
-            let subUlColapsablesInternos = colapsablesInterno.querySelector('.mt-search-filters-sub-options-classification');
-            botonToggleInterno.classList.add('expanded');
-            botonToggleInterno.setAttribute('aria-expanded', 'true');
-            subUlColapsablesInternos.style.display = 'block';
-        });
-    });
+        botonToggle.addEventListener('click', () => {
+            if (ulColapsablesInternos.style.display === 'none') {
+                ulColapsablesInternos.style.display = 'block';
+            } else {
+                ulColapsablesInternos.style.display = 'none';}});
 
-   */
+         botonToggle.classList.add('expanded');
+         botonToggle.setAttribute('aria-expanded', 'true');
+         ulColapsablesInternos.style.display = 'block';
+
+         let colapsablesInternos = ulColapsablesInternos.querySelectorAll('.mt-search-filters-classification-item');
+         colapsablesInternos.forEach(colapsablesInterno => {
+             let botonToggleInterno = colapsablesInterno.querySelector('.mt-search-filters-classification-toggle');
+             let subUlColapsablesInternos = colapsablesInterno.querySelector('.mt-search-filters-sub-options-classification');
+
+                botonToggleInterno.addEventListener('click', () => {
+                if (subUlColapsablesInternos.style.display === 'none') {
+                    subUlColapsablesInternos.style.display = 'block';
+                } else {
+                    subUlColapsablesInternos.style.display = 'none';}});
+
+             botonToggleInterno.classList.add('expanded');
+             botonToggleInterno.setAttribute('aria-expanded', 'true');
+             subUlColapsablesInternos.style.display = 'block';
+         });
+     });
+
+    */
 </script>
