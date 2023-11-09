@@ -67,8 +67,13 @@
          if (filtros) {
             filtros.style.position = 'sticky';
             filtros.style.top = '100px';}
-         var estadoBorradores = document.querySelector(".mt-search-filters-classification-estado");
-         if (estadoBorradores) {estadoBorradores.style.display = "none";}
+         var filtroEstadoBorradores = document.querySelector(".mt-search-filters-classification-estado");
+         if (filtroEstadoBorradores) {filtroEstadoBorradores.style.display = "none";}
+         var filtroTipoDeArticulo = document.querySelector(".mt-search-filters-classification-article");
+         if (filtroTipoDeArticulo) {filtroTipoDeArticulo.style.display = "none";}
+         var fitroPropietario = document.querySelector(".mt-search-filters-classification-propietario");
+         if (fitroPropietario) {fitroPropietario.style.display = "none";}
+         
 
          var results = document.querySelectorAll("li.result");
          results.forEach(function (result) {
@@ -79,7 +84,53 @@
                 result.addEventListener("click", function (event) {
                     if (!moreButton || event.target !== moreButton) {
                         window.location.href = originalUrl;}});}});
-    }, 1000);}
+
+
+     let ubicacion = document.querySelector(".mt-search-filters-option-location");
+     if (ubicacion) {
+         let textoEnNodo = ubicacion.childNodes[0];
+         textoEnNodo.nodeValue = "Categor\u00EDas";}
+     let clasificacion = document.querySelector(".mt-search-filters-option-classifications");
+     if (clasificacion) {
+         let textoEnNodo = clasificacion.childNodes[0];
+         textoEnNodo.nodeValue = "Caracter\u00EDsticas";}
+
+     let filtrosBuscador = document.getElementById('mt-search-spblls-filters');
+     let colapsablesPrincipales = filtrosBuscador.querySelectorAll('.mt-search-filters-option');
+     colapsablesPrincipales.forEach(colapsable => {
+         let botonToggle = colapsable.querySelector('.mt-search-filters-option-toggle');
+         let ulColapsablesInternos = colapsable.querySelector('.mt-search-filters-sub-options');
+
+        botonToggle.addEventListener('click', () => {
+            if (ulColapsablesInternos.style.display === 'none') {
+                ulColapsablesInternos.style.display = 'block';
+            } else {
+                ulColapsablesInternos.style.display = 'none';}});
+
+         botonToggle.classList.add('expanded');
+         botonToggle.setAttribute('aria-expanded', 'true');
+         ulColapsablesInternos.style.display = 'block';
+
+         let colapsablesInternos = ulColapsablesInternos.querySelectorAll('.mt-search-filters-classification-item');
+         colapsablesInternos.forEach(colapsablesInterno => {
+             let botonToggleInterno = colapsablesInterno.querySelector('.mt-search-filters-classification-toggle');
+             let subUlColapsablesInternos = colapsablesInterno.querySelector('.mt-search-filters-sub-options-classification');
+
+                botonToggleInterno.addEventListener('click', () => {
+                if (subUlColapsablesInternos.style.display === 'none') {
+                    subUlColapsablesInternos.style.display = 'block';
+                } else {
+                    subUlColapsablesInternos.style.display = 'none';}});
+
+             botonToggleInterno.classList.add('expanded');
+             botonToggleInterno.setAttribute('aria-expanded', 'true');
+             subUlColapsablesInternos.style.display = 'block';
+         });
+     });
+
+   
+
+    }, 500);}
 
 
     //*******************************LOGIN********************************
@@ -100,6 +151,7 @@
             logoLink.href = "https://osde-prod1.mindtouch.us"; 
             logoLink.innerHTML = '<img src="/@api/deki/files/219/osdeWhite.png" alt="logoOSDE">'; 
             logoLink.className = "logoOSDE";
+            logoLink.target = "_blank"; 
 
             var ul = document.createElement("ul");
             ul.className = "footer-links";
@@ -117,6 +169,7 @@
             var link3Anchor = document.createElement("a");
             link3Anchor.href="https://www.osde.com.ar/index.html#!homepage.html";
             link3Anchor.textContent = "www.osde.com.ar";
+            link3Anchor.target = "_blank";
             link3.appendChild(link3Anchor);
             var link4 = document.createElement("li");
             var link4P = document.createElement("p");
@@ -272,7 +325,7 @@
         linkLogo.href = "/";
         let logoImg = document.createElement('img');
         logoImg.alt = "Logo de la empresa";
-        logoImg.src = "/@api/deki/files/118/LogoOsde.png";
+        logoImg.src = "/@api/deki/files/255/Logo_Biblos_OSDE_Azul.png";
         linkLogo.appendChild(logoImg);
         elementoLogo.appendChild(linkLogo);
         ulPrincipal.appendChild(elementoLogo);
@@ -306,9 +359,9 @@
         ulSubmenu.classList.add('consejosDesplegables');
         let li1 = document.createElement('li');
         li1.textContent = 'En lugar de frases, us\u00E1 dos o m\u00E1s palabras clave.';
-        let li2 = document.createElement('li');
-        li2.textContent =
-            'Combinalas con los conectores AND, OR o NOT para sumarlas o excluirlas entre s\u00ED. Por ejemplo: X NOT X.';
+        // let li2 = document.createElement('li');
+        // li2.textContent =
+        //     'Combinalas con los conectores AND, OR o NOT para sumarlas o excluirlas entre s\u00ED. Por ejemplo: X NOT X.';
         let li3 = document.createElement('li');
         li3.textContent =
             'Us\u00E1 comillas para buscar frases o palabras exactas.';
@@ -322,11 +375,11 @@
         let li6Anchor = document.createElement("a");
         li6Anchor.classList.add('linkBusquedaAvanzada');
         li6Anchor.href = "https://osde-prod1.mindtouch.us/tutoriales/edicion/opciones_de_busqueda_avanzada";
-        li6Anchor.textContent = 'Accede aqu\u00ED para ver tips avanzados de b\u00FAsqueda';
+        li6Anchor.textContent = 'M\u00E1s tips de b\u00FAsqueda';
         li6.appendChild(li6Anchor);
         liConsejos.appendChild(aConsejos);
         ulSubmenu.appendChild(li1);
-        ulSubmenu.appendChild(li2);
+        // ulSubmenu.appendChild(li2);
         ulSubmenu.appendChild(li3);
         ulSubmenu.appendChild(li4);
         ulSubmenu.appendChild(li5);
@@ -350,6 +403,13 @@
         divInternoConsejos.appendChild(ulConsejos);
         divConsejos.appendChild(divInternoConsejos);
         
+
+
+
+
+
+
+
         setTimeout(function () {
         // var boton = document.getElementById("sugerirContenidoBoton");
         // boton.addEventListener("click", function () {abrirCorreo();});
