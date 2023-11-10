@@ -1535,6 +1535,14 @@ li.elm-pdf-export {
 	font-size: 14px !important;
 }
 
+.imgFlecha {
+    display: block !important;
+    height: 13px !important;
+}
+.contenedorFlecha{
+    margin-left: 15px;
+}
+
 /*Sugerir nuevo contenido*/
 .sugerirContenidoBoton {
 	margin: 5px 15px;
@@ -1609,3 +1617,4 @@ div.meta > div.url {
 .mt-search-filters-option-classifications > .mt-search-filters-sub-options .mt-search-filters-sub-options{
 	background: var(--white);
 }
+
