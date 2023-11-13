@@ -970,15 +970,15 @@ input[type="submit"].ui-button-primary {
 	box-shadow: none;
 }
 
-/* Oculta los contenidos */
-.contenidosRegiones .collapse {
+/* Oculta los contenidos - Pasado a template */
+/* .contenidosRegiones .collapse {
 	display: none;
-}
+} */
 
-/* Muestra los contenidos cuando están activos */
-.contenidosRegiones .collapse.active {
+/* Muestra los contenidos cuando están activos - Pasado a template */
+/* .contenidosRegiones .collapse.active {
 	display: block;
-}
+} */
 
 /* Para distinguir los botones que van a quedar SIN contenido */
 .contenidosRegiones span.noContent button {
@@ -1537,10 +1537,10 @@ li.elm-pdf-export {
 
 .imgFlecha {
     display: block !important;
-    height: 13px !important;
+    height: 9px !important;
 }
 .contenedorFlecha{
-    margin-left: 15px;
+    margin-left: 7px;
 }
 
 /*Sugerir nuevo contenido*/
@@ -1616,4 +1616,9 @@ div.meta > div.url {
 
 .mt-search-filters-option-classifications > .mt-search-filters-sub-options .mt-search-filters-sub-options{
 	background: var(--white);
+}
+
+/* Oculto la especificacion del tipo de pagina*/
+.elm-meta-bottom {
+	display:none !important;
 }
