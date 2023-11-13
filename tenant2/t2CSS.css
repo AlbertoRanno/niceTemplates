@@ -304,13 +304,14 @@ p a {
 .elm-header-logo-menu li.has-submenu a {
 	display: flex;
 	margin: 10px 15px;
-	color: var(--primary-black);
+	color: var(--primary-blue);
 	text-decoration: none;
 	align-items: center;
 	font-weight: 700 !important;
+	text-decoration: underline;
 }
 .elm-header-logo-menu li.has-submenu a:hover{
-	text-decoration: underline;
+	color: var(--primary-gray)
 }
 .elm-header-logo-menu li.has-submenu img {
 	display: none;
@@ -1532,6 +1533,14 @@ li.elm-pdf-export {
 	margin: 0 !important;
 	font-weight: 100 !important;
 	font-size: 14px !important;
+}
+
+.imgFlecha {
+    display: block !important;
+    height: 13px !important;
+}
+.contenedorFlecha{
+    margin-left: 15px;
 }
 
 /*Sugerir nuevo contenido*/
