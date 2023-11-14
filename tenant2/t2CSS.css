@@ -1618,6 +1618,14 @@ div.meta > div.url {
 	background: var(--white);
 }
 
+#search-results li {
+	transition: background-color 0.3s ease;
+}
+
+#search-results li:hover {
+	background-color: lightgray;
+}
+
 /* Oculto la especificacion del tipo de pagina*/
 .elm-meta-bottom {
 	display:none !important;
