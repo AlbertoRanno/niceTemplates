@@ -1626,6 +1626,11 @@ div.meta > div.url {
 	background-color: lightgray;
 }
 
+/* Resultado contenido expandido */
+.mt-tree-search-results li.mt-selected {
+	background-color: lightgray !important;
+	}
+
 /* Oculto la especificacion del tipo de pagina*/
 .elm-meta-bottom {
 	display:none !important;
