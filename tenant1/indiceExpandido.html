@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let toc = document.getElementById('mt-toc-container');
+        let colapsada = toc.getAttribute('data-collapsed') === 'true';
+        if (colapsada) {
+            let tocContenido = toc.querySelector('.mt-toc-content');
+            toc.setAttribute('data-collapsed', colapsada ? 'false' : 'true');
+            tocContenido.style.maxHeight = colapsada ? tocContenido.scrollHeight + 'px' : '0px';
+        }
+    </script>
+    <style>
+
+    </style>
+</body>
+
+</html>
