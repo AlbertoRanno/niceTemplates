@@ -178,7 +178,7 @@ p a {
 /* Menú default principal de la app */
 .elm-header-logo-container {
 	padding: 0 !important;
-	height: 110px;
+	height: 50px !important;/*110*/
 }
 .elm-header-logo-container a {
 	display: none;
@@ -260,7 +260,7 @@ p a {
 .elm-header-logo-menu .navbar-header-logo a {
 	display: block;
 	padding: 0;
-	height: 63px;
+	height: 50px;
 }
 
 .elm-header-logo-menu .navbar-header-logo img {
@@ -411,7 +411,7 @@ p a {
 @media (min-width: 68.5em) {
 	.elm-header-logo-container,
 	.elm-header-logo-menu {
-		height: 95px;
+		height: 63px !important; /*95*/
 	}
 	.elm-header-logo-menu .navbar-header-logo img {
 		height: 40px;
@@ -456,7 +456,7 @@ p a {
 	}
 	.elm-header-logo-container,
 	.elm-header-logo-menu {
-		height: 76px;
+		height: 63px; /*76*/
 	}
 	.elm-header-logo-menu .navbar-header-logo img {
 		height: 50px;
@@ -603,7 +603,7 @@ td {
 .warningRegistration,
 .warningChannels,
 .warningImportant {
-	padding: 12px 10px 12px 50px;
+	padding: 8px 10px 8px 50px;
 	color: var(--primary-black);
 	font-family: var(--font-family-primary);
 	font-size: 16px;
@@ -646,17 +646,17 @@ td {
 	background-color: var(--alert-background);
 	border-color: var(--alert);
 }
-.definitionBox,
+.definitionBox h2,
 .warningRegistration h2,
 .warningChannels h2,
 .warningImportant h2 {
 	margin-top: 0;
 }
-.definitionBox,
+.definitionBox p,
 .warningRegistration p,
 .warningChannels p,
 .warningImportant p {
-	margin-bottom: 0.5em;
+	/*margin-bottom: 0.5em;*/
 }
 .definitionBox {
 	background-color: var(--definition-background);
@@ -1634,4 +1634,16 @@ div.meta > div.url {
 /* Oculto la especificacion del tipo de pagina*/
 .elm-meta-bottom {
 	display:none !important;
+}
+
+/* Iconos puestos CAT CAP CGD */
+.iconosPuestos{
+	width: 14px ;
+	height: 14px ;
+	margin-right: 6px;
+}
+
+/* Oculto ultima fecha comentario*/
+.mt-last-rating-date {
+	display: none;
 }
