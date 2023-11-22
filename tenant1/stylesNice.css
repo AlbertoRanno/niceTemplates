@@ -603,7 +603,7 @@ td {
 .warningRegistration,
 .warningChannels,
 .warningImportant {
-	padding: 8px 10px 8px 50px;
+	padding: 8px 10px;
 	color: var(--primary-black);
 	font-family: var(--font-family-primary);
 	font-size: 16px;
@@ -620,6 +620,7 @@ td {
 }
 
 .warningImportant {
+	padding-left: 50px;
 	background-color: var(--error-background);
 	border-color: var(--error);
 	position: relative;
@@ -705,10 +706,27 @@ th,
 td,
 .mt-responsive-table td {
 	font-size: 14px;
-	line-height: 1.425em;
-	font-family: var(--font-family-primary);
+	line-height: 1.35em;
+	font-family: var(--font-family-secondary);
 	font-weight: 400;
 	color: var(--primary-black);
+}
+
+.dataTable td > ul,
+.mt-grid .ui-table td > ul,
+.ui-table td > ul,
+.ui-widget .ui-table td > ul,
+td > ul,
+.mt-responsive-table td > ul {
+    margin: 0;
+}
+.dataTable td > ul li:first-child,
+.mt-grid .ui-table td > ul li:first-child,
+.ui-table td > ul li:first-child,
+.ui-widget .ui-table td > ul li:first-child,
+td > ul li:first-child,
+.mt-responsive-table td > ul li:first-child{
+    margin-top: 0;
 }
 thead {
 	text-align: center;
