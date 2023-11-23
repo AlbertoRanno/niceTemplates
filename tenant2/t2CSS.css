@@ -1665,3 +1665,14 @@ div.meta > div.url {
 .mt-last-rating-date {
 	display: none;
 }
+
+/* Tablas dentro de colapsables - dinámicas */
+.EXPAND_COLLAPSE table {
+    width: auto !important;
+    table-layout: auto !important;
+}
+
+.EXPAND_COLLAPSE th,
+.EXPAND_COLLAPSE td {
+    width: auto !important;
+}
