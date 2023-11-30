@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            let usuarioActivoID = document.getElementById("usuarioActivoID");
+            let usuarioActivoEmail = document.getElementById("usuarioActivoEmail");
+            if (usuarioActivoEmail && usuarioActivoEmail){
+            console.log("ID del usuario:", usuarioActivoID.textContent);
+            console.log("Email del usuario:", usuarioActivoEmail.textContent);}
+            
+        });
+    </script>
+    <style>
+        /* Para métricas del índice */
+        #userID, #usuarioActivoEmail {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="userID">89</div>
+</body>
+</html>

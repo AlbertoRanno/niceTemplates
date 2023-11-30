@@ -24,11 +24,15 @@
 
 
     document.addEventListener('DOMContentLoaded', function () {
+        
+        //****************************** USERID PARA METRICAS ************************
+        let usuarioActivoID = document.getElementById("usuarioActivoID");
+        let usuarioActivoEmail = document.getElementById("usuarioActivoEmail");
+        if (usuarioActivoEmail && usuarioActivoEmail){
+        console.log("ID del usuario:", usuarioActivoID.textContent);
+        console.log("Email del usuario:", usuarioActivoEmail.textContent);}
 
         //**************************** DEJAR COMENTARIO *************************************
-
-
-        /********************************** VER A QUE LE PONGO EL TITLE!!! ********************/
         var texto1DejarComentario = document.querySelector('.mt-feedback-rating-message');
         if (texto1DejarComentario) {texto1DejarComentario.textContent = '\u00BFEncontraste la informaci\u00F3n que buscabas en este art\u00EDculo?';}
         var texto2DejarComentario = document.querySelector('.mt-feedback-improve-label');
