@@ -1676,3 +1676,8 @@ div.meta > div.url {
 .EXPAND_COLLAPSE td {
     width: auto !important;
 }
+
+/* Para métricas del índice */
+#usuarioActivoID, #usuarioActivoEmail {
+	display: none;
+}

@@ -1678,6 +1678,6 @@ div.meta > div.url {
 }
 
 /* Para métricas del índice */
-#userID, #usuarioActivoEmail {
+#usuarioActivoID, #usuarioActivoEmail {
 	display: none;
 }
