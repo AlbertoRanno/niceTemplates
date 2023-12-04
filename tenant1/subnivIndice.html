@@ -4,54 +4,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>Índice Expansible</title>
     <style>
+        /* Estilo para el Menú colapsado del índice */
         .contenedorFlechaIndice {
-            display: inline-block;
-            margin-left: 10px;
+            margin-left: 5px;
+            vertical-align: middle;
+            cursor: pointer;
         }
 
         .imgFlechaIndice {
             width: 10px;
             height: 10px;
         }
-    </style>
 
-    <title>Document</title>
+        /* Oculta los OL que tienen otros OL dentro */
+        .mt-toc-content ol>li>ol {
+            display: none;
+        }
+
+        /* Muestra los OL internos cuando tienen la clase 'active' */
+        .mt-toc-content ol.active>li>ol {
+            display: block;
+        }
+    </style>
 </head>
-Dada la siguiente estructura, quiero un codigo que considere lo siguiente:
-si, dentro del aside, con el id="mt-toc-container", hay un ol que tenga algun LI, que, a su vez tenga un ol dentro. Si
-se da ese caso, a ese LI, agregale,
-mediante el script y/o CSS, algo como lo siguiente:
-let contenedorFlechaIndice = document.createElement('div');
-contenedorFlechaIndice.classList.add('contenedorFlechaIndice');
-let imgFlechaIndice = document.createElement('img');
-imgFlechaIndice.classList.add('imgFlechaIndice');
-imgFlechaIndice.src = '/@api/deki/files/256/downArrowWhite.png';
-imgFlechaIndice.alt = 'flecha';
 
 <body>
-    <aside id="mt-toc-container" data-title="Índice" data-collapsed="false" class="mt-toggle-container"><button
-            class="mt-toggle mt-summary-toggle ui-button-icon mt-toggle-collapse" type="button">Índice</button>
-        <nav class="mt-toc-content mt-collapsible-section">
+    <!--Ejemplo de índice con muchos subniveles-->
+    <aside id="mt-toc-container" data-title="Índice" data-collapsed="false" class="mt-toggle-container">
+        <button class="mt-toggle mt-summary-toggle ui-button-icon mt-toggle-collapse" type="button">Índice</button>
+        <nav class="mt-toc-content mt-collapsible-section active">
             <ol>
+                <!--Los LI son cada H2-->
                 <li><a href="#Definici.C3.B3n" rel="internal">Definición</a></li>
                 <li><a href="#Descripci.C3.B3n_de_la_cobertura" rel="internal">Descripción de la cobertura</a>
-                    <ol>
+                    <ol class="active">
+                        <!--Los LI son cada H3-->
                         <li><a href="#Cobertura_Miopia" rel="internal">Cobertura Miopia</a>
-                            <ol>
+                            <ol class="active">
+                                <!--Los LI son cada H4-->
                                 <li><a href="#Dioptr.C3.ADa" rel="internal">Dioptría</a></li>
                                 <li><a href="#Edad" rel="internal">Edad</a></li>
                             </ol>
                         </li>
                         <li><a href="#Cobertura_Astigmatismo" rel="internal">Cobertura Astigmatismo</a>
-                            <ol>
+                            <ol class="active">
                                 <li><a href="#Dioptr.C3.ADa_2" rel="internal">Dioptría</a></li>
                                 <li><a href="#Edad_2" rel="internal">Edad</a></li>
                             </ol>
                         </li>
                         <li><a href="#Cobertura_Hipermetrop.C3.ADa" rel="internal">Cobertura Hipermetropía</a>
-                            <ol>
+                            <ol class="active">
                                 <li><a href="#Dioptr.C3.ADa_3" rel="internal">Dioptría</a></li>
                                 <li><a href="#Edad_3" rel="internal">Edad</a></li>
                             </ol>
@@ -60,35 +64,79 @@ imgFlechaIndice.alt = 'flecha';
                 </li>
                 <li><a href="#Tiempos_de_espera" rel="internal">Tiempos de espera</a></li>
                 <li><a href="#Topes" rel="internal">Topes</a>
-                    <ol>
+                    <ol class="active">
                         <li><a href="#Documentaci.C3.B3n" rel="internal">Documentación</a></li>
                     </ol>
                 </li>
             </ol>
         </nav>
     </aside>
-    <script>
-          document.addEventListener('DOMContentLoaded', function () {
-        var listItemsWithNestedOl = document.querySelectorAll('#mt-toc-container li ol');
 
-        listItemsWithNestedOl.forEach(function (li) {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Selecciona todos los elementos li que tienen un ol interno (solo la primer camada)
+            let liPrincipalesConOlInternos = document.querySelectorAll(
+                '#mt-toc-container > nav > ol > li:has(> ol)');
+
+            // Itera sobre cada elemento li seleccionado
+            liPrincipalesConOlInternos.forEach(function (li) {
+                // Agrego los contenedores y sus flechas
+                let contenedorFlechaIndice = document.createElement('div');
+                contenedorFlechaIndice.classList.add('contenedorFlechaIndice');
+                let imgFlechaIndice = document.createElement('img');
+                imgFlechaIndice.classList.add('imgFlechaIndice');
+                // Establezco la imagen inicial
+                imgFlechaIndice.src = '/@api/deki/files/132/downArrowBlue.png.png';
+                imgFlechaIndice.alt = 'flecha';
+
+                // Inserto el contenedor de flecha después de la etiqueta <a>
+                li.querySelector('a').insertAdjacentElement('afterend', contenedorFlechaIndice);
+
+                contenedorFlechaIndice.appendChild(imgFlechaIndice);
+
+                let olSiguienteAlLiActual = li.querySelector('ol');
+
+                // Agrego un evento de clic al contenedor de la flecha, para: 
+                // 1-cambiar imagen flecha
+                // 2-colapsar-expandir
+                contenedorFlechaIndice.addEventListener('click', function () {
+                    // Cambia la URL de la imagen al hacer clic
+                    let isActive = olSiguienteAlLiActual.classList.toggle('active');
+                    imgFlechaIndice.src = isActive ? '/@api/deki/files/129/upArrowBlue.png' :
+                        '/@api/deki/files/132/downArrowBlue.png.png';
+
+                    // Oculta / muestra el contenido 
+                    ol.style.display = isActive ? 'block' : 'none';
+                });
+            });
+
+        });
+    </script>
+
+    <script>
+        // ************************************* Colapsar subniveles índice *************************************
+        let liPrincipalesConOlInternos = document.querySelectorAll(
+            '#mt-toc-container > nav > ol > li:has(> ol)');
+        liPrincipalesConOlInternos.forEach(function (li) {
             let contenedorFlechaIndice = document.createElement('div');
             contenedorFlechaIndice.classList.add('contenedorFlechaIndice');
             let imgFlechaIndice = document.createElement('img');
             imgFlechaIndice.classList.add('imgFlechaIndice');
             imgFlechaIndice.src = '/@api/deki/files/132/downArrowBlue.png.png';
-            //@api/deki/files/129/upArrowBlue.png
             imgFlechaIndice.alt = 'flecha';
-
+            li.querySelector('a').insertAdjacentElement('afterend', contenedorFlechaIndice);
             contenedorFlechaIndice.appendChild(imgFlechaIndice);
-            li.insertBefore(contenedorFlechaIndice, li.firstChild);
-
+            let olSiguienteAlLiActual = li.querySelector('ol');
             contenedorFlechaIndice.addEventListener('click', function () {
-                li.querySelector('ol').classList.toggle('active');
+                let isActive = olSiguienteAlLiActual.classList.toggle('active');
+                imgFlechaIndice.src = isActive ? '/@api/deki/files/129/upArrowBlue.png' :
+                    '/@api/deki/files/132/downArrowBlue.png.png';
+                olSiguienteAlLiActual.style.display = isActive ? 'block' : 'none';
             });
         });
-    });
     </script>
+
 </body>
 
 </html>
