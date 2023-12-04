@@ -1677,7 +1677,30 @@ div.meta > div.url {
     width: auto !important;
 }
 
-/* Para métricas del índice */
-#usuarioActivoID, #usuarioActivoEmail {
-	display: none;
-}
+ #usuarioActivoID, #usuarioActivoEmail, #googleTagManager {
+            display: none;
+            width: 0px;
+            height: 0px;
+        }
+
+ /* Estilo para el Menú colapsado del índice */
+        .contenedorFlechaIndice {
+            margin-left: 5px;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+
+        .imgFlechaIndice {
+            width: 10px;
+            height: 10px;
+        }
+
+        /* Oculta los OL que tienen otros OL dentro */
+        .mt-toc-content ol>li>ol {
+            display: none;
+        }
+
+        /* Muestra los OL internos cuando tienen la clase 'active' */
+        .mt-toc-content ol.active>li>ol {
+            display: block;
+        }
