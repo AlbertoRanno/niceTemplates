@@ -9,6 +9,25 @@
     gtag('js', new Date());
     gtag('config', 'G-K7R0BP1SJQ');
 </script>
+<!-- Google Tag Manager -->
+<script>
+    (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+            'gtm.start': new Date().getTime(),
+            event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-P9XLPPW2');
+</script>
+<!-- End Google Tag Manager -->
+
 <script>
     //****************************COLAPSABLES****************************
     function alternarCollapse(id) {
@@ -108,7 +127,8 @@
                         'event_category': 'Indice',
                         'event_label': contenido,
                         'event_value': urlDelSitio,
-                        'user_email': usuarioActivoEmail.textContent
+                        'userEmail': usuarioActivoEmail.textContent,
+                        'userId': usuarioActivoID.textContent
                     });
                 } else {
                     console.log("Esta pagina no utiliza el template basico...");
@@ -203,7 +223,7 @@
                             if (subUlColapsablesInternos.style.display ===
                                 'none') {
                                 subUlColapsablesInternos.style.display =
-                                'block';
+                                    'block';
                             } else {
                                 subUlColapsablesInternos.style.display = 'none';
                             }
@@ -239,7 +259,7 @@
                 logoLink.setAttribute('title', 'Enlace al Home');
 
                 var ul = document.createElement("ul");
-                ul.className = "footer-links";                
+                ul.className = "footer-links";
                 var link3 = document.createElement("li");
                 var link3Anchor = document.createElement("a");
                 link3Anchor.href = "https://www.osde.com.ar/index.html#!homepage.html";
@@ -471,7 +491,7 @@
             ulConsejos.appendChild(liConsejos);
             divInternoConsejos.appendChild(ulConsejos);
             divConsejos.appendChild(divInternoConsejos);
-            setTimeout(function () {                
+            setTimeout(function () {
                 aConsejos.addEventListener('click', function () {
                     ulSubmenu.classList.toggle('consejosDesplegables');
                     // Cambio la URL de la flecha basado en si el menú está desplegado o no
