@@ -1654,8 +1654,8 @@ div.meta > div.url {
 	display:none !important;
 }
 
-/* Iconos puestos CAT CAP CGD */
-.iconosPuestos{
+/* Iconos */
+.iconosPuestos, .iconosPequenos {
 	width: 14px ;
 	height: 14px ;
 	margin-right: 6px;
