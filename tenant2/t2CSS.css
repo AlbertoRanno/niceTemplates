@@ -1655,7 +1655,7 @@ div.meta > div.url {
 }
 
 /* Iconos */
-.iconosPuestos, .iconosPequenos {
+.iconosPuestos, .iconosPequenos, .iconosPequenos img {
 	width: 14px ;
 	height: 14px ;
 	margin-right: 6px;
