@@ -1713,8 +1713,10 @@ div.meta > div.url {
 .iconosPuestos,
 .iconosPequenos,
 .iconosPequenos img {
-	width: 14px !important;
-	height: 14px !important;	
+	max-width: 14px !important;
+    max-height: 14px !important;
+    width: auto !important; 
+    height: auto !important;	
 }
 .iconosPequenos img{
 	position: relative;
