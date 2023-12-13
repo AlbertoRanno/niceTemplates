@@ -37,15 +37,20 @@
         let liPrincipalesConOlInternos = document.querySelectorAll(
             '#mt-toc-container > nav > ol > li:has(> ol)');
         liPrincipalesConOlInternos.forEach(function (li) {
-            let contenedorFlechaIndice = document.createElement('div');
+            let contenedorTitulo = document.createElement('div');
+            contenedorTitulo.classList.add('titulo-collapsible-section');
+            let olSiguienteAlLiActual = li.querySelector('ol');
+            li.insertBefore(contenedorTitulo, olSiguienteAlLiActual)
+            let enlace = li.querySelector('a');
+            contenedorTitulo.appendChild(enlace)
+            let contenedorFlechaIndice = document.createElement('span');
             contenedorFlechaIndice.classList.add('contenedorFlechaIndice');
             let imgFlechaIndice = document.createElement('img');
             imgFlechaIndice.classList.add('imgFlechaIndice');
             imgFlechaIndice.src = '/@api/deki/files/132/downArrowBlue.png.png';
             imgFlechaIndice.alt = 'flecha';
-            li.querySelector('a').insertAdjacentElement('afterend', contenedorFlechaIndice);
+            contenedorTitulo.appendChild(contenedorFlechaIndice);
             contenedorFlechaIndice.appendChild(imgFlechaIndice);
-            let olSiguienteAlLiActual = li.querySelector('ol');
             contenedorFlechaIndice.addEventListener('click', function () {
                 let isActive = olSiguienteAlLiActual.classList.toggle('active');
                 imgFlechaIndice.src = isActive ? '/@api/deki/files/129/upArrowBlue.png' :
@@ -91,24 +96,23 @@
 
         //******************METRICAS TABLA DE CONTENIDO******************************** 
         var elementNav = document.querySelector(".mt-toc-content");
-        var contenido, urlDelSitio, usuarioActivoEmail, usuarioActivoID;
+        var contenido, urlDelSitio, usuarioActivoID;
 
         elementNav.addEventListener("click", function (e) {
             if (e.target.tagName === "A" && e.target.parentNode.tagName === "LI") {
                 contenido = e.target.textContent;
                 urlDelSitio = window.location.href;
                 usuarioActivoID = document.getElementById("usuarioActivoID");
-                usuarioActivoEmail = document.getElementById("usuarioActivoEmail");
 
-                if (usuarioActivoEmail && usuarioActivoID) {
-                    console.log("ID: ", usuarioActivoID.textContent + " \nEmail:", usuarioActivoEmail
-                        .textContent + " \nClick en: " + contenido + " \nUrl: " + urlDelSitio);
+                if (usuarioActivoID) {
+                    console.log("ID: ", usuarioActivoID.textContent + " \nClick en: " + contenido +
+                        " \nUrl: " + urlDelSitio);
 
                     gtag('event', 'clic_tabla_de_contenidos', {
                         'event_category': 'Indice',
                         'event_label': contenido,
                         'event_value': urlDelSitio,
-                        'user_email': usuarioActivoEmail.textContent
+                        'userId': usuarioActivoID.textContent
                     });
                 } else {
                     console.log("Esta pagina no utiliza el template basico...");
