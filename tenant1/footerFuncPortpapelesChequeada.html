@@ -1,0 +1,320 @@
+<script>
+    //****************************FOOTER********************************
+    var footerDefault = document.querySelector(".elm-footer");
+    if (footerDefault) {
+        var footerPropio = document.createElement("footer");
+        footerPropio.className = "footer";
+        var container = document.createElement("div");
+        container.className = "container";
+        var row = document.createElement("div");
+        row.className = "row";
+        var colLeft = document.createElement("div");
+        colLeft.className = "colLeft";
+        var logoLink = document.createElement("a");
+        logoLink.href = "https://osde-prod1.mindtouch.us";
+        logoLink.innerHTML = '<img src="/@api/deki/files/219/osdeWhite.png" alt="logoOSDE">';
+        logoLink.className = "logoOSDE";
+        logoLink.target = "_blank";
+        logoLink.setAttribute('title', 'Enlace al Home');
+
+        var ul = document.createElement("ul");
+        ul.className = "footer-links";
+        var link3 = document.createElement("li");
+        var link3Anchor = document.createElement("a");
+        link3Anchor.href = "https://www.osde.com.ar/index.html#!homepage.html";
+        link3Anchor.textContent = "www.osde.com.ar";
+        link3Anchor.target = "_blank";
+        link3.setAttribute('title', 'Enlace a www.osde.com.ar');
+        link3.appendChild(link3Anchor);
+        var link4 = document.createElement("li");
+        var link4P = document.createElement("p");
+        link4P.innerHTML =
+            "Para sugerir un nuevo art\u00EDculo, escribinos a contenidos\u0040osde.com.ar desde tu cuenta de email.";
+        link4.setAttribute('title', 'Sugerir un nuevo art\u00EDculo');
+        link4.appendChild(link4P);
+        ul.appendChild(link3);
+        ul.appendChild(link4);
+
+        //Teléfonos
+        var telefonos = document.createElement("div");
+        telefonos.className = "cards_telefonos";
+
+        function copiarAlPortapapeles(numero) {
+            var elementoTemporal = document.createElement("textarea");
+            elementoTemporal.value = numero;
+            document.body.appendChild(elementoTemporal);
+            elementoTemporal.select();
+            document.execCommand("copy");
+            document.body.removeChild(elementoTemporal);
+            // alert("N\u00FAmero copiado al portapapeles: " + numero);
+
+            var copiadoAlPortapapeles = document.createElement("div");
+            copiadoAlPortapapeles.textContent = "N\u00FAmero copiado al portapapeles: " + numero;
+            copiadoAlPortapapeles.className = "copiadoAlPortapapeles";
+            document.body.appendChild(copiadoAlPortapapeles);
+            setTimeout(function () {
+                document.body.removeChild(copiadoAlPortapapeles);
+            }, 3000);
+        }
+
+        //Asistencia médica
+        var asistencia = document.createElement("div");
+        asistencia.className = "telefonos_card asistencia_card";
+        var asistenciaH5 = document.createElement("h5");
+        asistenciaH5.textContent = "Asistencia m\u00E9dica";
+        asistenciaH5.className = "titulos_columnas"
+        var asistenciaContent = document.createElement("div");
+        asistenciaContent.className = "telefonos_content";
+        var asistencialink1Content = document.createElement("div");
+        asistencialink1Content.className = "linkMasBotonCopiarPortapapeles"
+        var asistencialink1 = document.createElement("a");
+        asistencialink1.href = "https://wa.me/5491148729100";
+        var img1 = document.createElement("img");
+        img1.src = "/@api/deki/files/224/whatsapp.png";
+        img1.className = "iconos_whatsapp";
+        var textNode1 = document.createTextNode("11.4872.9100");
+        asistencialink1.appendChild(img1);
+        asistencialink1.appendChild(textNode1);
+        asistencialink1Content.appendChild(asistencialink1);
+        var iconoCopiarAsistencialink1 = document.createElement("img");
+        iconoCopiarAsistencialink1.src = "/@api/deki/files/269/copiarAlPortapapeles.png";
+        iconoCopiarAsistencialink1.className = "iconosCopiarNros";
+        iconoCopiarAsistencialink1.alt = "Copiar al portapapeles";
+        iconoCopiarAsistencialink1.addEventListener("click", function () {
+            copiarAlPortapapeles("11-4872-9100");
+        });
+        asistencialink1Content.appendChild(iconoCopiarAsistencialink1);
+        asistenciaContent.appendChild(asistencialink1Content);
+        var asistencialink2Content = document.createElement("div");
+        asistencialink2Content.className = "linkMasBotonCopiarPortapapeles";
+        var asistencialink2 = document.createElement("a");
+        asistencialink2.href = "tel:08108887788";
+        var img2 = document.createElement("img");
+        img2.src = "/@api/deki/files/225/telefono.png";
+        var textNode2 = document.createTextNode("0810.888.7788");
+        asistencialink2.appendChild(img2);
+        asistencialink2.appendChild(textNode2);
+        asistencialink2Content.appendChild(asistencialink2);
+        var iconoCopiarAsistencialink2 = document.createElement("img");
+        iconoCopiarAsistencialink2.src = "/@api/deki/files/269/copiarAlPortapapeles.png";
+        iconoCopiarAsistencialink2.className = "iconosCopiarNros";
+        iconoCopiarAsistencialink2.alt = "Copiar al portapapeles";
+        iconoCopiarAsistencialink2.addEventListener("click", function () {
+            copiarAlPortapapeles("0810-888-7788");
+        });
+        asistencialink2Content.appendChild(iconoCopiarAsistencialink2);
+        asistenciaContent.appendChild(asistencialink2Content);
+        var asistencialink3Content = document.createElement("div");
+        asistencialink3Content.className = "linkMasBotonCopiarPortapapeles";
+        var asistencialink3 = document.createElement("a");
+        asistencialink3.href = "tel:08109996300";
+        var img3 = document.createElement("img");
+        img3.src = "/@api/deki/files/225/telefono.png";
+        var textNode3 = document.createTextNode("0810.999.6300");
+        asistencialink3.appendChild(img3);
+        asistencialink3.appendChild(textNode3);
+        asistencialink3Content.appendChild(asistencialink3);
+        var iconoCopiarAsistencialink3 = document.createElement("img");
+        iconoCopiarAsistencialink3.src = "/@api/deki/files/269/copiarAlPortapapeles.png";
+        iconoCopiarAsistencialink3.className = "iconosCopiarNros";
+        iconoCopiarAsistencialink3.alt = "Copiar al portapapeles";
+        iconoCopiarAsistencialink3.addEventListener("click", function () {
+            copiarAlPortapapeles("0810-999-6300");
+        });
+        asistencialink3Content.appendChild(iconoCopiarAsistencialink3);
+        asistenciaContent.appendChild(asistencialink3Content);
+        var asistencialink4 = document.createElement("a");
+        asistencialink4.href = "https://asistenciamedica.osde.com.ar/tabs/inicio";
+        asistencialink4.className = "solicitar_online";
+        asistencialink4.textContent = "Solicitar asistencia online";
+        asistenciaContent.appendChild(asistencialink4);
+        asistencia.appendChild(asistenciaH5);
+        asistencia.appendChild(asistenciaContent);
+
+        //Riesgo de vida
+        var riesgo = document.createElement("div");
+        riesgo.className = "telefonos_card riesgo_card";
+        var riesgoH5 = document.createElement("h5");
+        riesgoH5.textContent = "Riesgo de vida";
+        riesgoH5.className = "titulos_columnas"
+        var riesgoContent = document.createElement("div");
+        riesgoContent.className = "telefonos_content linkMasBotonCopiarPortapapeles";
+        var riesgoLink = document.createElement("a");
+        riesgoLink.href = "tel:08106661111";
+        var riesgoImg = document.createElement("img");
+        riesgoImg.src = "/@api/deki/files/225/telefono.png";
+        var riesgoText = document.createTextNode("0810.666.1111");
+        var iconoCopiarRiesgoLink = document.createElement("img");
+        iconoCopiarRiesgoLink.src = "/@api/deki/files/269/copiarAlPortapapeles.png";
+        iconoCopiarRiesgoLink.className = "iconosCopiarNros";
+        iconoCopiarRiesgoLink.alt = "Copiar al portapapeles";
+        iconoCopiarRiesgoLink.addEventListener("click", function () {
+            copiarAlPortapapeles("0810-666-1111");
+        });
+        riesgoLink.appendChild(riesgoImg);
+        riesgoLink.appendChild(riesgoText);
+        riesgoContent.appendChild(riesgoLink);
+        riesgoContent.appendChild(iconoCopiarRiesgoLink);
+        riesgo.appendChild(riesgoH5);
+        riesgo.appendChild(riesgoContent);
+
+        //Atención al socio        
+        var atencion = document.createElement("div");
+        atencion.className = "telefonos_card atencion_card";
+        var atencionH5 = document.createElement("h5");
+        atencionH5.textContent = "Atenci\u00F3n al socio";
+        atencionH5.className = "titulos_columnas"
+        var atencionContent = document.createElement("div");
+        atencionContent.className = "telefonos_content";
+        var atencionHorarios = document.createElement("p");
+        atencionHorarios.textContent = "Lunes a viernes de 9 a 20 H";
+        var atencionLink1Content = document.createElement("div");
+        atencionLink1Content.className = "linkMasBotonCopiarPortapapeles";
+        var atencionLink1 = document.createElement("a");
+        atencionLink1.href = "https://wa.me/5491148729000";
+        var atencionImg1 = document.createElement("img");
+        atencionImg1.src = "/@api/deki/files/224/whatsapp.png";
+        atencionImg1.className = "iconos_whatsapp";
+        var atencionText1 = document.createTextNode("11.4872.9000");
+        atencionLink1.appendChild(atencionImg1);
+        atencionLink1.appendChild(atencionText1);
+        atencionLink1Content.appendChild(atencionLink1);
+        var iconoCopiarAtencionLink1 = document.createElement("img");
+        iconoCopiarAtencionLink1.src = "/@api/deki/files/269/copiarAlPortapapeles.png";
+        iconoCopiarAtencionLink1.className = "iconosCopiarNros";
+        iconoCopiarAtencionLink1.alt = "Copiar al portapapeles";
+        iconoCopiarAtencionLink1.addEventListener("click", function () {
+            copiarAlPortapapeles("11-4872-9000");
+        });
+        atencionLink1Content.appendChild(iconoCopiarAtencionLink1);
+        var atencionLink2Content = document.createElement("div");
+        atencionLink2Content.className = "linkMasBotonCopiarPortapapeles";
+        var atencionLink2 = document.createElement("a");
+        atencionLink2.href = "tel:08105556733";
+        var atencionImg2 = document.createElement("img");
+        atencionImg2.src = "/@api/deki/files/225/telefono.png";
+        var atencionText2 = document.createTextNode("0810.555.6733");
+        atencionLink2.appendChild(atencionImg2);
+        atencionLink2.appendChild(atencionText2);
+        atencionLink2Content.appendChild(atencionLink2);
+        var iconoCopiarAtencionLink2 = document.createElement("img");
+        iconoCopiarAtencionLink2.src = "/@api/deki/files/269/copiarAlPortapapeles.png";
+        iconoCopiarAtencionLink2.className = "iconosCopiarNros";
+        iconoCopiarAtencionLink2.alt = "Copiar al portapapeles";
+        iconoCopiarAtencionLink2.addEventListener("click", function () {
+            copiarAlPortapapeles("0810-555-6733");
+        });
+        atencionLink2Content.appendChild(iconoCopiarAtencionLink2);
+        var atencionLink3Content = document.createElement("div");
+        atencionLink3Content.className = "linkMasBotonCopiarPortapapeles";
+        var atencionLink3 = document.createElement("a");
+        atencionLink3.href = "tel:08005556733";
+        var atencionImg3 = document.createElement("img");
+        atencionImg3.src = "/@api/deki/files/225/telefono.png";
+        var atencionText3 = document.createTextNode("0800.555.6733");
+        atencionLink3.appendChild(atencionImg3);
+        atencionLink3.appendChild(atencionText3);
+        atencionLink3Content.appendChild(atencionLink3);
+        var iconoCopiarAtencionLink3 = document.createElement("img");
+        iconoCopiarAtencionLink3.src = "/@api/deki/files/269/copiarAlPortapapeles.png";
+        iconoCopiarAtencionLink3.className = "iconosCopiarNros";
+        iconoCopiarAtencionLink3.alt = "Copiar al portapapeles";
+        iconoCopiarAtencionLink3.addEventListener("click", function () {
+            copiarAlPortapapeles("0800.555.6733");
+        });
+        atencionLink3Content.appendChild(iconoCopiarAtencionLink3);
+        var atencionLink4 = document.createElement("a");
+        atencionLink4.href =
+            "https://www.osde.com.ar/index.html#!osde-caps-centros-atencion-personalizada.html";
+        var img4 = document.createElement("img");
+        img4.src = "/@api/deki/files/226/calendario.png";
+        var atencionText4 = document.createTextNode("Turnos en sucursal");
+        atencionLink4.appendChild(img4);
+        atencionLink4.appendChild(atencionText4);
+        var atencionMail = document.createElement("p");
+        atencionMail.textContent = "contacto@osde.com.ar";
+        atencionContent.appendChild(atencionHorarios);
+        atencionContent.appendChild(atencionLink1Content);
+        atencionContent.appendChild(atencionLink2Content);
+        atencionContent.appendChild(atencionLink3Content);
+        atencionContent.appendChild(atencionLink4);
+        atencionContent.appendChild(atencionMail);
+        atencion.appendChild(atencionH5);
+        atencion.appendChild(atencionContent);
+
+        telefonos.appendChild(asistencia);
+        telefonos.appendChild(riesgo);
+        telefonos.appendChild(atencion);
+
+        colLeft.appendChild(logoLink);
+        colLeft.appendChild(ul);
+        colLeft.appendChild(telefonos);
+
+        var colRight = document.createElement("div");
+        colRight.className = "colRight";
+        var copyright = document.createElement("p");
+        copyright.innerHTML =
+            '&copy;OSDE 2023 - Todos los derechos reservados. CUIT: 30-54674125-3 - Av. Leandro N. Alem 1067 - Piso 9 - C1001AAF - Buenos Aires. Superintendencia de Servicios de Salud - &Oacute;rgano de Control de Obras Sociales y Entidades de Medicina Prepaga - 0800-222-SALUD (72583) - www.sssalud.gob.ar - R.N.E.M.P. (Prov.) 1408 - R.N.O.S. 4-0080-0';
+        colRight.appendChild(copyright);
+
+        row.appendChild(colLeft);
+        row.appendChild(colRight);
+        container.appendChild(row);
+        footerPropio.appendChild(container);
+        footerDefault.parentNode.replaceChild(footerPropio, footerDefault);
+    }
+</script>
+<style>
+    .linkMasBotonCopiarPortapapeles {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-around;
+    }
+
+    .copiadoAlPortapapeles {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        padding: 10px;
+        background-color: var(--success-2);
+        color: var(--white);
+        border-radius: 5px;
+        animation: fadeOut 3s forwards;
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+
+        to {
+            opacity: 0;
+        }
+    }
+</style>
+<script>
+    // Se declara la función copiarAlPortapapeles que toma un parámetro numero.
+    function copiarAlPortapapeles(numero) {
+        // Se crea un nuevo elemento HTML <textarea> y se almacena en la variable elementoTemporal.
+        var elementoTemporal = document.createElement("textarea");
+
+        // Se establece el valor del elemento <textarea> como el número proporcionado a la función.
+        elementoTemporal.value = numero;
+
+        // Se agrega el elemento <textarea> al final del cuerpo del documento.
+        document.body.appendChild(elementoTemporal);
+
+        // Se selecciona el contenido del elemento <textarea>, que es el número.
+        elementoTemporal.select();
+
+        // Se ejecuta el comando de copiar en el documento, copiando el contenido seleccionado al portapapeles.
+        document.execCommand("copy");
+
+        // Se elimina el elemento <textarea> del cuerpo del documento.
+        document.body.removeChild(elementoTemporal);
+
+        // Se muestra una alerta indicando que el número fue copiado al portapapeles. 
+        // La variable numero se concatena en el mensaje de la alerta para mostrar el número copiado.
+        alert("Número copiado al portapapeles: " + numero);
+    }
+</script>

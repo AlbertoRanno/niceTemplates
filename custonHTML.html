@@ -1,14 +1,5 @@
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-K7R0BP1SJQ"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-K7R0BP1SJQ');
-</script>
+<!--No corresponden métricas del tenant 1 -->
 <script>
     //****************************COLAPSABLES****************************
     function alternarCollapse(id) {
@@ -52,7 +43,7 @@
             contenedorTitulo.appendChild(contenedorFlechaIndice);
             contenedorFlechaIndice.appendChild(imgFlechaIndice);
             contenedorFlechaIndice.addEventListener('click', function () {
-                let isActive = olSiguienteAlLiActual.classList.toggle('active');
+                let isActive = olSiguienteAlLiActual.classList.toggle('secondary-ol');
                 imgFlechaIndice.src = isActive ? '/@api/deki/files/129/upArrowBlue.png' :
                     '/@api/deki/files/132/downArrowBlue.png.png';
                 olSiguienteAlLiActual.style.display = isActive ? 'block' : 'none';
@@ -95,30 +86,7 @@
         }
 
         //******************METRICAS TABLA DE CONTENIDO******************************** 
-        var elementNav = document.querySelector(".mt-toc-content");
-        var contenido, urlDelSitio, usuarioActivoID;
-
-        elementNav.addEventListener("click", function (e) {
-            if (e.target.tagName === "A" && e.target.parentNode.tagName === "LI") {
-                contenido = e.target.textContent;
-                urlDelSitio = window.location.href;
-                usuarioActivoID = document.getElementById("usuarioActivoID");
-
-                if (usuarioActivoID) {
-                    console.log("ID: ", usuarioActivoID.textContent + " \nClick en: " + contenido +
-                        " \nUrl: " + urlDelSitio);
-
-                    gtag('event', 'clic_tabla_de_contenidos', {
-                        'event_category': 'Indice',
-                        'event_label': contenido,
-                        'event_value': urlDelSitio,
-                        'userId': usuarioActivoID.textContent
-                    });
-                } else {
-                    console.log("Esta pagina no utiliza el template basico...");
-                }
-            }
-        });
+        //No corresponden métricas del tenant 1
 
         //****************************LISTA RESULTADOS************************************
         if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
@@ -759,7 +727,7 @@
             }
 
 
-        } else { //Si es el Login, entonces, oculto las palabras "header", "footer", y el buscador
+        } else {
             var headerLogin = document.querySelector('.elm-header-custom a');
             if (headerLogin) {
                 headerLogin.style.display = 'none';
