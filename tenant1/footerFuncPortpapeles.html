@@ -2,42 +2,6 @@
     //****************************FOOTER********************************
     var footerDefault = document.querySelector(".elm-footer");
     if (footerDefault) {
-        var footerPropio = document.createElement("footer");
-        footerPropio.className = "footer";
-        var container = document.createElement("div");
-        container.className = "container";
-        var row = document.createElement("div");
-        row.className = "row";
-        var colLeft = document.createElement("div");
-        colLeft.className = "colLeft";
-        var logoLink = document.createElement("a");
-        logoLink.href = "https://osde-prod1.mindtouch.us";
-        logoLink.innerHTML = '<img src="/@api/deki/files/219/osdeWhite.png" alt="logoOSDE">';
-        logoLink.className = "logoOSDE";
-        logoLink.target = "_blank";
-        logoLink.setAttribute('title', 'Enlace al Home');
-
-        var ul = document.createElement("ul");
-        ul.className = "footer-links";
-        var link3 = document.createElement("li");
-        var link3Anchor = document.createElement("a");
-        link3Anchor.href = "https://www.osde.com.ar/index.html#!homepage.html";
-        link3Anchor.textContent = "www.osde.com.ar";
-        link3Anchor.target = "_blank";
-        link3.setAttribute('title', 'Enlace a www.osde.com.ar');
-        link3.appendChild(link3Anchor);
-        var link4 = document.createElement("li");
-        var link4P = document.createElement("p");
-        link4P.innerHTML =
-            "Para sugerir un nuevo art\u00EDculo, escribinos a contenidos\u0040osde.com.ar desde tu cuenta de email.";
-        link4.setAttribute('title', 'Sugerir un nuevo art\u00EDculo');
-        link4.appendChild(link4P);
-        ul.appendChild(link3);
-        ul.appendChild(link4);
-
-        //Teléfonos
-        var telefonos = document.createElement("div");
-        telefonos.className = "cards_telefonos";
 
         function copiarAlPortapapeles(numero) {
             var elementoTemporal = document.createElement("textarea");
@@ -56,6 +20,61 @@
                 document.body.removeChild(copiadoAlPortapapeles);
             }, 3000);
         }
+
+        var footerPropio = document.createElement("footer");
+        footerPropio.className = "footer";
+        var container = document.createElement("div");
+        container.className = "container";
+        var row = document.createElement("div");
+        row.className = "row";
+        var colLeft = document.createElement("div");
+        colLeft.className = "colLeft";
+        var logoLink = document.createElement("a");
+        logoLink.href = "https://osde-prod1.mindtouch.us";
+        logoLink.innerHTML = '<img src="/@api/deki/files/219/osdeWhite.png" alt="logoOSDE">';
+        logoLink.className = "logoOSDE";
+        logoLink.target = "_blank";
+        logoLink.setAttribute('title', 'Enlace al Home');
+
+        var ul = document.createElement("ul");
+        ul.className = "footer-links";
+        var link3 = document.createElement("li");
+        link3.className = "linkMasBotonCopiarPortapapeles";
+        var link3Anchor = document.createElement("a");
+        link3Anchor.href = "https://www.osde.com.ar/index.html#!homepage.html";
+        link3Anchor.textContent = "www.osde.com.ar";
+        link3Anchor.target = "_blank";
+        link3.setAttribute('title', 'Enlace a www.osde.com.ar');
+        link3.appendChild(link3Anchor);
+        var iconoCopiarlink3 = document.createElement("img");
+        iconoCopiarlink3.src = "/@api/deki/files/269/copiarAlPortapapeles.png";
+        iconoCopiarlink3.className = "iconosCopiarNros";
+        iconoCopiarlink3.alt = "Copiar al portapapeles";
+        iconoCopiarlink3.addEventListener("click", function () {
+            copiarAlPortapapeles("www.osde.com.ar");
+        });
+        link3.appendChild(iconoCopiarlink3);
+        var link4 = document.createElement("li");
+        link4.className = "linkMasBotonCopiarPortapapeles linkMasBotonCopiarPortapapelesLink4";
+        var link4P = document.createElement("p");
+        link4P.innerHTML =
+            "Para sugerir un nuevo art\u00EDculo, escribinos, desde tu cuenta de email, a contenidos\u0040osde.com.ar";
+        link4.setAttribute('title', 'Sugerir un nuevo art\u00EDculo');
+        link4.appendChild(link4P);
+        var iconoCopiarlink4 = document.createElement("img");
+        iconoCopiarlink4.src = "/@api/deki/files/269/copiarAlPortapapeles.png";
+        iconoCopiarlink4.className = "iconosCopiarNros";
+        iconoCopiarlink4.alt = "Copiar al portapapeles";
+        iconoCopiarlink4.addEventListener("click", function () {
+            copiarAlPortapapeles("contenidos\u0040osde.com.arr");
+        });
+        link4.appendChild(iconoCopiarlink4);
+        ul.appendChild(link3);
+        ul.appendChild(link4);
+
+        //Teléfonos
+        var telefonos = document.createElement("div");
+        telefonos.className = "cards_telefonos";
 
         //Asistencia médica
         var asistencia = document.createElement("div");
@@ -207,6 +226,7 @@
         atencionLink2Content.appendChild(iconoCopiarAtencionLink2);
         var atencionLink3Content = document.createElement("div");
         atencionLink3Content.className = "linkMasBotonCopiarPortapapeles";
+
         var atencionLink3 = document.createElement("a");
         atencionLink3.href = "tel:08005556733";
         var atencionImg3 = document.createElement("img");
@@ -223,6 +243,7 @@
             copiarAlPortapapeles("0800.555.6733");
         });
         atencionLink3Content.appendChild(iconoCopiarAtencionLink3);
+
         var atencionLink4 = document.createElement("a");
         atencionLink4.href =
             "https://www.osde.com.ar/index.html#!osde-caps-centros-atencion-personalizada.html";
@@ -231,14 +252,27 @@
         var atencionText4 = document.createTextNode("Turnos en sucursal");
         atencionLink4.appendChild(img4);
         atencionLink4.appendChild(atencionText4);
+
+        var atencionMailContent = document.createElement("div");
+        atencionMailContent.className = "linkMasBotonCopiarPortapapeles";
         var atencionMail = document.createElement("p");
+        atencionMail.className = "pFooter";
         atencionMail.textContent = "contacto@osde.com.ar";
+        atencionMailContent.appendChild(atencionMail);
+        var iconoCopiarAtencionMail = document.createElement("img");
+        iconoCopiarAtencionMail.src = "/@api/deki/files/269/copiarAlPortapapeles.png";
+        iconoCopiarAtencionMail.className = "iconosCopiarNros";
+        iconoCopiarAtencionMail.alt = "Copiar al portapapeles";
+        iconoCopiarAtencionMail.addEventListener("click", function () {
+            copiarAlPortapapeles("contacto@osde.com.ar");
+        });
+        atencionMailContent.appendChild(iconoCopiarAtencionMail);
         atencionContent.appendChild(atencionHorarios);
         atencionContent.appendChild(atencionLink1Content);
         atencionContent.appendChild(atencionLink2Content);
         atencionContent.appendChild(atencionLink3Content);
         atencionContent.appendChild(atencionLink4);
-        atencionContent.appendChild(atencionMail);
+        atencionContent.appendChild(atencionMailContent);
         atencion.appendChild(atencionH5);
         atencion.appendChild(atencionContent);
 
@@ -265,32 +299,52 @@
     }
 </script>
 <style>
+    /*Agregar al CSS de iconosPequenos, la clase: iconosCopiarNros*/
+
+    .iconosCopiarNros {
+        margin-left: 5px;
+    }
+
+    .linkMasBotonCopiarPortapapeles,
+    .linkMasBotonCopiarPortapapelesLink4 {
+        display: flex;
+        justify-content: flex-start;
+
+    }
+
     .linkMasBotonCopiarPortapapeles {
-	display: flex;
-	align-items: flex-start;
-	justify-content: space-around;
-}
+        align-items: flex-start;
+    }
 
-.copiadoAlPortapapeles {
-	position: fixed;
-	bottom: 10px;
-	right: 10px;
-	padding: 10px;
-	background-color: var(--success-2);
-	color: var(--white);
-	border-radius: 5px;
-	animation: fadeOut 3s forwards;
-}
+    .linkMasBotonCopiarPortapapelesLink4 {
+        align-items: flex-end !important;
+    }
 
-@keyframes fadeOut {
-	from {
-		opacity: 1;
-	}
+    .pFooter {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
 
-	to {
-		opacity: 0;
-	}
-}
+    .copiadoAlPortapapeles {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        padding: 10px;
+        background-color: var(--success-2);
+        color: var(--white);
+        border-radius: 5px;
+        animation: fadeOut 3s forwards;
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+
+        to {
+            opacity: 0;
+        }
+    }
 </style>
 <script>
     // Se declara la función copiarAlPortapapeles que toma un parámetro numero.
