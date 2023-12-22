@@ -1890,7 +1890,8 @@ div.meta>div.url {
 /* Iconos puestos CAT CAP CGD */
 .iconosPuestos,
 .iconosPequenos,
-.iconosPequenos img {
+.iconosPequenos img,
+.iconosCopiarNros {
 	max-width: 14px !important;
 	max-height: 14px !important;
 	width: auto !important;
@@ -1985,4 +1986,49 @@ div.meta>div.url {
 
 .mt-feedback-form fieldset {
 	background: var(--background-light-blue-2);
+}
+
+.iconosCopiarNros {
+	margin-left: 5px;
+}
+
+.linkMasBotonCopiarPortapapeles,
+.linkMasBotonCopiarPortapapelesLink4 {
+	display: flex;
+	justify-content: flex-start;
+
+}
+
+.linkMasBotonCopiarPortapapeles {
+	align-items: flex-start;
+}
+
+.linkMasBotonCopiarPortapapelesLink4 {
+	align-items: flex-end !important;
+}
+
+.pFooter {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.copiadoAlPortapapeles {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	padding: 10px;
+	background-color: var(--success-2);
+	color: var(--white);
+	border-radius: 5px;
+	animation: fadeOut 3s forwards;
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 0;
+	}
 }
