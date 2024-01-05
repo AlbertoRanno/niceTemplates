@@ -654,7 +654,7 @@ p a {
 	margin-left: 5px;
 }
 
-.EXPAND_COLLAPSE.close dt:after {
+.EXPAND_COLLAPSE dt.expanded:after {
 	border-top: 6px solid var(--primary-black);
 	border-bottom: none;
 }
@@ -1988,6 +1988,7 @@ div.meta>div.url {
 	background: var(--background-light-blue-2);
 }
 
+/* Funcion copiar al portapapeles - continuacion footer */
 .iconosCopiarNros {
 	margin-left: 5px;
 }
@@ -2031,4 +2032,15 @@ div.meta>div.url {
 	to {
 		opacity: 0;
 	}
+}
+
+/* Template y Tablas "medicamentos" */
+
+.mt-responsive-table.medicamentos {
+    width: auto !important;
+}
+
+.mt-responsive-table.medicamentos td,
+.mt-responsive-table.medicamentos th {
+    border: 1px solid var(--medium-gray);  
 }

@@ -45,8 +45,10 @@
     }
 
     $(function () {
+        $('.EXPAND_COLLAPSE').find('dt').addClass('expanded');
         $('.EXPAND_COLLAPSE').find('dt').on('click', function () {
             $(this).next().toggle('350');
+            $(this).toggleClass('expanded');
         });
     });
 
@@ -151,7 +153,8 @@
                     'event_category': 'Indice',
                     'event_label': contenido,
                     'event_value': urlDelSitio,
-                    'userId': usuarioActivoID.textContent
+                    'userId': usuarioActivoID.textContent,
+                    'userGroup': usuarioActivoGrupo
                 });
             } else {
                 console.log("Esta pagina no utiliza el template basico...");

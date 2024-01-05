@@ -1,0 +1,68 @@
+/*Originalmente el diseñador creo los "chevrones hacia arriba" de los colapsables, mediante un artilugio de CSS: */
+
+.EXPAND_COLLAPSE dt:after {
+	content: "";
+	width: 0px;
+	height: 0px;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid var(--primary-black);
+	position: absolute;
+	top: 9px;
+	margin-left: 5px;
+}
+
+/* Este código CSS es la creación de un triángulo mediante la propiedad border para dar la apariencia de un chevrón apuntando hacia arriba.
+
+content: "";: Esto se utiliza para crear un "cuadro" vacío que se inserta después de los elementos dt que tengan la clase EXPAND_COLLAPSE.
+
+width: 0; height: 0;: Establece el ancho y la altura del cuadro vacío en cero.
+
+border-left: 6px solid transparent; border-right: 6px solid transparent;: Define dos bordes transparentes a izquierda y derecha del cuadro vacío. 
+Estos bordes son los lados del triángulo.
+
+border-bottom: 6px solid var(--primary-black);: Establece un borde inferior de color negro en el cuadro vacío, formando así la base del triángulo.
+
+position: absolute;: Coloca el cuadro en una posición absoluta con respecto a su contenedor principal.
+
+top: 9px;: Desplaza el cuadro hacia abajo 9 píxeles desde la parte superior de su contenedor.
+
+margin-left: 5px;: Añade un margen izquierdo de 5 píxeles al cuadro para ajustar su posición.
+
+En resumen, este código CSS utiliza la técnica de bordes y triángulos transparentes para lograr la apariencia de un chevrón apuntando hacia arriba. 
+La base del triángulo se forma mediante el borde inferior coloreado, y los lados son representados por los bordes izquierdo y derecho transparentes.
+
+Se hicieron 2 cambios principales, en el Head, que originalmente era así:
+
+$(function () {
+        $('.EXPAND_COLLAPSE').find('dt').on('click', function () {
+            $(this).next().toggle('350');
+        });
+    });
+
+    Se determinó que a todas las etiquetas "dt", les agregue la clase expanded, 
+    y que por medio del toogle, le agregue o quite dicha clase, cuando se clickea en la etiqueta.
+
+    $(function () {
+    $('.EXPAND_COLLAPSE').find('dt').addClass('expanded'); 
+    $('.EXPAND_COLLAPSE').find('dt').on('click', function () {
+        $(this).next().toggle('350');
+        $(this).toggleClass('expanded');
+    });
+});
+
+Y el otro cambio, es que se agregó al CSS lo que hace la clase expanded. Que basicamente, 
+es cambiar ocultar el borde inferior y mostrar el superior, para que el triangulo apunte en la otra direccion*/
+
+.EXPAND_COLLAPSE dt.expanded:after {
+    border-top: 6px solid var(--primary-black);  
+    border-bottom: none;
+}
+
+/*La cosa sería así: se define un cuadradito con el content = ""; de tamaño 0, al ponerle bordes gruesos (6px), si le pusiera los 4 bordes, 
+cada uno con un color distinto, veería 4 triangulos distintos. Debido a la forma logica con la se parte cada ángulo de 90º a 45º.
+El truco reside en que los triangulos laterales sean transparentes (a menos que quiera que los chevrones apunten de costado). 
+Y juego con mostrar el borde superior y no el inferior, y viceversa.
+Para esto, le agrego , en el evento de los colapsables, una clase a las etiquetas DT, a la vez que se muestra este etiqueta,
+que es el contenido colapsado, entran en juego las reglas de CSS, que cambian si se muestra el borde superior o inferior, y se 
+oculta el otro.*/
