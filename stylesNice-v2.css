@@ -2037,12 +2037,23 @@ div.meta>div.url {
 }
 
 /* Template y Tablas "medicamentos" */
-
-.mt-responsive-table.medicamentos {
+.mt-responsive-table.medicamentos, .mt-responsive-table.diagnostico {
     width: auto !important;
 }
 
 .mt-responsive-table.medicamentos td,
-.mt-responsive-table.medicamentos th {
+.mt-responsive-table.diagnostico td  {
     border: 1px solid var(--medium-gray);  
+}
+
+.mt-responsive-table.diagnostico td:nth-child(1),
+.mt-responsive-table.diagnostico th:nth-child(1),
+.mt-responsive-table.diagnostico td:nth-child(3),
+.mt-responsive-table.diagnostico th:nth-child(3) {
+    width: 25% !important;
+}
+
+.mt-responsive-table.diagnostico td:nth-child(2),
+.mt-responsive-table.diagnostico th:nth-child(2) {
+    width: 50% !important;
 }
