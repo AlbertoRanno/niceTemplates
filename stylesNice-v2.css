@@ -871,6 +871,17 @@ thead {
                          en CSS de la NavBar */
 }
 
+.emptyRegions button {
+	border-radius: 0 !important;
+	padding: 8px 16px;
+	background: var(--background-light-blue);
+	color: var(--medium-gray);
+	box-shadow: none !important;
+	cursor: default;
+	pointer-events: none;
+	border-bottom: 0 !important;
+}
+
 /* Accordion */
 .accordion {
 	margin-bottom: 20px;
@@ -2037,23 +2048,24 @@ div.meta>div.url {
 }
 
 /* Template y Tablas "medicamentos" */
-.mt-responsive-table.medicamentos, .mt-responsive-table.diagnostico {
-    width: auto !important;
+.mt-responsive-table.medicamentos,
+.mt-responsive-table.diagnostico {
+	width: auto !important;
 }
 
 .mt-responsive-table.medicamentos td,
-.mt-responsive-table.diagnostico td  {
-    border: 1px solid var(--medium-gray);  
+.mt-responsive-table.diagnostico td {
+	border: 1px solid var(--medium-gray);
 }
 
 .mt-responsive-table.diagnostico td:nth-child(1),
 .mt-responsive-table.diagnostico th:nth-child(1),
 .mt-responsive-table.diagnostico td:nth-child(3),
 .mt-responsive-table.diagnostico th:nth-child(3) {
-    width: 25% !important;
+	width: 25% !important;
 }
 
 .mt-responsive-table.diagnostico td:nth-child(2),
 .mt-responsive-table.diagnostico th:nth-child(2) {
-    width: 50% !important;
+	width: 50% !important;
 }

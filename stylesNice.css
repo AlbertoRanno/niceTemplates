@@ -871,6 +871,17 @@ thead {
                          en CSS de la NavBar */
 }
 
+.emptyRegions button {
+	border-radius: 0 !important;
+	padding: 8px 16px;
+	background: var(--background-light-blue);
+	color: var(--medium-gray);
+	box-shadow: none !important;
+	cursor: default;
+	pointer-events: none;
+	border-bottom: 0 !important;
+}
+
 /* Accordion */
 .accordion {
 	margin-bottom: 20px;
