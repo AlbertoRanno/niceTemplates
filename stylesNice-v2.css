@@ -2097,3 +2097,16 @@ div.meta>div.url {
 	cursor: default;
 	pointer-events: none;
 }
+
+.mt-search-filters-classification-tipo-basico {
+	display: none;
+}
+
+.tool-tip-link { 
+  background-color: var(--definition-background); 
+  cursor: help;
+  padding: 2px;
+}
+
+.ui-tooltip {
+  background: var(--white); }
