@@ -1885,10 +1885,10 @@ div.meta>div.url {
 #search-results li:hover {
 	background-color: var(--background-light-blue-2) !important
 }
-
+/*
 #search-results li a:visited {
 	color: var(--enlaceVisitadoColor);
-}
+}*/
 
 /* Resultado contenido expandido */
 .mt-tree-search-results li {
@@ -2067,4 +2067,14 @@ div.meta>div.url {
 .mt-responsive-table.diagnostico td:nth-child(2),
 .mt-responsive-table.diagnostico th:nth-child(2) {
     width: 50% !important;
+}
+
+.botonBorrarLocalStorage {
+	background-color: var(--secondary-light-blue);
+    color: var(--primary-black);
+    margin: 5px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.375em;
+    font-weight: 500;
 }

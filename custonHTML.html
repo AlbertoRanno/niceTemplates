@@ -128,6 +128,7 @@
                     aplicarCambioDeColor();
                 }
             }, 1000);
+
             function aplicarCambioDeColor() {
                 const urlsGuardadas = JSON.parse(localStorage.getItem('urlsGuardadas')) || [];
                 document.querySelectorAll("#search-results li a").forEach(function (link) {
@@ -137,6 +138,7 @@
                     }
                 });
             }
+
             function handleClick(event) {
                 if (event.target.tagName === 'A') {
                     const url = event.target.href;
@@ -157,27 +159,17 @@
             var interval = setInterval(function () {
                 var targetNode = document.getElementById('search-results');
                 if (targetNode) {
-                    clearInterval(interval); 
+                    clearInterval(interval);
                     aplicarCambioDeColor();
                 }
             }, 1000);
-            function agregarBotonBorrarLocalStorage() {
-                var boton = document.createElement("button");
-                boton.innerHTML = "Borrar Historial";
-                boton.style.position = "fixed";
-                boton.style.top = "350px";
-                boton.style.right = "10px";
-                boton.style.padding = "10px";
-                boton.style.cursor = "pointer";
-                boton.style.zIndex = "9999"; 
-                boton.style.backgroundColor = "orange"; 
-                boton.addEventListener("click", function () {
-                    localStorage.removeItem('urlsGuardadas');
-                    location.reload();
-                });
-                document.body.appendChild(boton);
-            }
-            agregarBotonBorrarLocalStorage();
+
+            var botonBorrarLocalStorage = document.createElement("button");
+            botonBorrarLocalStorage.innerHTML = "Borrar Historial";
+            botonBorrarLocalStorage.addEventListener("click", function () {
+                localStorage.removeItem('urlsGuardadas');
+                location.reload();
+            });
 
             setTimeout(function () {
 
@@ -661,6 +653,15 @@
             ulSubmenu.appendChild(li6);
             liConsejos.appendChild(ulSubmenu);
             ulConsejos.appendChild(liConsejos);
+
+            if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
+
+                let liBotonBorrarLocalStorage = document.createElement('li');
+                botonBorrarLocalStorage.classList.add('botonBorrarLocalStorage');
+                liBotonBorrarLocalStorage.appendChild(botonBorrarLocalStorage)
+                ulConsejos.appendChild(botonBorrarLocalStorage);
+            }
+
             divInternoConsejos.appendChild(ulConsejos);
             divConsejos.appendChild(divInternoConsejos);
             setTimeout(function () {
