@@ -634,31 +634,41 @@ p a {
 /* Tablas y Listas Desplegables */
 /* Expand Collapse*/
 .EXPAND_COLLAPSE dt {
-	color: var(--background-light-blue-2);
-	cursor: pointer;
-	padding: 2px 5px;
-	background: var(--super-light-gray);
-	position: relative;
-	border-top: 1px solid var(--medium-gray);
-	border-bottom: 1px solid var(--medium-gray);
+    position: relative;
+    color: var(--background-light-blue-2);
+    cursor: pointer;
+    padding: 2px 5px;
+    background: var(--super-light-gray);
+    border-top: 1px solid var(--medium-gray);
+    border-bottom: 1px solid var(--medium-gray);
+    display: flex;
+    align-items: center;
 }
 
 .EXPAND_COLLAPSE dt:after {
-	content: "";
-	width: 0px;
-	height: 0px;
-	border-left: 6px solid transparent;
-	border-right: 6px solid transparent;
-	border-bottom: 6px solid var(--primary-black);
-	position: absolute;
-	top: 9px;
-	/*right: 5px;*/
-	margin-left: 5px;
+    content: "";
+    width: 0px;
+    height: 0px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid var(--primary-black);
+    margin-left: 5px;
 }
 
 .EXPAND_COLLAPSE dt.expanded:after {
-	border-top: 6px solid var(--primary-black);
-	border-bottom: none;
+    border-top: 6px solid var(--primary-black);
+    border-bottom: none;
+}
+
+.EXPAND_COLLAPSE dt:after {
+   /* position: absolute;*/
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.EXPAND_COLLAPSE dt.expanded span {
+    margin-right: 20px;
 }
 
 .EXPAND_COLLAPSE dd {
@@ -866,21 +876,12 @@ thead {
 	padding: 20px;
 }
 
-.particularidades .hidden {
-	/* display: none; 
-                         en CSS de la NavBar */
+.particularidades ul:not(:has(yourChildElements)){
+	display: none;
 }
 
-.emptyRegions button {
-	border-radius: 0 !important;
-	padding: 8px 16px;
-	background: var(--background-light-blue);
-	color: var(--medium-gray);
-	box-shadow: none !important;
-	cursor: default;
-	pointer-events: none;
-	border-bottom: 0 !important;
-}
+
+
 
 /* Accordion */
 .accordion {
@@ -1059,40 +1060,7 @@ input[type="submit"].ui-button-primary {
 	margin-bottom: 0;
 }
 
-/* Particularidades */
-.navBarLateral {
-	margin-right: 16px;
-}
 
-.navBarLateral button {
-	width: 100%;
-	border: 2px solid var(--primary-blue);
-	background: var(--white);
-	color: var(--primary-blue);
-	font-family: var(--font-family-primary);
-	font-size: 16px;
-	font-weight: 700;
-	line-height: 22px;
-	border-radius: 0;
-	border-bottom: 0;
-	padding: 12px 16px;
-	box-shadow: none !important;
-}
-
-.navBarLateral button:first-child {
-	border-radius: 16px 16px 0 0;
-}
-
-.navBarLateral button:last-of-type {
-	border-radius: 0 0 16px 16px;
-	border-bottom: 2px solid var(--primary-blue);
-}
-
-.navBarLateral button:hover {
-	background-color: var(--primary-blue);
-	color: var(--white);
-	box-shadow: none;
-}
 
 .contenidosRegiones {
 	width: 100%;
@@ -2053,20 +2021,20 @@ div.meta>div.url {
 }
 
 .mt-responsive-table.medicamentos td,
-.mt-responsive-table.diagnostico td  {
-    border: 1px solid var(--medium-gray);  
+.mt-responsive-table.diagnostico td {
+	border: 1px solid var(--medium-gray);
 }
 
 .mt-responsive-table.diagnostico td:nth-child(1),
 .mt-responsive-table.diagnostico th:nth-child(1),
 .mt-responsive-table.diagnostico td:nth-child(3),
 .mt-responsive-table.diagnostico th:nth-child(3) {
-    width: 25% !important;
+	width: 25% !important;
 }
 
 .mt-responsive-table.diagnostico td:nth-child(2),
 .mt-responsive-table.diagnostico th:nth-child(2) {
-    width: 50% !important;
+	width: 50% !important;
 }
 
 .botonBorrarLocalStorage {
@@ -2077,4 +2045,55 @@ div.meta>div.url {
     font-size: 14px;
     line-height: 1.375em;
     font-weight: 500;
+}
+
+/* Particularidades */
+.navBarLateral {
+	margin-right: 16px;
+	border: 2px solid var(--primary-blue);
+	border-radius: 8px;
+	overflow: hidden;
+	align-self: flex-start;
+}
+
+.navBarLateral button {
+	width: 100%;
+	background: var(--white);
+	color: var(--primary-blue);
+	font-family: var(--font-family-primary);
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 22px;
+	border-radius: 0;
+	border-bottom: 0;
+	border-left: 0;
+	border-right: 0;
+	border-top: 2px solid var(--primary-blue);
+	padding: 12px 16px;
+	box-shadow: none !important;
+}
+.navBarLateral button:hover {
+	background-color: var(--primary-blue);
+	color: var(--white);
+	box-shadow: none;
+}
+.navBarLateral button:first-child{
+	border: 0 !important;
+}
+.navBarLateral > .emptyRegions{
+	display:block;
+}
+.navBarLateral > .emptyRegions:last-of-type{
+	border-top: 2px solid var(--primary-blue);
+}
+.navBarLateral > .emptyRegions:first-child{
+	border-top: 0 !important;
+}
+.navBarLateral > .emptyRegions button {
+	padding: 8px 16px;
+	background: var(--background-light-blue);
+	color: var(--medium-gray);
+	box-shadow: none !important;
+	cursor: default;
+	pointer-events: none;
 }
