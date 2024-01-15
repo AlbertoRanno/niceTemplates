@@ -5,6 +5,12 @@
     function alternarCollapse(id) {
         const elemento = document.getElementById(id);
         if (elemento) {
+            const subregiones = elemento.parentElement.querySelectorAll('.collapse');
+            subregiones.forEach((subregion) => {
+                if (subregion !== elemento) {
+                    subregion.classList.remove('active');
+                }
+            });
             elemento.classList.toggle('active');
         }
     }

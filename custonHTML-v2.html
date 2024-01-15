@@ -1,14 +1,3 @@
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-K7R0BP1SJQ"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-K7R0BP1SJQ');
-</script>
 <!-- Google Tag Manager -->
 <script>
     (function (w, d, s, l, i) {
@@ -33,6 +22,12 @@
     function alternarCollapse(id) {
         const elemento = document.getElementById(id);
         if (elemento) {
+            const subregiones = elemento.parentElement.querySelectorAll('.collapse');
+            subregiones.forEach((subregion) => {
+                if (subregion !== elemento) {
+                    subregion.classList.remove('active');
+                }
+            });
             elemento.classList.toggle('active');
         }
     }
@@ -73,8 +68,10 @@
             contenedorTitulo.appendChild(contenedorFlechaIndice);
             contenedorFlechaIndice.appendChild(imgFlechaIndice);
             contenedorFlechaIndice.addEventListener('click', function () {
-                let isActive = olSiguienteAlLiActual.classList.toggle('secondary-ol');
-                imgFlechaIndice.src = isActive ? '/@api/deki/files/101/upArrowBlue.png' :
+                let isActive = olSiguienteAlLiActual.classList.toggle(
+                    'secondary-ol');
+                imgFlechaIndice.src = isActive ?
+                    '/@api/deki/files/101/upArrowBlue.png' :
                     '/@api/deki/files/22/downArrowBlue.png.png';
                 olSiguienteAlLiActual.style.display = isActive ? 'block' : 'none';
             });
@@ -117,52 +114,113 @@
 
         //******************METRICAS TABLA DE CONTENIDO******************************** 
         var elementNav = document.querySelector(".mt-toc-content");
-        var contenido, urlDelSitio, usuarioActivoID, usuarioActivoGrupo;
+        var contenido, urlDelSitio, usuarioActivo, usuarioActivoID, usuarioActivoGrupo;
 
         elementNav.addEventListener("click", function (e) {
+            usuarioActivo = document.getElementById("usuarioActivoID");
+
             contenido = e.target.textContent;
             urlDelSitio = window.location.href;
-            usuarioActivoID = document.getElementById("usuarioActivoID");
+            usuarioActivoID = usuarioActivo.textContent;
+            usuarioActivoGrupo = obtenerNombreDeGrupo();
 
-            if (e.target.tagName === "A" && e.target.parentNode.tagName === "LI") {
-                if (!e.target.closest(".secondary-ol")) {
-                    envioDeMetricasGTM(contenido, urlDelSitio, usuarioActivoID);
-                }
-            } else if (e.target.closest(".titulo-collapsible-section")) {
-                envioDeMetricasGTM(contenido, urlDelSitio, usuarioActivoID);
-            }
+            console.log("ID: ", usuarioActivoID + " \nClick en: " + contenido + " \nUrl: " +
+                urlDelSitio, " \nGrupo: " + usuarioActivoGrupo);
         });
 
         function obtenerNombreDeGrupo() {
             var divContent = document.getElementById("usuarioActivoGrupo").textContent;
             var colonIndex = divContent.indexOf(':');
+            console.log("divContent : " + divContent + " colonIndex : " + colonIndex);
 
             if (colonIndex !== -1) {
                 var jsonName = divContent.substring(1, colonIndex).trim();
                 return jsonName;
             }
         }
-
-        function envioDeMetricasGTM(contenido, urlDelSitio, usuarioActivoID) {
-            usuarioActivoGrupo = obtenerNombreDeGrupo();
-            if (usuarioActivoID) {
-                console.log("ID: ", usuarioActivoID.textContent + " \nClick en: " + contenido + " \nUrl: " +
-                    urlDelSitio, " \nGrupo: " + usuarioActivoGrupo);
-
-                gtag('event', 'clic_tabla_de_contenidos', {
-                    'event_category': 'Indice',
-                    'event_label': contenido,
-                    'event_value': urlDelSitio,
-                    'userId': usuarioActivoID.textContent,
-                    'userGroup': usuarioActivoGrupo
-                });
-            } else {
-                console.log("Esta pagina no utiliza el template basico...");
-            }
-        }
         //****************************LISTA RESULTADOS************************************
         if (window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:Search")) {
+/*
+            document.addEventListener('click', function (event) {
+                if (event.target.tagName === 'A') {
+                    const url = event.target.href;
+                    guardarURLenLocalStorage(url);
+                }
+            });
+            document.addEventListener('contextmenu', function (event) {
+                if (event.target.tagName === 'A') {
+                    const url = event.target.href;
+                    guardarURLenLocalStorage(url);
+                }
+            });
+            //localStorage.clear();            
+            function guardarURLenLocalStorage(url) {
+                const urlsGuardadas = JSON.parse(localStorage.getItem('urlsGuardadas')) || [];
+
+                if (!urlsGuardadas.includes(url)) {
+                    urlsGuardadas.push(url);
+
+                    localStorage.setItem('urlsGuardadas', JSON.stringify(urlsGuardadas));
+
+                    console.log('Nueva URL guardada en el array:', url);
+                    console.log('URLs Guardadas:', urlsGuardadas);
+                } else {
+                    console.log('La URL ya estaba en el array:', url);
+                    console.log('URLs Guardadas:', urlsGuardadas);
+                }
+            }
+            var interval = setInterval(function () {
+                var targetNode = document.getElementById('search-results');
+                if (targetNode) {
+                    //  clearInterval(interval); // Detener la verificación periódica
+                    aplicarCambioDeColor();
+                }
+            }, 1000);
+
+            function aplicarCambioDeColor() {
+                const urlsGuardadas = JSON.parse(localStorage.getItem('urlsGuardadas')) || [];
+                document.querySelectorAll("#search-results li a").forEach(function (link) {
+                    var linkUrl = link.getAttribute("href");
+                    if (urlsGuardadas.includes(linkUrl)) {
+                        link.style.color = "#800080";
+                    }
+                });
+            }
+
+            function handleClick(event) {
+                if (event.target.tagName === 'A') {
+                    const url = event.target.href;
+                    const urlsGuardadas = JSON.parse(localStorage.getItem('urlsGuardadas')) || [];
+                    if (!urlsGuardadas.includes(url)) {
+                        urlsGuardadas.push(url);
+                        localStorage.setItem('urlsGuardadas', JSON.stringify(urlsGuardadas));
+                        console.log('Nueva URL guardada en el array:', url);
+                        console.log('URLs Guardadas:', urlsGuardadas);
+                        aplicarCambioDeColor();
+                    } else {
+                        console.log('La URL ya estaba en el array:', url);
+                        console.log('URLs Guardadas:', urlsGuardadas);
+                    }
+                }
+            }
+            document.addEventListener('click', handleClick);
+            var interval = setInterval(function () {
+                var targetNode = document.getElementById('search-results');
+                if (targetNode) {
+                    clearInterval(interval);
+                    aplicarCambioDeColor();
+                }
+            }, 1000);
+
+            var botonBorrarLocalStorage = document.createElement("button");
+            botonBorrarLocalStorage.innerHTML = "Borrar Historial";
+            botonBorrarLocalStorage.addEventListener("click", function () {
+                localStorage.removeItem('urlsGuardadas');
+                location.reload();
+            });
+*/
             setTimeout(function () {
+
                 var buscador = document.querySelector('form.mt-search-form-seated');
                 if (buscador) {
                     buscador.style.position = 'sticky';
@@ -191,8 +249,10 @@
 
                 var results = document.querySelectorAll("li.result");
                 results.forEach(function (result) {
-                    var link = result.querySelector("a.go.result-spacer.mt-tracked-result");
-                    var moreButton = result.querySelector("button.mt-help-more-content");
+                    var link = result.querySelector(
+                        "a.go.result-spacer.mt-tracked-result");
+                    var moreButton = result.querySelector(
+                        "button.mt-help-more-content");
                     if (link) {
                         var originalUrl = link.getAttribute("href");
                         result.addEventListener("click", function (event) {
@@ -203,12 +263,14 @@
                     }
                 });
 
-                let ubicacion = document.querySelector(".mt-search-filters-option-location");
+                let ubicacion = document.querySelector(
+                    ".mt-search-filters-option-location");
                 if (ubicacion) {
                     let textoEnNodo = ubicacion.childNodes[0];
                     textoEnNodo.nodeValue = "Categor\u00EDas";
                 }
-                let clasificacion = document.querySelector(".mt-search-filters-option-classifications");
+                let clasificacion = document.querySelector(
+                    ".mt-search-filters-option-classifications");
                 if (clasificacion) {
                     let textoEnNodo = clasificacion.childNodes[0];
                     textoEnNodo.nodeValue = "Caracter\u00EDsticas";
@@ -224,7 +286,8 @@
                         '.mt-search-filters-sub-options');
 
                     botonToggle.addEventListener('click', () => {
-                        if (ulColapsablesInternos.style.display === 'none') {
+                        if (ulColapsablesInternos.style.display ===
+                            'none') {
                             ulColapsablesInternos.style.display = 'block';
                         } else {
                             ulColapsablesInternos.style.display = 'none';
@@ -320,7 +383,8 @@
                 });
                 link3.appendChild(iconoCopiarlink3);
                 var link4 = document.createElement("li");
-                link4.className = "linkMasBotonCopiarPortapapeles linkMasBotonCopiarPortapapelesLink4";
+                link4.className =
+                    "linkMasBotonCopiarPortapapeles linkMasBotonCopiarPortapapelesLink4";
                 var link4P = document.createElement("p");
                 link4P.innerHTML =
                     "Para sugerir un nuevo art\u00EDculo, escribinos, desde tu cuenta de email, a contenidos\u0040osde.com.ar";
@@ -624,7 +688,8 @@
             let li6 = document.createElement('li');
             let li6Anchor = document.createElement("a");
             li6Anchor.classList.add('linkBusquedaAvanzada');
-            li6Anchor.href = "https://osde-prod2.mindtouch.us/tutoriales/edicion/opciones_de_busqueda_avanzada";
+            li6Anchor.href =
+                "https://osde-prod2.mindtouch.us/tutoriales/edicion/opciones_de_busqueda_avanzada";
             li6Anchor.textContent = 'M\u00E1s tips de b\u00FAsqueda';
             li6.appendChild(li6Anchor);
             let contenedorFlecha = document.createElement('div');
@@ -643,6 +708,15 @@
             ulSubmenu.appendChild(li6);
             liConsejos.appendChild(ulSubmenu);
             ulConsejos.appendChild(liConsejos);
+
+            if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
+
+                let liBotonBorrarLocalStorage = document.createElement('li');
+                botonBorrarLocalStorage.classList.add('botonBorrarLocalStorage');
+                liBotonBorrarLocalStorage.appendChild(botonBorrarLocalStorage)
+                ulConsejos.appendChild(botonBorrarLocalStorage);
+            }
+
             divInternoConsejos.appendChild(ulConsejos);
             divConsejos.appendChild(divInternoConsejos);
             setTimeout(function () {
@@ -843,7 +917,8 @@
             ulSubList.appendChild(listItemReintegro);
 
             let listItemAdministracion = document.createElement('li');
-            listItemAdministracion.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+            listItemAdministracion.classList.add('has-submenu', 'mt-style-conditional',
+                'style-wrap');
             let linkAdministracion = document.createElement('a');
             linkAdministracion.href = "/Cobertura";
             linkAdministracion.title = "Administraci\u00F3n";
