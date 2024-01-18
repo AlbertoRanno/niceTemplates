@@ -30,6 +30,10 @@
         });
     });
 
+    $(function () {
+        $('.tool-tip-link').tooltip();
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
 
         // ************************************* Colapsar subniveles índice *************************************
@@ -84,6 +88,13 @@
                     searchContent.style.display = 'none';
                 }
             }
+
+            var imgHome = document.querySelectorAll('img.internal');
+
+            imgHome.forEach(function (imagen) {
+                imagen.classList.add('imgHome');
+            });
+
         }
 
         //******************BORRO PLACEHOLDERS DEFAULTS**********************    

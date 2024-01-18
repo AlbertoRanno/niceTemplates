@@ -47,6 +47,10 @@
         });
     });
 
+    $(function () {
+        $('.tool-tip-link').tooltip();
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
 
         // ************************************* Colapsar subniveles índice *************************************
@@ -103,6 +107,13 @@
                     searchContent.style.display = 'none';
                 }
             }
+
+            var imgHome = document.querySelectorAll('img.internal');
+
+            imgHome.forEach(function (imagen) {
+                imagen.classList.add('imgHome');
+            });
+
         }
 
         //******************BORRO PLACEHOLDERS DEFAULTS**********************    
@@ -129,6 +140,7 @@
         });
 
         function obtenerNombreDeGrupo() {
+            console.log("JSON DE GRUPOS: ", document.getElementById("usuarioActivoGrupo"));
             var divContent = document.getElementById("usuarioActivoGrupo").textContent;
             var colonIndex = divContent.indexOf(':');
             console.log("divContent : " + divContent + " colonIndex : " + colonIndex);
@@ -140,7 +152,7 @@
         }
         //****************************LISTA RESULTADOS************************************
         if (window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:Search")) {
-/*
+
             document.addEventListener('click', function (event) {
                 if (event.target.tagName === 'A') {
                     const url = event.target.href;
@@ -218,7 +230,7 @@
                 localStorage.removeItem('urlsGuardadas');
                 location.reload();
             });
-*/
+
             setTimeout(function () {
 
                 var buscador = document.querySelector('form.mt-search-form-seated');
@@ -709,7 +721,7 @@
             liConsejos.appendChild(ulSubmenu);
             ulConsejos.appendChild(liConsejos);
 
-            if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
+            if (window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:Search")) {
 
                 let liBotonBorrarLocalStorage = document.createElement('li');
                 botonBorrarLocalStorage.classList.add('botonBorrarLocalStorage');
