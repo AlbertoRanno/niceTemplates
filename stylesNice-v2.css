@@ -142,7 +142,7 @@ h5 {
 /* Estilo de encabezado h6 */
 h6 {
 	font-weight: 600 !important;
-	font-size: 14px !important;
+	font-size: 16px !important;
 	line-height: 1.375em;
 }
 
@@ -1760,7 +1760,7 @@ li.elm-pdf-export {
 .linkBusquedaAvanzada {
 	margin: 0 !important;
 	font-weight: 100 !important;
-	font-size: 14px !important;
+	font-size: 16px !important;
 }
 
 .imgFlecha {
@@ -2116,7 +2116,8 @@ div.meta>div.url {
 .tool-tip-link { 
   background-color: var(--definition-background); 
   cursor: help;
-  padding: 2px;
+ padding: 2px;
+/*COntinuar*/
 }
 
 .ui-tooltip {
@@ -2124,4 +2125,35 @@ div.meta>div.url {
 
 .imgHome {
 width: 80px;
+filter: invert(51%) sepia(28%) saturate(4187%) hue-rotate(160deg) brightness(92%) contrast(103%);
+}
+
+/*ELIMINAR post carga*/
+.EXPAND_COLLAPSE dd {
+  border-top: 1px solid var(--secondary-light-blue) !important;
+  border-bottom: 1px solid var(--secondary-light-blue) !important;
+  padding: 5px !important;
+  margin: 5px 0 !important;
+}
+
+.mt-responsive-table {
+    width: auto !important;
+}
+
+.mt-responsive-table.medicamentos td,
+.mt-responsive-table.diagnostico td {
+    border: 1px solid var(--medium-gray);
+}
+
+.mt-responsive-table.diagnostico td:nth-child(1),
+.mt-responsive-table.diagnostico th:nth-child(1),
+.mt-responsive-table.diagnostico td:nth-child(3),
+.mt-responsive-table.diagnostico th:nth-child(3) {
+    width: 25% !important;
+}
+
+td ul li {
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+    padding: 0 !important;
 }

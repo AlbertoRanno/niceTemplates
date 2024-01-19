@@ -16,7 +16,8 @@
     })(window, document, 'script', 'dataLayer', 'GTM-P9XLPPW2');
 </script>
 <!-- End Google Tag Manager -->
-
+<script src="https://unpkg.com/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.min.js"></script>
 <script>
     //****************************COLAPSABLES****************************
     function alternarCollapse(id) {
@@ -48,7 +49,25 @@
     });
 
     $(function () {
-        $('.tool-tip-link').tooltip();
+        $('.tool-tip-link').each(function () {
+            var className = $(this).attr('class').split(' ')[1];
+            var imageSrc = getImageSrc(className);
+
+            tippy(this, {
+                content: `<img src="${imageSrc}" alt="Icono" /> Información adicional`,
+                allowHTML: true,
+            });
+        });
+
+        function getImageSrc(className) {
+            var images = {
+                'CAT-CAD': '/@api/deki/files/33/Coordi_CAT-CAD.png',
+                'CGD': '/@api/deki/files/32/Coordi_CGD.png',
+                'CAP': '/@api/deki/files/30/Sub_y_encargado_CAP.png',
+            };
+
+            return images[className] || '';
+        }
     });
 
     document.addEventListener('DOMContentLoaded', function () {
