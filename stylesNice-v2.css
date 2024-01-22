@@ -152,11 +152,14 @@ p {
 	line-height: 1.35em;
 	font-family: var(--font-family-secondary);
 	font-weight: 400;
-	margin:0.5em 0;
+	margin: 0.5em 0;
 }
-ul, ol{
-	margin:0.5em 0;
+
+ul,
+ol {
+	margin: 0.5em 0;
 }
+
 li {
 	line-height: 16px;
 	font-size: 16px;
@@ -166,7 +169,8 @@ li {
 		line-height: inherit;
 	}
 }
-.elm-meta-data.elm-meta-top li{
+
+.elm-meta-data.elm-meta-top li {
 	margin: 0 !important;
 }
 
@@ -643,42 +647,42 @@ p a {
 /* Tablas y Listas Desplegables */
 /* Expand Collapse*/
 .EXPAND_COLLAPSE dt {
-    position: relative;
-    color: var(--background-light-blue-2);
-    cursor: pointer;
-    padding: 2px 5px;
-    background: var(--super-light-gray);
-    border-top: 1px solid var(--medium-gray);
-    border-bottom: 1px solid var(--medium-gray);
-    display: flex;
-    align-items: center;
+	position: relative;
+	color: var(--background-light-blue-2);
+	cursor: pointer;
+	padding: 2px 5px;
+	background: var(--super-light-gray);
+	border-top: 1px solid var(--medium-gray);
+	border-bottom: 1px solid var(--medium-gray);
+	display: flex;
+	align-items: center;
 }
 
 .EXPAND_COLLAPSE dt:after {
-    content: "";
-    width: 0px;
-    height: 0px;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-bottom: 6px solid var(--primary-black);
-    margin-left: 5px;
-	margin-top:6px;
+	content: "";
+	width: 0px;
+	height: 0px;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid var(--primary-black);
+	margin-left: 5px;
+	margin-top: 6px;
 }
 
 .EXPAND_COLLAPSE dt.expanded:after {
-    border-top: 6px solid var(--primary-black);
-    border-bottom: none;
+	border-top: 6px solid var(--primary-black);
+	border-bottom: none;
 }
 
 .EXPAND_COLLAPSE dt:after {
-   /* position: absolute;*/
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
+	/* position: absolute;*/
+	right: 5px;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .EXPAND_COLLAPSE dt.expanded span {
-    margin-right: 20px;
+	margin-right: 20px;
 }
 
 .EXPAND_COLLAPSE dd {
@@ -867,6 +871,7 @@ thead {
 	width: 200px;
 	background-color: white;
 }
+
 /*
 .particularidades ul {
 	list-style-type: none;
@@ -885,6 +890,7 @@ thead {
 	flex-grow: 1;
 	padding: 20px;
 }
+
 /*
 .particularidades ul:not(:has(yourChildElements)){
 	display: none;
@@ -1864,6 +1870,7 @@ div.meta>div.url {
 #search-results li:hover {
 	background-color: var(--background-light-blue-2) !important
 }
+
 /*
 #search-results li a:visited {
 	color: var(--enlaceVisitadoColor);
@@ -2027,8 +2034,9 @@ div.meta>div.url {
 }
 
 /* Template y Tablas "medicamentos" */
-.mt-responsive-table.medicamentos, .mt-responsive-table.diagnostico {
-    width: auto !important;
+.mt-responsive-table.medicamentos,
+.mt-responsive-table.diagnostico {
+	width: auto !important;
 }
 
 .mt-responsive-table.medicamentos td,
@@ -2050,12 +2058,12 @@ div.meta>div.url {
 
 .botonBorrarLocalStorage {
 	background-color: var(--secondary-light-blue);
-    color: var(--primary-black);
-    margin: 5px 15px;
-    cursor: pointer;
-    font-size: 16px;
-    line-height: 1.375em;
-    font-weight: 500;
+	color: var(--primary-black);
+	margin: 5px 15px;
+	cursor: pointer;
+	font-size: 16px;
+	line-height: 1.375em;
+	font-weight: 500;
 }
 
 /* Particularidades */
@@ -2083,24 +2091,30 @@ div.meta>div.url {
 	padding: 12px 16px;
 	box-shadow: none !important;
 }
+
 .navBarLateral button:hover {
 	background-color: var(--primary-blue);
 	color: var(--white);
 	box-shadow: none;
 }
-.navBarLateral button:first-child{
+
+.navBarLateral button:first-child {
 	border: 0 !important;
 }
-.navBarLateral > .emptyRegions{
-	display:block;
+
+.navBarLateral>.emptyRegions {
+	display: block;
 }
-.navBarLateral > .emptyRegions:last-of-type{
+
+.navBarLateral>.emptyRegions:last-of-type {
 	border-top: 2px solid var(--primary-blue);
 }
-.navBarLateral > .emptyRegions:first-child{
+
+.navBarLateral>.emptyRegions:first-child {
 	border-top: 0 !important;
 }
-.navBarLateral > .emptyRegions button {
+
+.navBarLateral>.emptyRegions button {
 	padding: 8px 16px;
 	background: var(--background-light-blue);
 	color: var(--medium-gray);
@@ -2113,47 +2127,91 @@ div.meta>div.url {
 	display: none;
 }
 
-.tool-tip-link { 
-  background-color: var(--definition-background); 
-  cursor: help;
- padding: 2px;
-/*COntinuar*/
+.tool-tip-link {
+	background-color: var(--definition-background);
+	cursor: help;
+	padding: 2px;
 }
 
-.ui-tooltip {
-  background: var(--white); }
-
-.imgHome {
-width: 80px;
-filter: invert(51%) sepia(28%) saturate(4187%) hue-rotate(160deg) brightness(92%) contrast(103%);
+.imgHome1,
+.imgHome2,
+.imgHome3,
+.imgHome4,
+.imgHome5,
+.imgHome6,
+.imgHome7,
+.imgHome8,
+.imgHome9,
+.imgHome10 {
+	width: 80px;
+	filter: invert(51%) sepia(28%) saturate(4187%) hue-rotate(160deg) brightness(92%) contrast(103%);
 }
 
+/*
+.imgHome1 {
+	filter: invert(34%) sepia(58%) saturate(4899%) hue-rotate(335deg) brightness(89%) contrast(96%);
+}
+
+.imgHome2 {
+	filter: invert(10%) sepia(77%) saturate(4490%) hue-rotate(235deg) brightness(106%) contrast(107%);
+}
+
+.imgHome3 {
+	filter: invert(37%) sepia(71%) saturate(2986%) hue-rotate(7deg) brightness(97%) contrast(94%);
+}
+
+.imgHome4 {
+	filter: invert(51%) sepia(28%) saturate(4187%) hue-rotate(160deg) brightness(92%) contrast(103%);
+}
+
+.imgHome5 {
+	filter: invert(9%) sepia(12%) saturate(667%) hue-rotate(174deg) brightness(97%) contrast(90%);
+}
+
+.imgHome6 {
+	filter: invert(21%) sepia(50%) saturate(965%) hue-rotate(100deg) brightness(94%) contrast(104%);
+}
+
+.imgHome7 {
+	filter: invert(24%) sepia(53%) saturate(5456%) hue-rotate(144deg) brightness(94%) contrast(78%);
+}
+*/
 /*ELIMINAR post carga*/
 .EXPAND_COLLAPSE dd {
-  border-top: 1px solid var(--secondary-light-blue) !important;
-  border-bottom: 1px solid var(--secondary-light-blue) !important;
-  padding: 5px !important;
-  margin: 5px 0 !important;
+	border-top: 1px solid var(--secondary-light-blue) !important;
+	border-bottom: 1px solid var(--secondary-light-blue) !important;
+	padding: 5px !important;
+	margin: 5px 0 !important;
 }
 
 .mt-responsive-table {
-    width: auto !important;
+	width: auto !important;
 }
 
 .mt-responsive-table.medicamentos td,
 .mt-responsive-table.diagnostico td {
-    border: 1px solid var(--medium-gray);
+	border: 1px solid var(--medium-gray);
 }
 
 .mt-responsive-table.diagnostico td:nth-child(1),
 .mt-responsive-table.diagnostico th:nth-child(1),
 .mt-responsive-table.diagnostico td:nth-child(3),
 .mt-responsive-table.diagnostico th:nth-child(3) {
-    width: 25% !important;
+	width: 25% !important;
 }
 
 td ul li {
-    margin-top: 4px !important;
-    margin-bottom: 4px !important;
-    padding: 0 !important;
+	margin-top: 4px !important;
+	margin-bottom: 4px !important;
+	padding: 0 !important;
+}
+
+.tippy-box {
+	border-radius: 5px;
+	background-color: var(--secondary-background);
+}
+
+.tippy-box img {
+	max-width: 25px;
+	height: auto;
 }

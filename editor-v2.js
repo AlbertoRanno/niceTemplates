@@ -9,7 +9,11 @@ CKEDITOR.editorConfig = function(config) {
     config.stylesSet.push({ name : 'definitionBox', element : 'p', wrap:true, attributes : { 'class' : 'definitionBox'} });
     config.stylesSet.push({ name : 'hasContent', wrap:false, attributes : { 'class' : 'hasContent'} });
     config.stylesSet.push({ name : 'emptyRegions', wrap:false, attributes : { 'class' : 'emptyRegions'} });
-    config.stylesSet.push({ name : 'tooltips', wrap: false, attributes: { 'class': 'tool-tip-link', 'title': '{{reemplazarAqui}}'}});
+    // config.stylesSet.push({ name : 'tooltips', wrap: false, attributes: { 'class': 'tool-tip-link', 'title': '{{reemplazarAqui}}'}});
+    
+    config.stylesSet.push({ name : 'tooltips_CAT-CAD', wrap: false, attributes: { 'class': 'tool-tip-link CAT-CAD'}});
+    config.stylesSet.push({ name : 'tooltips_CGD', wrap: false, attributes: { 'class': 'tool-tip-link CGD'}});
+    config.stylesSet.push({ name : 'tooltips_CAP', wrap: false, attributes: { 'class': 'tool-tip-link CAP'}});
 
     config.stylesSet.push({ name : '2 Columnas', element : 'div', wrap:true, attributes : { 'class' : 'generateColumns twoColumns' } });
     config.stylesSet.push({ name : '3 Columnas', element : 'div', wrap:true, attributes : { 'class' : 'generateColumns threeColumns' } });

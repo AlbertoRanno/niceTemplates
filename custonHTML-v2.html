@@ -54,8 +54,9 @@
             var imageSrc = getImageSrc(className);
 
             tippy(this, {
-                content: `<img src="${imageSrc}" alt="Icono" /> Información adicional`,
+                content: `<img src="${imageSrc}" alt="Icono" />`,
                 allowHTML: true,
+                theme: 'tooltip-custom',
             });
         });
 
@@ -129,8 +130,10 @@
 
             var imgHome = document.querySelectorAll('img.internal');
 
-            imgHome.forEach(function (imagen) {
-                imagen.classList.add('imgHome');
+            imgHome.forEach(function (imagen, index) {
+
+                var imgHomeSucesivas = 'imgHome' + (index + 1);
+                imagen.classList.add(imgHomeSucesivas);
             });
 
         }

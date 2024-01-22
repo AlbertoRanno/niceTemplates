@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        .tippy-box {
+            border-radius: 5px;
+            background-color: var(--secondary-background);
+        }
+
+        .tippy-box img {
+            max-width: 25px;
+            height: auto;
+        }
+    </style>
+   
+html
+Copy code
+<!-- Se cargan las bibliotecas Popper.js y Tippy.js desde CDN para ser utilizadas en el script -->
+<script src="https://unpkg.com/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.min.js"></script>
+<!--
+CDN significa "Content Delivery Network" (Red de Entrega de Contenido), y es una red de servidores distribuidos geográficamente que trabajan juntos 
+para proporcionar un rápido y eficiente suministro de contenido web. Cuando se carga una biblioteca desde un CDN, estás obteniendo esa biblioteca 
+desde uno de los servidores de la red en lugar de descargarla directamente desde el servidor del sitio web que estás visitando.
+
+Aquí hay una explicación paso a paso de cómo se cargan bibliotecas desde un CDN:
+
+Referencia a la Biblioteca en el HTML:
+En el HTML de la página web, se agrega una etiqueta <script> con la URL de la biblioteca alojada en el CDN. Por ejemplo:
+<script src="https://unpkg.com/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+Esta línea indica al navegador que cargue el archivo JavaScript popper.min.js desde el CDN https://unpkg.com/.
+
+Beneficios de Usar un CDN:
+Velocidad: Los CDNs tienen servidores distribuidos globalmente. Cuando un usuario solicita una biblioteca, se le entrega desde el servidor más cercano,
+ lo que reduce el tiempo de carga.
+Caché Compartida: Muchos sitios web pueden compartir la misma versión de la biblioteca, lo que significa que si un usuario ya ha visitado un sitio
+ que utiliza esa biblioteca, es probable que ya tenga en caché esa versión, acelerando la carga en otros sitios que también la usen.
+-->
+<!-- Inicio del script -->
+<script>
+    $(function () {
+        // Se seleccionan todos los elementos con la clase 'tool-tip-link' (clase que se agrega gracias al editor de Nice) y se itera sobre cada uno de ellos
+        $('.tool-tip-link').each(function () {
+            // Se obtiene la segunda clase del elemento actual y se guarda en la variable 'className'
+            var className = $(this).attr('class').split(' ')[1];
+
+            // Se obtiene la ruta de la imagen correspondiente a la clase actual mediante la función 'getImageSrc'
+            var imageSrc = getImageSrc(className);
+
+            // Se inicializa un tooltip utilizando Tippy.js en el elemento actual
+            tippy(this, {
+                // Se define el contenido del tooltip como una etiqueta de imagen con la ruta obtenida
+                content: `<img src="${imageSrc}" alt="Icono" />`,
+                // Se podría agregarle texto al lado de la imagen con:
+                //  content: `<img src="${imageSrc}" alt="Icono" />, texto extra`,
+                // Este sería el mismo para todas las clases... pero se podría ver de cambiarlo...
+                // Permite el uso de HTML en el contenido del tooltip (lo que permite la imagen)
+                allowHTML: true,
+                // Agrega la clase de estilo personalizado al tooltip
+                theme: 'tooltip-custom',
+                // Se define un evento que se ejecutará al mostrar el tooltip, imprime información útil en la consola
+                onShow(instance) {
+                    console.log(instance.popper);
+                },
+            });
+        });
+
+        // Función que devuelve la ruta de la imagen asociada a una clase dada
+        function getImageSrc(className) {
+            var images = {
+                'CAT-CAD': '/@api/deki/files/33/Coordi_CAT-CAD.png',
+                'CGD': '/@api/deki/files/32/Coordi_CGD.png',
+                'CAP': '/@api/deki/files/30/Sub_y_encargado_CAP.png',
+            };
+
+            // Devuelve la ruta de la imagen correspondiente a la clase, o cadena vacía si no hay coincidencia
+            return images[className] || '';
+        }
+    });
+    /*Ejecución paso a paso:
+
+Carga de Bibliotecas: Se cargan las bibliotecas Popper.js y Tippy.js desde CDN.
+Inicio del Script: Se inicia el script JavaScript.
+Selección de Elementos: Se seleccionan todos los elementos con la clase 'tool-tip-link' y se itera sobre cada uno de ellos.
+Obtención de Clase: Se obtiene la segunda clase del elemento actual y se guarda en la variable 'className'.
+Obtención de Ruta de Imagen: Se obtiene la ruta de la imagen correspondiente a la clase actual mediante la función 'getImageSrc'.
+Inicialización del Tooltip: Se inicializa un tooltip utilizando Tippy.js en el elemento actual, con contenido HTML y estilos personalizados.
+Evento onShow: Se define un evento que se ejecutará al mostrar el tooltip, imprime información útil en la consola.
+Función getImageSrc: Función que devuelve la ruta de la imagen asociada a una clase dada.
+Fin del Script: Se cierra el script JavaScript.*/
+</script>
+
+
+</body>
+
+</html>
