@@ -2144,10 +2144,9 @@ div.meta>div.url {
 .imgHome9,
 .imgHome10 {
 	width: 80px;
-	filter: invert(51%) sepia(28%) saturate(4187%) hue-rotate(160deg) brightness(92%) contrast(103%);
+    filter: invert(51%) sepia(28%) saturate(4187%) hue-rotate(160deg) brightness(92%) contrast(103%);
 }
 
-/*
 .imgHome1 {
 	filter: invert(34%) sepia(58%) saturate(4899%) hue-rotate(335deg) brightness(89%) contrast(96%);
 }
@@ -2175,43 +2174,35 @@ div.meta>div.url {
 .imgHome7 {
 	filter: invert(24%) sepia(53%) saturate(5456%) hue-rotate(144deg) brightness(94%) contrast(78%);
 }
-*/
-/*ELIMINAR post carga*/
-.EXPAND_COLLAPSE dd {
-	border-top: 1px solid var(--secondary-light-blue) !important;
-	border-bottom: 1px solid var(--secondary-light-blue) !important;
-	padding: 5px !important;
-	margin: 5px 0 !important;
-}
 
 .mt-responsive-table {
-	width: auto !important;
+    width: auto !important;
 }
 
 .mt-responsive-table.medicamentos td,
 .mt-responsive-table.diagnostico td {
-	border: 1px solid var(--medium-gray);
+    border: 1px solid var(--medium-gray);
 }
 
 .mt-responsive-table.diagnostico td:nth-child(1),
 .mt-responsive-table.diagnostico th:nth-child(1),
 .mt-responsive-table.diagnostico td:nth-child(3),
 .mt-responsive-table.diagnostico th:nth-child(3) {
-	width: 25% !important;
+    width: 25% !important;
 }
 
-td ul li {
-	margin-top: 4px !important;
-	margin-bottom: 4px !important;
-	padding: 0 !important;
+td ul li, div ul li {
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+    padding: 0 !important;
 }
 
 .tippy-box {
-	border-radius: 5px;
-	background-color: var(--secondary-background);
+    border-radius: 5px;
+    background-color: var(--secondary-background);
 }
 
 .tippy-box img {
-	max-width: 25px;
-	height: auto;
+    max-width: 25px;
+    height: auto;
 }

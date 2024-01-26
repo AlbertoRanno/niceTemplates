@@ -1,0 +1,36 @@
+.EXPAND_COLLAPSE dt {
+    border: 2px green solid !important;
+    padding: 3px;
+}
+
+.EXPAND_COLLAPSE dd {
+    border: 2px red solid;
+    padding: 3px;
+}
+
+.EXPAND_COLLAPSE {
+    border: 2px blue solid;
+    padding: 5px !important;
+}
+
+#contenidoBuenosAires,
+#contenidoCordoba,
+#contenidoCuyo,
+#contenidoMetropolitana,
+#contenidoNEA,
+#contenidoNOA,
+#contenidoSur {
+    border: 3px black solid;
+    padding: 5px !important;
+    margin: 5px !important;
+}
+
+/*  Si esto no va... y solo aplica el CSS Gral... agregarle al mismo y eliminar post carga:
+
+ .EXPAND_COLLAPSE dd {
+    border-top: 1px solid var(--secondary-light-blue) !important;
+    border-bottom: 1px solid var(--secondary-light-blue) !important;
+    padding: 5px !important;
+    margin: 5px 0 !important;
+  }
+*/

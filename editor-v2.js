@@ -14,6 +14,10 @@ CKEDITOR.editorConfig = function(config) {
     config.stylesSet.push({ name : 'tooltips_CAT-CAD', wrap: false, attributes: { 'class': 'tool-tip-link CAT-CAD'}});
     config.stylesSet.push({ name : 'tooltips_CGD', wrap: false, attributes: { 'class': 'tool-tip-link CGD'}});
     config.stylesSet.push({ name : 'tooltips_CAP', wrap: false, attributes: { 'class': 'tool-tip-link CAP'}});
+    config.stylesSet.push({ name : 'tooltips_todosLosPuestos', wrap: false, attributes: { 'class': 'tool-tip-link todosLosPuestos'}});
+    config.stylesSet.push({ name : 'tooltips_CAT-CGD', wrap: false, attributes: { 'class': 'tool-tip-link CAT-CGD'}});
+    config.stylesSet.push({ name : 'tooltips_CGD-CAP', wrap: false, attributes: { 'class': 'tool-tip-link CGD-CAP'}});
+    config.stylesSet.push({ name : 'tooltips_CAT-CAP', wrap: false, attributes: { 'class': 'tool-tip-link CAT-CAP'}});
 
     config.stylesSet.push({ name : '2 Columnas', element : 'div', wrap:true, attributes : { 'class' : 'generateColumns twoColumns' } });
     config.stylesSet.push({ name : '3 Columnas', element : 'div', wrap:true, attributes : { 'class' : 'generateColumns threeColumns' } });

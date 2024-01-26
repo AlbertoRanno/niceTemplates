@@ -73,6 +73,19 @@
 
     document.addEventListener('DOMContentLoaded', function () {
 
+        //****************************METRICAS POR AGRUPADOR****************************
+        var selectElement, selectValue;
+        selectElement = document.getElementById("live-tag-article-select");
+        console.log("selectElement: ", selectElement);
+
+        selectedValue = selectElement.options[selectElement.selectedIndex].value;
+        console.log("selectedValue: ", selectedValue);
+
+        if (selectedValue !== "article:topic-category" && selectedValue !== "article:topic-guide") {
+            console.log("Estoy dentro de un articulo...");
+        } else {
+            console.log("Estoy dentro de una categoria o guia...");
+        }
         // ************************************* Colapsar subniveles índice *************************************
         let liPrincipalesConOlInternos = document.querySelectorAll(
             '#mt-toc-container > nav > ol > li:has(> ol)');
@@ -120,6 +133,8 @@
 
         //******************EVITO DOBLE BUSCADOR HOME************************
         if (window.location.href === 'https://osde-prod2.mindtouch.us/') {
+            obtenerDatosDeUsuario();
+
             var searchElement = document.querySelector('li.elm-global-search');
             if (searchElement) {
                 var searchContent = searchElement.querySelector('.mt-quick-search-container');
@@ -147,25 +162,31 @@
 
         //******************METRICAS TABLA DE CONTENIDO******************************** 
         var elementNav = document.querySelector(".mt-toc-content");
-        var contenido, urlDelSitio, usuarioActivo, usuarioActivoID, usuarioActivoGrupo;
-
+        var contenido, urlDelSitio;
         elementNav.addEventListener("click", function (e) {
-            usuarioActivo = document.getElementById("usuarioActivoID");
 
             contenido = e.target.textContent;
             urlDelSitio = window.location.href;
+            obtenerDatosDeUsuario();
+
+            console.log("Click en: " + contenido + " \nUrl: " + urlDelSitio);
+        });
+
+        function obtenerDatosDeUsuario() {
+            var usuarioActivo, usuarioActivoID, usuarioActivoGrupo;
+
+            usuarioActivo = document.getElementById("usuarioActivoID");
             usuarioActivoID = usuarioActivo.textContent;
             usuarioActivoGrupo = obtenerNombreDeGrupo();
 
-            console.log("ID: ", usuarioActivoID + " \nClick en: " + contenido + " \nUrl: " +
-                urlDelSitio, " \nGrupo: " + usuarioActivoGrupo);
-        });
+            console.log("ID de usuario: ", usuarioActivoID + " \n Grupo al que pertenece: " +
+                usuarioActivoGrupo);
+        }
 
         function obtenerNombreDeGrupo() {
-            console.log("JSON DE GRUPOS: ", document.getElementById("usuarioActivoGrupo"));
+
             var divContent = document.getElementById("usuarioActivoGrupo").textContent;
             var colonIndex = divContent.indexOf(':');
-            console.log("divContent : " + divContent + " colonIndex : " + colonIndex);
 
             if (colonIndex !== -1) {
                 var jsonName = divContent.substring(1, colonIndex).trim();

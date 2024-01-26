@@ -1,8 +1,10 @@
-  $(function() {
-    $('.EXPAND_COLLAPSE').find('dt').on('click', function() {
-        $(this).next().toggle('350');   
-     });
+$(function () {
+  $('.EXPAND_COLLAPSE').find('dt').addClass('expanded');
+  $('.EXPAND_COLLAPSE').find('dt').on('click', function () {
+      $(this).next().toggle('350');
+      $(this).toggleClass('expanded');
   });
+});
 
     /* función que se encarga de alternar la visibilidad de un elemento específico y ocultar otros*/
         
@@ -35,3 +37,19 @@
   En resumen, esta función busca un elemento en el DOM por su ID, y si existe, alterna la clase 'active'en ese elemento para controlar
   su visibilidad.Además, desactiva la clase 'active' en otras subregiones del mismo padre para ocultarlas y garantizar que solo una subregión 
   esté visible a la vez. Esto puede ser útil en implementaciones de sistemas de colapsar o expandir secciones en una interfaz de usuario*/
+
+
+
+
+  function alternarCollapse(id) {
+    const elemento = document.getElementById(id);
+    if (elemento) {
+        const subregiones = elemento.parentElement.querySelectorAll('.collapse');
+        subregiones.forEach((subregion) => {
+            if (subregion !== elemento) {
+                subregion.classList.remove('active');
+            }
+        });
+        elemento.classList.toggle('active');
+    }
+}
