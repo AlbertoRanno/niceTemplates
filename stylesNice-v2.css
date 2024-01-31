@@ -877,6 +877,7 @@ thead {
 	list-style-type: none;
 }
 */
+
 .particularidades li {
 	padding: 10px;
 }
@@ -896,7 +897,6 @@ thead {
 	display: none;
 }
 */
-
 
 /* Accordion */
 .accordion {
@@ -2144,7 +2144,7 @@ div.meta>div.url {
 .imgHome9,
 .imgHome10 {
 	width: 80px;
-    filter: invert(51%) sepia(28%) saturate(4187%) hue-rotate(160deg) brightness(92%) contrast(103%);
+	filter: invert(51%) sepia(28%) saturate(4187%) hue-rotate(160deg) brightness(92%) contrast(103%);
 }
 
 .imgHome1 {
@@ -2176,33 +2176,38 @@ div.meta>div.url {
 }
 
 .mt-responsive-table {
-    width: auto !important;
+	width: auto !important;
 }
 
 .mt-responsive-table.medicamentos td,
 .mt-responsive-table.diagnostico td {
-    border: 1px solid var(--medium-gray);
+	border: 1px solid var(--medium-gray);
 }
 
 .mt-responsive-table.diagnostico td:nth-child(1),
 .mt-responsive-table.diagnostico th:nth-child(1),
 .mt-responsive-table.diagnostico td:nth-child(3),
 .mt-responsive-table.diagnostico th:nth-child(3) {
-    width: 25% !important;
+	width: 25% !important;
 }
 
-td ul li, div ul li {
-    margin-top: 4px !important;
-    margin-bottom: 4px !important;
-    padding: 0 !important;
+td ul li,
+div ul li {
+	margin-top: 4px !important;
+	margin-bottom: 4px !important;
+	padding: 0 !important;
 }
 
 .tippy-box {
-    border-radius: 5px;
-    background-color: var(--secondary-background);
+	border-radius: 5px;
+	background-color: var(--secondary-background);
 }
 
 .tippy-box img {
-    max-width: 25px;
-    height: auto;
+	max-width: 25px;
+	height: auto;
+}
+
+.contenidosRegiones button.filialActiva {
+	box-shadow: 0 5px 5px rgba(0, 0, 0, .6) !important;
 }

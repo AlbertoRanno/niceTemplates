@@ -315,3 +315,492 @@
     </div>
     </div>
        
+<script>
+    /****************************************************   EN LIMPIO PARA EL HEAD:
+
+let ultimoBotonClickeado = null;
+
+function alternarCollapse(id) {
+    const elemento = document.getElementById(id);
+    if (elemento) {
+        const subregiones = elemento.parentElement.querySelectorAll('.collapse');
+        subregiones.forEach((subregion) => {
+            if (subregion !== elemento) {
+                subregion.classList.remove('active');
+            }
+        });
+        elemento.classList.toggle('active');
+
+        const boton = obtenerBotonPorId(id);
+        resaltarBoton(boton);
+    }
+}
+
+function resaltarBoton(boton) {
+    if (ultimoBotonClickeado) {
+        ultimoBotonClickeado.classList.remove('filialActiva');       
+    }
+
+    if (boton) {
+        boton.classList.add('filialActiva');
+        ultimoBotonClickeado = boton;
+    }
+}
+
+function obtenerBotonPorId(id) {
+    const botones = document.querySelectorAll('.contenidosRegiones button');
+    for (const boton of botones) {
+        if (boton.getAttribute('onclick') === `alternarCollapse('${id}')`) {
+            return boton;
+        }
+    }
+    return null;
+}
+*/
+
+/* NOTA: Por pro, o contra, cuando se vuelve a clickear la filial que estaba mostrando contenido, el contenido se oculta,
+pero la sombra sigue bajo ella, hasta que se clickee una nueva filial */
+
+
+// Funciones para alternar la visibilidad de un elemento y resaltar el botón clickeado
+
+// Variable para almacenar el último botón clickeado
+let ultimoBotonClickeado = null;
+
+function alternarCollapse(id) {
+    //Esta funcion le agrega o quita la clase 'active' solo a las regiones  // El hecho de que en las filiales muestre solo una el contenido, lo logra el CSS
+
+    // Obtener el elemento correspondiente al ID
+    const elemento = document.getElementById(id);
+
+    // Si el elemento existe
+    if (elemento) {
+        // Obtener todas las subregiones dentro del mismo contenedor (no guiarse por la palabra subregiones, realmente solo se maneja el contenido de regiones)
+        const subregiones = elemento.parentElement.querySelectorAll('.collapse');
+
+        // Ocultar otras subregiones y alternar la clase 'active' en la subregión actual
+        subregiones.forEach((subregion) => {
+            if (subregion !== elemento) {
+                subregion.classList.remove('active');
+            }
+        });
+        elemento.classList.toggle('active');
+
+        // Resaltar el botón correspondiente
+        const boton = obtenerBotonPorId(id); //Guarda en 'boton' la ejecucion de la funcion obtenerBotonPorId, en el id de la region activa
+        resaltarBoton(boton); //llama a la funcion resaltarBoton, indicandole cual fue el boton que mostro el contenido activo
+    }
+}
+
+// Función para resaltar un botón
+function resaltarBoton(boton) {
+    // Desresaltar el último botón clickeado y su span interno si existe
+    if (ultimoBotonClickeado) {
+        ultimoBotonClickeado.classList.remove('filialActiva'); //Si ya habia un boton clickeado, con el efecto de filialActiva, le quita la clase
+        // const spanInternoAnterior = ultimoBotonClickeado.querySelector('.hasContent'); //TODA LA PARTE DE APLICARLE LA CLASE TAMBIEN A LOS SPAN DENTRO DE LOS BOTONES, QUEDO EN DESUSO!
+        // if (spanInternoAnterior) {
+        //     spanInternoAnterior.classList.remove('filialActiva');
+        // }
+    }
+
+    // Si el botón actual existe
+    if (boton) {
+        // Resaltar el botón y su span interno si existe
+        boton.classList.add('filialActiva'); //Si se encuentra al boton que hizo la llamada para mostrar el contenido activo, se le aplica la clase
+        // const spanInterno = boton.querySelector('.hasContent');
+        // if (spanInterno) {
+        //     spanInterno.classList.add('filialActiva');
+        // }
+
+        // Actualizar el último botón clickeado
+        ultimoBotonClickeado = boton; //Para tener un flujo de control por si habia otro boton ya con esa clase
+    }
+}
+
+// Función para obtener un botón por su ID
+function obtenerBotonPorId(id) {
+    // Obtener todos los botones dentro de '.contenidosRegiones'
+    const botones = document.querySelectorAll('.contenidosRegiones button');
+
+    // Iterar sobre los botones
+    for (const boton of botones) {
+        // Verificar si el atributo 'onclick' coincide con el ID proporcionado
+        if (boton.getAttribute('onclick') === `alternarCollapse('${id}')`) {
+            return boton;  // Devolver el botón encontrado
+        }
+    }
+    return null;  // Devolver null si no se encuentra ningún botón
+}
+
+/* Paso a paso:
+Ahora, una explicación más detallada:
+
+1-let ultimoBotonClickeado = null;: Esta variable se utiliza para almacenar la referencia al último botón que ha sido clickeado. 
+Inicialmente, se establece en null porque aún no se ha clickeado ningún botón.
+
+2-function alternarCollapse(id) { ... }: Esta función se encarga de alternar la visibilidad de un elemento (una subregión) y resaltar el botón correspondiente.
+
+3-const elemento = document.getElementById(id);: Se obtiene la referencia al elemento correspondiente al ID proporcionado.
+
+4-const subregiones = elemento.parentElement.querySelectorAll('.collapse');: Se obtienen todas las subregiones dentro del mismo contenedor que el elemento actual.
+
+5-subregiones.forEach((subregion) => { ... }: Se itera sobre todas las subregiones para ocultar aquellas que no sean la actual.
+
+6-elemento.classList.toggle('active');: Se alterna la clase 'active' en la subregión actual, lo que controla su visibilidad.
+
+7-const boton = obtenerBotonPorId(id);: Se obtiene el botón correspondiente al ID proporcionado.
+
+8-resaltarBoton(boton);: Se llama a la función resaltarBoton para resaltar el botón.
+
+9-function resaltarBoton(boton) { ... }: Esta función se encarga de resaltar el botón clickeado.
+
+10-if (ultimoBotonClickeado) { ... }: Si hay un último botón clickeado, se desresalta.
+
+11-boton.classList.add('filialActiva');: Se añade la clase 'filialActiva' al botón actual.
+
+12-const spanInterno = boton.querySelector('.hasContent');: Se busca el span interno del botón (si existe).
+
+13-spanInterno.classList.add('filialActiva');: Se añade la clase 'filialActiva' al span interno (si existe).
+
+14-ultimoBotonClickeado = boton;: Se actualiza el último botón clickeado con el botón actual.
+
+15-function obtenerBotonPorId(id) { ... }: Esta función busca y devuelve el botón correspondiente al ID proporcionado.
+*/
+
+/* JS PREVIO A LA FUNCION DE APLICAR LA CLASE 'filialActiva'
+
+$(function () {
+  $('.EXPAND_COLLAPSE').find('dt').addClass('expanded');
+  $('.EXPAND_COLLAPSE').find('dt').on('click', function () {
+      $(this).next().toggle('350');
+      $(this).toggleClass('expanded');
+  });
+});
+
+    // función que se encarga de alternar la visibilidad de un elemento específico y ocultar otros
+        
+
+    // La función alternarCollapse recibe un parámetro 'id', el cual será, si existe, el identificador único del elemento a manejar.
+    function alternarCollapse(id) {
+      // Se busca el elemento en el DOM con el ID proporcionado.
+      const elemento = document.getElementById(id);
+
+      // Se verifica si el elemento existe.
+      if (elemento) {
+          // Se obtienen todas las subregiones del elemento padre que tengan la clase 'collapse'.
+          const subregiones = elemento.parentElement.querySelectorAll('.collapse');
+
+          // Se itera sobre todas las subregiones encontradas.
+          subregiones.forEach((subregion) => {
+              // Se verifica si la subregión actual no es la misma que el elemento proporcionado.
+              if (subregion !== elemento) {
+                  // Si no es la misma, se le quita la clase 'active' para ocultarla.
+                  subregion.classList.remove('active');
+              }
+          });
+
+          // Finalmente, se le añade o quita la clase 'active' al elemento proporcionado, alternando su visibilidad.
+          elemento.classList.toggle('active');
+      }
+  }
+
+  
+//   En resumen, esta función busca un elemento en el DOM por su ID, y si existe, alterna la clase 'active'en ese elemento para controlar
+//   su visibilidad.Además, desactiva la clase 'active' en otras subregiones del mismo padre para ocultarlas y garantizar que solo una subregión 
+//   esté visible a la vez. Esto puede ser útil en implementaciones de sistemas de colapsar o expandir secciones en una interfaz de usuario
+*/
+</script>
+
+<style>
+    /*Ubicado en el ARCHIVO, PARA EDICION de los DATA-ENTRY en NIce*/
+
+/* Oculta los contenidos */
+.collapse {
+    display: none;
+  }
+  
+  /* Muestra los contenidos cuando están activos */
+  .collapse.active {
+    display: block;
+  }
+  
+/*EN el css general del HEAD:*/
+
+/* Particularidades */
+.particularidades {
+	display: flex;
+}
+
+.particularidades .navBarLateral {
+	width: 200px;
+	background-color: white;
+}
+
+.particularidades ul {
+	list-style-type: none;
+}
+
+.particularidades li {
+	padding: 10px;
+}
+
+.particularidades a {
+	text-decoration: none;
+	color: #000;
+}
+
+.particularidades .content {
+	flex-grow: 1;
+	padding: 20px;
+}
+
+/*.particularidades .hidden {
+	/* display: none; 
+                         en CSS de la NavBar */
+/*}*/
+
+/* Particularidades */
+.navBarLateral {
+	margin-right: 16px;
+}
+
+.navBarLateral button {
+	width: 100%;
+	border: 2px solid var(--primary-blue);
+	background: var(--white);
+	color: var(--primary-blue);
+	font-family: var(--font-family-primary);
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 22px;
+	border-radius: 0;
+	border-bottom: 0;
+	padding: 12px 16px;
+	box-shadow: none !important;
+}
+
+.navBarLateral button:first-child {
+	border-radius: 16px 16px 0 0;
+}
+
+.navBarLateral button:last-of-type {
+	border-radius: 0 0 16px 16px;
+	border-bottom: 2px solid var(--primary-blue);
+}
+
+.navBarLateral button:hover {
+	background-color: var(--primary-blue);
+	color: var(--white);
+	box-shadow: none;
+}
+
+.contenidosRegiones {
+	width: 100%;
+}
+
+.contenidosRegiones .collapse-buttons {
+	display: flex;
+}
+
+.contenidosRegiones button,
+.contenidosRegiones button:hover {
+	border: 2px solid var(--primary-blue);
+	font-family: var(--font-family-primary);
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 22px;
+	border-radius: 0;
+	padding: 8px 16px;
+	border-right: 0;
+	background: var(--background-light-blue);
+	color: var(--medium-gray);
+	box-shadow: none !important;
+	cursor: default;
+	pointer-events: none;
+}
+
+#editform .contenidosRegiones button,
+#editform .contenidosRegiones button:hover {
+	pointer-events: inherit;
+}
+
+.contenidosRegiones button:first-child {
+	border-radius: 16px 0 0 0;
+}
+
+.contenidosRegiones button:last-of-type {
+	border-radius: 0 16px 0 0;
+	border-right: 2px solid var(--primary-blue);
+}
+
+
+/* Para distinguir los botones que van a quedar SIN contenido */
+.contenidosRegiones button:has(span.hasContent) {
+	background: var(--white);
+	color: var(--primary-blue);
+	border: 2px solid var(--primary-blue);
+	border-right: 0;
+	cursor: pointer;
+	pointer-events: inherit;
+}
+
+.contenidosRegiones button:has(span.hasContent):last-of-type {
+	border-right: 2px solid var(--primary-blue);
+}
+
+.contenidosRegiones button:has(span.hasContent:hover) {
+	background-color: var(--primary-blue);
+	color: var(--white);
+	box-shadow: none;
+}
+
+.contenidosRegiones button:has(span.hasContent:hover) span.hasContent {
+	color: var(--white);
+}
+
+.contenidosRegiones button:has(span.hasContent):focus {
+	box-shadow: none;
+}
+
+.contenidosRegiones .contecontenidosLocalidades>div {
+	padding: 16px 0;
+	border-bottom: 2px solid var(--light-gray);
+}
+
+.emptyRegions button {
+  border-radius: 0 !important;
+  padding: 8px 16px;
+  background: var(--background-light-blue);
+  color: var(--medium-gray);
+  box-shadow: none !important;
+  cursor: default;
+  pointer-events: none;
+  border-bottom: 0 !important;
+}
+
+
+/* EXPLICACION:
+
+Entendiendo como funciona el CSS que Rodo le aplicó a Particularidades:
+
+/* Particularidades 
+.navBarLateral {
+	margin-right: 16px;
+}
+.navBarLateral button {
+	width: 100%;
+	border: 2px solid var(--primary-blue);
+	background: var(--white);
+	color: var(--primary-blue);
+	font-family: var(--font-family-primary);
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 22px;
+	border-radius: 0;
+	border-bottom: 0;
+	padding: 12px 16px;
+	box-shadow: none !important;
+}
+.navBarLateral button:first-child {
+	border-radius: 16px 16px 0 0;
+}
+.navBarLateral button:last-of-type {
+	border-radius: 0 0 16px 16px;
+	border-bottom: 2px solid var(--primary-blue);
+}
+.navBarLateral button:hover {
+	background-color: var(--primary-blue);
+	color: var(--white);
+	box-shadow: none;
+}
+.contenidosRegiones {
+	width: 100%;
+}
+.contenidosRegiones .collapse-buttons {
+	display: flex;
+}
+.contenidosRegiones button,
+.contenidosRegiones button:hover {
+	border: 2px solid var(--primary-blue);
+	font-family: var(--font-family-primary);
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 22px;
+	border-radius: 0;
+	padding: 8px 16px;
+	border-right: 0;
+	background: var(--background-light-blue);
+	color: var(--medium-gray);
+	box-shadow: none !important;
+	cursor: default;
+	pointer-events: none;
+}
+#editform .contenidosRegiones button,
+#editform .contenidosRegiones button:hover{
+	pointer-events: inherit;
+}
+.contenidosRegiones button:first-child {
+	border-radius: 16px 0 0 0;
+}
+.contenidosRegiones button:last-of-type {
+	border-radius: 0 16px 0 0;
+	border-right: 2px solid var(--primary-blue);
+}
+
+
+/* Para distinguir los botones que van a quedar SIN contenido 
+.contenidosRegiones button:has(span.hasContent) {
+	background: var(--white);
+	color: var(--primary-blue);
+	border: 2px solid var(--primary-blue);
+	border-right: 0;
+	cursor:pointer;
+	pointer-events: inherit;
+}
+.contenidosRegiones button:has(span.hasContent):last-of-type {
+	border-right: 2px solid var(--primary-blue);
+}
+.contenidosRegiones button:has(span.hasContent:hover) {
+	background-color: var(--primary-blue);
+	color: var(--white);
+	box-shadow: none;
+}
+.contenidosRegiones button:has(span.hasContent:hover) span.hasContent {
+	color: var(--white);
+}
+.contenidosRegiones button:has(span.hasContent):focus {
+	box-shadow: none;
+}
+.contenidosRegiones .contecontenidosLocalidades > div {
+	padding: 16px 0;
+	border-bottom: 2px solid var(--light-gray);
+}
+
+
+ 
+
+
+La propiedad que está relacionada con el hecho de que, al hacer clic en un determinado lugar, se realice un evento que abre un div suele ser la propiedad cursor: pointer;. Esta propiedad cambia el cursor cuando pasa sobre un elemento, indicando que es interactivo y puede hacer clic.
+
+En tu código, puedes observar esta propiedad en la siguiente parte:
+
+.contenidosRegiones button,
+.contenidosRegiones button:hover {
+  /* ... otras propiedades ... 
+  cursor: default; /* Aquí se establece inicialmente como predeterminado 
+  pointer-events: none; /* Aquí se deshabilita la interacción inicialmente 
+}
+
+#editform .contenidosRegiones button,
+#editform .contenidosRegiones button:hover {
+  pointer-events: inherit; /* Aquí se habilita la interacción al pasar por #editform 
+}
+En este caso, los botones dentro de .contenidosRegiones inicialmente tienen cursor: default; y pointer-events: none;, lo que indica que no son interactivos. Sin embargo, cuando están dentro de #editform, se les permite ser interactivos al establecer pointer-events: inherit;.
+
+Por lo tanto, si deseas que un div se abra al hacer clic en un botón, debes asegurarte de que el botón tenga la propiedad cursor: pointer; y que no esté deshabilitado por pointer-events: none;. 
+
+Recuerda que estas son convenciones comunes, y puede haber otras maneras de lograr el mismo efecto dependiendo del contexto y los requisitos específicos de tu proyecto.
+
+
+*/
+</style>
