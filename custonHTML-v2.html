@@ -19,7 +19,7 @@
 <script src="https://unpkg.com/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.min.js"></script>
 <script>
-    //****************************COLAPSABLES****************************
+    //****************************COLAPSABLES Y PARTICULARIDADES****************************
 
     let ultimoBotonClickeado = null;
 
@@ -92,6 +92,11 @@
                 'CAT-CAD': '/@api/deki/files/33/Coordi_CAT-CAD.png',
                 'CGD': '/@api/deki/files/32/Coordi_CGD.png',
                 'CAP': '/@api/deki/files/30/Sub_y_encargado_CAP.png',
+                'todosLosPuestos': '/@api/deki/files/584/todosLosPuestos.png',
+                'todosAsesores': '/@api/deki/files/588/todosAsesores.png',
+                'asesoresCGD_CAP': '/@api/deki/files/587/asesoresCGD_CAP.png',
+                'todosAsesoresCGD-CAP': '/@api/deki/files/593/todosAsesoresCGD-CAP.png',
+                'CAT-CGD': '/@api/deki/files/594/CGD-CAP.png',
             };
 
             return images[className] || '';
@@ -112,12 +117,20 @@
             if (selectedValue !== "article:topic-category" && selectedValue !== "article:topic-guide") {
                 selectElementOwner = document.getElementById("live-tag-propietario-select");
                 selectElementType = document.getElementById("live-tag-tipo-select");
+                selectElementTypeArticle = document.getElementById("live-tag-article-select");
 
                 propietario = selectElementOwner.options[selectElementOwner.selectedIndex].textContent;
                 tipo = selectElementType.options[selectElementType.selectedIndex].textContent;
+                tipoDeArticulo = selectElementTypeArticle.options[selectElementTypeArticle.selectedIndex]
+                    .textContent;
                 articleURL = window.location.href;
 
-                console.log("URL: " + articleURL + " \nPropietario: " + propietario + " \nTipo: " + tipo);
+                console.log("URL: " + articleURL + " \nPropietario: " + propietario + " \nTipo: " + tipo +
+                    "\nTipo de articulo: " + tipoDeArticulo);
+
+                if (tipoDeArticulo == "Procedimientos") {
+                    document.getElementById('mt-toc-container').style.display = 'none';
+                }
             }
         }
         // ************************************* Colapsar subniveles índice *************************************
@@ -321,22 +334,25 @@
                     filtros.style.position = 'sticky';
                     filtros.style.top = '100px';
                 }
+                /*
                 var filtroEstadoBorradores = document.querySelector(
                     ".mt-search-filters-classification-estado");
                 if (filtroEstadoBorradores) {
                     filtroEstadoBorradores.style.display = "none";
                 }
+                */
                 var filtroTipoDeArticulo = document.querySelector(
                     ".mt-search-filters-classification-article");
                 if (filtroTipoDeArticulo) {
                     filtroTipoDeArticulo.style.display = "none";
                 }
+                /*
                 var fitroPropietario = document.querySelector(
                     ".mt-search-filters-classification-propietario");
                 if (fitroPropietario) {
                     fitroPropietario.style.display = "none";
                 }
-
+                */
                 var results = document.querySelectorAll("li.result");
                 results.forEach(function (result) {
                     var link = result.querySelector(

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagrama Autorización de prestaciones - Fase 1</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .diagrama {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .seccion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.seccion.solicitud {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.seccion.gestion {
+  flex-wrap: wrap;
+}
+
+.seccion.gestion .decision {
+  width: 100%;
+  text-align: center;
+}
+
+.seccion.gestion .flujo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 10px;
+}
+
+.seccion.gestion .flujo.si {
+  border: 1px solid green;
+}
+
+.seccion.gestion .flujo.no {
+  border: 1px solid red;
+}
+
+.seccion.autorizacion {
+  flex-wrap: wrap;
+}
+
+.seccion.autorizacion .informacion {
+  width: 50%;
+}
+
+.seccion.cierre {
+  flex-wrap: wrap;
+}
+
+.seccion.cierre .informacion {
+  width: 33%;
+}
+
+.seccion.solicitud::after,
+.seccion.gestion .flujo.si::after,
+.seccion.gestion .flujo.no::after,
+.seccion.autorizacion::after,
+.seccion.cierre::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: #ddd;
+  top: 50%;
+  left: 0;
+}
+
+.seccion.solicitud::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.seccion.gestion .flujo.si::after {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.seccion.gestion .flujo.no::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.seccion.autorizacion::after {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.seccion.cierre::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.seccion.solicitud {
+  background-color: #f0f0f0;
+}
+
+.seccion.gestion {
+  background-color: #fafafa;
+}
+
+.seccion.autorizacion {
+  background-color: #f5f5f5;
+}
+
+.seccion.cierre {
+  background-color: #f0f0f0;
+}
+    </style>
+</head>
+
+<body>
+    <div class="diagrama">
+        <div class="seccion solicitud">
+            <h2>Solicitud</h2>
+            <div class="accion">App: Solicitud de autorización</div>
+            <div class="accion">Web: Solicitud de autorización</div>
+            <div class="accion">Mail: Solicitud de autorización</div>
+        </div>
+        <div class="seccion gestion">
+            <h2>Gestión de la solicitud</h2>
+            <div class="accion">Completa info en solapas (resumen y notas)</div>
+            <div class="decision">¿Requiere evaluación?</div>
+            <div class="flujo si">
+                <div class="accion">Analiza si corresponde la autorización</div>
+                <div class="accion">Crea trámite en fest, con info del ticket</div>
+            </div>
+            <div class="flujo no">
+                <div class="accion">cxs-evaluacc-mat(*)</div>
+                <div class="accion">Analiza si corresponde la autorización</div>
+            </div>
+            <div class="decision">¿Necesita Au Med?</div>
+            <div class="flujo si">
+                <div class="accion">Completa info y asigna al CGD</div>
+            </div>
+        </div>
+        <div class="seccion autorizacion">
+            <h2>Autorización</h2>
+            <div class="accion">Cart: Autoriza, informa y cierra el TKT</div>
+            <div class="accion">Cart: Envia mail con AP o rechazo de la solicitud</div>
+            <div class="accion">Cart: Deriva BSC a Insumos y cierra el TKT</div>
+            <div class="informacion">AUT: Autoriza</div>
+            <div class="informacion">AUT: Insumos</div>
+            <div class="informacion">AUT: GOC/IKE: corresponde</div>
+            <div class="informacion">AUT: xxx y en ticket</div>
+            <div class="informacion">AUT: trámite nº DSC</div>
+        </div>
+        <div class="seccion cierre">
+            <h2>Cierre</h2>
+            <div class="informacion">Ticket LINK: rta, brindada-cerrado</div>
+            <div class="informacion">Ticket LINK: rta, brindada cerrado</div>
+            <div class="informacion">Ticket LINK: xxx y en tichat</div>
+            <div class="informacion">Ticket LINK: trámite nº DSC</div>
+            <div class="informacion">Ticket LINK: actual</div>
+            <div class="informacion">Ticket LINK: en curso-asignado usr</div>
+            <div class="informacion">Ticket LINK: en curso-asignado equipo</div>
+        </div>
+        <div class="seccion otros">
+            <h2>Otros</h2>
+            <div class="informacion">CGD: Ingreso</div>
+            <div class="informacion">CGD: Gestión de la solicitud</div>
+            <div class="informacion">CGD: Cierre</div>
+            <div class="informacion">SaludSoft: ticket LINK</div>
+            <div class="informacion">FGM-GSC: ticket LINK</div>
+            <div class="informacion">DSC: ticket LINK</div>
+            <div class="informacion">GSE: ticket LINK</div>
+            <div class="informacion">St Insumos devuelve GSC, se reabre TKT</div>
+            <div class="informacion">Celula Traumato: ticket LINK</div>
+        </div>
+    </div>
+</body>
+
+</html>

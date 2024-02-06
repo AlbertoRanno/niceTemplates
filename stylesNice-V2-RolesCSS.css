@@ -1,3 +1,4 @@
+/*Pro Member CSS*/
 .EXPAND_COLLAPSE dt {
     border: 2px green solid !important;
     padding: 3px;
@@ -34,3 +35,10 @@
     margin: 5px 0 !important;
   }
 */
+
+/*********************************************************************************************************************/
+
+/*Community Member CSS*/
+.mt-search-filters-classification-sector {
+    display: none;
+}
