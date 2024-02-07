@@ -334,25 +334,16 @@
                     filtros.style.position = 'sticky';
                     filtros.style.top = '100px';
                 }
-                /*
-                var filtroEstadoBorradores = document.querySelector(
-                    ".mt-search-filters-classification-estado");
-                if (filtroEstadoBorradores) {
-                    filtroEstadoBorradores.style.display = "none";
-                }
-                */
                 var filtroTipoDeArticulo = document.querySelector(
                     ".mt-search-filters-classification-article");
                 if (filtroTipoDeArticulo) {
                     filtroTipoDeArticulo.style.display = "none";
                 }
-                /*
                 var fitroPropietario = document.querySelector(
                     ".mt-search-filters-classification-propietario");
                 if (fitroPropietario) {
                     fitroPropietario.style.display = "none";
                 }
-                */
                 var results = document.querySelectorAll("li.result");
                 results.forEach(function (result) {
                     var link = result.querySelector(
@@ -850,20 +841,21 @@
             listItemComercial.appendChild(linkComercial);
             let ulSubListComercial = document.createElement('ul');
             ulSubListComercial.classList.add('submenu');
-            let listItemGestionarB2B = document.createElement('li');
-            let linkGestionarB2B = document.createElement('a');
-            linkGestionarB2B.href = "/Comercial/Gestionar_leads_B2B";
-            linkGestionarB2B.textContent = "Gestionar leads B2B";
-            linkGestionarB2B.title = "Gestionar leads B2B";
-            listItemGestionarB2B.appendChild(linkGestionarB2B);
-            let listItemGestionarB2C = document.createElement('li');
-            let linkGestionarB2C = document.createElement('a');
-            linkGestionarB2C.href = "/Comercial/Gestionar_leads_B2C";
-            linkGestionarB2C.textContent = "Gestionar leads B2C";
-            linkGestionarB2C.title = "Gestionar leads B2C";
-            listItemGestionarB2C.appendChild(linkGestionarB2C);
-            ulSubListComercial.appendChild(listItemGestionarB2B);
-            ulSubListComercial.appendChild(listItemGestionarB2C);
+            const accesosComercial = [
+                "Gestionar leads B2B",
+                "Gestionar leads B2C"
+            ];
+
+            function agregarAccesoComercial(palabra) {
+                let listItem = document.createElement('li');
+                let link = document.createElement('a');
+                link.href = "/Comercial/" + encodeURIComponent(palabra);
+                link.textContent = palabra;
+                link.title = palabra;
+                listItem.appendChild(link);
+                ulSubListComercial.appendChild(listItem);
+            }
+            accesosComercial.forEach(agregarAccesoComercial);
             listItemComercial.appendChild(ulSubListComercial);
             ulSubList.appendChild(listItemComercial);
 
@@ -880,27 +872,42 @@
             listItemCobertura.appendChild(linkCobertura);
             let ulSubListCobertura = document.createElement('ul');
             ulSubListCobertura.classList.add('submenu');
-            let listItemCirugias = document.createElement('li');
-            let linkCirugias = document.createElement('a');
-            linkCirugias.href = "/Cobertura/Cirugias";
-            linkCirugias.textContent = "Cirug\u00EDas";
-            linkCirugias.title = "Cirug\u00EDas";
-            listItemCirugias.appendChild(linkCirugias);
-            let listItemMedicamentos = document.createElement('li');
-            let linkMedicamentos = document.createElement('a');
-            linkMedicamentos.href = "/Cobertura/Medicamentos";
-            linkMedicamentos.textContent = "Medicamentos";
-            linkMedicamentos.title = "Medicamentos";
-            listItemMedicamentos.appendChild(linkMedicamentos);
-            let listItemPracticas = document.createElement('li');
-            let linkPracticas = document.createElement('a');
-            linkPracticas.href = "/Cobertura/practicas";
-            linkPracticas.textContent = "Pr\u00E1cticas";
-            linkPracticas.title = "Pr\u00E1cticas";
-            listItemPracticas.appendChild(linkPracticas);
-            ulSubListCobertura.appendChild(listItemCirugias);
-            ulSubListCobertura.appendChild(listItemMedicamentos);
-            ulSubListCobertura.appendChild(listItemPracticas);
+            const accesosCobertura = [
+                "Anticonceptivos",
+                "Asesoramiento sobre aplicaciones",
+                "Asistencia domiciliaria",
+                "Bioqu\u00EDmica",
+                "Cartilla",
+                "Cirug\u00EDas",
+                "Diabetes",
+                "Discapacidad",
+                "Empadronamiento",
+                "Fertilidad",
+                "Gesti\u00F3n de la calidad de atenci\u00F3n",
+                "Medicamentos",
+                "Odontolog\u00EDa",
+                "Ortopedia",
+                "PMI",
+                "Pr\u00E1cticas",
+                "Pr\u00E1cticas Condicionada",
+                "Pr\u00E1cticas sin cobertura",
+                "Psicopatolog\u00EDa",
+                "Reintegros",
+                "Traslado",
+                "Vacunas",
+                "Urgencias"
+            ];
+
+            function agregarAccesoCobertura(palabra) {
+                let listItem = document.createElement('li');
+                let link = document.createElement('a');
+                link.href = "/Cobertura/" + encodeURIComponent(palabra);
+                link.textContent = palabra;
+                link.title = palabra;
+                listItem.appendChild(link);
+                ulSubListCobertura.appendChild(listItem);
+            }
+            accesosCobertura.forEach(agregarAccesoCobertura);
             listItemCobertura.appendChild(ulSubListCobertura);
             ulSubList.appendChild(listItemCobertura);
 
@@ -917,34 +924,27 @@
             listItemAfiliaciones.appendChild(linkAfiliaciones);
             let ulSubListAfiliaciones = document.createElement('ul');
             ulSubListAfiliaciones.classList.add('submenu');
-            let listItemAltas = document.createElement('li');
-            let linkAltas = document.createElement('a');
-            linkAltas.href = "/Afiliaciones/altas";
-            linkAltas.textContent = "Altas";
-            linkAltas.title = "Altas";
-            listItemAltas.appendChild(linkAltas);
-            let listItemBajas = document.createElement('li');
-            let linkBajas = document.createElement('a');
-            linkBajas.href = "/Afiliaciones/Bajas";
-            linkBajas.textContent = "Bajas";
-            linkBajas.title = "Bajas";
-            listItemBajas.appendChild(linkBajas);
-            let listItemLicencias = document.createElement('li');
-            let linkLicencias = document.createElement('a');
-            linkLicencias.href = "/Afiliaciones/Licencias";
-            linkLicencias.textContent = "Licencias";
-            linkLicencias.title = "Licencias";
-            listItemLicencias.appendChild(linkLicencias);
-            let listItemMovimientosPadron = document.createElement('li');
-            let linkMovimientosPadron = document.createElement('a');
-            linkMovimientosPadron.href = "/Afiliaciones/movimientos_padron";
-            linkMovimientosPadron.textContent = "Movimientos del padr\u00F3n";
-            linkMovimientosPadron.title = "Movimientos del padr\u00F3n";
-            listItemMovimientosPadron.appendChild(linkMovimientosPadron);
-            ulSubListAfiliaciones.appendChild(listItemAltas);
-            ulSubListAfiliaciones.appendChild(listItemBajas);
-            ulSubListAfiliaciones.appendChild(listItemLicencias);
-            ulSubListAfiliaciones.appendChild(listItemMovimientosPadron);
+            const accesosAfiliaciones = [
+                "Altas",
+                "Bajas",
+                "Aplicaciones",
+                "Certificados",
+                "Modificaciones",
+                "Modificaciones del padr\u00F3n",
+                "Modificaci\u00F3n de datos",
+                "Subsidio - Licencia"
+            ];
+
+            function agregarAccesoAfiliaciones(palabra) {
+                let listItem = document.createElement('li');
+                let link = document.createElement('a');
+                link.href = "/Afiliaciones/" + encodeURIComponent(palabra);
+                link.textContent = palabra;
+                link.title = palabra;
+                listItem.appendChild(link);
+                ulSubListAfiliaciones.appendChild(listItem);
+            }
+            accesosAfiliaciones.forEach(agregarAccesoAfiliaciones);
             listItemAfiliaciones.appendChild(ulSubListAfiliaciones);
             ulSubList.appendChild(listItemAfiliaciones);
 
@@ -961,27 +961,21 @@
             listItemCobranzas.appendChild(linkCobranzas);
             let ulSubListCobranzas = document.createElement('ul');
             ulSubListCobranzas.classList.add('submenu');
-            let listItemCuentaCorriente = document.createElement('li');
-            let linkCuentaCorriente = document.createElement('a');
-            linkCuentaCorriente.href = "/Cobranzas/Cuenta_corriente";
-            linkCuentaCorriente.textContent = "Cuenta corriente";
-            linkCuentaCorriente.title = "Cuenta corriente";
-            listItemCuentaCorriente.appendChild(linkCuentaCorriente);
-            let listItemCuentaDebitoAutomatico = document.createElement('li');
-            let linkCuentaDebitoAutomatico = document.createElement('a');
-            linkCuentaDebitoAutomatico.href = "/Cobranzas/Cuenta_debito_automatico";
-            linkCuentaDebitoAutomatico.textContent = "Cuenta d\u00E9bito autom\u00E1tico";
-            linkCuentaDebitoAutomatico.title = "Cuenta d\u00E9bito autom\u00E1tico";
-            listItemCuentaDebitoAutomatico.appendChild(linkCuentaDebitoAutomatico);
-            let listItemDeudaVencida = document.createElement('li');
-            let linkDeudaVencida = document.createElement('a');
-            linkDeudaVencida.href = "/Cobranzas/Deuda_vencida";
-            linkDeudaVencida.textContent = "Deuda vencida";
-            linkDeudaVencida.title = "Deuda vencida";
-            listItemDeudaVencida.appendChild(linkDeudaVencida);
-            ulSubListCobranzas.appendChild(listItemCuentaCorriente);
-            ulSubListCobranzas.appendChild(listItemCuentaDebitoAutomatico);
-            ulSubListCobranzas.appendChild(listItemDeudaVencida);
+            const accesosFacturacion = [
+                "Cuenta corriente",
+                "Facturaci\u00F3n"
+            ];
+
+            function agregarAccesoFacturacion(palabra) {
+                let listItem = document.createElement('li');
+                let link = document.createElement('a');
+                link.href = "/Cobranzas/" + encodeURIComponent(palabra);
+                link.textContent = palabra;
+                link.title = palabra;
+                listItem.appendChild(link);
+                ulSubListCobranzas.appendChild(listItem);
+            }
+            accesosFacturacion.forEach(agregarAccesoFacturacion);
             listItemCobranzas.appendChild(ulSubListCobranzas);
             ulSubList.appendChild(listItemCobranzas);
 
@@ -998,104 +992,77 @@
             listItemReintegro.appendChild(linkReintegro);
             let ulSubListReintegro = document.createElement('ul');
             ulSubListReintegro.classList.add('submenu');
-            let listItemReintegro1 = document.createElement('li');
-            let linkRCirugias = document.createElement('a');
-            linkRCirugias.href = "/Cobertura/Cirugias";
-            linkRCirugias.textContent = "Cirug\u00EDas";
-            linkRCirugias.title = "Cirug\u00EDas";
-            listItemReintegro1.appendChild(linkRCirugias);
-            let listItemReintegro2 = document.createElement('li');
-            let linkRMedicamentos = document.createElement('a');
-            linkRMedicamentos.href = "/Cobertura/Medicamentos";
-            linkRMedicamentos.textContent = "Medicamentos";
-            linkRMedicamentos.title = "Medicamentos";
-            listItemReintegro2.appendChild(linkRMedicamentos);
-            let listItemReintegro3 = document.createElement('li');
-            let linkRPracticas = document.createElement('a');
-            linkRPracticas.href = "/Cobertura/practicas";
-            linkRPracticas.textContent = "Pr\u00E1cticas";
-            linkRPracticas.title = "Pr\u00E1cticas";
-            listItemReintegro3.appendChild(linkRPracticas);
-            ulSubListReintegro.appendChild(listItemReintegro1);
-            ulSubListReintegro.appendChild(listItemReintegro2);
-            ulSubListReintegro.appendChild(listItemReintegro3);
+            const accesosReintegro = [
+                "Reintegros"
+            ];
+
+            function agregarAccesoReintegro(palabra) {
+                let listItem = document.createElement('li');
+                let link = document.createElement('a');
+                link.href = "/Reintegros/" + encodeURIComponent(palabra);
+                link.textContent = palabra;
+                link.title = palabra;
+                listItem.appendChild(link);
+                ulSubListReintegro.appendChild(listItem);
+            }
+            accesosReintegro.forEach(agregarAccesoReintegro);
             listItemReintegro.appendChild(ulSubListReintegro);
             ulSubList.appendChild(listItemReintegro);
 
-            let listItemAdministracion = document.createElement('li');
-            listItemAdministracion.classList.add('has-submenu', 'mt-style-conditional',
-                'style-wrap');
-            let linkAdministracion = document.createElement('a');
-            linkAdministracion.href = "/Cobertura";
-            linkAdministracion.title = "Administraci\u00F3n";
-            let imgACobertura = document.createElement('img');
-            imgACobertura.alt = "Icono";
-            imgACobertura.src = "/@api/deki/files/213/cobertura.png";
-            linkAdministracion.appendChild(imgACobertura);
-            linkAdministracion.appendChild(document.createTextNode("Administraci\u00F3n"));
-            listItemAdministracion.appendChild(linkAdministracion);
-            let ulSubListAdministracion = document.createElement('ul');
-            ulSubListAdministracion.classList.add('submenu');
-            let ulSubListAdministracion1 = document.createElement('li');
-            let linkACirugias = document.createElement('a');
-            linkACirugias.href = "/Cobertura/Cirugias";
-            linkACirugias.textContent = "Cirug\u00EDas";
-            linkACirugias.title = "Cirug\u00EDas";
-            ulSubListAdministracion1.appendChild(linkACirugias);
-            let ulSubListAdministracion2 = document.createElement('li');
-            let linkAMedicamentos = document.createElement('a');
-            linkAMedicamentos.href = "/Cobertura/Medicamentos";
-            linkAMedicamentos.textContent = "Medicamentos";
-            linkAMedicamentos.title = "Medicamentos";
-            ulSubListAdministracion2.appendChild(linkAMedicamentos);
-            let ulSubListAdministracion3 = document.createElement('li');
-            let linkAPracticas = document.createElement('a');
-            linkAPracticas.href = "/Cobertura/practicas";
-            linkAPracticas.textContent = "Pr\u00E1cticas";
-            linkAPracticas.title = "Pr\u00E1cticas";
-            ulSubListAdministracion3.appendChild(linkAPracticas);
-            ulSubListAdministracion.appendChild(ulSubListAdministracion1);
-            ulSubListAdministracion.appendChild(ulSubListAdministracion2);
-            ulSubListAdministracion.appendChild(ulSubListAdministracion3);
-            listItemAdministracion.appendChild(ulSubListAdministracion);
-            ulSubList.appendChild(listItemAdministracion);
+            let listItemPrestadores = document.createElement('li');
+            listItemPrestadores.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+            let linkPrestadores = document.createElement('a');
+            linkPrestadores.href = "/Prestadores";
+            linkPrestadores.title = "Prestadores";
+            linkPrestadores.appendChild(document.createTextNode("Prestadores"));
+            listItemPrestadores.appendChild(linkPrestadores);
+            let ulSubListPrestadores = document.createElement('ul');
+            ulSubListPrestadores.classList.add('submenu');
+            const accesosPrestadores = [
+                "Aplicaciones",
+                "Extranet",
+                "Servicios",
+                "Validaci\u00F3n de l\u00EDnea"
+            ];
 
-            let listItemLibre = document.createElement('li');
-            listItemLibre.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
-            let linkLibre = document.createElement('a');
-            linkLibre.href = "/Cobertura";
-            linkLibre.title = "Libre";
-            let imgLCobertura = document.createElement('img');
-            imgLCobertura.alt = "Icono";
-            imgLCobertura.src = "/@api/deki/files/213/cobertura.png";
-            linkLibre.appendChild(imgLCobertura);
-            linkLibre.appendChild(document.createTextNode("Libre"));
-            listItemLibre.appendChild(linkLibre);
-            let ulSubListLibre = document.createElement('ul');
-            ulSubListLibre.classList.add('submenu');
-            let ulSubListLibre1 = document.createElement('li');
-            let linkLCirugias = document.createElement('a');
-            linkLCirugias.href = "/Cobertura/Cirugias";
-            linkLCirugias.textContent = "Cirug\u00EDas";
-            linkLCirugias.title = "Cirug\u00EDas";
-            ulSubListLibre1.appendChild(linkLCirugias);
-            let ulSubListLibre2 = document.createElement('li');
-            let linkLMedicamentos = document.createElement('a');
-            linkLMedicamentos.href = "/Cobertura/Medicamentos";
-            linkLMedicamentos.textContent = "Medicamentos";
-            linkLMedicamentos.title = "Medicamentos";
-            ulSubListLibre2.appendChild(linkLMedicamentos);
-            let ulSubListLibre3 = document.createElement('li');
-            let linkLPracticas = document.createElement('a');
-            linkLPracticas.href = "/Cobertura/practicas";
-            linkLPracticas.textContent = "Pr\u00E1cticas";
-            linkLPracticas.title = "Pr\u00E1cticas";
-            ulSubListLibre3.appendChild(linkLPracticas);
-            ulSubListLibre.appendChild(ulSubListLibre1);
-            ulSubListLibre.appendChild(ulSubListLibre2);
-            ulSubListLibre.appendChild(ulSubListLibre3);
-            listItemLibre.appendChild(ulSubListLibre);
-            ulSubList.appendChild(listItemLibre);
+            function agregarAccesoPrestadores(palabra) {
+                let listItem = document.createElement('li');
+                let link = document.createElement('a');
+                link.href = "/Prestadores/" + encodeURIComponent(palabra);
+                link.textContent = palabra;
+                link.title = palabra;
+                listItem.appendChild(link);
+                ulSubListPrestadores.appendChild(listItem);
+            }
+            accesosPrestadores.forEach(agregarAccesoPrestadores);
+            listItemPrestadores.appendChild(ulSubListPrestadores);
+            ulSubList.appendChild(listItemPrestadores);
+
+            let listItemInfoAplicaciones = document.createElement('li');
+            listItemInfoAplicaciones.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+            let linkInfoAplicaciones = document.createElement('a');
+            linkInfoAplicaciones.href = "/Informacion_sobre_Aplicaciones";
+            linkInfoAplicaciones.title = "Info Aplicaciones";
+            linkInfoAplicaciones.appendChild(document.createTextNode("Info Aplicaciones"));
+            listItemInfoAplicaciones.appendChild(linkInfoAplicaciones);
+            let ulSubInfoAplicaciones = document.createElement('ul');
+            ulSubInfoAplicaciones.classList.add('submenu');
+            const accesosInfoAplicaciones = [
+                "Aplicaciones"
+            ];
+
+            function agregarAccesoInfoAplicaciones(palabra) {
+                let listItem = document.createElement('li');
+                let link = document.createElement('a');
+                link.href = "/Informacion_sobre_Aplicaciones/" + encodeURIComponent(palabra);
+                link.textContent = palabra;
+                link.title = palabra;
+                listItem.appendChild(link);
+                ulSubInfoAplicaciones.appendChild(listItem);
+            }
+            accesosInfoAplicaciones.forEach(agregarAccesoInfoAplicaciones);
+            listItemInfoAplicaciones.appendChild(ulSubInfoAplicaciones);
+            ulSubList.appendChild(listItemInfoAplicaciones);
 
             elementoMenu.appendChild(labelResponsive);
             elementoMenu.appendChild(ulSubList);

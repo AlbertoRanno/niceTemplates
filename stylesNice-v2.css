@@ -2204,10 +2204,20 @@ div ul li {
 }
 
 .tippy-box img {
-	max-width: 25px;
-	height: auto;
+	max-width: auto;
+	height: 30px;
 }
 
 .contenidosRegiones button.filialActiva {
 	box-shadow: 0 5px 5px rgba(0, 0, 0, .6) !important;
+}
+
+.nonEmptyRegion {
+    display: inline-block;
+    padding: 12px 16px;
+    background: var(--white);
+    color: var(--primary-blue);
+    cursor: pointer;
+    pointer-events: all;
+    box-shadow: none !important;
 }
