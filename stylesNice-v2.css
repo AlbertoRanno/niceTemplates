@@ -2213,11 +2213,15 @@ div ul li {
 }
 
 .nonEmptyRegion {
-    display: inline-block;
-    padding: 12px 16px;
-    background: var(--white);
-    color: var(--primary-blue);
-    cursor: pointer;
-    pointer-events: all;
-    box-shadow: none !important;
+	display: inline-block;
+	padding: 12px 16px;
+	background: var(--white);
+	color: var(--primary-blue);
+	cursor: pointer;
+	pointer-events: all;
+	box-shadow: none !important;
+}
+
+div.muestrario img {
+	height: 30px;
 }

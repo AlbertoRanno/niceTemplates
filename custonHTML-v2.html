@@ -77,26 +77,41 @@
 
     $(function () {
         $('.tool-tip-link').each(function () {
-            var className = $(this).attr('class').split(' ')[1];
-            var imageSrc = getImageSrc(className);
+            if ($(this).attr('class').split(' ').length > 1) {
+                var className = $(this).attr('class').split(' ')[1];
+                var imageSrc = getImageSrc(className);
 
-            tippy(this, {
-                content: `<img src="${imageSrc}" alt="Icono" />`,
-                allowHTML: true,
-                theme: 'tooltip-custom',
-            });
+                tippy(this, {
+                    content: `<img src="${imageSrc}" alt="Icono" />`,
+                    allowHTML: true,
+                    theme: 'tooltip-custom',
+                });
+            }
         });
 
         function getImageSrc(className) {
             var images = {
-                'CAT-CAD': '/@api/deki/files/33/Coordi_CAT-CAD.png',
-                'CGD': '/@api/deki/files/32/Coordi_CGD.png',
-                'CAP': '/@api/deki/files/30/Sub_y_encargado_CAP.png',
-                'todosLosPuestos': '/@api/deki/files/584/todosLosPuestos.png',
+                //Sueltos
+                'coordiCAT': '/@api/deki/files/33/Coordi_CAT-CAD.png',
+                'coordiCGD': '/@api/deki/files/32/Coordi_CGD.png',
+                'coordiCAP': '/@api/deki/files/30/Sub_y_encargado_CAP.png',
+                'asesorCAT': '/@api/deki/files/31/Asesor_CAT-CAD.png',
+                'asesorCGD': '/@api/deki/files/34/Asesor_CGD.png',
+                'asesorCAP': '/@api/deki/files/29/Asistente_CAP.png',
+                //Grupos
+                'todos': '/@api/deki/files/608/Todos.png',
+                'todosCoordi': '/@api/deki/files/584/todosLosPuestos.png',
                 'todosAsesores': '/@api/deki/files/588/todosAsesores.png',
+                //Combinaciones de Coordinadores                
+                'coordiCAT-CGD': '/@api/deki/files/606/CAT-CGD.png',
+                'coordiCGD-CAP': '/@api/deki/files/594/CGD-CAP.png',
+                'coordiCAT-CAP': '/@api/deki/files/607/CAT-CAP.png',
+                //Combinaciones de Asesores
+                'asesoresCAT_CGD': '/@api/deki/files/605/asesoresCAT_CGD.png',
                 'asesoresCGD_CAP': '/@api/deki/files/587/asesoresCGD_CAP.png',
+                'asesoresCAT_CAP': '/@api/deki/files/604/asesoresCAT_CAP.png',
+                //A medida
                 'todosAsesoresCGD-CAP': '/@api/deki/files/593/todosAsesoresCGD-CAP.png',
-                'CAT-CGD': '/@api/deki/files/594/CGD-CAP.png',
             };
 
             return images[className] || '';
@@ -812,6 +827,19 @@
                 botonBorrarLocalStorage.classList.add('botonBorrarLocalStorage');
                 liBotonBorrarLocalStorage.appendChild(botonBorrarLocalStorage)
                 ulConsejos.appendChild(botonBorrarLocalStorage);
+                /*} else {
+                    let botonIrAListaResultados = document.createElement("button");
+                    botonIrAListaResultados.innerHTML = "Lista de Resultados";
+                    botonIrAListaResultados.classList.add("botonIrAListaResultados");
+                    let linkIrAListaResultados = document.createElement('a');
+                    linkIrAListaResultados.href = "https://osde-prod2.mindtouch.us/Special:Search?type=wiki&query=";
+                    linkIrAListaResultados.title = "Lista de Resultados";
+                    botonIrAListaResultados.appendChild(linkIrAListaResultados);
+                    ulConsejos.appendChild(botonIrAListaResultados);
+                    botonIrAListaResultados.addEventListener('click', function () {
+                        window.location.href =
+                            "https://osde-prod2.mindtouch.us/Special:Search?type=wiki&query=";
+                    });*/
             }
 
             divInternoConsejos.appendChild(ulConsejos);
@@ -982,7 +1010,7 @@
             let listItemReintegro = document.createElement('li');
             listItemReintegro.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
             let linkReintegro = document.createElement('a');
-            linkReintegro.href = "/Cobertura";
+            linkReintegro.href = "/Reintegros";
             linkReintegro.title = "Reintegro";
             let imgRCobertura = document.createElement('img');
             imgRCobertura.alt = "Icono";

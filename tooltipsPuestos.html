@@ -48,6 +48,11 @@ Caché Compartida: Muchos sitios web pueden compartir la misma versión de la bi
     $(function () {
         // Se seleccionan todos los elementos con la clase 'tool-tip-link' (clase que se agrega gracias al editor de Nice) y se itera sobre cada uno de ellos
         $('.tool-tip-link').each(function () {
+            // Verificar si el elemento tiene más de una clase:
+            if ($(this).attr('class').split(' ').length > 1) {
+                /*Si el elemento, tiene solo la clase 'tool-tip-link', en Nice, lo trato para cargar solo texto en los tooltips, mediante
+                las variables globales, entonces que no le agregue la img, es decir, la img la aplica solo si tiene mas clases aparte de esa*/
+
             // Se obtiene la segunda clase del elemento actual y se guarda en la variable 'className'
             var className = $(this).attr('class').split(' ')[1];
 
@@ -70,14 +75,33 @@ Caché Compartida: Muchos sitios web pueden compartir la misma versión de la bi
                     console.log(instance.popper);
                 },
             });
+        }
         });
 
         // Función que devuelve la ruta de la imagen asociada a una clase dada
         function getImageSrc(className) {
             var images = {
-                'CAT-CAD': '/@api/deki/files/33/Coordi_CAT-CAD.png',
-                'CGD': '/@api/deki/files/32/Coordi_CGD.png',
-                'CAP': '/@api/deki/files/30/Sub_y_encargado_CAP.png',
+                //Sueltos
+                'coordiCAT': '/@api/deki/files/33/Coordi_CAT-CAD.png',
+                'coordiCGD': '/@api/deki/files/32/Coordi_CGD.png',
+                'coordiCAP': '/@api/deki/files/30/Sub_y_encargado_CAP.png',
+                'asesorCAT': '/@api/deki/files/31/Asesor_CAT-CAD.png',
+                'asesorCGD': '/@api/deki/files/34/Asesor_CGD.png',
+                'asesorCAP': '/@api/deki/files/29/Asistente_CAP.png',
+                //Grupos
+                'todos': '/@api/deki/files/608/Todos.png',
+                'todosCoordi': '/@api/deki/files/584/todosLosPuestos.png',
+                'todosAsesores': '/@api/deki/files/588/todosAsesores.png',
+                //Combinaciones de Coordinadores                
+                'coordiCAT-CGD': '/@api/deki/files/606/CAT-CGD.png',
+                'coordiCGD-CAP': '/@api/deki/files/594/CGD-CAP.png',
+                'coordiCAT-CAP': '/@api/deki/files/607/CAT-CAP.png',
+                //Combinaciones de Asesores
+                'asesoresCAT_CGD': '/@api/deki/files/605/asesoresCAT_CGD.png',
+                'asesoresCGD_CAP': '/@api/deki/files/587/asesoresCGD_CAP.png',
+                'asesoresCAT_CAP': '/@api/deki/files/604/asesoresCAT_CAP.png',                
+                //A medida
+                'todosAsesoresCGD-CAP': '/@api/deki/files/593/todosAsesoresCGD-CAP.png',
             };
 
             // Devuelve la ruta de la imagen correspondiente a la clase, o cadena vacía si no hay coincidencia
