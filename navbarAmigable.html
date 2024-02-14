@@ -1,0 +1,270 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        //*******************************LOGIN********************************
+        if (!window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:UserLogin")) {
+
+            //****************************NAVBAR**********************************
+            let topLevelNavigation = document.createElement('nav');
+            topLevelNavigation.classList.add('navbar', 'navbar-menu-osde', 'elm-header-logo-menu');
+            let divContenedor = document.createElement('div');
+            divContenedor.classList.add('elm-header-nav-container', 'elm-nav-container');
+            let ulPrincipal = document.createElement('ul');
+            ulPrincipal.classList.add('navbar-header');
+
+            let elementoLogo = document.createElement('li');
+            elementoLogo.classList.add('navbar-header-logo');
+            let linkLogo = document.createElement('a');
+            linkLogo.href = "/";
+            linkLogo.title = "Enlace al inicio";
+            let logoImg = document.createElement('img');
+            logoImg.alt = "Logo de la empresa";
+            logoImg.src = "/@api/deki/files/24/Logo_Biblos_OSDE_Azul.png";
+            linkLogo.appendChild(logoImg);
+            elementoLogo.appendChild(linkLogo);
+            ulPrincipal.appendChild(elementoLogo);
+
+            let elementoMenu = document.createElement('li');
+            elementoMenu.classList.add('navbar-header-menu');
+            let inputCheckbox = document.createElement('input');
+            inputCheckbox.classList.add('nav-toggle');
+            inputCheckbox.id = "nav-toggle";
+            inputCheckbox.type = "checkbox";
+            elementoMenu.appendChild(inputCheckbox);
+            let ulSubList = document.createElement('ul');
+
+            let labelResponsive = document.createElement('label');
+            labelResponsive.setAttribute('for', 'nav-toggle');
+            labelResponsive.classList.add('nav-toggle-label');
+            let spanResponsive = document.createElement('span');
+            labelResponsive.appendChild(spanResponsive);
+
+            let divConsejos = document.createElement('div');
+            divConsejos.classList.add('consejo-busqueda-area');
+            let divInternoConsejos = document.createElement('div');
+            divInternoConsejos.classList.add('elm-content-container');
+            let ulConsejos = document.createElement('ul');
+            ulConsejos.classList.add('navbar-header');
+            let liConsejos = document.createElement('li');
+            liConsejos.classList.add('has-submenu');
+            let aConsejos = document.createElement('a');
+            aConsejos.textContent = 'Tips de b\u00FAsqueda';
+            let ulSubmenu = document.createElement('ul');
+            ulSubmenu.classList.add('consejosDesplegables');
+            let li1 = document.createElement('li');
+            li1.textContent = 'En lugar de frases, us\u00E1 dos o m\u00E1s palabras clave.';
+            let li3 = document.createElement('li');
+            li3.textContent =
+                'Us\u00E1 comillas para buscar frases o palabras exactas.';
+            let li4 = document.createElement('li');
+            li4.textContent =
+                'Una vez que hayas realizado la b\u00FAsqueda, en el margen izquierdo vas a poder filtrar por categor\u00EDa o caracter\u00EDsticas del art\u00EDculo.';
+            let li5 = document.createElement('li');
+            li5.textContent =
+                'Para buscar palabras estando dentro del art\u00EDculo o en la lista de resultados, pod\u00E9s usar CTRL+F.';
+            let li6 = document.createElement('li');
+            let li6Anchor = document.createElement("a");
+            li6Anchor.classList.add('linkBusquedaAvanzada');
+            li6Anchor.href =
+                "https://osde-prod2.mindtouch.us/tutoriales/edicion/opciones_de_busqueda_avanzada";
+            li6Anchor.textContent = 'M\u00E1s tips de b\u00FAsqueda';
+            li6.appendChild(li6Anchor);
+            let contenedorFlecha = document.createElement('div');
+            contenedorFlecha.classList.add('contenedorFlecha');
+            let imgFlecha = document.createElement('img');
+            imgFlecha.classList.add('imgFlecha');
+            imgFlecha.src = '/@api/deki/files/26/downArrowWhite.png';
+            imgFlecha.alt = 'flecha';
+            contenedorFlecha.appendChild(imgFlecha)
+            aConsejos.appendChild(contenedorFlecha);
+            liConsejos.appendChild(aConsejos);
+            ulSubmenu.appendChild(li1);
+            ulSubmenu.appendChild(li3);
+            ulSubmenu.appendChild(li4);
+            ulSubmenu.appendChild(li5);
+            ulSubmenu.appendChild(li6);
+            liConsejos.appendChild(ulSubmenu);
+            ulConsejos.appendChild(liConsejos);
+
+            if (window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:Search")) {
+
+                let liBotonBorrarLocalStorage = document.createElement('li');
+                botonBorrarLocalStorage.classList.add('botonBorrarLocalStorage');
+                liBotonBorrarLocalStorage.appendChild(botonBorrarLocalStorage)
+                ulConsejos.appendChild(botonBorrarLocalStorage);
+                /*} else {
+                    let botonIrAListaResultados = document.createElement("button");
+                    botonIrAListaResultados.innerHTML = "Lista de Resultados";
+                    botonIrAListaResultados.classList.add("botonIrAListaResultados");
+                    let linkIrAListaResultados = document.createElement('a');
+                    linkIrAListaResultados.href = "https://osde-prod2.mindtouch.us/Special:Search?type=wiki&query=";
+                    linkIrAListaResultados.title = "Lista de Resultados";
+                    botonIrAListaResultados.appendChild(linkIrAListaResultados);
+                    ulConsejos.appendChild(botonIrAListaResultados);
+                    botonIrAListaResultados.addEventListener('click', function () {
+                        window.location.href =
+                            "https://osde-prod2.mindtouch.us/Special:Search?type=wiki&query=";
+                    });*/
+            }
+
+            divInternoConsejos.appendChild(ulConsejos);
+            divConsejos.appendChild(divInternoConsejos);
+            setTimeout(function () {
+                aConsejos.addEventListener('click', function () {
+                    ulSubmenu.classList.toggle('consejosDesplegables');
+                    // Cambio la URL de la flecha basado en si el menú está desplegado o no
+                    if (ulSubmenu.classList.contains('consejosDesplegables')) {
+                        imgFlecha.src = '/@api/deki/files/26/downArrowWhite.png';
+                    } else {
+                        imgFlecha.src = '/@api/deki/files/21/upArrowWhite.png';
+                    }
+                });
+            }, 1000);
+
+            /*********************************** MODIFICAR BARRA DE NAVEGACION ***********************************/
+            //SOLO AGREGAR LOS NOMBRES DE LAS CATEGORIAS Y SUS CORRESPONDIENTES GUIAS, TAL CUAL FUERON CREADAS EN SUS RUTAS
+
+            //Agregar la nueva categoria al listado, en la ubicacion deseada, mantener el formato: '    "nombre",   ' (la ultima sin ',' )
+            let categorias = ["Comercial", "Cobertura", "Afiliaciones", "Facturaci\u00F3n", "Reintegro",
+                "Prestadores", "Info Aplicaciones"
+            ];
+
+            //Agregar las guias pertenecientes a la nueva Categoria, en la MISMA UBICACION QUE PUSIERON LA CATEGORIA,
+            // mantener el formato: '    ["guia1" , "guia2" , "guia3"],  '
+            let guias = [
+                //Comercial
+                [
+                    "Gestionar leads B2B",
+                    "Gestionar leads B2C"
+                ],
+                
+                //Cobertura
+                [
+                    "Anticonceptivos",
+                    "Asesoramiento sobre aplicaciones",
+                    "Asistencia domiciliaria",
+                    "Bioqu\u00EDmica",
+                    "Cartilla",
+                    "Cirug\u00EDas",
+                    "Diabetes",
+                    "Discapacidad",
+                    "Empadronamiento",
+                    "Fertilidad",
+                    "Gesti\u00F3n de la calidad de atenci\u00F3n",
+                    "Medicamentos",
+                    "Odontolog\u00EDa",
+                    "Ortopedia",
+                    "PMI",
+                    "Pr\u00E1cticas",
+                    "Pr\u00E1cticas Condicionada",
+                    "Pr\u00E1cticas sin cobertura",
+                    "Psicopatolog\u00EDa",
+                    "Reintegros",
+                    "Traslado",
+                    "Vacunas",
+                    "Urgencias"
+                ],
+                
+                //Afiliaciones
+                [
+                    "Altas",
+                    "Bajas",
+                    "Aplicaciones",
+                    "Certificados",
+                    "Modificaciones",
+                    "Modificaciones del padr\u00F3n",
+                    "Modificaci\u00F3n de datos",
+                    "Subsidio - Licencia"
+                ],
+                //Facturacion
+                [
+                "Cuenta corriente",
+                "Facturaci\u00F3n"
+                ],
+                //Reintegro
+                [
+                "Reintegros"
+                ],
+                //Prestadores
+                [
+                "Aplicaciones",
+                "Extranet",
+                "Servicios",
+                "Validaci\u00F3n de l\u00EDnea"
+                ],
+                //Info Aplicaciones
+                []
+
+            ]
+
+            /*La siguiente funcion se llama abajo de la misma, y por cada nueva categoria, y sus guias, crea siempre las mismas estructuras:
+            (Nota: cuando se invoca la funcion agregarCategoria, con 'guias[i]', lo que se le esta pasando por cada categoria, es un array de guias)
+            Un LI, con sus clases, que dentro lleva un link, con su href, nombreVisible, y title, el link se inserta en el LI.
+            Y por cada LI, se crea un UL, que va a almacenar su submenu (las guias). El UL tiene su clase 'submenu'
+            Entonces, de ese array de guias que se recibio, por cada una de ellas, se ejecuta una nueva funcion, anonima en este caso, porque ya
+            la desarrollo ahi mismo. Y la funcion, hace basicamente lo mismo que la funcion agregarCategoria, crea, por cada guia, un LI, con su link,
+            y estos LI se insertan al UL
+            (Nota: lo mas dificil fue dar con 'encodeURIComponent(variable)', la cual es una función en JavaScript que se utiliza para codificar 
+            un componente uniforme de recursos (URI), como un String, convirtiendo caracteres especiales en su representación hexadecimal UTF-8. 
+            Esto es útil cuando se necesita incluir una cadena en una URL, ya que algunas cadenas pueden contener caracteres que tienen significados 
+            especiales en una URL y podrían causar problemas si no se codifican correctamente.
+            Por ejemplo, si categoria es una variable que contiene una cadena con espacios u otros caracteres especiales, al aplicar encodeURIComponent(categoria),
+            estos caracteres serán convertidos en su representación hexadecimal, asegurando que la URL resultante sea válida y pueda ser interpretada correctamente por el navegador.
+            Ejemplo práctico:
+
+            var categoria = "Electrónica & Tecnología";
+            var url = "https://ejemplo.com/busqueda?categoria=" + encodeURIComponent(categoria);
+
+            console.log(url);
+            En este ejemplo, si la variable categoria contiene la cadena "Electrónica & Tecnología", al aplicar encodeURIComponent(categoria), la URL resultante será:
+
+            https://ejemplo.com/busqueda?categoria=Electr%C3%B3nica%20%26%20Tecnolog%C3%ADa
+
+            Como se puedes ver, los caracteres especiales como el espacio (" ") y el ampersand ("&") se han convertido en su representación hexadecimal, 
+            lo que asegura que la URL sea válida y pueda ser interpretada correctamente por el navegador.
+            */
+
+            function agregarCategoria(categoria, guias) {
+                let listItem = document.createElement('li');
+                listItem.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+                let link = document.createElement('a');
+                link.href = "/" + encodeURIComponent(categoria);
+                link.textContent = categoria;
+                link.title = categoria;
+                listItem.appendChild(link);
+
+                let listadoPorCategoria = document.createElement('ul');
+                listadoPorCategoria.classList.add('submenu');
+
+                guias.forEach(function (guia) {
+                    let subListItem = document.createElement('li');
+                    let subLink = document.createElement('a');
+                    subLink.href = "/" + encodeURIComponent(categoria) + "/" + encodeURIComponent(guia);
+                    subLink.textContent = guia;
+                    subLink.title = guia;
+                    subListItem.appendChild(subLink);
+                    listadoPorCategoria.appendChild(subListItem);
+                });
+
+                listItem.appendChild(listadoPorCategoria);
+                ulSubList.appendChild(listItem);
+            }
+
+            for (let i = 0; i < categorias.length; i++) {
+                agregarCategoria(categorias[i], guias[i]);
+            }                      
+           
+            elementoMenu.appendChild(labelResponsive);
+            elementoMenu.appendChild(ulSubList);
+            ulPrincipal.appendChild(elementoMenu);
+            divContenedor.appendChild(ulPrincipal);
+            topLevelNavigation.appendChild(divContenedor);
+            topLevelNavigation.appendChild(divConsejos);
+            let logoContainer = document.querySelector('.elm-header-logo-container');
+            if (logoContainer) {
+                logoContainer.innerHTML = '';
+                logoContainer.appendChild(topLevelNavigation);
+            }
+        }
+    });
+</script>

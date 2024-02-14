@@ -2222,6 +2222,14 @@ div ul li {
 	box-shadow: none !important;
 }
 
+.hasNotContent {
+	color: var(--medium-gray) !important;
+}
+
+.hasContent .hasNotContent {
+	color: var(--primary-black) !important;
+}
+
 div.muestrario img {
 	height: 30px;
 }

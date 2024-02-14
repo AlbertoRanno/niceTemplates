@@ -13,7 +13,10 @@ CKEDITOR.editorConfig = function(config) {
 
     //Particularidades
     config.stylesSet.push({ name : 'hasContent', wrap:false, attributes : { 'class' : 'hasContent'} });
-    config.stylesSet.push({ name : 'emptyRegions', wrap:false, attributes : { 'class' : 'emptyRegions'} });
+    //config.stylesSet.push({ name : 'hasNotContent', wrap:false, attributes : { 'class' : 'hasNotContent'} });
+    config.stylesSet.push({ name : 'emptyRegions', wrap:false, attributes : { 'class' : 'emptyRegions'} });    
+    //config.stylesSet.push({ name : 'nonEmptyRegion', wrap:false, attributes : { 'class' : 'nonEmptyRegion'} });
+    
 
     //Tooltips-Textos (Variables Globales)
     config.stylesSet.push({ name : 'tooltips', wrap: false, attributes: { 'class': 'tool-tip-link', 'title': '{{reemplazarAqui}}'}});

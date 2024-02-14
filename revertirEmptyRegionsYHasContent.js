@@ -27,6 +27,20 @@
     }
 
     revertirEmptyRegions();
+    
+    
+    CSS
+    
+    .nonEmptyRegion {
+
+    display: inline-block;
+    padding: 12px 16px;
+    background: var(--white);
+    color: var(--primary-blue);
+    cursor: pointer;
+    pointer-events: all;
+    box-shadow: none !important;
+    }
     */
 
     function revertirHasContent() {
@@ -59,7 +73,12 @@
     revertirHasContent();
     
     SUmar al css:
-    .hasNotContent {
-        color: var(--medium - gray);
+   .hasNotContent {
+        color: var(--medium-gray) !important;
+    }
+
+    Para cuando aplican, revierten, y vuelven a aplicar:
+    .hasContent .hasNotContent {
+        color: var(--primary-black) !important;
     }
     */

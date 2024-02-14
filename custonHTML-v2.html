@@ -120,6 +120,29 @@
 
     document.addEventListener('DOMContentLoaded', function () {
 
+        function revertirEmptyRegions() {
+            var spansNonEmptyRegion = document.querySelectorAll('.emptyRegions .nonEmptyRegion');
+            spansNonEmptyRegion.forEach(function (spanNonEmptyRegion) {
+                var spanEmptyRegions = spanNonEmptyRegion.parentNode;
+                spanEmptyRegions.parentNode.replaceChild(spanNonEmptyRegion, spanEmptyRegions);
+            });
+        }
+
+        revertirEmptyRegions();
+
+        function revertirHasContent() {
+            var botonesConHasContent = document.querySelectorAll('button .hasNotContent .hasContent');
+            botonesConHasContent.forEach(function (spanHasContent) {
+                var nombreFilial = spanHasContent.textContent;
+                var nuevoNodoTexto = document.createTextNode(nombreFilial);
+                spanHasContent.parentNode.replaceChild(nuevoNodoTexto, spanHasContent.parentNode
+                    .firstChild);
+            });
+        }
+        revertirHasContent();
+
+
+
         //****************************METRICAS POR AGRUPADOR****************************
         var selectElement, selectedValue, selectElementOwner, selectElementType, propietario, tipo, articleURL;
 
