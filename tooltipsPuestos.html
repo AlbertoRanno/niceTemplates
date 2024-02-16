@@ -1,27 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <style>
-        .tippy-box {
-            border-radius: 5px;
-            background-color: var(--secondary-background);
-        }
-
-        .tippy-box img {
-            max-width: 25px;
-            height: auto;
-        }
-    </style>
-   
-html
-Copy code
 <!-- Se cargan las bibliotecas Popper.js y Tippy.js desde CDN para ser utilizadas en el script -->
 <script src="https://unpkg.com/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.min.js"></script>
@@ -43,8 +21,298 @@ Velocidad: Los CDNs tienen servidores distribuidos globalmente. Cuando un usuari
 Caché Compartida: Muchos sitios web pueden compartir la misma versión de la biblioteca, lo que significa que si un usuario ya ha visitado un sitio
  que utiliza esa biblioteca, es probable que ya tenga en caché esa versión, acelerando la carga en otros sitios que también la usen.
 -->
-<!-- Inicio del script -->
+
+<!--Version Limpia Final Tenant 1-->
 <script>
+    const contenedoresPath = document.querySelectorAll('.mt-lp-progress-container');
+
+    contenedoresPath.forEach(contenedor => {
+        const enlacesPath = contenedor.querySelectorAll('a');
+
+        enlacesPath.forEach(enlace => {
+            const nombreDelArticulo = enlace.textContent.trim();
+            const cantidadAsteriscos = (nombreDelArticulo.match(/\*/g) || []).length;
+            const cantidadGuiones = (nombreDelArticulo.match(/-/g) || []).length;
+
+            let nombreClaseTooltips = '';
+            if (!nombreDelArticulo.startsWith('*') && !nombreDelArticulo.startsWith('-') &&
+                !nombreDelArticulo.endsWith('*') && !nombreDelArticulo.endsWith('-')) {
+                nombreClaseTooltips = 'todos';
+            } else if (nombreDelArticulo.startsWith('*')) {
+                switch (cantidadAsteriscos) {
+                    case 1:
+                        nombreClaseTooltips = 'todosCoordi';
+                        break;
+                    case 2:
+                        nombreClaseTooltips = 'coordiCGD';
+                        break;
+                    case 3:
+                        nombreClaseTooltips = 'coordiCAP';
+                        break;
+                    case 4:
+                        nombreClaseTooltips = 'coordiCAT';
+                        break;
+                }
+            } else if (nombreDelArticulo.endsWith('*')) {
+                switch (cantidadAsteriscos) {
+                    case 1:
+                        nombreClaseTooltips = 'coordiCAT-CGD';
+                        break;
+                    case 2:
+                        nombreClaseTooltips = 'coordiCGD-CAP';
+                        break;
+                    case 3:
+                        nombreClaseTooltips = 'coordiCAT-CAP';
+                        break;
+                }
+            } else if (nombreDelArticulo.includes('-')) {
+                if (nombreDelArticulo.startsWith('-')) {
+                    switch (cantidadGuiones) {
+                        case 1:
+                            nombreClaseTooltips = 'todosAsesores';
+                            break;
+                        case 2:
+                            nombreClaseTooltips = 'asesorCGD';
+                            break;
+                        case 3:
+                            nombreClaseTooltips = 'asesorCAP';
+                            break;
+                        case 4:
+                            nombreClaseTooltips = 'asesorCAT';
+                            break;
+                    }
+                } else if (nombreDelArticulo.endsWith('-')) {
+                    switch (cantidadGuiones) {
+                        case 1:
+                            nombreClaseTooltips = 'asesoresCAT_CGD';
+                            break;
+                        case 2:
+                            nombreClaseTooltips = 'asesoresCGD_CAP';
+                            break;
+                        case 3:
+                            nombreClaseTooltips = 'asesoresCAT_CAP';
+                            break;
+                    }
+                }
+            }
+
+            const tooltipSpan = document.createElement('span');
+
+            if (nombreClaseTooltips) {
+                tooltipSpan.classList.add('tooltip-tool-tip-link');
+                tooltipSpan.classList.add(nombreClaseTooltips);
+            }
+
+            enlace.parentNode.insertBefore(tooltipSpan, enlace);
+            tooltipSpan.appendChild(enlace);
+            enlace.removeAttribute('title');
+        });
+    });
+
+    $(function () {
+        $('.tooltip-tool-tip-link').each(function () {
+            if ($(this).attr('class').split(' ').length > 1) {
+                var nombreClaseTooltips = $(this).attr('class').split(' ')[1];
+                var rutaImagen = obtenerRutaImagen(nombreClaseTooltips);
+
+                tippy(this, {
+                    content: `<img src="${rutaImagen}" alt="Icono" />`,
+                    allowHTML: true,
+                    theme: 'tooltip-custom',
+                    onShow(instance) {
+                        console.log(instance.popper);
+                    },
+                });
+            }
+        });
+
+        function obtenerRutaImagen(nombreClaseTooltips) {
+            var imagenesPuestosTooltips = {
+                'coordiCAT': '/@api/deki/files/264/Coordi_CAT-CAD.png',
+                'coordiCGD': '/@api/deki/files/265/Coordi_CGD.png',
+                'coordiCAP': '/@api/deki/files/267/Sub_y_encargado_CAP.png',
+                'asesorCAT': '/@api/deki/files/31/Asesor_CAT-CAD.png',
+                'asesorCGD': '/@api/deki/files/266/Asesor_CGD.png',
+                'asesorCAP': '/@api/deki/files/29/Asistente_CAP.png',
+                //Grupos
+                'todos': '/@api/deki/files/289/Todos.png',
+                'todosCoordi': '/@api/deki/files/584/todosLosPuestos.png',
+                'todosAsesores': '/@api/deki/files/588/todosAsesores.png',
+                //Combinaciones de Coordinadores                
+                'coordiCAT-CGD': '/@api/deki/files/606/CAT-CGD.png',
+                'coordiCGD-CAP': '/@api/deki/files/287/CGD-CAP.png',
+                'coordiCAT-CAP': '/@api/deki/files/607/CAT-CAP.png',
+                //Combinaciones de Asesores
+                'asesoresCAT_CGD': '/@api/deki/files/605/asesoresCAT_CGD.png',
+                'asesoresCGD_CAP': '/@api/deki/files/288/asesoresCGD_CAP.png',
+                'asesoresCAT_CAP': '/@api/deki/files/604/asesoresCAT_CAP.png',
+                //A medida
+                'todosAsesoresCGD-CAP': '/@api/deki/files/593/todosAsesoresCGD-CAP.png',
+            };
+
+            return imagenesPuestosTooltips[nombreClaseTooltips] || '';
+        }
+    });
+</script>
+
+<!--Version Explicada (otros nombres de variables menos claros) Final Tenant 1-->
+<script>
+//TOOLTIPS EN PATH con Seleccion Automatica referenciada
+
+    // Seleccionar todos los elementos con la clase ".mt-lp-progress-container"
+    const containers = document.querySelectorAll('.mt-lp-progress-container');
+
+    // Iterar sobre cada contenedor encontrado
+    containers.forEach(container => {
+        // Seleccionar todos los elementos <a> dentro del contenedor actual
+        const links = container.querySelectorAll('a');
+
+        // Iterar sobre cada enlace encontrado
+        links.forEach(link => {
+            // Verificar la cantidad de asteriscos y guiones en cualquier parte del texto del enlace
+            const textContent = link.textContent.trim();
+            const asteriskCount = (textContent.match(/\*/g) || []).length;
+            const dashCount = (textContent.match(/-/g) || []).length;
+
+            /*IDEA:
+
+                    0 => Todos juntos => todos
+
+                    => Coordinadores:
+
+                    '*' a izquierda (Juntos y Sueltos)
+                    1 => todosCoordi
+                    2 => coordiCGD
+                    3 => coordiCAP
+                    4 => coordiCAT
+
+                    '*' a derecha (Combinaciones)
+                    1 => coordiCAT-CGD
+                    2 => coordiCGD-CAP
+                    3 => coordiCAT-CAP
+
+
+                    => Asesores:
+
+                    '-' a izquierda (Juntos y Sueltos)
+                    1 => todosAsesores
+                    2 => asesorCGD
+                    3 => asesorCAP
+                    4 => asesorCAT
+                    
+                    '-' a derecha (Combinaciones)
+                    1 => coordiCAT-CGD
+                    2 => coordiCGD-CAP
+                    3 => coordiCAT-CAP
+
+                    */
+
+            // Determinar la clase correspondiente según la cantidad y posición de asteriscos y guiones
+            let className = '';
+            if (!textContent.startsWith('*') && !textContent.startsWith('-') &&
+                !textContent.endsWith('*') && !textContent.endsWith('-')) {
+                // No empieza ni termina con asterisco ni guion
+                className = 'todos';
+            } else if (textContent.startsWith('*')) {
+                // Asterisco al inicio del texto
+                switch (asteriskCount) {
+                    case 1:
+                        className = 'todosCoordi';
+                        break;
+                    case 2:
+                        className = 'coordiCGD';
+                        break;
+                    case 3:
+                        className = 'coordiCAP';
+                        break;
+                    case 4:
+                        className = 'coordiCAT';
+                        break;
+                }
+            } else if (textContent.endsWith('*')) {
+                // Asterisco al final del texto
+                switch (asteriskCount) {
+                    case 1:
+                        className = 'coordiCAT-CGD';
+                        break;
+                    case 2:
+                        className = 'coordiCGD-CAP';
+                        break;
+                    case 3:
+                        className = 'coordiCAT-CAP';
+                        break;
+                }
+            } else if (textContent.includes('-')) {
+                // Guion en cualquier parte del texto
+                if (textContent.startsWith('-')) {
+                    // Guion al inicio del texto
+                    switch (dashCount) {
+                        case 1:
+                            className = 'todosAsesores';
+                            break;
+                        case 2:
+                            className = 'asesorCGD';
+                            break;
+                        case 3:
+                            className = 'asesorCAP';
+                            break;
+                        case 4:
+                            className = 'asesorCAT';
+                            break;
+                    }
+                } else if (textContent.endsWith('-')) {
+                    // Guion al final del texto
+                    switch (dashCount) {
+                        case 1:
+                            className = 'asesoresCAT_CGD';
+                            break;
+                        case 2:
+                            className = 'asesoresCGD_CAP';
+                            break;
+                        case 3:
+                            className = 'asesoresCAT_CAP';
+                            break;
+                    }
+                }
+            }
+
+            // Crear un nuevo elemento span
+            const tooltipSpan = document.createElement('span');
+
+            // Agregar la clase al span si es necesario
+            if (className) {
+                tooltipSpan.classList.add('tool-tip-link');
+                tooltipSpan.classList.add(className);
+            }
+
+            // Envolver el enlace con el nuevo span
+            link.parentNode.insertBefore(tooltipSpan,
+                link); // Inserta el nuevo span antes del enlace
+            tooltipSpan.appendChild(link); // Añade el enlace al interior del span
+            link.removeAttribute('title');
+        });
+    });
+
+    /*Toda la parte anterior a este comentario, es el desarrollo para colocar los tooltips, con las imagenes de los puestos, sobre el nombre,
+    de cada paso de un proceso (que se condice con el nombre del archivo que encapsula ese paso). Para lograr esto, primero selecciono los containers
+    que son los divs que contienen la linea punteada con los pasos. Luego, busco en cada uno de ellos, y capturo todos sus links. Posteriomente,
+    itero los links, y cuento la cantidad de '*' o de '-' que tienen. En base a esto, y definiendo una variable className, y mediante una sucesion
+    de condicionales, le asigno a classname el valor correspondiente. Este va a depender de:
+    -si el nombre del articulo no tiene ni * ni -
+    -tiene * a la izq
+    -tiene * a la der
+    -tiene - a la izq
+    -tiene - a la der
+    Una vez que ya se que clase va a llevar, creo un etiqueta SPAN, a esta etiqueta le agrego la clase comun para todos los tooltips, y la clase
+    especifica del puesto. Luego a este SPAN, lo inserto antes del LINK, PERO, establezco que el link es su hijo, para que no se cierre el SPAN
+    arriba del link.
+    POr ultimo, elimino el title original, dado que es el que genera el tooltip original, y no quiero que cree conflictos.
+    
+    Una vez que tengo armada esta estructura, que es el equivalente automatico, a lo que manualmente hago desde la interfaz, de seleccionar una frase
+    y agregarle, gracias al editor, un span y una clase. Una vez que tengo esta estructura, que es de la misma forma que la usada en contenido, entra
+    en accion el siguiente codigo que usa JQuery y las librerias de tooltips:
+    */
+
     $(function () {
         // Se seleccionan todos los elementos con la clase 'tool-tip-link' (clase que se agrega gracias al editor de Nice) y se itera sobre cada uno de ellos
         $('.tool-tip-link').each(function () {
@@ -53,29 +321,29 @@ Caché Compartida: Muchos sitios web pueden compartir la misma versión de la bi
                 /*Si el elemento, tiene solo la clase 'tool-tip-link', en Nice, lo trato para cargar solo texto en los tooltips, mediante
                 las variables globales, entonces que no le agregue la img, es decir, la img la aplica solo si tiene mas clases aparte de esa*/
 
-            // Se obtiene la segunda clase del elemento actual y se guarda en la variable 'className'
-            var className = $(this).attr('class').split(' ')[1];
+                // Se obtiene la segunda clase del elemento actual y se guarda en la variable 'className'
+                var className = $(this).attr('class').split(' ')[1];
 
-            // Se obtiene la ruta de la imagen correspondiente a la clase actual mediante la función 'getImageSrc'
-            var imageSrc = getImageSrc(className);
+                // Se obtiene la ruta de la imagen correspondiente a la clase actual mediante la función 'getImageSrc'
+                var imageSrc = getImageSrc(className);
 
-            // Se inicializa un tooltip utilizando Tippy.js en el elemento actual
-            tippy(this, {
-                // Se define el contenido del tooltip como una etiqueta de imagen con la ruta obtenida
-                content: `<img src="${imageSrc}" alt="Icono" />`,
-                // Se podría agregarle texto al lado de la imagen con:
-                //  content: `<img src="${imageSrc}" alt="Icono" />, texto extra`,
-                // Este sería el mismo para todas las clases... pero se podría ver de cambiarlo...
-                // Permite el uso de HTML en el contenido del tooltip (lo que permite la imagen)
-                allowHTML: true,
-                // Agrega la clase de estilo personalizado al tooltip
-                theme: 'tooltip-custom',
-                // Se define un evento que se ejecutará al mostrar el tooltip, imprime información útil en la consola
-                onShow(instance) {
-                    console.log(instance.popper);
-                },
-            });
-        }
+                // Se inicializa un tooltip utilizando Tippy.js en el elemento actual
+                tippy(this, {
+                    // Se define el contenido del tooltip como una etiqueta de imagen con la ruta obtenida
+                    content: `<img src="${imageSrc}" alt="Icono" />`,
+                    // Se podría agregarle texto al lado de la imagen con:
+                    //  content: `<img src="${imageSrc}" alt="Icono" />, texto extra`,
+                    // Este sería el mismo para todas las clases... pero se podría ver de cambiarlo...
+                    // Permite el uso de HTML en el contenido del tooltip (lo que permite la imagen)
+                    allowHTML: true,
+                    // Agrega la clase de estilo personalizado al tooltip
+                    theme: 'tooltip-custom',
+                    // Se define un evento que se ejecutará al mostrar el tooltip, imprime información útil en la consola
+                    onShow(instance) {
+                        console.log(instance.popper);
+                    },
+                });
+            }
         });
 
         // Función que devuelve la ruta de la imagen asociada a una clase dada
@@ -99,7 +367,7 @@ Caché Compartida: Muchos sitios web pueden compartir la misma versión de la bi
                 //Combinaciones de Asesores
                 'asesoresCAT_CGD': '/@api/deki/files/605/asesoresCAT_CGD.png',
                 'asesoresCGD_CAP': '/@api/deki/files/587/asesoresCGD_CAP.png',
-                'asesoresCAT_CAP': '/@api/deki/files/604/asesoresCAT_CAP.png',                
+                'asesoresCAT_CAP': '/@api/deki/files/604/asesoresCAT_CAP.png',
                 //A medida
                 'todosAsesoresCGD-CAP': '/@api/deki/files/593/todosAsesoresCGD-CAP.png',
             };
@@ -130,8 +398,3 @@ Si bien es importante tener en cuenta que agregar scripts al head puede afectar 
 las bibliotecas mencionadas son bastante livianas y ampliamente utilizadas, por lo que no deberías enfrentar problemas significativos.
 */
 </script>
-
-
-</body>
-
-</html>

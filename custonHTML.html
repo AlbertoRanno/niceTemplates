@@ -58,50 +58,146 @@
         });
     });
 
-    $(function () {
-        $('.tool-tip-link').each(function () {
-            if ($(this).attr('class').split(' ').length > 1) {
-                var className = $(this).attr('class').split(' ')[1];
-                var imageSrc = getImageSrc(className);
 
-                tippy(this, {
-                    content: `<img src="${imageSrc}" alt="Icono" />`,
-                    allowHTML: true,
-                    theme: 'tooltip-custom',
-                });
+
+
+
+
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const contenedoresPath = document.querySelectorAll('.mt-lp-progress-container');
+
+        contenedoresPath.forEach(contenedor => {
+            const enlacesPath = contenedor.querySelectorAll('a');
+
+            enlacesPath.forEach(enlace => {
+                const nombreDelArticulo = enlace.textContent.trim();
+                const cantidadAsteriscos = (nombreDelArticulo.match(/\*/g) || []).length;
+                const cantidadGuiones = (nombreDelArticulo.match(/-/g) || []).length;
+
+                let nombreClaseTooltips = '';
+                if (!nombreDelArticulo.startsWith('*') && !nombreDelArticulo.startsWith('-') &&
+                    !nombreDelArticulo.endsWith('*') && !nombreDelArticulo.endsWith('-')) {
+                    nombreClaseTooltips = 'todos';
+                } else if (nombreDelArticulo.startsWith('*')) {
+                    switch (cantidadAsteriscos) {
+                        case 1:
+                            nombreClaseTooltips = 'todosCoordi';
+                            break;
+                        case 2:
+                            nombreClaseTooltips = 'coordiCGD';
+                            break;
+                        case 3:
+                            nombreClaseTooltips = 'coordiCAP';
+                            break;
+                        case 4:
+                            nombreClaseTooltips = 'coordiCAT';
+                            break;
+                    }
+                } else if (nombreDelArticulo.endsWith('*')) {
+                    switch (cantidadAsteriscos) {
+                        case 1:
+                            nombreClaseTooltips = 'coordiCAT-CGD';
+                            break;
+                        case 2:
+                            nombreClaseTooltips = 'coordiCGD-CAP';
+                            break;
+                        case 3:
+                            nombreClaseTooltips = 'coordiCAT-CAP';
+                            break;
+                    }
+                } else if (nombreDelArticulo.includes('-')) {
+                    if (nombreDelArticulo.startsWith('-')) {
+                        switch (cantidadGuiones) {
+                            case 1:
+                                nombreClaseTooltips = 'todosAsesores';
+                                break;
+                            case 2:
+                                nombreClaseTooltips = 'asesorCGD';
+                                break;
+                            case 3:
+                                nombreClaseTooltips = 'asesorCAP';
+                                break;
+                            case 4:
+                                nombreClaseTooltips = 'asesorCAT';
+                                break;
+                        }
+                    } else if (nombreDelArticulo.endsWith('-')) {
+                        switch (cantidadGuiones) {
+                            case 1:
+                                nombreClaseTooltips = 'asesoresCAT_CGD';
+                                break;
+                            case 2:
+                                nombreClaseTooltips = 'asesoresCGD_CAP';
+                                break;
+                            case 3:
+                                nombreClaseTooltips = 'asesoresCAT_CAP';
+                                break;
+                        }
+                    }
+                }
+
+                const tooltipSpan = document.createElement('span');
+
+                if (nombreClaseTooltips) {
+                    tooltipSpan.classList.add('tooltip-tool-tip-link');
+                    tooltipSpan.classList.add(nombreClaseTooltips);
+                }
+
+                enlace.parentNode.insertBefore(tooltipSpan, enlace);
+                tooltipSpan.appendChild(enlace);
+                enlace.removeAttribute('title');
+            });
+        });
+
+        $(function () {
+            $('.tooltip-tool-tip-link').each(function () {
+                if ($(this).attr('class').split(' ').length > 1) {
+                    var nombreClaseTooltips = $(this).attr('class').split(' ')[1];
+                    var rutaImagen = obtenerRutaImagen(nombreClaseTooltips);
+
+                    tippy(this, {
+                        content: `<img src="${rutaImagen}" alt="Icono" />`,
+                        allowHTML: true,
+                        theme: 'tooltip-custom',
+                        onShow(instance) {
+                            console.log(instance.popper);
+                        },
+                    });
+                }
+            });
+
+            function obtenerRutaImagen(nombreClaseTooltips) {
+                var imagenesPuestosTooltips = {
+                    'coordiCAT': '/@api/deki/files/264/Coordi_CAT-CAD.png',
+                    'coordiCGD': '/@api/deki/files/265/Coordi_CGD.png',
+                    'coordiCAP': '/@api/deki/files/267/Sub_y_encargado_CAP.png',
+                    'asesorCAT': '/@api/deki/files/31/Asesor_CAT-CAD.png',
+                    'asesorCGD': '/@api/deki/files/266/Asesor_CGD.png',
+                    'asesorCAP': '/@api/deki/files/29/Asistente_CAP.png',
+                    //Grupos
+                    'todos': '/@api/deki/files/289/Todos.png',
+                    'todosCoordi': '/@api/deki/files/584/todosLosPuestos.png',
+                    'todosAsesores': '/@api/deki/files/588/todosAsesores.png',
+                    //Combinaciones de Coordinadores                
+                    'coordiCAT-CGD': '/@api/deki/files/606/CAT-CGD.png',
+                    'coordiCGD-CAP': '/@api/deki/files/287/CGD-CAP.png',
+                    'coordiCAT-CAP': '/@api/deki/files/607/CAT-CAP.png',
+                    //Combinaciones de Asesores
+                    'asesoresCAT_CGD': '/@api/deki/files/605/asesoresCAT_CGD.png',
+                    'asesoresCGD_CAP': '/@api/deki/files/288/asesoresCGD_CAP.png',
+                    'asesoresCAT_CAP': '/@api/deki/files/604/asesoresCAT_CAP.png',
+                    //A medida
+                    'todosAsesoresCGD-CAP': '/@api/deki/files/593/todosAsesoresCGD-CAP.png',
+                };
+
+                return imagenesPuestosTooltips[nombreClaseTooltips] || '';
             }
         });
 
-        function getImageSrc(className) {
-            var images = {
-                //Sueltos
-                'coordiCAT': '/@api/deki/files/33/Coordi_CAT-CAD.png',
-                'coordiCGD': '/@api/deki/files/32/Coordi_CGD.png',
-                'coordiCAP': '/@api/deki/files/30/Sub_y_encargado_CAP.png',
-                'asesorCAT': '/@api/deki/files/31/Asesor_CAT-CAD.png',
-                'asesorCGD': '/@api/deki/files/34/Asesor_CGD.png',
-                'asesorCAP': '/@api/deki/files/29/Asistente_CAP.png',
-                //Grupos
-                'todos': '/@api/deki/files/608/Todos.png',
-                'todosCoordi': '/@api/deki/files/584/todosLosPuestos.png',
-                'todosAsesores': '/@api/deki/files/588/todosAsesores.png',
-                //Combinaciones de Coordinadores                
-                'coordiCAT-CGD': '/@api/deki/files/606/CAT-CGD.png',
-                'coordiCGD-CAP': '/@api/deki/files/594/CGD-CAP.png',
-                'coordiCAT-CAP': '/@api/deki/files/607/CAT-CAP.png',
-                //Combinaciones de Asesores
-                'asesoresCAT_CGD': '/@api/deki/files/605/asesoresCAT_CGD.png',
-                'asesoresCGD_CAP': '/@api/deki/files/587/asesoresCGD_CAP.png',
-                'asesoresCAT_CAP': '/@api/deki/files/604/asesoresCAT_CAP.png',
-                //A medida
-                'todosAsesoresCGD-CAP': '/@api/deki/files/593/todosAsesoresCGD-CAP.png',
-            };
-
-            return images[className] || '';
-        }
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
 
         function revertirEmptyRegions() {
             var spansNonEmptyRegion = document.querySelectorAll('.emptyRegions .nonEmptyRegion');
@@ -807,7 +903,7 @@
                     "Gestionar leads B2B",
                     "Gestionar leads B2C"
                 ],
-                
+
                 //Cobertura
                 [
                     "Anticonceptivos",
@@ -834,7 +930,7 @@
                     "Vacunas",
                     "Urgencias"
                 ],
-                
+
                 //Afiliaciones
                 [
                     "Altas",
@@ -848,23 +944,23 @@
                 ],
                 //Facturacion
                 [
-                "Cuenta corriente",
-                "Facturaci\u00F3n"
+                    "Cuenta corriente",
+                    "Facturaci\u00F3n"
                 ],
                 //Reintegro
                 [
-                "Reintegros"
+                    "Reintegros"
                 ],
                 //Prestadores
                 [
-                "Aplicaciones",
-                "Extranet",
-                "Servicios",
-                "Validaci\u00F3n de l\u00EDnea"
+                    "Aplicaciones",
+                    "Extranet",
+                    "Servicios",
+                    "Validaci\u00F3n de l\u00EDnea"
                 ],
                 //Info Aplicaciones
                 [
-                "Aplicaciones"
+                    "Aplicaciones"
                 ]
 
             ]
