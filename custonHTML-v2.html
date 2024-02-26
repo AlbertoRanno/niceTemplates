@@ -75,22 +75,113 @@
         });
     });
 
-    $(function () {
-        $('.tool-tip-link').each(function () {
-            if ($(this).attr('class').split(' ').length > 1) {
-                var className = $(this).attr('class').split(' ')[1];
-                var imageSrc = getImageSrc(className);
+    document.addEventListener('DOMContentLoaded', function () {
 
-                tippy(this, {
-                    content: `<img src="${imageSrc}" alt="Icono" />`,
-                    allowHTML: true,
-                    theme: 'tooltip-custom',
-                });
-            }
+
+        const contenedoresPath = document.querySelectorAll('.mt-lp-progress-container');
+
+        contenedoresPath.forEach(contenedor => {
+            const enlacesPath = contenedor.querySelectorAll('a');
+
+            enlacesPath.forEach(enlace => {
+                const nombreDelArticulo = enlace.textContent.trim();
+                const cantidadAsteriscos = (nombreDelArticulo.match(/\*/g) || []).length;
+                const cantidadGuiones = (nombreDelArticulo.match(/-/g) || []).length;
+
+                let nombreClaseTooltips = '';
+                if (!nombreDelArticulo.startsWith('*') && !nombreDelArticulo.startsWith('-') &&
+                    !nombreDelArticulo.endsWith('*') && !nombreDelArticulo.endsWith('-')) {
+                    nombreClaseTooltips = 'todos';
+                } else if (nombreDelArticulo.startsWith('*')) {
+                    switch (cantidadAsteriscos) {
+                        case 1:
+                            nombreClaseTooltips = 'todosCoordi';
+                            break;
+                        case 2:
+                            nombreClaseTooltips = 'coordiCGD';
+                            break;
+                        case 3:
+                            nombreClaseTooltips = 'coordiCAP';
+                            break;
+                        case 4:
+                            nombreClaseTooltips = 'coordiCAT';
+                            break;
+                    }
+                } else if (nombreDelArticulo.endsWith('*')) {
+                    switch (cantidadAsteriscos) {
+                        case 1:
+                            nombreClaseTooltips = 'coordiCAT-CGD';
+                            break;
+                        case 2:
+                            nombreClaseTooltips = 'coordiCGD-CAP';
+                            break;
+                        case 3:
+                            nombreClaseTooltips = 'coordiCAT-CAP';
+                            break;
+                    }
+                } else if (nombreDelArticulo.includes('-')) {
+                    if (nombreDelArticulo.startsWith('-')) {
+                        switch (cantidadGuiones) {
+                            case 1:
+                                nombreClaseTooltips = 'todosAsesores';
+                                break;
+                            case 2:
+                                nombreClaseTooltips = 'asesorCGD';
+                                break;
+                            case 3:
+                                nombreClaseTooltips = 'asesorCAP';
+                                break;
+                            case 4:
+                                nombreClaseTooltips = 'asesorCAT';
+                                break;
+                        }
+                    } else if (nombreDelArticulo.endsWith('-')) {
+                        switch (cantidadGuiones) {
+                            case 1:
+                                nombreClaseTooltips = 'asesoresCAT_CGD';
+                                break;
+                            case 2:
+                                nombreClaseTooltips = 'asesoresCGD_CAP';
+                                break;
+                            case 3:
+                                nombreClaseTooltips = 'asesoresCAT_CAP';
+                                break;
+                        }
+                    }
+                }
+
+                const tooltipSpan = document.createElement('span');
+
+                if (nombreClaseTooltips) {
+                    tooltipSpan.classList.add('tooltip-tool-tip-link');
+                    tooltipSpan.classList.add(nombreClaseTooltips);
+                }
+
+                enlace.parentNode.insertBefore(tooltipSpan, enlace);
+                tooltipSpan.appendChild(enlace);
+                enlace.removeAttribute('title');
+            });
         });
 
-        function getImageSrc(className) {
-            var images = {
+        $(function () {
+            $('.tooltip-tool-tip-link').each(function () {
+                if ($(this).attr('class').split(' ').length > 1) {
+                    var nombreClaseTooltips = $(this).attr('class').split(' ')[1];
+                    var rutaImagen = obtenerRutaImagen(nombreClaseTooltips);
+
+                    tippy(this, {
+                        content: `<img src="${rutaImagen}" alt="Icono" />`,
+                        allowHTML: true,
+                        theme: 'tooltip-custom',
+                        onShow(instance) {
+                            console.log(instance.popper);
+                        },
+                    });
+                }
+            });
+
+            function obtenerRutaImagen(nombreClaseTooltips) {
+                var imagenesPuestosTooltips = {
                 //Sueltos
                 'coordiCAT': '/@api/deki/files/33/Coordi_CAT-CAD.png',
                 'coordiCGD': '/@api/deki/files/32/Coordi_CGD.png',
@@ -114,11 +205,10 @@
                 'todosAsesoresCGD-CAP': '/@api/deki/files/593/todosAsesoresCGD-CAP.png',
             };
 
-            return images[className] || '';
-        }
-    });
+                return imagenesPuestosTooltips[nombreClaseTooltips] || '';
+            }
+        });
 
-    document.addEventListener('DOMContentLoaded', function () {
 
         function revertirEmptyRegions() {
             var spansNonEmptyRegion = document.querySelectorAll('.emptyRegions .nonEmptyRegion');
@@ -140,8 +230,6 @@
             });
         }
         revertirHasContent();
-
-
 
         //****************************METRICAS POR AGRUPADOR****************************
         var selectElement, selectedValue, selectElementOwner, selectElementType, propietario, tipo, articleURL;
@@ -166,9 +254,9 @@
                 console.log("URL: " + articleURL + " \nPropietario: " + propietario + " \nTipo: " + tipo +
                     "\nTipo de articulo: " + tipoDeArticulo);
 
-                if (tipoDeArticulo == "Procedimientos") {
-                    document.getElementById('mt-toc-container').style.display = 'none';
-                }
+                /* if (tipoDeArticulo == "Procedimientos") {
+                     document.getElementById('mt-toc-container').style.display = 'none';
+                 } */
             }
         }
         // ************************************* Colapsar subniveles índice *************************************
@@ -190,10 +278,8 @@
             contenedorTitulo.appendChild(contenedorFlechaIndice);
             contenedorFlechaIndice.appendChild(imgFlechaIndice);
             contenedorFlechaIndice.addEventListener('click', function () {
-                let isActive = olSiguienteAlLiActual.classList.toggle(
-                    'secondary-ol');
-                imgFlechaIndice.src = isActive ?
-                    '/@api/deki/files/101/upArrowBlue.png' :
+                let isActive = olSiguienteAlLiActual.classList.toggle('secondary-ol');
+                imgFlechaIndice.src = isActive ? '/@api/deki/files/101/upArrowBlue.png' :
                     '/@api/deki/files/22/downArrowBlue.png.png';
                 olSiguienteAlLiActual.style.display = isActive ? 'block' : 'none';
             });
@@ -384,10 +470,8 @@
                 }
                 var results = document.querySelectorAll("li.result");
                 results.forEach(function (result) {
-                    var link = result.querySelector(
-                        "a.go.result-spacer.mt-tracked-result");
-                    var moreButton = result.querySelector(
-                        "button.mt-help-more-content");
+                    var link = result.querySelector("a.go.result-spacer.mt-tracked-result");
+                    var moreButton = result.querySelector("button.mt-help-more-content");
                     if (link) {
                         var originalUrl = link.getAttribute("href");
                         result.addEventListener("click", function (event) {
@@ -398,14 +482,12 @@
                     }
                 });
 
-                let ubicacion = document.querySelector(
-                    ".mt-search-filters-option-location");
+                let ubicacion = document.querySelector(".mt-search-filters-option-location");
                 if (ubicacion) {
                     let textoEnNodo = ubicacion.childNodes[0];
                     textoEnNodo.nodeValue = "Categor\u00EDas";
                 }
-                let clasificacion = document.querySelector(
-                    ".mt-search-filters-option-classifications");
+                let clasificacion = document.querySelector(".mt-search-filters-option-classifications");
                 if (clasificacion) {
                     let textoEnNodo = clasificacion.childNodes[0];
                     textoEnNodo.nodeValue = "Caracter\u00EDsticas";
@@ -421,8 +503,7 @@
                         '.mt-search-filters-sub-options');
 
                     botonToggle.addEventListener('click', () => {
-                        if (ulColapsablesInternos.style.display ===
-                            'none') {
+                        if (ulColapsablesInternos.style.display === 'none') {
                             ulColapsablesInternos.style.display = 'block';
                         } else {
                             ulColapsablesInternos.style.display = 'none';
@@ -518,8 +599,7 @@
                 });
                 link3.appendChild(iconoCopiarlink3);
                 var link4 = document.createElement("li");
-                link4.className =
-                    "linkMasBotonCopiarPortapapeles linkMasBotonCopiarPortapapelesLink4";
+                link4.className = "linkMasBotonCopiarPortapapeles linkMasBotonCopiarPortapapelesLink4";
                 var link4P = document.createElement("p");
                 link4P.innerHTML =
                     "Para sugerir un nuevo art\u00EDculo, escribinos, desde tu cuenta de email, a contenidos\u0040osde.com.ar";
@@ -823,8 +903,7 @@
             let li6 = document.createElement('li');
             let li6Anchor = document.createElement("a");
             li6Anchor.classList.add('linkBusquedaAvanzada');
-            li6Anchor.href =
-                "https://osde-prod2.mindtouch.us/tutoriales/edicion/opciones_de_busqueda_avanzada";
+            li6Anchor.href = "https://osde-prod2.mindtouch.us/tutoriales/edicion/opciones_de_busqueda_avanzada";
             li6Anchor.textContent = 'M\u00E1s tips de b\u00FAsqueda';
             li6.appendChild(li6Anchor);
             let contenedorFlecha = document.createElement('div');
@@ -844,12 +923,16 @@
             liConsejos.appendChild(ulSubmenu);
             ulConsejos.appendChild(liConsejos);
 
+            let liRightMenu = document.createElement('li');
+            liRightMenu.classList.add('right-menu');
+            let ulRightMenu = document.createElement('ul');
+
             if (window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:Search")) {
 
                 let liBotonBorrarLocalStorage = document.createElement('li');
                 botonBorrarLocalStorage.classList.add('botonBorrarLocalStorage');
                 liBotonBorrarLocalStorage.appendChild(botonBorrarLocalStorage)
-                ulConsejos.appendChild(botonBorrarLocalStorage);
+                ulRightMenu.appendChild(liBotonBorrarLocalStorage);
                 /*} else {
                     let botonIrAListaResultados = document.createElement("button");
                     botonIrAListaResultados.innerHTML = "Lista de Resultados";
@@ -863,7 +946,20 @@
                         window.location.href =
                             "https://osde-prod2.mindtouch.us/Special:Search?type=wiki&query=";
                     });*/
+            } else {
+
+                let liLinkListaResultados = document.createElement('li');
+                let aListaResultados = document.createElement("a");
+                aListaResultados.classList.add('linkListaResultados');
+                aListaResultados.textContent = 'Ir a Listado de resultados';
+                aListaResultados.href = "https://osde-prod2.mindtouch.us/Special:Search";
+
+                liLinkListaResultados.appendChild(aListaResultados)
+                ulRightMenu.appendChild(liLinkListaResultados);
             }
+
+            ulConsejos.appendChild(liRightMenu);
+            liRightMenu.appendChild(ulRightMenu);
 
             divInternoConsejos.appendChild(ulConsejos);
             divConsejos.appendChild(divInternoConsejos);

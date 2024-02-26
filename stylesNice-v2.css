@@ -2180,7 +2180,8 @@ div.meta>div.url {
 }
 
 .mt-responsive-table.medicamentos td,
-.mt-responsive-table.diagnostico td {
+.mt-responsive-table.diagnostico td,
+.procedimientos {
 	border: 1px solid var(--medium-gray);
 }
 
@@ -2232,4 +2233,66 @@ div ul li {
 
 div.muestrario img {
 	height: 30px;
+}
+
+ul.listadoLinks {
+	position: relative !important;
+  }
+  
+  ul.listadoLinks li {
+	  position: relative!important;
+	  list-style: none!important;
+	  margin: 10px 0!important;
+	  padding-left: 25px!important;
+	  margin-left: -27px !important;
+  }
+  
+  /* Circulo */
+  ul.listadoLinks li::before {
+	content: '';
+	background-color: #fff;
+	border: 0.2em solid #666;
+	border-radius: 50%;
+	color: #666;
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 10px;
+	height: 10px;
+	z-index: 2 !important;
+  }
+  
+  /* Linea punteada */
+  ul.listadoLinks::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 15px;
+	height: 100%;
+	border-left: 0.15em dotted #999;
+	z-index: 1 !important;
+  }
+
+  .procedimientos th h3 {
+    text-decoration: none !important;
+    font-size: 16px !important;
+    color: var(--primary-blue) !important;
+}
+
+.procedimientos th .mt-section {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.procedimientos {
+    border-collapse: collapse;
+}
+
+
+.procedimientos td {
+    border: 1px solid var(--medium-gray);
 }
