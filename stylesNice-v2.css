@@ -2110,7 +2110,7 @@ div.meta>div.url {
 	background-color: var(--white);
 	color: var(--primary-blue) !important;
 	border: 2px solid var(--primary-blue) !important;
-	margin: 5px 15px;
+	margin-top: 5px;
 	cursor: pointer;
 	font-size: 14px;
 	line-height: 24px;
@@ -2200,9 +2200,11 @@ div.meta>div.url {
 .imgHome9,
 .imgHome10 {
 	width: 80px;
-	filter: invert(51%) sepia(28%) saturate(4187%) hue-rotate(160deg) brightness(92%) contrast(103%);
-}
+	/*filter: invert(51%) sepia(28%) saturate(4187%) hue-rotate(160deg) brightness(92%) contrast(103%);*/
+	filter: invert(11%) sepia(64%) saturate(7082%) hue-rotate(237deg) brightness(78%) contrast(98%);
 
+}
+/*
 .imgHome1 {
 	filter: invert(34%) sepia(58%) saturate(4899%) hue-rotate(335deg) brightness(89%) contrast(96%);
 }
@@ -2230,7 +2232,7 @@ div.meta>div.url {
 .imgHome7 {
 	filter: invert(24%) sepia(53%) saturate(5456%) hue-rotate(144deg) brightness(94%) contrast(78%);
 }
-
+*/
 .mt-responsive-table {
 	width: auto !important;
 }

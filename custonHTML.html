@@ -362,6 +362,7 @@
 
             var botonBorrarLocalStorage = document.createElement("button");
             botonBorrarLocalStorage.innerHTML = "Borrar Historial";
+            botonBorrarLocalStorage.classList.add("botonBorrarLocalStorage")
             botonBorrarLocalStorage.addEventListener("click", function () {
                 localStorage.removeItem('urlsGuardadas');
                 location.reload();
@@ -369,6 +370,10 @@
 
             setTimeout(function () {
 
+                var divBreadcrumbContainer = document.querySelector('div.mt-help-breadcrumb-container');
+                if (divBreadcrumbContainer) {
+                    divBreadcrumbContainer.appendChild(botonBorrarLocalStorage);
+                }
                 var buscador = document.querySelector('form.mt-search-form-seated');
                 if (buscador) {
                     buscador.style.position = 'sticky';
@@ -458,7 +463,7 @@
                         subUlColapsablesInternos.style.display = 'block';
                     });
                 });
-            }, 500);
+            }, 1000);
         }
 
         //*******************************LOGIN********************************
@@ -844,26 +849,22 @@
             liConsejos.appendChild(ulSubmenu);
             ulConsejos.appendChild(liConsejos);
 
-            if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
-
-                let liBotonBorrarLocalStorage = document.createElement('li');
-                botonBorrarLocalStorage.classList.add('botonBorrarLocalStorage');
-                liBotonBorrarLocalStorage.appendChild(botonBorrarLocalStorage)
-                ulConsejos.appendChild(botonBorrarLocalStorage);
-            } else {
-                let botonIrAListaResultados = document.createElement("button");
-                botonIrAListaResultados.innerHTML = "Lista de Resultados";
-                botonIrAListaResultados.classList.add("botonIrAListaResultados");
-                let linkIrAListaResultados = document.createElement('a');
-                linkIrAListaResultados.href = "https://osde-prod1.mindtouch.us/Special:Search?type=wiki&query=";
-                linkIrAListaResultados.title = "Lista de Resultados";
-                botonIrAListaResultados.appendChild(linkIrAListaResultados);
-                ulConsejos.appendChild(botonIrAListaResultados);
-                botonIrAListaResultados.addEventListener('click', function () {
-                    window.location.href =
-                        "https://osde-prod1.mindtouch.us/Special:Search?type=wiki&query=";
-                });
-            }
+            /*if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
+                   
+                 } else {
+                     let botonIrAListaResultados = document.createElement("button");
+                     botonIrAListaResultados.innerHTML = "Lista de Resultados";
+                     botonIrAListaResultados.classList.add("botonIrAListaResultados");
+                     let linkIrAListaResultados = document.createElement('a');
+                     linkIrAListaResultados.href = "https://osde-prod1.mindtouch.us/Special:Search?type=wiki&query=";
+                     linkIrAListaResultados.title = "Lista de Resultados";
+                     botonIrAListaResultados.appendChild(linkIrAListaResultados);
+                     ulConsejos.appendChild(botonIrAListaResultados);
+                     botonIrAListaResultados.addEventListener('click', function () {
+                         window.location.href =
+                             "https://osde-prod1.mindtouch.us/Special:Search?type=wiki&query=";
+                     });
+            }*/
 
             divInternoConsejos.appendChild(ulConsejos);
             divConsejos.appendChild(divInternoConsejos);
