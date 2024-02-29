@@ -499,7 +499,7 @@ p a {
 
 	.elm-header-logo-container,
 	.elm-header-logo-menu {
-		height: 53px !important;
+		height: 58px !important;
 	}
 
 	.elm-header-logo-menu .navbar-header-logo img {
@@ -1267,6 +1267,7 @@ body[class*="pagenotfound"] pre.script:before {
 
 .consejo-busqueda-area {
 	background-color: var(--light-blue);
+    height: 35px;
 }
 
 .consejo-busqueda-area .elm-content-container {
@@ -2325,4 +2326,30 @@ ul.listadoLinks::before {
 button.botonIrAListaResultados:hover {
 	color: var(--secondary-light-blue);
 	background-color: transparent !important;
+}
+
+.contenedorBuscadorHome {
+	position: relative;
+	height: 0px;
+}
+
+.buscadorHome {
+	transform: translateY(-30%);
+}
+
+article.elm-content-container {
+	padding-top: 0px !important;
+}
+
+li.mt-sortable-listing {
+	flex: 0 0 200px !important;
+}
+
+.elm-header-user-nav {
+    min-height: 50px !important;
+}
+
+ul.mt-sortable-listings-container  {
+	display: flex !important;
+	justify-content: space-around !important;
 }
