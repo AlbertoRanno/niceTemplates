@@ -201,8 +201,7 @@ p a {
 /* Menú default principal de la app */
 .elm-header-logo-container {
 	padding: 0 !important;
-	height: 50px !important;
-	/*110*/
+	height: 40px !important;
 }
 
 .elm-header-logo-container a {
@@ -500,8 +499,7 @@ p a {
 
 	.elm-header-logo-container,
 	.elm-header-logo-menu {
-		height: 63px !important;
-		/*95*/
+		height: 53px !important;
 	}
 
 	.elm-header-logo-menu .navbar-header-logo img {
