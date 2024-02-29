@@ -361,7 +361,7 @@
             }, 1000);
 
             var botonBorrarLocalStorage = document.createElement("button");
-            botonBorrarLocalStorage.innerHTML = "Borrar Historial";
+            botonBorrarLocalStorage.innerHTML = "Borrar historial de links visitados";
             botonBorrarLocalStorage.classList.add("botonBorrarLocalStorage")
             botonBorrarLocalStorage.addEventListener("click", function () {
                 localStorage.removeItem('urlsGuardadas');
@@ -849,8 +849,8 @@
             liConsejos.appendChild(ulSubmenu);
             ulConsejos.appendChild(liConsejos);
 
-            /*if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
-                   
+            if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
+                   //Quisieron el boton de borrar, en el cuerpo de la pagina de resultados
                  } else {
                      let botonIrAListaResultados = document.createElement("button");
                      botonIrAListaResultados.innerHTML = "Lista de Resultados";
@@ -864,7 +864,7 @@
                          window.location.href =
                              "https://osde-prod1.mindtouch.us/Special:Search?type=wiki&query=";
                      });
-            }*/
+            }
 
             divInternoConsejos.appendChild(ulConsejos);
             divConsejos.appendChild(divInternoConsejos);

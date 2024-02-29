@@ -351,8 +351,7 @@ p a {
 	color: var(--primary-blue);
 	text-decoration: none;
 	align-items: center;
-	font-weight: 700 !important;
-	text-decoration: underline;
+	font-weight: 500 !important;
 }
 
 .elm-header-logo-menu li.has-submenu a:hover {
@@ -1242,7 +1241,6 @@ body[class*="pagenotfound"] pre.script:before {
 	font-size: 14px;
 	line-height: 1.375em;
 	font-weight: 500;
-	text-decoration: underline;
 }
 
 .consejo-busqueda-area .navbar-header .has-submenu>a:hover {
@@ -2039,12 +2037,13 @@ div.meta>div.url {
 }
 
 .botonBorrarLocalStorage {
-	background-color: var(--white);
+	background-color: transparent !important;
 	color: var(--primary-blue) !important;
-	border: 2px solid var(--primary-blue) !important;
+	border:none !important;
 	margin: 5px 15px;
 	cursor: pointer;
-	font-size: 14px;
+	font-size: 16px;
+	font-family: var(--font-family-primary);
 	line-height: 24px;
 	font-weight: 600;
 	border-radius: 8px;
@@ -2276,4 +2275,16 @@ ul.listadoLinks::before {
 
 .procedimientos td {
     border: 1px solid var(--medium-gray);
+}
+
+.botonIrAListaResultados {
+	background: none;
+	margin-bottom: 0px !important;
+	color: var(--white);
+        font-size: 14px;
+}
+
+button.botonIrAListaResultados:hover {
+	color: var(--secondary-light-blue);
+	background-color: transparent !important;
 }
