@@ -386,8 +386,7 @@ p a {
 	color: var(--primary-blue);
 	text-decoration: none;
 	align-items: center;
-	font-weight: 700 !important;
-	text-decoration: underline;
+	font-weight: 500 !important;
 }
 
 .elm-header-logo-menu li.has-submenu a:hover {
@@ -1295,7 +1294,6 @@ body[class*="pagenotfound"] pre.script:before {
 	font-size: 16px;
 	line-height: 1.375em;
 	font-weight: 500;
-	text-decoration: underline;
 }
 
 .consejo-busqueda-area .navbar-header .has-submenu>a:hover {
@@ -1762,7 +1760,7 @@ li.elm-pdf-export {
 	align-items: center;
 }
 
-.consejo-busqueda-area ul ul.consejosDesplegables {
+.consejo-busqueda-area ul ul {
 	background: var(--background-light-blue);
 	position: absolute;
 	box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.29);
@@ -1774,23 +1772,23 @@ li.elm-pdf-export {
 }
 
 @media all and (min-width: 25em) {
-	.consejo-busqueda-area ul ul.consejosDesplegables {
+	.consejo-busqueda-area ul ul {
 		width: 90%;
 	}
 }
 
 @media all and (min-width: 37.5em) {
-	.consejo-busqueda-area ul ul.consejosDesplegables {
+	.consejo-busqueda-area ul ul {
 		width: 500px;
 	}
 }
 
-.consejo-busqueda-area ul ul.consejosDesplegables li {
+.consejo-busqueda-area ul ul li {
 	border-bottom: 2px solid var(--white);
 	padding-bottom: 0.25em;
 }
 
-.consejo-busqueda-area ul ul.consejosDesplegables li:last-child {
+.consejo-busqueda-area ul ul li:last-child {
 	border-bottom: none;
 	padding-bottom: 0;
 }
@@ -2107,12 +2105,13 @@ div.meta>div.url {
 }
 
 .botonBorrarLocalStorage {
-	background-color: var(--white);
+	background-color: transparent !important;
 	color: var(--primary-blue) !important;
-	border: 2px solid var(--primary-blue) !important;
-	margin-top: 5px;
+	border: none !important;
+	margin: 5px 15px;
 	cursor: pointer;
-	font-size: 14px;
+	font-size: 16px;
+	font-family: var(--font-family-primary);
 	line-height: 24px;
 	font-weight: 600;
 	border-radius: 8px;
@@ -2199,40 +2198,10 @@ div.meta>div.url {
 .imgHome8,
 .imgHome9,
 .imgHome10 {
-	width: 80px;
-	/*filter: invert(51%) sepia(28%) saturate(4187%) hue-rotate(160deg) brightness(92%) contrast(103%);*/
+	height: 60px;
 	filter: invert(11%) sepia(64%) saturate(7082%) hue-rotate(237deg) brightness(78%) contrast(98%);
-
-}
-/*
-.imgHome1 {
-	filter: invert(34%) sepia(58%) saturate(4899%) hue-rotate(335deg) brightness(89%) contrast(96%);
 }
 
-.imgHome2 {
-	filter: invert(10%) sepia(77%) saturate(4490%) hue-rotate(235deg) brightness(106%) contrast(107%);
-}
-
-.imgHome3 {
-	filter: invert(37%) sepia(71%) saturate(2986%) hue-rotate(7deg) brightness(97%) contrast(94%);
-}
-
-.imgHome4 {
-	filter: invert(51%) sepia(28%) saturate(4187%) hue-rotate(160deg) brightness(92%) contrast(103%);
-}
-
-.imgHome5 {
-	filter: invert(9%) sepia(12%) saturate(667%) hue-rotate(174deg) brightness(97%) contrast(90%);
-}
-
-.imgHome6 {
-	filter: invert(21%) sepia(50%) saturate(965%) hue-rotate(100deg) brightness(94%) contrast(104%);
-}
-
-.imgHome7 {
-	filter: invert(24%) sepia(53%) saturate(5456%) hue-rotate(144deg) brightness(94%) contrast(78%);
-}
-*/
 .mt-responsive-table {
 	width: auto !important;
 }
@@ -2346,4 +2315,16 @@ ul.listadoLinks::before {
 
 .procedimientos td {
 	border: 1px solid var(--medium-gray);
+}
+
+.botonIrAListaResultados {
+	background: none;
+	margin-bottom: 0px !important;
+	color: var(--white);
+	font-size: 14px;
+}
+
+button.botonIrAListaResultados:hover {
+	color: var(--secondary-light-blue);
+	background-color: transparent !important;
 }

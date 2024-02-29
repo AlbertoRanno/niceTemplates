@@ -13,10 +13,9 @@ CKEDITOR.editorConfig = function(config) {
 
     //Particularidades
     config.stylesSet.push({ name : 'hasContent', wrap:false, attributes : { 'class' : 'hasContent'} });
-    //config.stylesSet.push({ name : 'hasNotContent', wrap:false, attributes : { 'class' : 'hasNotContent'} });
+    config.stylesSet.push({ name : 'hasNotContent', wrap:false, attributes : { 'class' : 'hasNotContent'} });
     config.stylesSet.push({ name : 'emptyRegions', wrap:false, attributes : { 'class' : 'emptyRegions'} });    
-    //config.stylesSet.push({ name : 'nonEmptyRegion', wrap:false, attributes : { 'class' : 'nonEmptyRegion'} });
-    
+    config.stylesSet.push({ name : 'nonEmptyRegion', wrap:false, attributes : { 'class' : 'nonEmptyRegion'} });    
 
     //Tooltips-Textos (Variables Globales)
     config.stylesSet.push({ name : 'tooltips', wrap: false, attributes: { 'class': 'tool-tip-link', 'title': '{{reemplazarAqui}}'}});
@@ -26,9 +25,11 @@ CKEDITOR.editorConfig = function(config) {
     config.stylesSet.push({ name : 't_coordiCAT', wrap: false, attributes: { 'class': 'tool-tip-link coordiCAT'}});    
     config.stylesSet.push({ name : 't_coordiCGD', wrap: false, attributes: { 'class': 'tool-tip-link coordiCGD'}});
     config.stylesSet.push({ name : 't_coordiCAP', wrap: false, attributes: { 'class': 'tool-tip-link coordiCAP'}});
+    config.stylesSet.push({ name : 't_coordiOtros', wrap: false, attributes: { 'class': 'tool-tip-link coordiOtros'}});
     config.stylesSet.push({ name : 't_asesorCAT', wrap: false, attributes: { 'class': 'tool-tip-link asesorCAT'}});
     config.stylesSet.push({ name : 't_asesorCGD', wrap: false, attributes: { 'class': 'tool-tip-link asesorCGD'}});
     config.stylesSet.push({ name : 't_asesorCAP', wrap: false, attributes: { 'class': 'tool-tip-link asesorCAP'}});
+    config.stylesSet.push({ name : 't_asesorOtros', wrap: false, attributes: { 'class': 'tool-tip-link asesorOtros'}});
         //Grupos
     config.stylesSet.push({ name : 't_todos', wrap: false, attributes: { 'class': 'tool-tip-link todos'}});
     config.stylesSet.push({ name : 't_todosCoordi', wrap: false, attributes: { 'class': 'tool-tip-link todosCoordi'}});

@@ -77,7 +77,6 @@
 
     document.addEventListener('DOMContentLoaded', function () {
 
-
         const contenedoresPath = document.querySelectorAll('.mt-lp-progress-container');
 
         contenedoresPath.forEach(contenedor => {
@@ -182,28 +181,30 @@
 
             function obtenerRutaImagen(nombreClaseTooltips) {
                 var imagenesPuestosTooltips = {
-                //Sueltos
-                'coordiCAT': '/@api/deki/files/33/Coordi_CAT-CAD.png',
-                'coordiCGD': '/@api/deki/files/32/Coordi_CGD.png',
-                'coordiCAP': '/@api/deki/files/30/Sub_y_encargado_CAP.png',
-                'asesorCAT': '/@api/deki/files/31/Asesor_CAT-CAD.png',
-                'asesorCGD': '/@api/deki/files/34/Asesor_CGD.png',
-                'asesorCAP': '/@api/deki/files/29/Asistente_CAP.png',
-                //Grupos
-                'todos': '/@api/deki/files/608/Todos.png',
-                'todosCoordi': '/@api/deki/files/584/todosLosPuestos.png',
-                'todosAsesores': '/@api/deki/files/588/todosAsesores.png',
-                //Combinaciones de Coordinadores                
-                'coordiCAT-CGD': '/@api/deki/files/606/CAT-CGD.png',
-                'coordiCGD-CAP': '/@api/deki/files/594/CGD-CAP.png',
-                'coordiCAT-CAP': '/@api/deki/files/607/CAT-CAP.png',
-                //Combinaciones de Asesores
-                'asesoresCAT_CGD': '/@api/deki/files/605/asesoresCAT_CGD.png',
-                'asesoresCGD_CAP': '/@api/deki/files/587/asesoresCGD_CAP.png',
-                'asesoresCAT_CAP': '/@api/deki/files/604/asesoresCAT_CAP.png',
-                //A medida
-                'todosAsesoresCGD-CAP': '/@api/deki/files/593/todosAsesoresCGD-CAP.png',
-            };
+                    //Sueltos
+                    'coordiCAT': '/@api/deki/files/33/Coordi_CAT-CAD.png',
+                    'coordiCGD': '/@api/deki/files/32/Coordi_CGD.png',
+                    'coordiCAP': '/@api/deki/files/30/Sub_y_encargado_CAP.png',
+                    'coordiOtros': '/@api/deki/files/689/Otras_areas_-_coordinacion.png',
+                    'asesorCAT': '/@api/deki/files/31/Asesor_CAT-CAD.png',
+                    'asesorCGD': '/@api/deki/files/34/Asesor_CGD.png',
+                    'asesorCAP': '/@api/deki/files/29/Asistente_CAP.png',
+                    'asesorOtros': '/@api/deki/files/688/Otras_areas_-_asistentes.png',
+                    //Grupos
+                    'todos': '/@api/deki/files/608/Todos.png',
+                    'todosCoordi': '/@api/deki/files/584/todosLosPuestos.png',
+                    'todosAsesores': '/@api/deki/files/588/todosAsesores.png',
+                    //Combinaciones de Coordinadores                
+                    'coordiCAT-CGD': '/@api/deki/files/606/CAT-CGD.png',
+                    'coordiCGD-CAP': '/@api/deki/files/594/CGD-CAP.png',
+                    'coordiCAT-CAP': '/@api/deki/files/607/CAT-CAP.png',
+                    //Combinaciones de Asesores
+                    'asesoresCAT_CGD': '/@api/deki/files/605/asesoresCAT_CGD.png',
+                    'asesoresCGD_CAP': '/@api/deki/files/587/asesoresCGD_CAP.png',
+                    'asesoresCAT_CAP': '/@api/deki/files/604/asesoresCAT_CAP.png',
+                    //A medida
+                    'todosAsesoresCGD-CAP': '/@api/deki/files/593/todosAsesoresCGD-CAP.png',
+                };
 
                 return imagenesPuestosTooltips[nombreClaseTooltips] || '';
             }
@@ -440,7 +441,8 @@
             }, 1000);
 
             var botonBorrarLocalStorage = document.createElement("button");
-            botonBorrarLocalStorage.innerHTML = "Borrar Historial";
+            botonBorrarLocalStorage.innerHTML = "Borrar historial de links visitados";
+            botonBorrarLocalStorage.classList.add("botonBorrarLocalStorage")
             botonBorrarLocalStorage.addEventListener("click", function () {
                 localStorage.removeItem('urlsGuardadas');
                 location.reload();
@@ -448,6 +450,10 @@
 
             setTimeout(function () {
 
+                var divBreadcrumbContainer = document.querySelector('div.mt-help-breadcrumb-container');
+                if (divBreadcrumbContainer) {
+                    divBreadcrumbContainer.appendChild(botonBorrarLocalStorage);
+                }
                 var buscador = document.querySelector('form.mt-search-form-seated');
                 if (buscador) {
                     buscador.style.position = 'sticky';
@@ -537,7 +543,7 @@
                         subUlColapsablesInternos.style.display = 'block';
                     });
                 });
-            }, 500);
+            }, 1000);
         }
 
         //*******************************LOGIN********************************
@@ -923,43 +929,22 @@
             liConsejos.appendChild(ulSubmenu);
             ulConsejos.appendChild(liConsejos);
 
-            let liRightMenu = document.createElement('li');
-            liRightMenu.classList.add('right-menu');
-            let ulRightMenu = document.createElement('ul');
-
             if (window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:Search")) {
-
-                let liBotonBorrarLocalStorage = document.createElement('li');
-                botonBorrarLocalStorage.classList.add('botonBorrarLocalStorage');
-                liBotonBorrarLocalStorage.appendChild(botonBorrarLocalStorage)
-                ulRightMenu.appendChild(liBotonBorrarLocalStorage);
-                /*} else {
-                    let botonIrAListaResultados = document.createElement("button");
-                    botonIrAListaResultados.innerHTML = "Lista de Resultados";
-                    botonIrAListaResultados.classList.add("botonIrAListaResultados");
-                    let linkIrAListaResultados = document.createElement('a');
-                    linkIrAListaResultados.href = "https://osde-prod2.mindtouch.us/Special:Search?type=wiki&query=";
-                    linkIrAListaResultados.title = "Lista de Resultados";
-                    botonIrAListaResultados.appendChild(linkIrAListaResultados);
-                    ulConsejos.appendChild(botonIrAListaResultados);
-                    botonIrAListaResultados.addEventListener('click', function () {
-                        window.location.href =
-                            "https://osde-prod2.mindtouch.us/Special:Search?type=wiki&query=";
-                    });*/
+                //Quisieron el boton de borrar, en el cuerpo de la pagina de resultados
             } else {
-
-                let liLinkListaResultados = document.createElement('li');
-                let aListaResultados = document.createElement("a");
-                aListaResultados.classList.add('linkListaResultados');
-                aListaResultados.textContent = 'Ir a Listado de resultados';
-                aListaResultados.href = "https://osde-prod2.mindtouch.us/Special:Search";
-
-                liLinkListaResultados.appendChild(aListaResultados)
-                ulRightMenu.appendChild(liLinkListaResultados);
+                let botonIrAListaResultados = document.createElement("button");
+                botonIrAListaResultados.innerHTML = "Lista de Resultados";
+                botonIrAListaResultados.classList.add("botonIrAListaResultados");
+                let linkIrAListaResultados = document.createElement('a');
+                linkIrAListaResultados.href = "https://osde-prod2.mindtouch.us/Special:Search?type=wiki&query=";
+                linkIrAListaResultados.title = "Lista de Resultados";
+                botonIrAListaResultados.appendChild(linkIrAListaResultados);
+                ulConsejos.appendChild(botonIrAListaResultados);
+                botonIrAListaResultados.addEventListener('click', function () {
+                    window.location.href =
+                        "https://osde-prod2.mindtouch.us/Special:Search?type=wiki&query=";
+                });
             }
-
-            ulConsejos.appendChild(liRightMenu);
-            liRightMenu.appendChild(ulRightMenu);
 
             divInternoConsejos.appendChild(ulConsejos);
             divConsejos.appendChild(divInternoConsejos);
