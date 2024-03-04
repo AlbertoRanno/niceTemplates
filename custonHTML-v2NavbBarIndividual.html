@@ -960,116 +960,241 @@
                 });
             }, 1000);
 
-/*********************************** MODIFICAR BARRA DE NAVEGACION ***********************************/
-            //SOLO AGREGAR LOS NOMBRES DE LAS CATEGORIAS Y SUS CORRESPONDIENTES GUIAS, TAL CUAL FUERON CREADAS EN SUS RUTAS
-
-            //Agregar la nueva categoria al listado, en la ubicacion deseada, mantener el formato: '    "nombre",   ' (la ultima sin ',' )
-            let categorias = ["Comercial", "Cobertura", "Afiliaciones", "Facturaci\u00F3n", "Reintegros",
-                "Prestadores", "Info Aplicaciones"
+            let listItemComercial = document.createElement('li');
+            listItemComercial.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+            let linkComercial = document.createElement('a');
+            linkComercial.href = "/Comercial";
+            linkComercial.title = "Comercial";
+            let imgComercial = document.createElement('img');
+            imgComercial.alt = "Icono";
+            imgComercial.src = "/@api/deki/files/3/comercial.png";
+            linkComercial.appendChild(imgComercial);
+            linkComercial.appendChild(document.createTextNode("Comercial"));
+            listItemComercial.appendChild(linkComercial);
+            let ulSubListComercial = document.createElement('ul');
+            ulSubListComercial.classList.add('submenu');
+            const accesosComercial = [
+                "Gestionar leads B2B",
+                "Gestionar leads B2C"
             ];
 
-            //Agregar las guias pertenecientes a la nueva Categoria, en la MISMA UBICACION QUE PUSIERON LA CATEGORIA,
-            // mantener el formato: '    ["guia1" , "guia2" , "guia3"],  '
-            let guias = [
-                //Comercial
-                [
-                    "Gestionar leads B2B",
-                    "Gestionar leads B2C"
-                ],
-
-                //Cobertura
-                [
-                    "Anticonceptivos",
-                    "Asesoramiento sobre aplicaciones",
-                    "Asistencia domiciliaria",
-                    "Bioqu\u00EDmica",
-                    "Cartilla",
-                    "Cirug\u00EDas",
-                    "Diabetes",
-                    "Discapacidad",
-                    "Empadronamiento",
-                    "Fertilidad",
-                    "Gesti\u00F3n de la calidad de atenci\u00F3n",
-                    "Medicamentos",
-                    "Odontolog\u00EDa",
-                    "Ortopedia",
-                    "PMI",
-                    "Pr\u00E1cticas",
-                    "Pr\u00E1cticas Condicionada",
-                    "Pr\u00E1cticas sin cobertura",
-                    "Psicopatolog\u00EDa",
-                    "Reintegros",
-                    "Traslado",
-                    "Vacunas",
-                    "Urgencias"
-                ],
-
-                //Afiliaciones
-                [
-                    "Altas",
-                    "Bajas",
-                    "Certificados",
-                    "Modificaciones",
-                    "Modificaciones del padr\u00F3n",
-                    "Modificaci\u00F3n de datos",
-                    "Subsidio - Licencia"
-                ],
-                //Facturacion
-                [
-                    "Cuenta corriente",
-                    "Facturaci\u00F3n"
-                ],
-                //Reintegros
-                [
-                    "Reintegros"
-                ],
-                //Prestadores
-                [
-                    "Aplicaciones",
-                    "Extranet",
-                    "Servicios",
-                    "Validaci\u00F3n de l\u00EDnea"
-                ],
-                //Info Aplicaciones
-                [
-                    "App OSDE",
-                    "Autogesti\u00F3n de empresas",
-                    "Credencial digital",
-                    "Turnos online",
-                    "Web OSDE"
-                ]
-
-            ]
-
-            function agregarCategoria(categoria, guias) {
+            function agregarAccesoComercial(palabra) {
                 let listItem = document.createElement('li');
-                listItem.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
                 let link = document.createElement('a');
-                link.href = "/" + encodeURIComponent(categoria);
-                link.textContent = categoria;
-                link.title = categoria;
+                link.href = "/Comercial/" + encodeURIComponent(palabra);
+                link.textContent = palabra;
+                link.title = palabra;
                 listItem.appendChild(link);
-
-                let listadoPorCategoria = document.createElement('ul');
-                listadoPorCategoria.classList.add('submenu');
-
-                guias.forEach(function (guia) {
-                    let subListItem = document.createElement('li');
-                    let subLink = document.createElement('a');
-                    subLink.href = "/" + encodeURIComponent(categoria) + "/" + encodeURIComponent(guia);
-                    subLink.textContent = guia;
-                    subLink.title = guia;
-                    subListItem.appendChild(subLink);
-                    listadoPorCategoria.appendChild(subListItem);
-                });
-
-                listItem.appendChild(listadoPorCategoria);
-                ulSubList.appendChild(listItem);
+                ulSubListComercial.appendChild(listItem);
             }
+            accesosComercial.forEach(agregarAccesoComercial);
+            listItemComercial.appendChild(ulSubListComercial);
+            ulSubList.appendChild(listItemComercial);
 
-            for (let i = 0; i < categorias.length; i++) {
-                agregarCategoria(categorias[i], guias[i]);
+            let listItemCobertura = document.createElement('li');
+            listItemCobertura.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+            let linkCobertura = document.createElement('a');
+            linkCobertura.href = "/Cobertura";
+            linkCobertura.title = "Cobertura";
+            let imgCobertura = document.createElement('img');
+            imgCobertura.alt = "Icono";
+            imgCobertura.src = "/@api/deki/files/2/cobertura.png";
+            linkCobertura.appendChild(imgCobertura);
+            linkCobertura.appendChild(document.createTextNode("Cobertura"));
+            listItemCobertura.appendChild(linkCobertura);
+            let ulSubListCobertura = document.createElement('ul');
+            ulSubListCobertura.classList.add('submenu');
+            const accesosCobertura = [
+                "Anticonceptivos",
+                "Asesoramiento sobre aplicaciones",
+                "Asistencia domiciliaria",
+                "Bioqu\u00EDmica",
+                "Cartilla",
+                "Cirug\u00EDas",
+                "Diabetes",
+                "Discapacidad",
+                "Empadronamiento",
+                "Fertilidad",
+                "Gesti\u00F3n de la calidad de atenci\u00F3n",
+                "Medicamentos",
+                "Odontolog\u00EDa",
+                "Ortopedia",
+                "PMI",
+                "Pr\u00E1cticas",
+                "Pr\u00E1cticas Condicionada",
+                "Pr\u00E1cticas sin cobertura",
+                "Psicopatolog\u00EDa",
+                "Reintegros",
+                "Traslado",
+                "Vacunas",
+                "Urgencias"
+            ];
+
+            function agregarAccesoCobertura(palabra) {
+                let listItem = document.createElement('li');
+                let link = document.createElement('a');
+                link.href = "/Cobertura/" + encodeURIComponent(palabra);
+                link.textContent = palabra;
+                link.title = palabra;
+                listItem.appendChild(link);
+                ulSubListCobertura.appendChild(listItem);
             }
+            accesosCobertura.forEach(agregarAccesoCobertura);
+            listItemCobertura.appendChild(ulSubListCobertura);
+            ulSubList.appendChild(listItemCobertura);
+
+            let listItemAfiliaciones = document.createElement('li');
+            listItemAfiliaciones.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+            let linkAfiliaciones = document.createElement('a');
+            linkAfiliaciones.href = "/Afiliaciones";
+            linkAfiliaciones.title = "Afiliaciones";
+            let imgAfiliaciones = document.createElement('img');
+            imgAfiliaciones.alt = "Icono";
+            imgAfiliaciones.src = "/@api/deki/files/4/afiliaciones.png";
+            linkAfiliaciones.appendChild(imgAfiliaciones);
+            linkAfiliaciones.appendChild(document.createTextNode("Afiliaciones"));
+            listItemAfiliaciones.appendChild(linkAfiliaciones);
+            let ulSubListAfiliaciones = document.createElement('ul');
+            ulSubListAfiliaciones.classList.add('submenu');
+            const accesosAfiliaciones = [
+                "Altas",
+                "Bajas",
+                "Aplicaciones",
+                "Certificados",
+                "Modificaciones",
+                "Modificaciones del padr\u00F3n",
+                "Modificaci\u00F3n de datos",
+                "Subsidio - Licencia"
+            ];
+
+            function agregarAccesoAfiliaciones(palabra) {
+                let listItem = document.createElement('li');
+                let link = document.createElement('a');
+                link.href = "/Afiliaciones/" + encodeURIComponent(palabra);
+                link.textContent = palabra;
+                link.title = palabra;
+                listItem.appendChild(link);
+                ulSubListAfiliaciones.appendChild(listItem);
+            }
+            accesosAfiliaciones.forEach(agregarAccesoAfiliaciones);
+            listItemAfiliaciones.appendChild(ulSubListAfiliaciones);
+            ulSubList.appendChild(listItemAfiliaciones);
+
+            let listItemCobranzas = document.createElement('li');
+            listItemCobranzas.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+            let linkCobranzas = document.createElement('a');
+            linkCobranzas.href = "/Cobranzas";
+            linkCobranzas.title = "Facturaci\u00F3n";
+            let imgCobranzas = document.createElement('img');
+            imgCobranzas.alt = "Icono";
+            imgCobranzas.src = "/@api/deki/files/1/cobranzas.png";
+            linkCobranzas.appendChild(imgCobranzas);
+            linkCobranzas.appendChild(document.createTextNode("Facturaci\u00F3n"));
+            listItemCobranzas.appendChild(linkCobranzas);
+            let ulSubListCobranzas = document.createElement('ul');
+            ulSubListCobranzas.classList.add('submenu');
+            const accesosFacturacion = [
+                "Cuenta corriente",
+                "Facturaci\u00F3n"
+            ];
+
+            function agregarAccesoFacturacion(palabra) {
+                let listItem = document.createElement('li');
+                let link = document.createElement('a');
+                link.href = "/Cobranzas/" + encodeURIComponent(palabra);
+                link.textContent = palabra;
+                link.title = palabra;
+                listItem.appendChild(link);
+                ulSubListCobranzas.appendChild(listItem);
+            }
+            accesosFacturacion.forEach(agregarAccesoFacturacion);
+            listItemCobranzas.appendChild(ulSubListCobranzas);
+            ulSubList.appendChild(listItemCobranzas);
+
+            let listItemReintegro = document.createElement('li');
+            listItemReintegro.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+            let linkReintegro = document.createElement('a');
+            linkReintegro.href = "/Reintegros";
+            linkReintegro.title = "Reintegro";
+            let imgRCobertura = document.createElement('img');
+            imgRCobertura.alt = "Icono";
+            imgRCobertura.src = "/@api/deki/files/213/cobertura.png";
+            linkReintegro.appendChild(imgRCobertura);
+            linkReintegro.appendChild(document.createTextNode("Reintegro"));
+            listItemReintegro.appendChild(linkReintegro);
+            let ulSubListReintegro = document.createElement('ul');
+            ulSubListReintegro.classList.add('submenu');
+            const accesosReintegro = [
+                "Reintegros"
+            ];
+
+            function agregarAccesoReintegro(palabra) {
+                let listItem = document.createElement('li');
+                let link = document.createElement('a');
+                link.href = "/Reintegros/" + encodeURIComponent(palabra);
+                link.textContent = palabra;
+                link.title = palabra;
+                listItem.appendChild(link);
+                ulSubListReintegro.appendChild(listItem);
+            }
+            accesosReintegro.forEach(agregarAccesoReintegro);
+            listItemReintegro.appendChild(ulSubListReintegro);
+            ulSubList.appendChild(listItemReintegro);
+
+            let listItemPrestadores = document.createElement('li');
+            listItemPrestadores.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+            let linkPrestadores = document.createElement('a');
+            linkPrestadores.href = "/Prestadores";
+            linkPrestadores.title = "Prestadores";
+            linkPrestadores.appendChild(document.createTextNode("Prestadores"));
+            listItemPrestadores.appendChild(linkPrestadores);
+            let ulSubListPrestadores = document.createElement('ul');
+            ulSubListPrestadores.classList.add('submenu');
+            const accesosPrestadores = [
+                "Aplicaciones",
+                "Extranet",
+                "Servicios",
+                "Validaci\u00F3n de l\u00EDnea"
+            ];
+
+            function agregarAccesoPrestadores(palabra) {
+                let listItem = document.createElement('li');
+                let link = document.createElement('a');
+                link.href = "/Prestadores/" + encodeURIComponent(palabra);
+                link.textContent = palabra;
+                link.title = palabra;
+                listItem.appendChild(link);
+                ulSubListPrestadores.appendChild(listItem);
+            }
+            accesosPrestadores.forEach(agregarAccesoPrestadores);
+            listItemPrestadores.appendChild(ulSubListPrestadores);
+            ulSubList.appendChild(listItemPrestadores);
+
+            let listItemInfoAplicaciones = document.createElement('li');
+            listItemInfoAplicaciones.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+            let linkInfoAplicaciones = document.createElement('a');
+            linkInfoAplicaciones.href = "/Informacion_sobre_Aplicaciones";
+            linkInfoAplicaciones.title = "Info Aplicaciones";
+            linkInfoAplicaciones.appendChild(document.createTextNode("Info Aplicaciones"));
+            listItemInfoAplicaciones.appendChild(linkInfoAplicaciones);
+            let ulSubInfoAplicaciones = document.createElement('ul');
+            ulSubInfoAplicaciones.classList.add('submenu');
+            const accesosInfoAplicaciones = [
+                "Aplicaciones"
+            ];
+
+            function agregarAccesoInfoAplicaciones(palabra) {
+                let listItem = document.createElement('li');
+                let link = document.createElement('a');
+                link.href = "/Informacion_sobre_Aplicaciones/" + encodeURIComponent(palabra);
+                link.textContent = palabra;
+                link.title = palabra;
+                listItem.appendChild(link);
+                ulSubInfoAplicaciones.appendChild(listItem);
+            }
+            accesosInfoAplicaciones.forEach(agregarAccesoInfoAplicaciones);
+            listItemInfoAplicaciones.appendChild(ulSubInfoAplicaciones);
+            ulSubList.appendChild(listItemInfoAplicaciones);
 
             elementoMenu.appendChild(labelResponsive);
             elementoMenu.appendChild(ulSubList);

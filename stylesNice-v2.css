@@ -2346,10 +2346,14 @@ li.mt-sortable-listing {
 }
 
 .elm-header-user-nav {
-    min-height: 50px !important;
+    min-height: 38px !important;
 }
 
 ul.mt-sortable-listings-container  {
 	display: flex !important;
 	justify-content: space-around !important;
+}
+
+div.elm-nav-container ol li.elm-user-menu ol li {
+    font-size: 12px !important;
 }
