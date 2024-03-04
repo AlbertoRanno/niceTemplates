@@ -60,6 +60,31 @@
 
     document.addEventListener('DOMContentLoaded', function () {
 
+        var linkUsuario = document.querySelector('.mt-user-menu-user a');
+        if (linkUsuario) {
+            let contenedorFlechaUsuario = document.createElement('div');
+            contenedorFlechaUsuario.classList.add('contenedorFlecha');
+            let imgFlechaUsuario = document.createElement('img');
+            imgFlechaUsuario.classList.add('imgFlecha');
+            imgFlechaUsuario.src = '/@api/deki/files/256/downArrowWhite.png';
+            imgFlechaUsuario.alt = 'flecha';
+            contenedorFlechaUsuario.appendChild(imgFlechaUsuario);
+
+            // Reemplazo el nombre/mail del usuario (del <a>) con el nuevo contenido (el contenedor con su img)
+            linkUsuario.innerHTML = '';
+            linkUsuario.appendChild(contenedorFlechaUsuario);
+
+            function cambiarFlecha() {
+                if (imgFlechaUsuario.src.includes('downArrowWhite')) {
+                    imgFlechaUsuario.src = '/@api/deki/files/126/upArrowWhite.png';
+                } else {
+                    imgFlechaUsuario.src = '/@api/deki/files/256/downArrowWhite.png';
+                }
+            }
+
+            linkUsuario.addEventListener('click', cambiarFlecha);
+        }
+
         const contenedoresPath = document.querySelectorAll('.mt-lp-progress-container');
 
         contenedoresPath.forEach(contenedor => {

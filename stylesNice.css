@@ -2354,6 +2354,11 @@ ul.mt-sortable-listings-container  {
 	justify-content: space-around !important;
 }
 
-div.elm-nav-container ol li.elm-user-menu ol li {
+div.elm-nav-container ol li.elm-user-menu ol li,
+div.mt-quick-search-container.mt-toggle-form-container {
     font-size: 12px !important;
+}
+
+.contenedorFlecha {
+    display: inline-block;
 }
