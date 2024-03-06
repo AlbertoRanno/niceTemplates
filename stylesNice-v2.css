@@ -1230,7 +1230,8 @@ input[type="submit"].ui-button-primary {
 /* Esconder clasificaciones default de los filtros de búsqueda */
 .mt-search-filters-classification-article-howto,
 .mt-search-filters-classification-article-topic,
-.mt-search-filters-classification-article-reference {
+.mt-search-filters-classification-article-reference,
+.mt-search-filters-classification-tipo-servicios-procedimiento {
 	display: none;
 }
 
@@ -2342,7 +2343,7 @@ article.elm-content-container {
 }
 
 li.mt-sortable-listing {
-	flex: 0 0 200px !important;
+	flex: 0 0 300px !important;
 }
 
 .elm-header-user-nav {
@@ -2351,14 +2352,9 @@ li.mt-sortable-listing {
 
 ul.mt-sortable-listings-container  {
 	display: flex !important;
-	justify-content: space-around !important;
+	justify-content: center !important;
 }
 
-div.elm-nav-container ol li.elm-user-menu ol li,
-div.mt-quick-search-container.mt-toggle-form-container {
+div.elm-nav-container ol li.elm-user-menu ol li {
     font-size: 12px !important;
-}
-
-.contenedorFlecha {
-    display: inline-block;
 }
