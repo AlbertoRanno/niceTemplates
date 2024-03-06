@@ -963,6 +963,20 @@
 /*********************************** MODIFICAR BARRA DE NAVEGACION ***********************************/
             //SOLO AGREGAR LOS NOMBRES DE LAS CATEGORIAS Y SUS CORRESPONDIENTES GUIAS, TAL CUAL FUERON CREADAS EN SUS RUTAS
 
+            /*Codigos UNICODE para los nombres con tildes:
+            á - \u00E1
+            é - \u00E9
+            í - \u00ED
+            ó - \u00F3
+            ú - \u00FA
+            
+            Á - \u00C1
+            É - \u00C9
+            Í - \u00CD
+            Ó - \u00D3
+            Ú - \u00DA
+            */
+
             //Agregar la nueva categoria al listado, en la ubicacion deseada, mantener el formato: '    "nombre",   ' (la ultima sin ',' )
             let categorias = ["Comercial", "Cobertura", "Afiliaciones", "Facturaci\u00F3n", "Reintegros",
                 "Prestadores", "Info Aplicaciones"
