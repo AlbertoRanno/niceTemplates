@@ -2358,3 +2358,7 @@ ul.mt-sortable-listings-container  {
 div.elm-nav-container ol li.elm-user-menu ol li {
     font-size: 12px !important;
 }
+
+li.elm-last-modified * {
+    color: var(--light-gray);
+}
