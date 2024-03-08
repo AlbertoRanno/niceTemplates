@@ -409,16 +409,7 @@
                     filtros.style.position = 'sticky';
                     filtros.style.top = '100px';
                 }
-                var filtroTipoDeArticulo = document.querySelector(
-                    ".mt-search-filters-classification-article");
-                if (filtroTipoDeArticulo) {
-                    filtroTipoDeArticulo.style.display = "none";
-                }
-                var fitroPropietario = document.querySelector(
-                    ".mt-search-filters-classification-propietario");
-                if (fitroPropietario) {
-                    fitroPropietario.style.display = "none";
-                }
+
                 var results = document.querySelectorAll("li.result");
                 results.forEach(function (result) {
                     var link = result.querySelector("a.go.result-spacer.mt-tracked-result");
@@ -967,7 +958,6 @@
                 [
                     "Altas",
                     "Bajas",
-                    "Aplicaciones",
                     "Certificados",
                     "Modificaciones",
                     "Modificaciones del padr\u00F3n",

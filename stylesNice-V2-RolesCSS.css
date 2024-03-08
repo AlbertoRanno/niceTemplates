@@ -26,23 +26,13 @@
     margin: 5px !important;
 }
 
-/*  Si esto no va... y solo aplica el CSS Gral... agregarle al mismo y eliminar post carga:
-
- .EXPAND_COLLAPSE dd {
-    border-top: 1px solid var(--secondary-light-blue) !important;
-    border-bottom: 1px solid var(--secondary-light-blue) !important;
-    padding: 5px !important;
-    margin: 5px 0 !important;
-  }
-*/
-
 /*********************************************************************************************************************/
 
-/*Community Member CSS*/
-.mt-search-filters-classification-sector {
-    display: none;
-}
-
-.botonIrAListaResultados {
+/*Anonymous - Community - Pro Member CSS*/
+.botonIrAListaResultados,
+.mt-search-filters-classification-article,
+.mt-search-filters-classification-propietario,
+.mt-search-filters-classification-tipo-servicios-procedimiento,
+.mt-search-filters-classification-tipo-basico {
     display: none;
 }

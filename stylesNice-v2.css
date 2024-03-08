@@ -1227,14 +1227,6 @@ input[type="submit"].ui-button-primary {
 	box-shadow: none;
 }
 
-/* Esconder clasificaciones default de los filtros de búsqueda */
-.mt-search-filters-classification-article-howto,
-.mt-search-filters-classification-article-topic,
-.mt-search-filters-classification-article-reference,
-.mt-search-filters-classification-tipo-servicios-procedimiento {
-	display: none;
-}
-
 /* 404 page not found */
 body[class*="pagenotfound"] h1#title {
 	font-size: 4em !important;
@@ -2178,10 +2170,6 @@ div.meta>div.url {
 	pointer-events: none;
 }
 
-.mt-search-filters-classification-tipo-basico {
-	display: none;
-}
-
 .tool-tip-link {
 	background-color: var(--definition-background);
 	cursor: help;
@@ -2359,6 +2347,17 @@ div.elm-nav-container ol li.elm-user-menu ol li {
     font-size: 12px !important;
 }
 
+.contenedorFlecha {
+    display: inline-block;
+}
+
 li.elm-last-modified * {
     color: var(--light-gray);
+}
+
+.mt-search-filters-classification-article,
+.mt-search-filters-classification-propietario,
+.mt-search-filters-classification-tipo-servicios-procedimiento,
+.mt-search-filters-classification-tipo-basico {
+    display: none;
 }

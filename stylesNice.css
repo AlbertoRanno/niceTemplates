@@ -2358,10 +2358,18 @@ ul.mt-sortable-listings-container  {
 div.elm-nav-container ol li.elm-user-menu ol li {
     font-size: 12px !important;
 }
+
 .contenedorFlecha {
     display: inline-block;
 }
 
 li.elm-last-modified * {
     color: var(--light-gray);
+}
+
+.mt-search-filters-classification-article,
+.mt-search-filters-classification-propietario,
+.mt-search-filters-classification-tipo-servicios-procedimiento,
+.mt-search-filters-classification-tipo-basico {
+    display: none;
 }
