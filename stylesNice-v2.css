@@ -1260,7 +1260,7 @@ body[class*="pagenotfound"] pre.script:before {
 
 .consejo-busqueda-area {
 	background-color: var(--light-blue);
-    height: 35px;
+	height: 35px;
 }
 
 .consejo-busqueda-area .elm-content-container {
@@ -2227,6 +2227,10 @@ div ul li {
 	box-shadow: 0 5px 5px rgba(0, 0, 0, .6) !important;
 }
 
+.navBarLateral button.regionActiva {
+	border-right: 7px solid var(--primary-blue) !important;
+}
+
 .nonEmptyRegion {
 	cursor: pointer;
 	pointer-events: all;
@@ -2335,29 +2339,29 @@ li.mt-sortable-listing {
 }
 
 .elm-header-user-nav {
-    min-height: 38px !important;
+	min-height: 38px !important;
 }
 
-ul.mt-sortable-listings-container  {
+ul.mt-sortable-listings-container {
 	display: flex !important;
 	justify-content: center !important;
 }
 
 div.elm-nav-container ol li.elm-user-menu ol li {
-    font-size: 12px !important;
+	font-size: 12px !important;
 }
 
 .contenedorFlecha {
-    display: inline-block;
+	display: inline-block;
 }
 
 li.elm-last-modified * {
-    color: var(--light-gray);
+	color: var(--light-gray);
 }
 
 .mt-search-filters-classification-article,
 .mt-search-filters-classification-propietario,
 .mt-search-filters-classification-tipo-servicios-procedimiento,
 .mt-search-filters-classification-tipo-basico {
-    display: none;
+	display: none;
 }

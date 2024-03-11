@@ -5,6 +5,7 @@
     //****************************COLAPSABLES Y PARTICULARIDADES****************************
 
     let ultimoBotonClickeado = null;
+    let ultimoBotonExternoClickeado = null;
 
     function alternarCollapse(id) {
         const elemento = document.getElementById(id);
@@ -19,15 +20,17 @@
 
             const boton = obtenerBotonPorId(id);
             resaltarBoton(boton);
+
+            const botonExterno = obtenerBotonExternoPorId(id);
+            resaltarBotonExterno(botonExterno);
         }
     }
 
     function resaltarBoton(boton) {
-        if (ultimoBotonClickeado) {
-            ultimoBotonClickeado.classList.remove('filialActiva');
-        }
-
-        if (boton) {
+        if (boton && !boton.classList.contains('filialActiva')) {
+            if (ultimoBotonClickeado) {
+                ultimoBotonClickeado.classList.remove('filialActiva');
+            }
             boton.classList.add('filialActiva');
             ultimoBotonClickeado = boton;
         }
@@ -38,6 +41,26 @@
         for (const boton of botones) {
             if (boton.getAttribute('onclick') === `alternarCollapse('${id}')`) {
                 return boton;
+            }
+        }
+        return null;
+    }
+
+    function resaltarBotonExterno(botonExterno) {
+        if (botonExterno) {
+            if (ultimoBotonExternoClickeado && ultimoBotonExternoClickeado !== botonExterno) {
+                ultimoBotonExternoClickeado.classList.remove('regionActiva');
+            }
+            botonExterno.classList.add('regionActiva');
+            ultimoBotonExternoClickeado = botonExterno;
+        }
+    }
+
+    function obtenerBotonExternoPorId(id) {
+        const botonesExternos = document.querySelectorAll('.navBarLateral button');
+        for (const botonExterno of botonesExternos) {
+            if (botonExterno.getAttribute('onclick') === `alternarCollapse('${id}')`) {
+                return botonExterno;
             }
         }
         return null;
