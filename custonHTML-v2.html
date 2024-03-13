@@ -125,6 +125,18 @@
             linkUsuario.addEventListener('click', cambiarFlecha);
         }
 
+        setTimeout(function () {
+            let liConTooltips = document.querySelectorAll('.tool-tip-link');
+            liConTooltips.forEach(function (elemento) {
+                let link = elemento.querySelector('a');
+                let texto = link.textContent.trim();
+                // Reemplaza los caracteres especiales con un span
+                texto = texto.replace(/([&~@*-]+)/g,
+                    '<span class="caracteresOcultos">$1</span>');
+                link.innerHTML = texto;
+            });
+        }, 1000);
+
         const contenedoresPath = document.querySelectorAll('.mt-lp-progress-container');
 
         contenedoresPath.forEach(contenedor => {
@@ -132,30 +144,40 @@
 
             enlacesPath.forEach(enlace => {
                 const nombreDelArticulo = enlace.textContent.trim();
-                const cantidadAsteriscos = (nombreDelArticulo.match(/\*/g) || []).length;
-                const cantidadGuiones = (nombreDelArticulo.match(/-/g) || []).length;
+                const contadorAsterisco = (nombreDelArticulo.match(/\*/g) || []).length;
+                const contadorGuion = (nombreDelArticulo.match(/-/g) || []).length;
+                const contadorArroba = (nombreDelArticulo.match(/@/g) || []).length;
+                const contadorVirgulilla = (nombreDelArticulo.match(/~/g) || []).length;
+                const contadorAspersand = (nombreDelArticulo.match(/&/g) || []).length;
 
                 let nombreClaseTooltips = '';
-                if (!nombreDelArticulo.startsWith('*') && !nombreDelArticulo.startsWith('-') &&
-                    !nombreDelArticulo.endsWith('*') && !nombreDelArticulo.endsWith('-')) {
-                    nombreClaseTooltips = 'todos';
-                } else if (nombreDelArticulo.startsWith('*')) {
-                    switch (cantidadAsteriscos) {
+                //Juntos
+                if (nombreDelArticulo.endsWith('*')) {
+                    switch (contadorAsterisco) {
                         case 1:
-                            nombreClaseTooltips = 'todosCoordi';
+                            nombreClaseTooltips = 'todos';
                             break;
                         case 2:
-                            nombreClaseTooltips = 'coordiCGD';
+                            nombreClaseTooltips = 'todosCoordi';
                             break;
                         case 3:
+                            nombreClaseTooltips = 'todosAsesores';
+                            break;
+                    } //Coordinadores                    
+                } else if (nombreDelArticulo.endsWith('-')) {
+                    switch (contadorGuion) {
+                        case 1:
+                            nombreClaseTooltips = 'coordiCGD';
+                            break;
+                        case 2:
                             nombreClaseTooltips = 'coordiCAP';
                             break;
-                        case 4:
+                        case 3:
                             nombreClaseTooltips = 'coordiCAT';
                             break;
-                    }
-                } else if (nombreDelArticulo.endsWith('*')) {
-                    switch (cantidadAsteriscos) {
+                    } //Coordinadores Combinaciones
+                } else if (nombreDelArticulo.endsWith('&')) {
+                    switch (contadorAspersand) {
                         case 1:
                             nombreClaseTooltips = 'coordiCAT-CGD';
                             break;
@@ -165,42 +187,39 @@
                         case 3:
                             nombreClaseTooltips = 'coordiCAT-CAP';
                             break;
+                    } //Asesores
+                } else if (nombreDelArticulo.endsWith('~')) {
+                    switch (contadorVirgulilla) {
+                        case 1:
+                            nombreClaseTooltips = 'asesorCGD';
+                            break;
+                        case 2:
+                            nombreClaseTooltips = 'asesorCAP';
+                            break;
+                        case 3:
+                            nombreClaseTooltips = 'asesorCAT';
+                            break;
+                    } //Asesores Combinaciones
+                } else if (nombreDelArticulo.endsWith('@')) {
+                    switch (contadorArroba) {
+                        case 1:
+                            nombreClaseTooltips = 'asesoresCAT_CGD';
+                            break;
+                        case 2:
+                            nombreClaseTooltips = 'asesoresCGD_CAP';
+                            break;
+                        case 3:
+                            nombreClaseTooltips = 'asesoresCAT_CAP';
+                            break;
                     }
-                } else if (nombreDelArticulo.includes('-')) {
-                    if (nombreDelArticulo.startsWith('-')) {
-                        switch (cantidadGuiones) {
-                            case 1:
-                                nombreClaseTooltips = 'todosAsesores';
-                                break;
-                            case 2:
-                                nombreClaseTooltips = 'asesorCGD';
-                                break;
-                            case 3:
-                                nombreClaseTooltips = 'asesorCAP';
-                                break;
-                            case 4:
-                                nombreClaseTooltips = 'asesorCAT';
-                                break;
-                        }
-                    } else if (nombreDelArticulo.endsWith('-')) {
-                        switch (cantidadGuiones) {
-                            case 1:
-                                nombreClaseTooltips = 'asesoresCAT_CGD';
-                                break;
-                            case 2:
-                                nombreClaseTooltips = 'asesoresCGD_CAP';
-                                break;
-                            case 3:
-                                nombreClaseTooltips = 'asesoresCAT_CAP';
-                                break;
-                        }
-                    }
+                } else {
+                    nombreClaseTooltips = '';
                 }
 
                 const tooltipSpan = document.createElement('span');
 
                 if (nombreClaseTooltips) {
-                    tooltipSpan.classList.add('tooltip-tool-tip-link');
+                    tooltipSpan.classList.add('tool-tip-link');
                     tooltipSpan.classList.add(nombreClaseTooltips);
                 }
 
@@ -211,7 +230,7 @@
         });
 
         $(function () {
-            $('.tooltip-tool-tip-link').each(function () {
+            $('.tool-tip-link').each(function () {
                 if ($(this).attr('class').split(' ').length > 1) {
                     var nombreClaseTooltips = $(this).attr('class').split(' ')[1];
                     var rutaImagen = obtenerRutaImagen(nombreClaseTooltips);

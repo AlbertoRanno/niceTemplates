@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparent Characters</title>
+    <style>
+        .mt-search-partial-content {
+            color: black;
+            /* Por defecto */
+        }
+
+        .caracteresOcultos {
+            color: transparent;
+            /* Cambia el color a transparente */
+        }
+    </style>
+</head>
+
+<body>
+    <p class="mt-search-partial-content">2{} Se adjunta aquí todo los archivos que se utilizan en los artículos de
+        Cobertura Se debe realizar el link desde el articulo a este sector para seleccionar el archivo que necesita.</p>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            setTimeout(function () {
+                let elementosSeleccionados = document.querySelectorAll('.mt-search-partial-content');
+                elementosSeleccionados.forEach(function (elemento) {
+                    let textoElemento = elemento.textContent.trim();
+                    textoElemento = textoElemento.replace(/\s*2\s*\{\s*\}\s*/g,
+                        ''
+                        ); // Elimina el texto que coincide con el patrón "2{}" con espacios adicionales alrededor
+                    elemento.textContent = textoElemento;
+                });
+            }, 1000);
+
+        });
+    </script>
+</body>
+
+</html>

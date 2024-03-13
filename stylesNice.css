@@ -2173,7 +2173,7 @@ div.meta>div.url {
 .tool-tip-link {
 	background-color: var(--definition-background);
 	cursor: help;
-	padding: 2px;
+	/*padding: 2px;*/
 }
 
 .imgHome1,
@@ -2364,4 +2364,8 @@ li.elm-last-modified * {
 .mt-search-filters-classification-tipo-servicios-procedimiento,
 .mt-search-filters-classification-tipo-basico {
 	display: none;
+}
+
+.caracteresOcultos {
+	color: transparent;
 }
