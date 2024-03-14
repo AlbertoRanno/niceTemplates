@@ -2,7 +2,7 @@
 <script src="https://unpkg.com/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.min.js"></script>
 <script>
-    //****************************COLAPSABLES Y PARTICULARIDADES****************************
+    //****************************Particularidades****************************
 
     let ultimoBotonClickeado = null;
     let ultimoBotonExternoClickeado = null;
@@ -66,6 +66,8 @@
         return null;
     }
 
+    //****************************Colapsables****************************
+
     function toggleAccordion(collapseId) {
         var accordionBody = document.getElementById(collapseId);
         accordionBody.classList.toggle('show');
@@ -83,6 +85,17 @@
 
     document.addEventListener('DOMContentLoaded', function () {
 
+        //****************************Ajuste para tablero****************************
+
+        if (window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:Dashboard")) {
+            var headerLogoContainer = document.querySelector('div.elm-header-logo-container');
+            if (headerLogoContainer) {
+                headerLogoContainer.style.height = '36px';
+            }
+        }
+
+        //****************************Menu perfil usuario****************************
+
         var linkUsuario = document.querySelector('.mt-user-menu-user a');
         if (linkUsuario) {
             let contenedorFlechaUsuario = document.createElement('div');
@@ -92,8 +105,6 @@
             imgFlechaUsuario.src = '/@api/deki/files/256/downArrowWhite.png';
             imgFlechaUsuario.alt = 'flecha';
             contenedorFlechaUsuario.appendChild(imgFlechaUsuario);
-
-            // Reemplazo el nombre/mail del usuario (del <a>) con el nuevo contenido (el contenedor con su img)
             linkUsuario.innerHTML = '';
             linkUsuario.appendChild(contenedorFlechaUsuario);
 
@@ -107,6 +118,8 @@
 
             linkUsuario.addEventListener('click', cambiarFlecha);
         }
+
+        //****************************Tooltips con imagenes****************************
 
         setTimeout(function () {
             let liConTooltips = document.querySelectorAll('.tool-tip-link');
@@ -258,6 +271,7 @@
             }
         });
 
+        //****************************Reversiones para Particularidades****************************
 
         function revertirEmptyRegions() {
             var spansNonEmptyRegion = document.querySelectorAll('.emptyRegions .nonEmptyRegion');
@@ -306,7 +320,7 @@
             });
         });
 
-        //**************************** DEJAR COMENTARIO *************************************
+        //**************************** Dejar comentario *************************************
         var texto1DejarComentario = document.querySelector('.mt-feedback-rating-message');
         if (texto1DejarComentario) {
             texto1DejarComentario.textContent =
@@ -323,7 +337,7 @@
             consentimientoLabel.style.display = 'none';
         }
 
-        //******************EVITO DOBLE BUSCADOR HOME************************
+        //******************Evitar doble buscador home************************
         if (window.location.href === 'https://osde-prod1.mindtouch.us/') {
             var searchElement = document.querySelector('li.elm-global-search');
             if (searchElement) {
@@ -343,7 +357,7 @@
 
         }
 
-        //******************BORRO PLACEHOLDERS DEFAULTS**********************    
+        //******************Esconder placeholders defaults**********************    
         var searchField = document.getElementById('mt-site-search-input');
         if (searchField) {
             searchField.placeholder = '\u00BFQu\u00E9 est\u00E1s buscando?';
@@ -353,7 +367,7 @@
         //******************METRICAS TABLA DE CONTENIDO******************************** 
         //No corresponden métricas del tenant 1
 
-        //****************************LISTA RESULTADOS************************************
+        //****************************Lista de resultados************************************
         if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
 
             document.addEventListener('click', function (event) {
@@ -524,10 +538,10 @@
             }, 1000);
         }
 
-        //*******************************LOGIN********************************
+        //*******************************Login********************************
         if (!window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:UserLogin")) {
 
-            //****************************FOOTER********************************
+            //****************************Footer********************************
             var footerDefault = document.querySelector(".elm-footer");
             if (footerDefault) {
 
@@ -826,7 +840,7 @@
                 footerDefault.parentNode.replaceChild(footerPropio, footerDefault);
             }
 
-            //****************************NAVBAR**********************************
+            //****************************Barra de navegación**********************************
             let topLevelNavigation = document.createElement('nav');
             topLevelNavigation.classList.add('navbar', 'navbar-menu-osde', 'elm-header-logo-menu');
             let divContenedor = document.createElement('div');
@@ -955,13 +969,16 @@
             Ú - \u00DA
             */
 
-            //Agregar la nueva categoria al listado, en la ubicacion deseada, mantener el formato: '    "nombre",   ' (la ultima sin ',' )
+            //Agregar la nueva categoria al listado, en la ubicacion deseada, mantener el formato ("nombre",). La ultima va sin coma.
             let categorias = ["Comercial", "Cobertura", "Afiliaciones", "Facturaci\u00F3n", "Reintegros",
                 "Prestadores", "Info Aplicaciones"
             ];
 
-            //Agregar las guias pertenecientes a la nueva Categoria, en la MISMA UBICACION QUE PUSIERON LA CATEGORIA,
-            // mantener el formato: '    ["guia1" , "guia2" , "guia3"],  '
+            /*Agregar las guias pertenecientes a la nueva Categoria, en la MISMA UBICACION QUE PUSIERON LA CATEGORIA (Si agregaron una
+            Categoría luego de Afiliaciones, los corchetes con las guías para esta nueva categoría, irán después de los corchetes que 
+            contienen las guías de Afiliaciones para mantener la concordancia). Mantener el formato (["guiaA1" , "guiaA2"] , ["guiaB1", "GuiaB2"],...).
+            Luego del último grupo de guias, no va la coma.*/
+
             let guias = [
                 //Comercial
                 [
@@ -1075,7 +1092,7 @@
                 logoContainer.appendChild(topLevelNavigation);
             }
 
-
+            //*******************************Login********************************
         } else {
             var headerLogin = document.querySelector('.elm-header-custom a');
             if (headerLogin) {
