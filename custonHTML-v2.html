@@ -101,7 +101,7 @@
     });
 
     document.addEventListener('DOMContentLoaded', function () {
-        
+
         //****************************Ajuste para tablero****************************
 
         if (window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:Dashboard")) {
@@ -546,6 +546,15 @@
                     filtros.style.top = '100px';
                 }
 
+                let noResultadosH4 = document.querySelector('#search-results h4');
+                let noResultadosP = document.querySelector('#search-results p');
+
+                if (noResultadosH4 && noResultadosP) {
+                    noResultadosH4.textContent = 'No se encontraron resultados';
+                    noResultadosP.textContent =
+                        'Intent\u00E1 modificando el criterio de b\u00FAsqueda o usando los filtros';
+                }
+
                 var results = document.querySelectorAll("li.result");
                 results.forEach(function (result) {
                     var link = result.querySelector("a.go.result-spacer.mt-tracked-result");
@@ -615,7 +624,7 @@
                         subUlColapsablesInternos.style.display = 'block';
                     });
                 });
-            }, 1000);
+            }, 300);
         }
 
         //*******************************Login********************************
