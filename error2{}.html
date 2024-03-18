@@ -1,43 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transparent Characters</title>
-    <style>
-        .mt-search-partial-content {
-            color: black;
-            /* Por defecto */
-        }
-
-        .caracteresOcultos {
-            color: transparent;
-            /* Cambia el color a transparente */
-        }
-    </style>
-</head>
-
-<body>
-    <p class="mt-search-partial-content">2{} Se adjunta aquí todo los archivos que se utilizan en los artículos de
-        Cobertura Se debe realizar el link desde el articulo a este sector para seleccionar el archivo que necesita.</p>
-
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        //FINAL: (se ejecuta cada segundo) --------------------------------------------------
+        function ejecutarCorreccion2Llaves() {
+            let resultadosLista = document.querySelectorAll('.mt-search-partial-content');
+            resultadosLista.forEach(function (elemento) {
+                let textoSummary = elemento.textContent.trim();
+                textoSummary = textoSummary.replace(/\s*2\s*\{\s*\}\s*/g, '');
+                // Elimina el texto que coincide con el patron '2{}' con juego de espacios alrededor
+                elemento.textContent = textoSummary;
+            });
+        }
+        setInterval(function () {
+            ejecutarCorreccion2Llaves();
+        }, 1000);
+
+        //BASE:-----------------------------------------------------------------------------
+        setTimeout(function () {
+            let resultadosLista = document.querySelectorAll('.mt-search-partial-content');
+            resultadosLista.forEach(function (elemento) {
+                let textoSummary = elemento.textContent.trim();
+                textoSummary = textoSummary.replace(/\s*2\s*\{\s*\}\s*/g, '');
+                // Elimina el texto que coincide con el patron '2{}' con espacios alrededor
+                elemento.textContent = textoSummary;
+            });
+        }, 1500); //Con menos margen, se ejecuta antes de que carguen los resultados
+
+
+
+        //IDEAL (pero no funciona como se espera):------------------------------------------
+        function ejecutarScript() {
+            console.log("Ejecutando script...");
 
             setTimeout(function () {
-                let elementosSeleccionados = document.querySelectorAll('.mt-search-partial-content');
-                elementosSeleccionados.forEach(function (elemento) {
-                    let textoElemento = elemento.textContent.trim();
-                    textoElemento = textoElemento.replace(/\s*2\s*\{\s*\}\s*/g,
-                        ''
-                        ); // Elimina el texto que coincide con el patrón "2{}" con espacios adicionales alrededor
-                    elemento.textContent = textoElemento;
+                let resultadosLista = document.querySelectorAll('.mt-search-partial-content');
+                console.log("Número de elementos encontrados:", resultadosLista.length);
+
+                resultadosLista.forEach(function (elemento) {
+                    let textoSummary = elemento.textContent.trim();
+                    console.log("Texto original:", textoSummary);
+
+                    textoSummary = textoSummary.replace(/\s*2\s*\{\s*\}\s*/g, '');
+                    console.log("Texto modificado:", textoSummary);
+
+                    // Elimina el texto que coincide con el patron '2{}' con espacios alrededor
+                    elemento.textContent = textoSummary;
                 });
-            }, 1000);
+            }, 2000); //Con menos margen, se ejecuta antes de que carguen los resultados
+        }
 
-        });
+        // Observador de eventos para detectar cambios en el formulario de búsqueda
+        var formularioBusqueda = document.getElementById('mt-search-component-form');
+        if (formularioBusqueda) {
+            formularioBusqueda.addEventListener('submit', function (event) {
+                event.preventDefault(); // Evita el envío del formulario
+                console.log("Evento de envío del formulario detectado.");
+                ejecutarScript();
+            });
+        }
+
+        // Observador de eventos para detectar cambios en el campo de búsqueda
+        var campoBusqueda = document.querySelector('.mt-text.mt-help-search-input');
+        if (campoBusqueda) {
+            campoBusqueda.addEventListener('input', function () {
+                console.log("Evento de entrada en el campo de búsqueda detectado.");
+                ejecutarScript();
+            });
+        }
     </script>
-</body>
-
-</html>

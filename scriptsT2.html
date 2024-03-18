@@ -450,6 +450,19 @@
         //****************************Lista de resultados************************************
         if (window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:Search")) {
 
+            function ejecutarCorreccion2Llaves() {
+                let resultadosLista = document.querySelectorAll('.mt-search-partial-content');
+                resultadosLista.forEach(function (elemento) {
+                    let textoSummary = elemento.textContent.trim();
+                    textoSummary = textoSummary.replace(/\s*2\s*\{\s*\}\s*/g, '');
+                    // Elimina el texto que coincide con el patron '2{}' con juego de espacios alrededor
+                    elemento.textContent = textoSummary;
+                });
+            }
+            setInterval(function () {
+                ejecutarCorreccion2Llaves();
+            }, 1000);
+
             document.addEventListener('click', function (event) {
                 if (event.target.tagName === 'A') {
                     const url = event.target.href;
@@ -624,7 +637,7 @@
                         subUlColapsablesInternos.style.display = 'block';
                     });
                 });
-            }, 300);
+            }, 500);
         }
 
         //*******************************Login********************************
