@@ -455,7 +455,7 @@
                 resultadosLista.forEach(function (elemento) {
                     let textoSummary = elemento.textContent.trim();
                     textoSummary = textoSummary.replace(/\s*2\s*\{\s*\}\s*/g, '');
-                    // Elimina el texto que coincide con el patron '2{}' con juego de espacios alrededor
+                    // Elimina el texto que coincide con el patron '2{}' con juego de espacios alrededor 
                     elemento.textContent = textoSummary;
                 });
             }

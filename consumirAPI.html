@@ -1,0 +1,166 @@
+<!--Fetch Simplificado-->
+<script>
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+        .then(response => response.json())
+        .then(json => console.log(json))
+</script>
+
+<!--Estructura en la que voy a insertar la info-->
+<div class="infoApi">
+    <!-- La estructura interna que la arme el script -->
+</div>
+
+<!--Fetch completo Explicado-->
+<script>
+    /* Lo siguiente no hizo falta, porque enviarlo solo a una página, carecía de sentido, dado que no se podía reutilizar
+    desde allí (aunque la página estuviera activa en el navegador).
+    if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/PruebasVarias/AlbertPruebas/infoAPI")) {
+    console.log('La p\u00E1gina es correcta.');   
+        
+     Así que por el contrario, cambié la lógica:
+
+     Armé un array con los IDs de los posibles casos.
+     Por cada url necesaria para un fetch específico, hay que hacer un ID
+     Cuando la página se cargue, corre un forEach de ese array
+     Va a buscar cada ID, si lo encuentra, define la variable apiUrl, y, acorde al Switch, le va a asignar
+     la url que corresponda.
+     Con la misma, se va a ejecutar el fetch
+     El cual, en este ejemplo particular, analiza si la info es una array, o solo un objeto, y en base a eso,
+     define el tipo de estructura que irá en el Div en cada caso (estructura + la info traida del fetch obviamente)   */
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const IDsDivs = ['infoApi', 'infoApi1', 'infoApi2']; // Todos los casos de IDs 
+
+        IDsDivs.forEach(IdDiv => {
+            // Selecciono el elemento HTML dentro del artículo de Nice donde deseo mostrar la información
+            const divARecibirInfo = document.getElementById(IdDiv);
+            console.log(`Buscando div con ID ${IdDiv}`);
+
+            if (divARecibirInfo) {
+                let apiUrl; // URL del endpoint de la API:
+                switch (IdDiv) {
+                    case 'infoApi':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos';
+                        break;
+                    case 'infoApi1':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/1';
+                        break;
+                    case 'infoApi2':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/2';
+                        break;
+                    default:
+                        console.warn(`ID de div desconocido: ${IdDiv}`);
+                        apiUrl = ''; // URL por defecto
+                }
+                console.log(`Realizando fetch para el div con ID ${IdDiv} desde la URL: ${apiUrl}`);
+                // Utilizo fetch para realizar la solicitud GET a la API
+                fetch(apiUrl)
+                    .then(response => {
+                        console.log('Respuesta recibida desde la API:', response);
+                        // Verifico si la respuesta es exitosa (código de estado 200)
+                        if (response.ok) {
+                            // Parseo la respuesta como JSON y la retorno
+                            return response.json();
+                        }
+                        // Si la respuesta no es exitosa, lanzo un error
+                        throw new Error('No se pudo traer la info desde la API');
+                    })
+                    .then(data => {
+                        // Muestro la información que traje en la consola del navegador
+                        console.log(`Datos obtenidos para el div con ID ${IdDiv}:`, data);
+                        if (Array.isArray(data)) {
+                            data.forEach(objeto => {
+                                const pContenedor = document.createElement('p');
+                                pContenedor.textContent =
+                                    `Tarea: ${objeto.title}, Completada: ${objeto.completed ? 'Sí' : 'No'}`;
+                                // Agrego el nuevo elemento al artículo de Nice
+                                divARecibirInfo.appendChild(pContenedor);
+                            });
+                        } else {
+                            const pContenedor = document.createElement('p');
+                            pContenedor.textContent =
+                                `Tarea: ${data.title}, Completada: ${data.completed ? 'Sí' : 'No'}`;
+                            divARecibirInfo.appendChild(pContenedor);
+                        }
+                    })
+                    // Capturo y manejo cualquier error que ocurra durante la solicitud
+                    .catch(error => {
+                        console.error(`Hubo un problema con fetch para el div con ID ${IdDiv}:`,
+                            error);
+                    });
+            } else {
+                console.warn(`Div con ID ${IdDiv} no encontrado`);
+            }
+        });
+    });
+  //  } else {
+  //      console.log('No estoy en la p\u00E1gina correcta.');
+  //  }
+</script>
+
+<!-- Comentario previo a la resolución final
+    Integración con salusoft: a la espera de la url que expone la info deseada. Pero mientras tanto, probé con una API gratis, 
+    la consumí, y pude exponer el listado de usuarios en un artículo. Esto, desde el head. La contra, depende de como venga dada
+     la info, y como la quieran distribuir por nice, si esto va a ser factible o no de hacer así… si está toda en una página, sí. 
+     Pero si su idea, es capturarla, compartirla desde esa página, por todo el sitio, que es lo que pensé de entrada… y no… 
+     luego me dí cuenta de que no se va a poder, porque si en esa página abierta, el head no le puedo enviar la info, ergo, 
+     no va a estar… Si fuera el caso, tengo opciones a probar:
+Op1 - ver de mandar a cada página, solo el mínimo pedacito relevante de manera directa.
+Op2 - ver de guardar la info en el local storage, y redistribuir de ahí a donde sea necesario.
+-->
+
+<!--Fetch Reducido para Head-->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const IDsDivs = ['infoApi', 'infoApi1', 'infoApi2'];
+
+        IDsDivs.forEach(IdDiv => {
+            const divARecibirInfo = document.getElementById(IdDiv);
+            if (divARecibirInfo) {
+                let apiUrl;
+                switch (IdDiv) {
+                    case 'infoApi':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos';
+                        break;
+                    case 'infoApi1':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/1';
+                        break;
+                    case 'infoApi2':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/2';
+                        break;
+                    default:
+                        console.warn(`ID de div desconocido: ${IdDiv}`);
+                        apiUrl = '';
+                }
+                fetch(apiUrl)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        throw new Error('No se pudo traer la info desde la API');
+                    })
+                    .then(data => {
+                        if (Array.isArray(data)) {
+                            data.forEach(objeto => {
+                                const pContenedor = document.createElement('p');
+                                pContenedor.textContent =
+                                    `Tarea: ${objeto.title}, Completada: ${objeto.completed ? 'Sí' : 'No'}`;
+                                divARecibirInfo.appendChild(pContenedor);
+                            });
+                        } else {
+                            const pContenedor = document.createElement('p');
+                            pContenedor.textContent =
+                                `Tarea: ${data.title}, Completada: ${data.completed ? 'Sí' : 'No'}`;
+                            divARecibirInfo.appendChild(pContenedor);
+                        }
+                    })
+                    .catch(error => {
+                        console.error(`Hubo un problema con fetch para el div con ID ${IdDiv}:`,
+                            error);
+                    });
+            } else {
+                console.warn(`Div con ID ${IdDiv} no encontrado`);
+            }
+        });
+    });
+</script>

@@ -1,0 +1,119 @@
+<html>
+
+<body>
+
+    <div id="mindtouch" style="height: 550px;"></div>
+
+    <script type="text/javascript">
+        // 1. Definición de una variable HTML que contiene un script de incrustación de MindTouch
+        var HTML =
+            '<script type="mindtouch/embed" id="mindtouch-embed-01f27ec6b18e8744aa0ba229a89c3ad64759c852e722408ba0ad55dd885449e9" data-search-query="DEFAULT_SEARCH" data-case-id=""><\/script>';
+
+        // 2. Reemplazo de la cadena "DEFAULT_SEARCH" por un valor obtenido de algún contexto específico (sap.byd.ui.mashup.context.inport.TicketDescription)
+        HTML = HTML.replace("DEFAULT_SEARCH", sap.byd.ui.mashup.context.inport.TicketDescription);
+
+        // 3. Inserción del script de incrustación de MindTouch en el elemento div con id "mindtouch"
+        document.getElementById("mindtouch").innerHTML = HTML;
+
+
+        // 4. Creación de un elemento script para cargar un script externo de MindTouch
+        var js_script = document.createElement('script');
+
+        // 5. Definición del tipo de script como JavaScript
+        js_script.type = "text/javascript";
+
+        // 6. Especificación de la URL del script externo de MindTouch
+        js_script.src = //VENÍA SIN COMILLAS, VER MAIL
+            "https://osde-prod2.mindtouch.us/@embed/01f27ec6b18e8744aa0ba229a89c3ad64759c852e722408ba0ad55dd885449e9.js";
+
+        // 7. Marcado del script para que se cargue asíncronamente
+        js_script.async = true;
+
+        // 8. Inserción del script en el encabezado del documento HTML para su carga
+        document.getElementsByTagName('head')[0].appendChild(js_script);
+    </script>
+
+</body>
+
+</html>
+
+<!--
+EXPLICADO EN DETALLE:
+
+
+De entrada analicé la integración con Link, y por el chat ya les resumí que es lo que me parecía:
+*El índice no lo ven, porque están compartiendo el div con clase “mt-content-container”, cuando deberían compartir,  al menos, el article con clase 
+“elm-content-container”. Dado que es el article el que contiene al Aside que a su vez contiene al índice.
+*Respecto a lo estético, no estoy seguro como se ve afectado el CSS en las integraciones, pero creería que: algunas reglas de css cambian de jerarquía
+ y se van a ver distinto, por el mismo tema, nosotros tenemos una estructura, y ahí solo se despliega una parte de la misma. Es decir, nuestros 
+ contenedores más amplios de html,  tienen sus reglas de CSS, que pueden o no condicionar a las estructuras que contienen. Por lo tanto, al no estar
+  las mismas, algunas propiedades cambian de jerarquía, y por ende de valor. En otras palabras, las reglas se aplicaron en un contexto, y al compartir
+   solo una parte, el contexto va a ser otro.
+
+Entiendo que no van a compartir la totalidad porque no tendría sentido que vean la navbar, o el menú de herramientas por ejemplo, pero partiendo de esa base,
+ puede que el css sí, nos quede distinto… por lo pronto, estaría bueno si pueden, en principio, cambiar del DIV al ARTICLE, para ver si funciona bien el índice.
+  Y desde ese punto, ver si está en nuestro alcance mejorar como quede con luego de ese cambio… Pero de nuevo, es una posibilidad que lo podamos mejorar, 
+  tampoco vamos a poder cambiar todo el css del proyecto para que las reglas de todo lo que contiene el article sean independientes al resto. En tal caso, 
+  también podría ser que les sea factible realizar a ellos justamente los ajustes. Es decir, a los diseñadores del proyecto LInk, dado que ellos tendrían 
+  que modificar directamente lo que se ve, a diferencia de nosotros que tendríamos que hacer algo que funcione para 2 contextos.
+
+Esto es lo que tenía en mente respecto a esta integración, antes de la meet del 19/3. En la cual, Lucas Fernandez, dejó en claro que ellos no tienen 
+idea de cómo condicionar la integración, y que respecto a la misma, solo compartieron un código que brinda Nice. (El único, dado que usan el touchpoint,
+ que gratis tenemos solo uno, y lo usan para LINK - C4C). Por lo que le pedí el código, y estuve googleando bastante para tratar de entenderlo y ver si
+  estaba a nuestro alcance modificarlo… y llegué a entender lo siguiente:
+ 1- Recibe una palabra clave desde Link, la cual utiliza para realizar una búsqueda en el buscador de Nice. Esto lo logra mediante el reemplazo de la
+  frase "DEFAULT_SEARCH", en el script de incrustación, con la palabra clave proporcionada.  En código:
+
+1a-Define la variable HTML, la cual contiene el script de incrustación de Nice:
+
+
+var HTML = '<script type="mindtouch/embed" id="mindtouch-embed-01f27ec6b18e8744aa0ba229a89c3ad64759c852e722408ba0ad55dd885449e9" 
+data-search-query="DEFAULT_SEARCH" data-case-id=""><\/script>';
+
+1b-Reemplaza de la frase "DEFAULT_SEARCH" por un valor que obtiene del contexto específico, es decir, eso corre por cuenta de Link, 
+depende del artículo o lo que se esté buscando en Link, la palabra o frase que envía al buscador de nice:
+
+HTML = HTML.replace("DEFAULT_SEARCH", sap.byd.ui.mashup.context.inport.TicketDescription);
+
+1c- Inserta el script de incrustación en el elemento DIV de Link con id "mindtouch"
+document.getElementById("mindtouch").innerHTML = HTML;
+Y esto lo que va a hacer, es mostrar el listado de resultados que ofrece Nice para esa búsqueda.
+
+2 - Una vez que se selecciona un resultado de la búsqueda en Nice, el script externo se carga de forma asíncrona con la URL del artículo en cuestión de Nice.
+ Y para mí, este es el script que habría que ver de cambiar. Dado que es el que se encarga de cargar y mostrar el contenido artículo seleccionado. 
+ PERO, no lo muestra completo, y esa es la cuestión, entiendo que no quiera agarrar todo el Body, porque tiene muchos elementos que no tienen sentido,
+  como la barra de navegación por ejemplo. Pero al mostrar desde el DIV con clase “mt-content-container”, deja de lado al ASIDE, que es el que contiene 
+  el índice. Y es por eso que yo sugería que comparta desde el ARTICLE, con clase “elm-content-container”, de modo de incluir al Aside, y en consecuencia 
+  al Índice… PERO, el tema, es que hay que ver si la funcionalidad que tiene se mantiene en una integración… Digo, quizás no sea casualidad que lo dejaran de lado….
+En código:
+2a- Crea un elemento script para cargar un script externo de MindTouch
+var js_script = document.createElement('script');
+
+2b- Define el tipo de script como JavaScript
+js_script.type = "text/javascript";
+
+2c- Especifica la URL del script externo de MindTouch (OJO que en el mail, vino si comillas la URL… no creo que la falta de ellas haga que cambie 
+el contenedor que muestra, pero me llamó la atención de que les funcione así)
+js_script.src = "https://osde-prod2.mindtouch.us/@embed/01f27ec6b18e8744aa0ba229a89c3ad64759c852e722408ba0ad55dd885449e9.js";
+
+2d- Marca el script para que se cargue asíncronamente
+js_script.async = true;
+
+2e- Inserta el script en el encabezado del documento HTML para su carga
+document.getElementsByTagName('head')[0].appendChild(js_script);
+Conclusión, en esa URL, Nice, tiene un script, que es el que contiene la lógica de mostrar el contenido, y como lo hace, y es él, donde el cambio 
+de contenedor podría realizarse. Lógicamente, habría que abrir un ticket… pero a todo esto, me temo que si ellos excluyeron el índice, es porque no lo tienen 
+armado para que la funcionalidad sea extensiva a la integración…
+
+
+
+
+
+
+
+
+-->
+
+
+
+
