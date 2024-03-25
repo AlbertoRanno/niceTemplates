@@ -1,0 +1,44 @@
+var uri = site.api & 'pages/popular' & { limit: 30 };
+var api = wiki.api(uri);
+
+
+<div class="widget-popular">
+    <ul>
+        foreach(var pg in api['page'] ) {
+        var pageUri = pg / 'uri.ui';
+
+        if (user.admin || pageUri.startsWith('https://osde-prod2.mindtouch.us/Comercial') ||
+        pageUri.startsWith('https://osde-prod2.mindtouch.us/Afiliaciones') ||
+        pageUri.startsWith('https://osde-prod2.mindtouch.us/facturacion') ||
+        pageUri.startsWith('https://osde-prod2.mindtouch.us/Prestadores') ||
+        pageUri.startsWith('https://osde-prod2.mindtouch.us/Reintegros')||
+        pageUri.startsWith('https://osde-prod2.mindtouch.us/Prestadores')||
+        pageUri.startsWith('https://osde-prod2.mindtouch.us/Informacion_sobre_Aplicaciones')||
+        pageUri.startsWith('https://osde-prod2.mindtouch.us/Soporte_Interno')) {
+        <li>
+            web.link(pageUri, pg / 'title');
+        </li>
+        }
+        }
+    </ul>
+</div>
+
+
+var uri = site.api & 'pages/popular' & { limit: 30 };
+var api = wiki.api(uri);
+
+
+<div class="widget-popular">
+    <ul>
+        foreach(var pg in api['page'] ) {
+        var pageUri = pg / 'uri.ui';
+
+        if (user.admin || pageUri.startsWith('https://osde-prod2.mindtouch.us/Socios_y_empresas') ||
+        pageUri.startsWith('https://osde-prod2.mindtouch.us/Prestadores')) {
+        <li>
+            web.link(pageUri, pg / 'title');
+        </li>
+        }
+        }
+    </ul>
+</div>

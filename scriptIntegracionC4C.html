@@ -1,0 +1,27 @@
+<html>
+<body>
+
+    <div id="mindtouch" style="height: 550px;"></div>
+
+    <script type="text/javascript">
+        var HTML =
+            '<script type="mindtouch/embed" id="mindtouch-embed-01f27ec6b18e8744aa0ba229a89c3ad64759c852e722408ba0ad55dd885449e9" data-search-query="DEFAULT_SEARCH" data-case-id=""><\/script>';
+
+        HTML = HTML.replace("DEFAULT_SEARCH", sap.byd.ui.mashup.context.inport.TicketDescription);
+
+        document.getElementById("mindtouch").innerHTML = HTML;
+
+        var js_script = document.createElement('script');
+
+        js_script.type = "text/javascript";
+
+        js_script.src =
+            "https://osde-prod2.mindtouch.us/@embed/01f27ec6b18e8744aa0ba229a89c3ad64759c852e722408ba0ad55dd885449e9.js";
+
+        js_script.async = true;
+
+        document.getElementsByTagName('head')[0].appendChild(js_script);
+    </script>
+
+</body>
+</html>

@@ -36,3 +36,10 @@
 .mt-search-filters-classification-tipo-basico {
     display: none;
 }
+
+/* Icono del menu perfil */
+.mt-icon-user-menu::before,
+.mt-icon-user-menu:focus::before,
+.mt-icon-user-menu:active::before {
+    color: white; 
+}

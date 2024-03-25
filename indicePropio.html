@@ -1,0 +1,76 @@
+<script>
+    // Esperar a que se cargue todo el contenido de la página
+    window.addEventListener('load', function () {
+        console.log('El contenido de la página se ha cargado completamente.');
+
+        // Obtener el contenedor principal
+        const contentContainer = document.querySelector('.mt-content-container');
+        console.log('Contenedor principal obtenido:', contentContainer);
+
+        // Crear el contenedor del índice
+        const tocContainer = document.createElement('div');
+        tocContainer.id = 'mt-toc-container';
+        tocContainer.dataset.title = 'Índice';
+        tocContainer.dataset.collapsed = 'false';
+        tocContainer.className = 'mt-toggle-container';
+        tocContainer.style.border = '2px solid red'; // Agregar borde rojo
+        console.log('Contenedor del índice creado:', tocContainer);
+
+        // Crear la lista de contenidos del índice
+        const tocList = document.createElement('ol');
+        tocList.className = 'mt-toc-content mt-collapsible-section';
+        tocContainer.appendChild(tocList);
+        console.log('Contenido del índice creado:', tocList);
+
+        // Obtener todos los encabezados dentro del contenedor principal
+        const headings = contentContainer.querySelectorAll('h2, h3, h4');
+        console.log('Encabezados encontrados:', headings);
+
+        // Variables para seguir el orden de los encabezados
+        let lastLevel = 0;
+        let parentList = tocList;
+
+        // Recorrer todos los encabezados
+        headings.forEach((heading) => {
+            // Obtener el nivel del encabezado
+            const level = parseInt(heading.tagName[1]);
+
+            // Crear el elemento de ítem de la lista del índice
+            const tocItem = document.createElement('li');
+            const tocLink = document.createElement('a');
+            tocLink.href = `#${heading.id}`;
+            tocLink.rel = 'internal';
+            tocLink.textContent = heading.textContent;
+            tocItem.appendChild(tocLink);
+
+            // Verificar si el nivel del encabezado ha cambiado
+            if (level > lastLevel) {
+                // Crear una nueva lista anidada para los encabezados de un nivel inferior
+                const subList = document.createElement('ol');
+                tocItem.appendChild(subList);
+                parentList.appendChild(tocItem);
+                parentList = subList;
+            } else if (level < lastLevel) {
+                // Retroceder al nivel correcto en la jerarquía de listas
+                let diff = lastLevel - level;
+                while (diff > 0) {
+                    parentList = parentList.parentNode; // Retroceder un nivel (ol -> li)
+                    diff--;
+                }
+                parentList.parentNode.appendChild(
+                tocItem); // Agregar el nuevo ítem al mismo nivel que el anterior
+                parentList = tocItem;
+            } else {
+                // Mismo nivel que el encabezado anterior, agregar al mismo nivel de lista
+                parentList.parentNode.appendChild(tocItem);
+            }
+
+            // Actualizar el nivel del encabezado anterior
+            lastLevel = level;
+        });
+
+        // Agregar el contenedor del índice al documento
+        contentContainer.insertBefore(tocContainer, contentContainer.firstChild);
+        console.log('Contenedor del índice agregado al documento.');
+    });
+</script>

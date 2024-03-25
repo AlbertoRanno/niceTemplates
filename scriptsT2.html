@@ -1,3 +1,57 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const IDsDivs = ['infoApi', 'infoApi1', 'infoApi2'];
+
+        IDsDivs.forEach(IdDiv => {
+            const divARecibirInfo = document.getElementById(IdDiv);
+            if (divARecibirInfo) {
+                let apiUrl;
+                switch (IdDiv) {
+                    case 'infoApi':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos';
+                        break;
+                    case 'infoApi1':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/1';
+                        break;
+                    case 'infoApi2':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/2';
+                        break;
+                    default:
+                        console.warn(`ID de div desconocido: ${IdDiv}`);
+                        apiUrl = '';
+                }
+                fetch(apiUrl)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        throw new Error('No se pudo traer la info desde la API');
+                    })
+                    .then(data => {
+                        if (Array.isArray(data)) {
+                            data.forEach(objeto => {
+                                const pContenedor = document.createElement('p');
+                                pContenedor.textContent =
+                                    `Tarea: ${objeto.title}, Completada: ${objeto.completed ? 'Sí' : 'No'}`;
+                                divARecibirInfo.appendChild(pContenedor);
+                            });
+                        } else {
+                            const pContenedor = document.createElement('p');
+                            pContenedor.textContent =
+                                `Tarea: ${data.title}, Completada: ${data.completed ? 'Sí' : 'No'}`;
+                            divARecibirInfo.appendChild(pContenedor);
+                        }
+                    })
+                    .catch(error => {
+                        console.error(`Hubo un problema con fetch para el div con ID ${IdDiv}:`,
+                            error);
+                    });
+            } else {
+                console.warn(`Div con ID ${IdDiv} no encontrado`);
+            }
+        });
+    });
+</script>
 <!-- Google Tag Manager -->
 <script>
     (function (w, d, s, l, i) {
@@ -111,6 +165,8 @@
             }
         }
 
+        iconosCategoriasYGuias();
+
         //****************************Menu perfil usuario****************************
 
         var linkUsuario = document.querySelector('.mt-user-menu-user a');
@@ -132,7 +188,6 @@
                     imgFlechaUsuario.src = '/@api/deki/files/26/downArrowWhite.png';
                 }
             }
-
             linkUsuario.addEventListener('click', cambiarFlecha);
         }
 
@@ -396,14 +451,18 @@
                 }
             }
 
-            var imgHome = document.querySelectorAll('img.internal');
+            iconosCategoriasYGuias();
 
+        }
+
+        function iconosCategoriasYGuias() {
+
+            var imgHome = document.querySelectorAll('img.internal');
             imgHome.forEach(function (imagen, index) {
 
                 var imgHomeSucesivas = 'imgHome' + (index + 1);
                 imagen.classList.add(imgHomeSucesivas);
             });
-
         }
 
         //******************Esconder placeholders defaults**********************    
@@ -703,7 +762,7 @@
                 var link4P = document.createElement("p");
                 link4P.innerHTML =
                     "Para sugerir un nuevo art\u00EDculo, escribinos, desde tu cuenta de email, a contenidos\u0040osde.com.ar";
-                link4.setAttribute('title', 'Sugerir un nuevo art\u00EDculo');
+                //link4.setAttribute('title', 'Sugerir un nuevo art\u00EDculo');
                 link4.appendChild(link4P);
                 var iconoCopiarlink4 = document.createElement("img");
                 iconoCopiarlink4.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
@@ -957,7 +1016,7 @@
             linkLogo.title = "Enlace al inicio";
             let logoImg = document.createElement('img');
             logoImg.alt = "Logo de la empresa";
-            logoImg.src = "/@api/deki/files/24/Logo_Biblos_OSDE_Azul.png";
+            logoImg.src = "/@api/deki/files/1036/Biblos_3.0_azul.png";
             linkLogo.appendChild(logoImg);
             elementoLogo.appendChild(linkLogo);
             ulPrincipal.appendChild(elementoLogo);
@@ -1072,9 +1131,7 @@
             */
 
             //Agregar la nueva categoria al listado, en la ubicacion deseada, mantener el formato ("nombre",). La ultima va sin coma.
-            let categorias = ["Comercial", "Cobertura", "Afiliaciones", "Facturaci\u00F3n", "Reintegros",
-                "Prestadores", "Info Aplicaciones"
-            ];
+            let categorias = ["Socios y Empresas", "Prestadores"];
 
             /*Agregar las guias pertenecientes a la nueva Categoria, en la MISMA UBICACION QUE PUSIERON LA CATEGORIA (Si agregaron una
             Categoría luego de Afiliaciones, los corchetes con las guías para esta nueva categoría, irán después de los corchetes que 
@@ -1082,75 +1139,24 @@
             Luego del último grupo de guias, no va la coma.*/
 
             let guias = [
-                //Comercial
+                // "Socios y Empresas"
                 [
-                    "Gestionar leads B2B",
-                    "Gestionar leads B2C"
+                    "Alta de socio - Modificaci\u00F3n de grupo familiar",
+                    "Facturaci\u00F3n y Cobranzas a Socios",
+                    "Acceso al servicio",
+                    "Empadronamientos a coberturas especiales",
+                    "Solicitud de Autorizaciones",
+                    "Otorgamiento de Reintegro y Pago Directo",
+                    "Baja de socios"
                 ],
-
-                //Cobertura
-                [
-                    "Anticonceptivos",
-                    "Asesoramiento sobre aplicaciones",
-                    "Asistencia domiciliaria",
-                    "Bioqu\u00EDmica",
-                    "Cartilla",
-                    "Cirug\u00EDas",
-                    "Diabetes",
-                    "Discapacidad",
-                    "Empadronamiento",
-                    "Fertilidad",
-                    "Gesti\u00F3n de la calidad de atenci\u00F3n",
-                    "Medicamentos",
-                    "Odontolog\u00EDa",
-                    "Ortopedia",
-                    "PMI",
-                    "Pr\u00E1cticas",
-                    "Pr\u00E1cticas Condicionada",
-                    "Pr\u00E1cticas sin cobertura",
-                    "Psicopatolog\u00EDa",
-                    "Reintegros",
-                    "Traslado",
-                    "Vacunas",
-                    "Urgencias"
-                ],
-
-                //Afiliaciones
-                [
-                    "Altas",
-                    "Bajas",
-                    "Certificados",
-                    "Modificaciones",
-                    "Modificaciones del padr\u00F3n",
-                    "Modificaci\u00F3n de datos",
-                    "Subsidio - Licencia"
-                ],
-                //Facturacion
-                [
-                    "Cuenta corriente",
-                    "Facturaci\u00F3n"
-                ],
-                //Reintegros
-                [
-                    "Reintegros"
-                ],
-                //Prestadores
+                // Prestadores
                 [
                     "Aplicaciones",
                     "Extranet",
                     "Servicios",
                     "Validaci\u00F3n de l\u00EDnea"
-                ],
-                //Info Aplicaciones
-                [
-                    "App OSDE",
-                    "Autogesti\u00F3n de empresas",
-                    "Credencial digital",
-                    "Turnos online",
-                    "Web OSDE"
                 ]
-
-            ]
+            ];
 
             function agregarCategoria(categoria, guias) {
                 let listItem = document.createElement('li');
@@ -1158,6 +1164,29 @@
                 let link = document.createElement('a');
                 link.href = "/" + encodeURIComponent(categoria);
                 link.textContent = categoria;
+
+                // Agregar el icono a la izquierda de cada sección
+                let icono;
+                if (categoria === "Socios y Empresas") {
+                    icono = document.createElement('img');
+                    icono.classList.add('internal', 'imgHome1');
+                    icono.alt = "mindtouch.page#thumbnail";
+                    icono.loading = "lazy";
+                    icono.src =
+                        "https://osde-prod2.mindtouch.us/@api/deki/files/516/mindtouch.page%2523thumbnail?revision=1";
+                } else if (categoria === "Prestadores") {
+                    icono = document.createElement('img');
+                    icono.classList.add('internal', 'imgHome2');
+                    icono.alt = "mindtouch.page#thumbnail";
+                    icono.loading = "lazy";
+                    icono.src =
+                        "https://osde-prod2.mindtouch.us/@api/deki/files/522/mindtouch.page%2523thumbnail?revision=4";
+                }
+
+                if (icono) {
+                    link.appendChild(icono);
+                }
+
                 link.title = categoria;
                 listItem.appendChild(link);
 
