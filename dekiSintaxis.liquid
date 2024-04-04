@@ -1,0 +1,189 @@
+"Texto"; // Texto entre comillas
+<br/> //Line break 
+<br/><br/> //Line space
+
+"Link : ";
+<a href="http://www.mindtouch.com">"MindTouch"</a>; //Acordarse del ";" por mas que no esté en los ejemplos
+//la diferencia de ponerlo acá y en el html, es que acá lleva "" pero no se ven... y en el html, si se las pongo, se ven... 
+//en el html, funciona bien sin las comillas: <p><a href="http://www.hyperlink.com">Text for your hyperlink</a></p>
+<br/><br/>
+
+"Concatenación : ";
+//Para concatenar    "..x.."
+var x=5;
+var y=6;
+""..x..""..y.."";  //muestra "56"
+
+// DekiScript operadores
+// =	    setea un valor
+// ==	    compara
+// &&	    “y”
+// ||	    “o”
+// !=	    “distinto”
+// ()	    permite DekiScript en el HTML
+<br/><br/>
+
+"Muestro variable : ";
+var url = "http://www.mindtouch.com";
+url;
+<br/><br/>
+
+"Condicional : ";
+<br/> 
+var x =25;
+if (user.title != "Prueba")
+{
+"valor de x =";
+let x = 75;
+}
+x;
+<br/><br/>
+
+"Cambio valor variable : ";
+<br/> 
+//Si lo siguiente, lo envuelvo en {{
+var output = "Hello World";		        // Seteo el valor de la variable
+output;					                // Imprimo el valor de la variable
+<br/>
+let output = "Hello Universe";  	    // Cambio el valor de la variable
+output; 				                // Imprimo el valor de la variable
+//}} y lo paso al html, funciona OK!
+<br/><br/>
+
+"Importo variable global desde: ";
+<a href="https://osde-prod2.mindtouch.us/Template:System/Variables">"Variables Globales"</a>;
+
+<br/> 
+coberturaMedicamentos;
+<br/><br/>
+
+"Link con variable : ";
+<br/> 
+var linkURL = 'https://success.mindtouch.com';
+<p>'Acá cualquier cadena de texto '; <a href=(linkURL) target='_blank'> 'Esto debe estar rodeado de comillas para que se renderice como link' </a></p>
+<br/><br/>
+
+"Link con variable global : ";
+<p>'Acá cualquier cadena de texto '; <a href=(coberturaMedicamentos) target='_blank'> 'coberturaMedicamentos link' </a></p>
+<br/><br/>
+
+//Con las comillas, se recomienda las simples para Strings, pero depende el caso se pueden necesitar las dobles, como en todos los lenguajes.
+"Apóstrofes : ";
+<br/> 
+//Por ej. si se necesita un apóstrofe dentro de un String, hay que usar comillas dobles
+<p>"This is John's house";</p>
+<br/><br/>
+
+//Deki se usa principalmente para info interna del sistema, y como tal, son muy útiles las
+"Propiedades de los objetos : ";
+<br/> 
+"User: " ..user.displayname;<br/>
+"Page title: " ..page.title;<br/>
+"Site name: " ..site.name;<br/>
+
+// Explicación de la sintaxis:
+// Elemento            		 Descripción
+// ""	                  		 Para rodear al String
+// ..	                  		 Designa la página actual
+// user.displayname 	    	 La llamada a la propiedad del objeto
+// ;	                    		 Indica el final de la linea de código
+// <br/>	                		 Salto de línea
+
+// Los objetos principales son:  user, page y site.
+// Ejemplos:
+// user.name	            
+// user.anonymous      
+// page.title	        
+// page.author	         
+// site.uri	        
+// site.name	        
+<br/><br/>
+
+"Usuario: " ..user.name;
+<br/><br/>
+"Grupos a los que pertenece: ";
+user.groups;
+<br/><br/>
+"Métricas del usuario: ";
+user.metrics;
+<br/><br/>
+"Propiedades del usuario: ";
+user.properties;
+<br/><br/><br/><br/>
+"Objeto User:";
+<br/>
+user.active;
+<br/>
+user.activityuri;
+<br/>
+user.admin;
+<br/>
+user.api;
+
+<br/>
+user.comments;
+<br/>
+user.displayname;
+<br/>
+user.fullname;
+<br/>
+user.name;
+<br/>
+user.email;
+<br/>
+user.groups;
+<br/>
+user.homepage;
+<br/>
+user.metrics;
+<br/>
+user.owner;
+<br/>
+user.properties;
+<br/>
+user.uri;
+<br/><br/>
+
+"Cantidad de visitas en esta página: ";
+page.viewcount;
+<br/><br/>
+
+"Cantidad de páginas en Nice hasta el momento: ";
+site.pagecount;
+<br/><br/><br/><br/>
+
+
+---------
+//wiki.toc();
+page.author.displayname;
+page.toc;
+page.id
+---------
+
+EN EL HTML DIRECTO:
+
+<p>This content is about {{productname}}, version {{productversion}}.</p>
+
+<p>Hi {{ User.Name }}, today is {{ Date.DayName(Date.Now) }}.</p>
+
+<p>Hi {{ User.Anonymous ? 'stranger' : User.Name }}, today is {{ Date.DayName(Date.Now) }}.</p>
+
+<p>{{coberturaMedicamentos}} ({{coberturaMedicamentos}})</p>
+
+<p>{{ var output = "Hello World"; // Set the output variable output; // Print the output let output = "Hello Universe"; // Reset the ouput variable output; // Print the output }}</p>
+
+<p>'This is just a string.'; <a href="/(coberturaMedicamentos)" target="_blank"> 'con comillas, barra y parentesis' </a></p>
+
+<p>'This is just a string.'; <a href="/(coberturaMedicamentos)" target="_blank"> 'sin barra, sin parentesis' </a></p>
+
+<p>'This is just a string.'; <a href="/(coberturaMedicamentos)" target="_blank"> 'barra parentesis' </a></p>
+
+<p>'This is just a string.'; <a href="/(coberturaMedicamentos)" target="_blank"> 'comillas parentesis' </a></p>
+
+<p>'This is just a string.'; <a href="/%7B%7B(coberturaMedicamentos)%7D%7D" target="_blank"> 'con comillas, barra y parentesis' </a></p>
+
+<p>'This is just a string.'; {{ 'sin barra, sin parentesis' }}</p>
+
+<p>{{'This is just a string.'; 'barra parentesis' }}</p>
+
+<p>'This is just a string.'; <a href="/(%7B%7BcoberturaMedicamentos%7D%7D)" target="_blank"> 'comillas parentesis' </a></p>
