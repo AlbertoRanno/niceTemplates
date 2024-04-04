@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+/* Estilo para ocultar el marcador de lista de primer nivel */
+ul,
+ol {
+    list-style-type: none;
+}
+
+/* Estilo para ocultar el marcador de lista de segundo nivel */
+ol ol,
+ul ul {
+    list-style-type: none;
+}
+
+/* Estilo para ocultar el marcador de lista de tercer nivel */
+ol ol ol,
+ul ul ul {
+    list-style-type: none;
+}
+
+/* Estilo para ocultar el marcador de lista y el pseudo-elemento ::before de los elementos de lista */
+ol, ul {
+    list-style-type: none; /* Oculta el marcador de lista */
+}
+
+li::marker, li::before {
+    display: none; /* Oculta el marcador de lista y el pseudo-elemento ::before */
+}
+
+.collapsed {
+    display: none;
+}
+
+.mt-content-container #mt-toc-container {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+}
+</style>
+
+<body>
+    <div class="mt-content-container">
+        <h2>Encabezado H2 1</h2>
+        <h3>Encabezado H3 1.1</h3>
+        <h4>Encabezado H4 1.1.1</h4>
+        <h4>Encabezado H4 1.1.2</h4>
+        <h3>Encabezado H3 1.2</h3>
+        <h2>Encabezado H2 2</h2>
+        <h3>Encabezado H3 2.1</h3>
+        <h4>Encabezado H4 2.1.1</h4>
+        <h3>Encabezado H3 2.2</h3>
+        <h2>Encabezado H2 3</h2>
+        <h3>Encabezado H3 3.1</h3>
+        <h4>Encabezado H4 3.1.1</h4>
+        <h4>Encabezado H4 3.1.2</h4>
+        <h4>Encabezado H4 3.1.3</h4>
+    </div>
+
+</body>
+<script>
+    if (window.location.href.startsWith('https://osde-prod2.mindtouch.us/')) {
+        const indiceIntegracion = document.querySelector('.indiceIntegracion');
+        if (indiceIntegracion) {
+            indiceIntegracion.style.display = 'none';
+        } else {
+            console.log('No se encontro el elemento');
+        }
+    } else {
+        console.log('La URL no coincide con "https://osde-prod2.mindtouch.us/".');
+    }
+</script>
+<script>
+  
+  window.addEventListener('load', function () {
+    console.log('La página se terminó de cargar');
+
+   // Función para codificar los caracteres especiales
+function encodeSpecialCharacters(text) {
+    return text.replace(/[áÁ]/g, '.C3.A1')
+               .replace(/[éÉ]/g, '.C3.A9')
+               .replace(/[íÍ]/g, '.C3.AD')
+               .replace(/[óÓ]/g, '.C3.B3')
+               .replace(/[úÚ]/g, '.C3.BA')
+               .replace(/\s+/g, '_');
+}
+
+    
+    // Capturar el contenedor principal
+    const contenedorPrincipal = document.querySelector('.mt-content-container');
+    console.log('Contenedor principal capturado:', contenedorPrincipal);
+
+    // Crear el contenedor del índice
+    const divTocContenedor = document.createElement('div');
+    divTocContenedor.id = 'mt-toc-container';
+    divTocContenedor.dataset.title = 'Índice';
+    divTocContenedor.dataset.collapsed = 'false';
+    divTocContenedor.className = 'mt-toggle-container indiceIntegracion';
+    console.log('Contenedor del índice creado:', divTocContenedor);
+
+    // Crear la lista de contenidos del índice
+    const tocLista = document.createElement('ol');
+    tocLista.className = 'mt-toc-content mt-collapsible-section';
+    divTocContenedor.appendChild(tocLista);
+    console.log('Contenido del índice creado:', tocLista);
+
+    // Capturar todos los encabezados h2
+    const encabezadosH2 = contenedorPrincipal.querySelectorAll('h2');
+    console.log('Encabezados h2 encontrados:', encabezadosH2);
+
+    // Recorrer todos los encabezados h2
+    encabezadosH2.forEach((encabezadoH2) => {
+        // Crear elemento de ítem de lista para h2
+        const tocLiH2 = document.createElement('li');
+        const tocLinkH2 = document.createElement('a');
+        tocLinkH2.rel = 'internal';
+        tocLinkH2.textContent = encabezadoH2.textContent.trim();
+       const enlaceTextoH2 = encodeSpecialCharacters(encabezadoH2.textContent.trim().replace(/\s+/g, '_'));
+tocLinkH2.href = `#${enlaceTextoH2}`;
+        tocLiH2.appendChild(tocLinkH2);
+        console.log(`Elemento de ítem de lista creado para "${encabezadoH2.textContent.trim()}":`, tocLiH2);
+
+        // Capturar los encabezados h3 dentro de este h2
+        const encabezadosH3 = encabezadoH2.parentNode.querySelectorAll('h3');
+
+        // Verificar si hay encabezados h3
+        if (encabezadosH3.length > 0) {
+            // Crear la flecha para h2
+            const flechaH2 = document.createElement('img');
+            flechaH2.classList.add('imgFlechaIndice');
+            flechaH2.style.marginLeft = "10px";
+            flechaH2.src = '/@api/deki/files/22/downArrowBlue.png.png'; // Ruta de la imagen de la flecha hacia abajo
+            flechaH2.alt = 'Flecha';
+            tocLiH2.appendChild(flechaH2);
+
+            // Crear lista de contenidos para h3
+            const listaHermanosH2 = document.createElement('ol');
+            listaHermanosH2.classList.add('collapsed'); // Ocultar inicialmente
+            encabezadosH3.forEach((encabezadoH3) => {
+                const tocLiH3 = document.createElement('li');
+                const tocLinkH3 = document.createElement('a');
+                tocLinkH3.rel = 'internal';
+                tocLinkH3.textContent = encabezadoH3.textContent.trim();
+                const enlaceTextoH3 = encodeSpecialCharacters(encabezadoH3.textContent.trim().replace(/\s+/g, '_'));
+                tocLinkH3.href = `#${enlaceTextoH3}`;
+                tocLiH3.appendChild(tocLinkH3);
+                listaHermanosH2.appendChild(tocLiH3);
+                console.log(`"${encabezadoH3.textContent.trim()}" agregado como hijo de "${encabezadoH2.textContent.trim()}"`);
+            });
+
+            // Agregar la lista de h3 a la lista principal del índice
+            tocLiH2.appendChild(listaHermanosH2);
+
+            // Agregar evento de clic a la flecha de h2 para expandir/colapsar los h3
+            flechaH2.addEventListener('click', function () {
+                listaHermanosH2.classList.toggle('collapsed');
+                flechaH2.src = listaHermanosH2.classList.contains('collapsed') ? '/@api/deki/files/22/downArrowBlue.png.png' : '/@api/deki/files/101/upArrowBlue.png'; // Cambiar la imagen de la flecha
+            });
+        }
+
+        // Agregar el elemento de ítem de lista para h2 a la lista principal del índice
+        tocLista.appendChild(tocLiH2);
+    });
+
+    // Agregar el contenedor del índice al documento
+    contenedorPrincipal.insertBefore(divTocContenedor, contenedorPrincipal.firstChild);
+    console.log('Contenedor del índice agregado al documento.');
+
+    // Agregar evento de clic para desplazar suavemente a los encabezados
+    tocLista.addEventListener('click', function (event) {
+        if (event.target.tagName === 'A') {
+            event.preventDefault();
+
+            const enlace = event.target;
+            const idEncabezado = enlace.getAttribute('href').substring(1);
+            const encabezadoDestino = document.getElementById(idEncabezado);
+            const posicionElemento = encabezadoDestino.offsetTop;
+
+            const desplazamiento = posicionElemento + 0;
+
+            // Desplazar suavemente la página al encabezado
+            window.scrollTo({
+                top: desplazamiento,
+                behavior: 'smooth'
+            });
+        }
+    });
+
+    // Crear el botón de colapso
+    const botonColapso = document.createElement('button');
+    botonColapso.className = 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-collapse';
+    botonColapso.type = 'button';
+    botonColapso.textContent = 'Índice';
+    divTocContenedor.insertBefore(botonColapso, tocLista);
+
+    // Agregar evento de clic para colapsar/expandir el índice al botón de colapso
+    botonColapso.addEventListener('click', function () {
+        divTocContenedor.classList.toggle('collapsed');
+        tocLista.classList.toggle('collapsed');
+        botonColapso.textContent = divTocContenedor.classList.contains('collapsed') ? '+ Índice' : '- Índice';
+    });
+});
+/*
+En este código, se añade un evento de clic al contenedor del índice (tocLista). Cuando se hace clic en un enlace del índice,
+ el código busca el elemento en el documento correspondiente al href del enlace. Luego, calcula el desplazamiento necesario 
+ para hacer que ese elemento sea más visible en la ventana del navegador. Finalmente, utiliza window.scrollTo() para 
+ desplazar suavemente la página al encabezado correspondiente. El valor de desplazamiento está ajustado en -100 para que
+  el encabezado no esté demasiado cerca del borde superior de la ventana. Puedes ajustar este valor según sea necesario 
+  para que se ajuste mejor a tu diseño.
+*/
+
+
+
+</script>
+
+</html>
