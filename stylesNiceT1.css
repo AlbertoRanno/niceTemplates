@@ -2198,7 +2198,7 @@ div.meta>div.url {
 .imgHome8,
 .imgHome9,
 .imgHome10,
-span.mt-sortable-listing-image img.internal {
+span.mt-sortable-listing-image img.internal{
 	height: 60px;
 	filter: invert(11%) sepia(64%) saturate(7082%) hue-rotate(237deg) brightness(78%) contrast(98%);
 }
