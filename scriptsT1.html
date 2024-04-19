@@ -137,7 +137,45 @@
         });
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {      
+
+        //*********************Cambiar Nombre en solapa Featured Articles*********************
+        function cambiarNombreEnSolapa() {
+            var featuredHighestRated = document.querySelector('.noindex .mt-featured-highest-rated');
+            if (featuredHighestRated) {
+                var h5Element = featuredHighestRated.querySelector('h5');
+                if (h5Element) {
+                    h5Element.textContent = 'M\u00E1s calificados';
+                }
+                var spanElement = featuredHighestRated.querySelector('.mt-note');
+                if (spanElement) {
+                    spanElement.textContent = '(likes)';
+                }
+            }
+        }
+        //El MutationObserver es para observar cambios en el DOM
+        var observer = new MutationObserver(function (mutationsList, observer) {
+            for (var mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    // Verifica si se añade un nuevo elemento con la clase .mt-featured-highest-rated
+                    var featuredHighestRated = document.querySelector(
+                        '.noindex .mt-featured-highest-rated');
+                    if (featuredHighestRated) {
+                        // Si se detecta el elemento, cambia el nombre en la solapa
+                        cambiarNombreEnSolapa();
+                        // Desconecta el observer después de realizar el cambio
+                        observer.disconnect();
+                        break;
+                    }
+                }
+            }
+        });
+
+        // Observa cambios en el DOM
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
 
         //****************************Ajuste para tablero****************************
 
@@ -404,9 +442,9 @@
 
             //iconosCategoriasYGuias();
 
-       // }
+            // }
 
-       // function iconosCategoriasYGuias() {
+            // function iconosCategoriasYGuias() {
 
             var imgHome = document.querySelectorAll('img.internal');
             imgHome.forEach(function (imagen, index) {
@@ -1005,6 +1043,8 @@
             if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
                 //Quisieron el boton de borrar, en el cuerpo de la pagina de resultados
             } else {
+                let liBtnListaResultados = document.createElement('li');
+                liBtnListaResultados.classList.add('navbar-header-menu');
                 let botonIrAListaResultados = document.createElement("button");
                 botonIrAListaResultados.innerHTML = "Lista de Resultados";
                 botonIrAListaResultados.classList.add("botonIrAListaResultados");
@@ -1012,7 +1052,8 @@
                 linkIrAListaResultados.href = "https://osde-prod1.mindtouch.us/Special:Search?type=wiki&query=";
                 linkIrAListaResultados.title = "Lista de Resultados";
                 botonIrAListaResultados.appendChild(linkIrAListaResultados);
-                ulConsejos.appendChild(botonIrAListaResultados);
+                liBtnListaResultados.appendChild(botonIrAListaResultados);
+                ulConsejos.appendChild(liBtnListaResultados);
                 botonIrAListaResultados.addEventListener('click', function () {
                     window.location.href =
                         "https://osde-prod1.mindtouch.us/Special:Search?type=wiki&query=";
@@ -1157,9 +1198,22 @@
             if (buscadorLogin) {
                 buscadorLogin.style.display = 'none';
             }
+            var widgetPassword = document.getElementById('widget-password');
+            if (widgetPassword) {
+                widgetPassword.style.display = 'none';
+            }
             var tituloLogin = document.querySelector('#title');
             if (tituloLogin) {
-                tituloLogin.textContent = 'Nice: la nueva base de conocimientos de OSDE';
+                tituloLogin.textContent = 'Bienvenido a la base de conocimientos de OSDE. ';
+                tituloLogin.className = 'tituloLogin';
+                var linkLoginBiblos = document.createElement('a');
+                linkLoginBiblos.textContent =
+                    'Haz clic aqu\u00ED para iniciar sesi\u00F3n en Biblos 3.0 con tu cuenta RCPO';
+                //No va a funcionar SAML en TENANT 1:
+                linkLoginBiblos.href = 'https://osde-prod2.mindtouch.us/@app/auth/2/login';
+                //linkLoginBiblos.target = '_blank';
+                linkLoginBiblos.className = 'linkLoginBiblos';
+                tituloLogin.appendChild(linkLoginBiblos);
             }
         }
 

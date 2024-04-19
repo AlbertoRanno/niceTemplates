@@ -1,0 +1,87 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+
+        // Función para cambiar el nombre en la solapa Featured Articles
+        function cambiarNombreEnSolapa() {
+            // Busco el elemento que contiene la solapa Featured Articles
+            console.log('Entrando a la funcion cambiarNombreEnSolapa');
+            var featuredHighestRated = document.querySelector('.noindex .mt-featured-highest-rated');
+            if (featuredHighestRated) {
+                // Busco el elemento h5 dentro del contenedor de la solapa
+                var h5Element = featuredHighestRated.querySelector('h5');
+                if (h5Element) {
+                    // Cambio el texto del elemento h5
+                    h5Element.textContent = 'M\u00E1s calificados';
+                    console.log('Texto del h5 cambiado correctamente.');
+                } else {
+                    console.log('No se encontro ningun elemento h5 dentro de .mt-featured-highest-rated.');
+                }
+
+                // Busco el elemento span dentro del contenedor de la solapa
+                var spanElement = featuredHighestRated.querySelector('.mt-note');
+                if (spanElement) {
+                    // Cambio el texto del elemento span
+                    spanElement.textContent = '(likes)';
+                    console.log('Texto del span cambiado correctamente.');
+                } else {
+                    console.log(
+                        'No se encontro ningun elemento .mt-note dentro de .mt-featured-highest-rated.');
+                }
+            } else {
+                console.log('No se encontro ningun elemento con la clase .mt-featured-highest-rated.');
+            }
+        }
+
+        // Creo un MutationObserver para observar cambios en el DOM
+        var observer = new MutationObserver(function (mutationsList, observer) {
+            // Itero sobre las mutaciones observadas
+            for (var mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    // Verifico si se añade un nuevo elemento con la clase .mt-featured-highest-rated
+                    var featuredHighestRated = document.querySelector(
+                        '.noindex .mt-featured-highest-rated');
+                    if (featuredHighestRated) {
+                        // Si se detecta el elemento, cambio el nombre en la solapa
+                        cambiarNombreEnSolapa();
+                        // Desconecto el observer después de realizar el cambio
+                        observer.disconnect();
+                        break;
+                    }
+                }
+            }
+        });
+
+        // Observo cambios en el DOM
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+
+
+    });
+
+
+    /*
+    El MutationObserver es una herramienta que permite observar cambios en el DOM (Document Object Model) de una página web.
+     Imagina que el DOM es como una representación estructurada de una página web, donde cada elemento HTML (como etiquetas div, p, span, etc.)
+      es un nodo en esa estructura.
+
+    Ahora, el MutationObserver es como un "observador" que está constantemente revisando este DOM en busca de cambios. Cuando detecta un cambio,
+     como la adición, eliminación o modificación de un nodo (un elemento HTML), puede ejecutar una función específica en respuesta a ese cambio.
+
+    Veamos un ejemplo sencillo:
+
+    Supongamos que estás observando una lista de tareas en una aplicación web. Cada vez que se agrega una nueva tarea a la lista, quieres que 
+    se muestre un mensaje en la consola que diga "Se agregó una nueva tarea". Esto es lo que harías con un MutationObserver:
+
+    Crearías un MutationObserver y le dirías qué tipo de cambios quieres observar. En este caso, quieres observar la adición de nuevos elementos 
+    a la lista de tareas.
+    Configurarías una función para que se ejecute cuando se detecte ese cambio específico. En este caso, la función imprimiría un mensaje en la consola.
+    Activarías el MutationObserver, y a partir de ese momento estaría "observando" la lista de tareas.
+    Cada vez que se agregue una nueva tarea a la lista, el MutationObserver detectará este cambio y ejecutará la función que configuraste, 
+    imprimiendo el mensaje en la consola.
+    En resumen, el MutationObserver te permite reaccionar dinámicamente a los cambios en una página web, lo que puede ser muy útil para
+     hacer que tu aplicación web sea más interactiva y receptiva a las acciones del usuario.
+        */
+</script>
