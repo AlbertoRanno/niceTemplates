@@ -47,7 +47,7 @@
                             error);
                     });
             } else {
-                console.warn(`Div con ID ${IdDiv} no encontrado`);
+                //console.warn(`Div con ID ${IdDiv} no encontrado`);
             }
         });
     });
@@ -137,7 +137,27 @@
         });
     });
 
-    document.addEventListener('DOMContentLoaded', function () {      
+    document.addEventListener('DOMContentLoaded', function () {
+
+        //********************* Foco automático en vista mobile de Particularidades *********************
+        if (window.innerWidth < 650) {
+            document.querySelectorAll('.navBarLateral button').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var contentId = this.getAttribute('onclick').match(/'(.*?)'/)[1];
+                    var filiales = document.getElementById(contentId);
+                    if (filiales) {
+                        var filialesPosition = filiales.getBoundingClientRect().top;
+                        var headerHeight = document.querySelector('.navbar-menu-osde')
+                            .getBoundingClientRect().height;
+
+                        window.scrollTo({
+                            top: window.scrollY + filialesPosition - headerHeight - 210,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
 
         //*********************Cambiar Nombre en solapa Featured Articles*********************
         function cambiarNombreEnSolapa() {
@@ -727,7 +747,7 @@
                 iconoCopiarlink4.className = "iconosCopiarNros";
                 iconoCopiarlink4.alt = "Copiar al portapapeles";
                 iconoCopiarlink4.addEventListener("click", function () {
-                    copiarAlPortapapeles("contenidos\u0040osde.com.arr");
+                    copiarAlPortapapeles("contenidos\u0040osde.com.ar");
                 });
                 link4.appendChild(iconoCopiarlink4);
                 ul.appendChild(link3);
