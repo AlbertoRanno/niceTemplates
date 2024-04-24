@@ -1216,7 +1216,6 @@ input[type="submit"].ui-button-primary {
 	.contenidosRegiones button:has(span.hasContent):last-of-type {
 		border-bottom: 2px solid var(--primary-blue);
 	}
-
 }
 
 @media (min-width: 40.625em) {
@@ -2526,6 +2525,10 @@ li.mt-user-menu-preferences {
 	background: linear-gradient(90deg, var(--primary-blue-gradient) 0%, var(--primary-blue) 100%);
 	color: var(--white) !important;
 }
+/*Provisorio para Login por error en permisos de imagenes*/
+.logoLoginTxt {
+    font-size: xx-large !important;
+}
 
 /* Hasta 650px a Fuente del contenedor a 16px*/
 @media (max-width: 40.625em) {
@@ -2593,9 +2596,7 @@ li.mt-user-menu-preferences {
 	.navBarLateral :is(.emptyRegions:last-of-type + button:last-of-type){
 		border-radius: 0 16px 0 0;
 	}
-	
-	/* Establece bordes rectos para los botones dentro de emptyRegions que no son el primero ni el último */
-	
+
 	.navBarLateral .emptyRegions button:not(:first-child):not(:last-child) {
 		border-radius: 0;
 	}

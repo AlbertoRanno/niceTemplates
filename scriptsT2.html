@@ -781,543 +781,546 @@
             }, 500);
         }
 
-        //*******************************Login********************************
-        if (!window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:UserLogin")) {
 
-            //****************************Footer********************************
-            var footerDefault = document.querySelector(".elm-footer");
-            if (footerDefault) {
+        //****************************Footer********************************
+        var footerDefault = document.querySelector(".elm-footer");
+        if (footerDefault) {
 
-                function copiarAlPortapapeles(numero) {
-                    var elementoTemporal = document.createElement("textarea");
-                    elementoTemporal.value = numero;
-                    document.body.appendChild(elementoTemporal);
-                    elementoTemporal.select();
-                    document.execCommand("copy");
-                    document.body.removeChild(elementoTemporal);
-                    // alert("N\u00FAmero copiado al portapapeles: " + numero);
+            function copiarAlPortapapeles(numero) {
+                var elementoTemporal = document.createElement("textarea");
+                elementoTemporal.value = numero;
+                document.body.appendChild(elementoTemporal);
+                elementoTemporal.select();
+                document.execCommand("copy");
+                document.body.removeChild(elementoTemporal);
+                // alert("N\u00FAmero copiado al portapapeles: " + numero);
 
-                    var copiadoAlPortapapeles = document.createElement("div");
-                    copiadoAlPortapapeles.textContent = "Copiado al portapapeles: " + numero;
-                    copiadoAlPortapapeles.className = "copiadoAlPortapapeles";
-                    document.body.appendChild(copiadoAlPortapapeles);
-                    setTimeout(function () {
-                        document.body.removeChild(copiadoAlPortapapeles);
-                    }, 3000);
-                }
-
-                var footerPropio = document.createElement("footer");
-                footerPropio.className = "footer";
-                var container = document.createElement("div");
-                container.className = "container";
-                var row = document.createElement("div");
-                row.className = "row";
-                var colLeft = document.createElement("div");
-                colLeft.className = "colLeft";
-                var logoLink = document.createElement("a");
-                logoLink.href = "https://osde-prod2.mindtouch.us";
-                logoLink.innerHTML = '<img src="/@api/deki/files/12/osdeWhite.png" alt="logoOSDE">';
-                logoLink.className = "logoOSDE";
-                logoLink.target = "_blank";
-                logoLink.setAttribute('title', 'Enlace al Home');
-
-                var ul = document.createElement("ul");
-                ul.className = "footer-links";
-                var link3 = document.createElement("li");
-                link3.className = "linkMasBotonCopiarPortapapeles";
-                var link3Anchor = document.createElement("a");
-                link3Anchor.href = "https://www.osde.com.ar/index.html#!homepage.html";
-                link3Anchor.textContent = "www.osde.com.ar";
-                link3Anchor.target = "_blank";
-                link3.setAttribute('title', 'Enlace a www.osde.com.ar');
-                link3.appendChild(link3Anchor);
-                var iconoCopiarlink3 = document.createElement("img");
-                iconoCopiarlink3.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
-                iconoCopiarlink3.className = "iconosCopiarNros";
-                iconoCopiarlink3.alt = "Copiar al portapapeles";
-                iconoCopiarlink3.addEventListener("click", function () {
-                    copiarAlPortapapeles("www.osde.com.ar");
-                });
-                link3.appendChild(iconoCopiarlink3);
-                var link4 = document.createElement("li");
-                link4.className = "linkMasBotonCopiarPortapapeles linkMasBotonCopiarPortapapelesLink4";
-                var link4P = document.createElement("p");
-                link4P.innerHTML =
-                    "Para sugerir un nuevo art\u00EDculo, escribinos, desde tu cuenta de email, a contenidos\u0040osde.com.ar";
-                //link4.setAttribute('title', 'Sugerir un nuevo art\u00EDculo');
-                link4.appendChild(link4P);
-                var iconoCopiarlink4 = document.createElement("img");
-                iconoCopiarlink4.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
-                iconoCopiarlink4.className = "iconosCopiarNros";
-                iconoCopiarlink4.alt = "Copiar al portapapeles";
-                iconoCopiarlink4.addEventListener("click", function () {
-                    copiarAlPortapapeles("contenidos\u0040osde.com.ar");
-                });
-                link4.appendChild(iconoCopiarlink4);
-                ul.appendChild(link3);
-                ul.appendChild(link4);
-
-                //Teléfonos
-                var telefonos = document.createElement("div");
-                telefonos.className = "cards_telefonos";
-
-                //Asistencia médica
-                var asistencia = document.createElement("div");
-                asistencia.className = "telefonos_card asistencia_card";
-                var asistenciaH5 = document.createElement("h5");
-                asistenciaH5.textContent = "Asistencia m\u00E9dica";
-                asistenciaH5.className = "titulos_columnas"
-                var asistenciaContent = document.createElement("div");
-                asistenciaContent.className = "telefonos_content";
-                var asistencialink1Content = document.createElement("div");
-                asistencialink1Content.className = "linkMasBotonCopiarPortapapeles"
-                var asistencialink1 = document.createElement("a");
-                asistencialink1.href = "https://wa.me/5491148729100";
-                var img1 = document.createElement("img");
-                img1.src = "/@api/deki/files/16/whatsapp.png";
-                img1.className = "iconos_whatsapp";
-                var textNode1 = document.createTextNode("11.4872.9100");
-                asistencialink1.appendChild(img1);
-                asistencialink1.appendChild(textNode1);
-                asistencialink1Content.appendChild(asistencialink1);
-                var iconoCopiarAsistencialink1 = document.createElement("img");
-                iconoCopiarAsistencialink1.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
-                iconoCopiarAsistencialink1.className = "iconosCopiarNros";
-                iconoCopiarAsistencialink1.alt = "Copiar al portapapeles";
-                iconoCopiarAsistencialink1.addEventListener("click", function () {
-                    copiarAlPortapapeles("11-4872-9100");
-                });
-                asistencialink1Content.appendChild(iconoCopiarAsistencialink1);
-                asistenciaContent.appendChild(asistencialink1Content);
-                var asistencialink2Content = document.createElement("div");
-                asistencialink2Content.className = "linkMasBotonCopiarPortapapeles";
-                var asistencialink2 = document.createElement("a");
-                asistencialink2.href = "tel:08108887788";
-                var img2 = document.createElement("img");
-                img2.src = "/@api/deki/files/17/telefono.png";
-                var textNode2 = document.createTextNode("0810.888.7788");
-                asistencialink2.appendChild(img2);
-                asistencialink2.appendChild(textNode2);
-                asistencialink2Content.appendChild(asistencialink2);
-                var iconoCopiarAsistencialink2 = document.createElement("img");
-                iconoCopiarAsistencialink2.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
-                iconoCopiarAsistencialink2.className = "iconosCopiarNros";
-                iconoCopiarAsistencialink2.alt = "Copiar al portapapeles";
-                iconoCopiarAsistencialink2.addEventListener("click", function () {
-                    copiarAlPortapapeles("0810-888-7788");
-                });
-                asistencialink2Content.appendChild(iconoCopiarAsistencialink2);
-                asistenciaContent.appendChild(asistencialink2Content);
-                var asistencialink3Content = document.createElement("div");
-                asistencialink3Content.className = "linkMasBotonCopiarPortapapeles";
-                var asistencialink3 = document.createElement("a");
-                asistencialink3.href = "tel:08109996300";
-                var img3 = document.createElement("img");
-                img3.src = "/@api/deki/files/17/telefono.png";
-                var textNode3 = document.createTextNode("0810.999.6300");
-                asistencialink3.appendChild(img3);
-                asistencialink3.appendChild(textNode3);
-                asistencialink3Content.appendChild(asistencialink3);
-                var iconoCopiarAsistencialink3 = document.createElement("img");
-                iconoCopiarAsistencialink3.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
-                iconoCopiarAsistencialink3.className = "iconosCopiarNros";
-                iconoCopiarAsistencialink3.alt = "Copiar al portapapeles";
-                iconoCopiarAsistencialink3.addEventListener("click", function () {
-                    copiarAlPortapapeles("0810-999-6300");
-                });
-                asistencialink3Content.appendChild(iconoCopiarAsistencialink3);
-                asistenciaContent.appendChild(asistencialink3Content);
-                var asistencialink4 = document.createElement("a");
-                asistencialink4.href = "https://asistenciamedica.osde.com.ar/tabs/inicio";
-                asistencialink4.className = "solicitar_online";
-                asistencialink4.textContent = "Solicitar asistencia online";
-                asistenciaContent.appendChild(asistencialink4);
-                asistencia.appendChild(asistenciaH5);
-                asistencia.appendChild(asistenciaContent);
-
-                //Riesgo de vida
-                var riesgo = document.createElement("div");
-                riesgo.className = "telefonos_card riesgo_card";
-                var riesgoH5 = document.createElement("h5");
-                riesgoH5.textContent = "Riesgo de vida";
-                riesgoH5.className = "titulos_columnas"
-                var riesgoContent = document.createElement("div");
-                riesgoContent.className = "telefonos_content linkMasBotonCopiarPortapapeles";
-                var riesgoLink = document.createElement("a");
-                riesgoLink.href = "tel:08106661111";
-                var riesgoImg = document.createElement("img");
-                riesgoImg.src = "/@api/deki/files/17/telefono.png";
-                var riesgoText = document.createTextNode("0810.666.1111");
-                var iconoCopiarRiesgoLink = document.createElement("img");
-                iconoCopiarRiesgoLink.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
-                iconoCopiarRiesgoLink.className = "iconosCopiarNros";
-                iconoCopiarRiesgoLink.alt = "Copiar al portapapeles";
-                iconoCopiarRiesgoLink.addEventListener("click", function () {
-                    copiarAlPortapapeles("0810-666-1111");
-                });
-                riesgoLink.appendChild(riesgoImg);
-                riesgoLink.appendChild(riesgoText);
-                riesgoContent.appendChild(riesgoLink);
-                riesgoContent.appendChild(iconoCopiarRiesgoLink);
-                riesgo.appendChild(riesgoH5);
-                riesgo.appendChild(riesgoContent);
-
-                //Atención al socio        
-                var atencion = document.createElement("div");
-                atencion.className = "telefonos_card atencion_card";
-                var atencionH5 = document.createElement("h5");
-                atencionH5.textContent = "Atenci\u00F3n al socio";
-                atencionH5.className = "titulos_columnas"
-                var atencionContent = document.createElement("div");
-                atencionContent.className = "telefonos_content";
-                var atencionHorarios = document.createElement("p");
-                atencionHorarios.textContent = "Lunes a viernes de 9 a 20 H.";
-                var atencionLink1Content = document.createElement("div");
-                atencionLink1Content.className = "linkMasBotonCopiarPortapapeles";
-                var atencionLink1 = document.createElement("a");
-                atencionLink1.href = "https://wa.me/5491148729000";
-                var atencionImg1 = document.createElement("img");
-                atencionImg1.src = "/@api/deki/files/16/whatsapp.png";
-                atencionImg1.className = "iconos_whatsapp";
-                var atencionText1 = document.createTextNode("11.4872.9000");
-                atencionLink1.appendChild(atencionImg1);
-                atencionLink1.appendChild(atencionText1);
-                atencionLink1Content.appendChild(atencionLink1);
-                var iconoCopiarAtencionLink1 = document.createElement("img");
-                iconoCopiarAtencionLink1.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
-                iconoCopiarAtencionLink1.className = "iconosCopiarNros";
-                iconoCopiarAtencionLink1.alt = "Copiar al portapapeles";
-                iconoCopiarAtencionLink1.addEventListener("click", function () {
-                    copiarAlPortapapeles("11-4872-9000");
-                });
-                atencionLink1Content.appendChild(iconoCopiarAtencionLink1);
-                var atencionLink2Content = document.createElement("div");
-                atencionLink2Content.className = "linkMasBotonCopiarPortapapeles";
-                var atencionLink2 = document.createElement("a");
-                atencionLink2.href = "tel:08105556733";
-                var atencionImg2 = document.createElement("img");
-                atencionImg2.src = "/@api/deki/files/17/telefono.png";
-                var atencionText2 = document.createTextNode("0810.555.6733");
-                atencionLink2.appendChild(atencionImg2);
-                atencionLink2.appendChild(atencionText2);
-                atencionLink2Content.appendChild(atencionLink2);
-                var iconoCopiarAtencionLink2 = document.createElement("img");
-                iconoCopiarAtencionLink2.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
-                iconoCopiarAtencionLink2.className = "iconosCopiarNros";
-                iconoCopiarAtencionLink2.alt = "Copiar al portapapeles";
-                iconoCopiarAtencionLink2.addEventListener("click", function () {
-                    copiarAlPortapapeles("0810-555-6733");
-                });
-                atencionLink2Content.appendChild(iconoCopiarAtencionLink2);
-                var atencionLink3Content = document.createElement("div");
-                atencionLink3Content.className = "linkMasBotonCopiarPortapapeles";
-
-                var atencionLink3 = document.createElement("a");
-                atencionLink3.href = "tel:08005556733";
-                var atencionImg3 = document.createElement("img");
-                atencionImg3.src = "/@api/deki/files/17/telefono.png";
-                var atencionText3 = document.createTextNode("0800.555.6733");
-                atencionLink3.appendChild(atencionImg3);
-                atencionLink3.appendChild(atencionText3);
-                atencionLink3Content.appendChild(atencionLink3);
-                var iconoCopiarAtencionLink3 = document.createElement("img");
-                iconoCopiarAtencionLink3.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
-                iconoCopiarAtencionLink3.className = "iconosCopiarNros";
-                iconoCopiarAtencionLink3.alt = "Copiar al portapapeles";
-                iconoCopiarAtencionLink3.addEventListener("click", function () {
-                    copiarAlPortapapeles("0800.555.6733");
-                });
-                atencionLink3Content.appendChild(iconoCopiarAtencionLink3);
-
-                var atencionLink4 = document.createElement("a");
-                atencionLink4.href =
-                    "https://www.osde.com.ar/index.html#!osde-caps-centros-atencion-personalizada.html";
-                var img4 = document.createElement("img");
-                img4.src = "/@api/deki/files/15/calendario.png";
-                var atencionText4 = document.createTextNode("Turnos en sucursal");
-                atencionLink4.appendChild(img4);
-                atencionLink4.appendChild(atencionText4);
-
-                var atencionMailContent = document.createElement("div");
-                atencionMailContent.className = "linkMasBotonCopiarPortapapeles";
-                var atencionMail = document.createElement("p");
-                atencionMail.className = "pFooter";
-                atencionMail.textContent = "contacto@osde.com.ar";
-                atencionMailContent.appendChild(atencionMail);
-                var iconoCopiarAtencionMail = document.createElement("img");
-                iconoCopiarAtencionMail.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
-                iconoCopiarAtencionMail.className = "iconosCopiarNros";
-                iconoCopiarAtencionMail.alt = "Copiar al portapapeles";
-                iconoCopiarAtencionMail.addEventListener("click", function () {
-                    copiarAlPortapapeles("contacto@osde.com.ar");
-                });
-                atencionMailContent.appendChild(iconoCopiarAtencionMail);
-                atencionContent.appendChild(atencionHorarios);
-                atencionContent.appendChild(atencionLink1Content);
-                atencionContent.appendChild(atencionLink2Content);
-                atencionContent.appendChild(atencionLink3Content);
-                atencionContent.appendChild(atencionLink4);
-                atencionContent.appendChild(atencionMailContent);
-                atencion.appendChild(atencionH5);
-                atencion.appendChild(atencionContent);
-
-                telefonos.appendChild(asistencia);
-                telefonos.appendChild(riesgo);
-                telefonos.appendChild(atencion);
-
-                colLeft.appendChild(logoLink);
-                colLeft.appendChild(ul);
-                colLeft.appendChild(telefonos);
-
-                var colRight = document.createElement("div");
-                colRight.className = "colRight";
-                var copyright = document.createElement("p");
-                copyright.innerHTML =
-                    '&copy;OSDE 2023 - Todos los derechos reservados. CUIT: 30-54674125-3 - Av. Leandro N. Alem 1067 - Piso 9 - C1001AAF - Buenos Aires. Superintendencia de Servicios de Salud - &Oacute;rgano de Control de Obras Sociales y Entidades de Medicina Prepaga - 0800-222-SALUD (72583) - www.sssalud.gob.ar - R.N.E.M.P. (Prov.) 1408 - R.N.O.S. 4-0080-0';
-                colRight.appendChild(copyright);
-
-                row.appendChild(colLeft);
-                row.appendChild(colRight);
-                container.appendChild(row);
-                footerPropio.appendChild(container);
-                footerDefault.parentNode.replaceChild(footerPropio, footerDefault);
+                var copiadoAlPortapapeles = document.createElement("div");
+                copiadoAlPortapapeles.textContent = "Copiado al portapapeles: " + numero;
+                copiadoAlPortapapeles.className = "copiadoAlPortapapeles";
+                document.body.appendChild(copiadoAlPortapapeles);
+                setTimeout(function () {
+                    document.body.removeChild(copiadoAlPortapapeles);
+                }, 3000);
             }
 
-            //****************************Barra de navegación**********************************
-            let topLevelNavigation = document.createElement('nav');
-            topLevelNavigation.classList.add('navbar', 'navbar-menu-osde', 'elm-header-logo-menu');
-            let divContenedor = document.createElement('div');
-            divContenedor.classList.add('elm-header-nav-container', 'elm-nav-container');
-            let ulPrincipal = document.createElement('ul');
-            ulPrincipal.classList.add('navbar-header');
+            var footerPropio = document.createElement("footer");
+            footerPropio.className = "footer";
+            var container = document.createElement("div");
+            container.className = "container";
+            var row = document.createElement("div");
+            row.className = "row";
+            var colLeft = document.createElement("div");
+            colLeft.className = "colLeft";
+            var logoLink = document.createElement("a");
+            logoLink.href = "https://osde-prod2.mindtouch.us";
+            logoLink.innerHTML = '<img src="/@api/deki/files/12/osdeWhite.png" alt="logoOSDE">';
+            logoLink.className = "logoOSDE";
+            logoLink.target = "_blank";
+            logoLink.setAttribute('title', 'Enlace al Home');
 
-            let elementoLogo = document.createElement('li');
-            elementoLogo.classList.add('navbar-header-logo');
-            let linkLogo = document.createElement('a');
-            linkLogo.href = "/";
-            linkLogo.title = "Enlace al inicio";
-            let logoImg = document.createElement('img');
-            logoImg.alt = "Logo de la empresa";
-            logoImg.src = "/@api/deki/files/1036/Biblos_3.0_azul.png";
-            linkLogo.appendChild(logoImg);
-            elementoLogo.appendChild(linkLogo);
-            ulPrincipal.appendChild(elementoLogo);
+            var ul = document.createElement("ul");
+            ul.className = "footer-links";
+            var link3 = document.createElement("li");
+            link3.className = "linkMasBotonCopiarPortapapeles";
+            var link3Anchor = document.createElement("a");
+            link3Anchor.href = "https://www.osde.com.ar/index.html#!homepage.html";
+            link3Anchor.textContent = "www.osde.com.ar";
+            link3Anchor.target = "_blank";
+            link3.setAttribute('title', 'Enlace a www.osde.com.ar');
+            link3.appendChild(link3Anchor);
+            var iconoCopiarlink3 = document.createElement("img");
+            iconoCopiarlink3.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
+            iconoCopiarlink3.className = "iconosCopiarNros";
+            iconoCopiarlink3.alt = "Copiar al portapapeles";
+            iconoCopiarlink3.addEventListener("click", function () {
+                copiarAlPortapapeles("www.osde.com.ar");
+            });
+            link3.appendChild(iconoCopiarlink3);
+            var link4 = document.createElement("li");
+            link4.className = "linkMasBotonCopiarPortapapeles linkMasBotonCopiarPortapapelesLink4";
+            var link4P = document.createElement("p");
+            link4P.innerHTML =
+                "Para sugerir un nuevo art\u00EDculo, escribinos, desde tu cuenta de email, a contenidos\u0040osde.com.ar";
+            //link4.setAttribute('title', 'Sugerir un nuevo art\u00EDculo');
+            link4.appendChild(link4P);
+            var iconoCopiarlink4 = document.createElement("img");
+            iconoCopiarlink4.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
+            iconoCopiarlink4.className = "iconosCopiarNros";
+            iconoCopiarlink4.alt = "Copiar al portapapeles";
+            iconoCopiarlink4.addEventListener("click", function () {
+                copiarAlPortapapeles("contenidos\u0040osde.com.ar");
+            });
+            link4.appendChild(iconoCopiarlink4);
+            ul.appendChild(link3);
+            ul.appendChild(link4);
 
-            let elementoMenu = document.createElement('li');
-            elementoMenu.classList.add('navbar-header-menu');
-            let inputCheckbox = document.createElement('input');
-            inputCheckbox.classList.add('nav-toggle');
-            inputCheckbox.id = "nav-toggle";
-            inputCheckbox.type = "checkbox";
-            elementoMenu.appendChild(inputCheckbox);
-            let ulSubList = document.createElement('ul');
+            //Teléfonos
+            var telefonos = document.createElement("div");
+            telefonos.className = "cards_telefonos";
 
-            let labelResponsive = document.createElement('label');
-            labelResponsive.setAttribute('for', 'nav-toggle');
-            labelResponsive.classList.add('nav-toggle-label');
-            let spanResponsive = document.createElement('span');
-            labelResponsive.appendChild(spanResponsive);
+            //Asistencia médica
+            var asistencia = document.createElement("div");
+            asistencia.className = "telefonos_card asistencia_card";
+            var asistenciaH5 = document.createElement("h5");
+            asistenciaH5.textContent = "Asistencia m\u00E9dica";
+            asistenciaH5.className = "titulos_columnas"
+            var asistenciaContent = document.createElement("div");
+            asistenciaContent.className = "telefonos_content";
+            var asistencialink1Content = document.createElement("div");
+            asistencialink1Content.className = "linkMasBotonCopiarPortapapeles"
+            var asistencialink1 = document.createElement("a");
+            asistencialink1.href = "https://wa.me/5491148729100";
+            var img1 = document.createElement("img");
+            img1.src = "/@api/deki/files/16/whatsapp.png";
+            img1.className = "iconos_whatsapp";
+            var textNode1 = document.createTextNode("11.4872.9100");
+            asistencialink1.appendChild(img1);
+            asistencialink1.appendChild(textNode1);
+            asistencialink1Content.appendChild(asistencialink1);
+            var iconoCopiarAsistencialink1 = document.createElement("img");
+            iconoCopiarAsistencialink1.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
+            iconoCopiarAsistencialink1.className = "iconosCopiarNros";
+            iconoCopiarAsistencialink1.alt = "Copiar al portapapeles";
+            iconoCopiarAsistencialink1.addEventListener("click", function () {
+                copiarAlPortapapeles("11-4872-9100");
+            });
+            asistencialink1Content.appendChild(iconoCopiarAsistencialink1);
+            asistenciaContent.appendChild(asistencialink1Content);
+            var asistencialink2Content = document.createElement("div");
+            asistencialink2Content.className = "linkMasBotonCopiarPortapapeles";
+            var asistencialink2 = document.createElement("a");
+            asistencialink2.href = "tel:08108887788";
+            var img2 = document.createElement("img");
+            img2.src = "/@api/deki/files/17/telefono.png";
+            var textNode2 = document.createTextNode("0810.888.7788");
+            asistencialink2.appendChild(img2);
+            asistencialink2.appendChild(textNode2);
+            asistencialink2Content.appendChild(asistencialink2);
+            var iconoCopiarAsistencialink2 = document.createElement("img");
+            iconoCopiarAsistencialink2.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
+            iconoCopiarAsistencialink2.className = "iconosCopiarNros";
+            iconoCopiarAsistencialink2.alt = "Copiar al portapapeles";
+            iconoCopiarAsistencialink2.addEventListener("click", function () {
+                copiarAlPortapapeles("0810-888-7788");
+            });
+            asistencialink2Content.appendChild(iconoCopiarAsistencialink2);
+            asistenciaContent.appendChild(asistencialink2Content);
+            var asistencialink3Content = document.createElement("div");
+            asistencialink3Content.className = "linkMasBotonCopiarPortapapeles";
+            var asistencialink3 = document.createElement("a");
+            asistencialink3.href = "tel:08109996300";
+            var img3 = document.createElement("img");
+            img3.src = "/@api/deki/files/17/telefono.png";
+            var textNode3 = document.createTextNode("0810.999.6300");
+            asistencialink3.appendChild(img3);
+            asistencialink3.appendChild(textNode3);
+            asistencialink3Content.appendChild(asistencialink3);
+            var iconoCopiarAsistencialink3 = document.createElement("img");
+            iconoCopiarAsistencialink3.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
+            iconoCopiarAsistencialink3.className = "iconosCopiarNros";
+            iconoCopiarAsistencialink3.alt = "Copiar al portapapeles";
+            iconoCopiarAsistencialink3.addEventListener("click", function () {
+                copiarAlPortapapeles("0810-999-6300");
+            });
+            asistencialink3Content.appendChild(iconoCopiarAsistencialink3);
+            asistenciaContent.appendChild(asistencialink3Content);
+            var asistencialink4 = document.createElement("a");
+            asistencialink4.href = "https://asistenciamedica.osde.com.ar/tabs/inicio";
+            asistencialink4.className = "solicitar_online";
+            asistencialink4.textContent = "Solicitar asistencia online";
+            asistenciaContent.appendChild(asistencialink4);
+            asistencia.appendChild(asistenciaH5);
+            asistencia.appendChild(asistenciaContent);
 
-            let divConsejos = document.createElement('div');
-            divConsejos.classList.add('consejo-busqueda-area');
-            let divInternoConsejos = document.createElement('div');
-            divInternoConsejos.classList.add('elm-content-container');
-            let ulConsejos = document.createElement('ul');
-            ulConsejos.classList.add('navbar-header');
-            let liConsejos = document.createElement('li');
-            liConsejos.classList.add('has-submenu');
-            let aConsejos = document.createElement('a');
-            aConsejos.textContent = 'Tips de b\u00FAsqueda';
-            let ulSubmenu = document.createElement('ul');
-            ulSubmenu.classList.add('consejosDesplegables');
-            let li1 = document.createElement('li');
-            li1.textContent = 'En lugar de frases, us\u00E1 dos o m\u00E1s palabras clave.';
-            let li3 = document.createElement('li');
-            li3.textContent =
-                'Us\u00E1 comillas para buscar frases o palabras exactas.';
-            let li4 = document.createElement('li');
-            li4.textContent =
-                'Una vez que hayas realizado la b\u00FAsqueda, en el margen izquierdo vas a poder filtrar por categor\u00EDa o caracter\u00EDsticas del art\u00EDculo.';
-            let li5 = document.createElement('li');
-            li5.textContent =
-                'Para buscar palabras estando dentro del art\u00EDculo o en la lista de resultados, pod\u00E9s usar CTRL+F.';
-            let li6 = document.createElement('li');
-            let li6Anchor = document.createElement("a");
-            li6Anchor.classList.add('linkBusquedaAvanzada');
-            li6Anchor.href = "https://osde-prod2.mindtouch.us/tutoriales/edicion/opciones_de_busqueda_avanzada";
-            li6Anchor.textContent = 'M\u00E1s tips de b\u00FAsqueda';
-            li6.appendChild(li6Anchor);
-            let contenedorFlecha = document.createElement('div');
-            contenedorFlecha.classList.add('contenedorFlecha');
-            let imgFlecha = document.createElement('img');
-            imgFlecha.classList.add('imgFlecha');
-            imgFlecha.src = '/@api/deki/files/26/downArrowWhite.png';
-            imgFlecha.alt = 'flecha';
-            contenedorFlecha.appendChild(imgFlecha)
-            aConsejos.appendChild(contenedorFlecha);
-            liConsejos.appendChild(aConsejos);
-            ulSubmenu.appendChild(li1);
-            ulSubmenu.appendChild(li3);
-            ulSubmenu.appendChild(li4);
-            ulSubmenu.appendChild(li5);
-            ulSubmenu.appendChild(li6);
-            liConsejos.appendChild(ulSubmenu);
-            ulConsejos.appendChild(liConsejos);
+            //Riesgo de vida
+            var riesgo = document.createElement("div");
+            riesgo.className = "telefonos_card riesgo_card";
+            var riesgoH5 = document.createElement("h5");
+            riesgoH5.textContent = "Riesgo de vida";
+            riesgoH5.className = "titulos_columnas"
+            var riesgoContent = document.createElement("div");
+            riesgoContent.className = "telefonos_content linkMasBotonCopiarPortapapeles";
+            var riesgoLink = document.createElement("a");
+            riesgoLink.href = "tel:08106661111";
+            var riesgoImg = document.createElement("img");
+            riesgoImg.src = "/@api/deki/files/17/telefono.png";
+            var riesgoText = document.createTextNode("0810.666.1111");
+            var iconoCopiarRiesgoLink = document.createElement("img");
+            iconoCopiarRiesgoLink.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
+            iconoCopiarRiesgoLink.className = "iconosCopiarNros";
+            iconoCopiarRiesgoLink.alt = "Copiar al portapapeles";
+            iconoCopiarRiesgoLink.addEventListener("click", function () {
+                copiarAlPortapapeles("0810-666-1111");
+            });
+            riesgoLink.appendChild(riesgoImg);
+            riesgoLink.appendChild(riesgoText);
+            riesgoContent.appendChild(riesgoLink);
+            riesgoContent.appendChild(iconoCopiarRiesgoLink);
+            riesgo.appendChild(riesgoH5);
+            riesgo.appendChild(riesgoContent);
 
-            if (window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:Search")) {
-                //Quisieron el boton de borrar, en el cuerpo de la pagina de resultados
-            } else {
-                let liBtnListaResultados = document.createElement('li');
-                liBtnListaResultados.classList.add('navbar-header-menu');
-                let botonIrAListaResultados = document.createElement("button");
-                botonIrAListaResultados.innerHTML = "Lista de Resultados";
-                botonIrAListaResultados.classList.add("botonIrAListaResultados");
-                let linkIrAListaResultados = document.createElement('a');
-                linkIrAListaResultados.href = "https://osde-prod2.mindtouch.us/Special:Search?type=wiki&query=";
-                linkIrAListaResultados.title = "Lista de Resultados";
-                botonIrAListaResultados.appendChild(linkIrAListaResultados);
-                liBtnListaResultados.appendChild(botonIrAListaResultados);
-                ulConsejos.appendChild(liBtnListaResultados);
-                botonIrAListaResultados.addEventListener('click', function () {
-                    window.location.href =
-                        "https://osde-prod2.mindtouch.us/Special:Search?type=wiki&query=";
-                });
-            }
+            //Atención al socio        
+            var atencion = document.createElement("div");
+            atencion.className = "telefonos_card atencion_card";
+            var atencionH5 = document.createElement("h5");
+            atencionH5.textContent = "Atenci\u00F3n al socio";
+            atencionH5.className = "titulos_columnas"
+            var atencionContent = document.createElement("div");
+            atencionContent.className = "telefonos_content";
+            var atencionHorarios = document.createElement("p");
+            atencionHorarios.textContent = "Lunes a viernes de 9 a 20 H.";
+            var atencionLink1Content = document.createElement("div");
+            atencionLink1Content.className = "linkMasBotonCopiarPortapapeles";
+            var atencionLink1 = document.createElement("a");
+            atencionLink1.href = "https://wa.me/5491148729000";
+            var atencionImg1 = document.createElement("img");
+            atencionImg1.src = "/@api/deki/files/16/whatsapp.png";
+            atencionImg1.className = "iconos_whatsapp";
+            var atencionText1 = document.createTextNode("11.4872.9000");
+            atencionLink1.appendChild(atencionImg1);
+            atencionLink1.appendChild(atencionText1);
+            atencionLink1Content.appendChild(atencionLink1);
+            var iconoCopiarAtencionLink1 = document.createElement("img");
+            iconoCopiarAtencionLink1.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
+            iconoCopiarAtencionLink1.className = "iconosCopiarNros";
+            iconoCopiarAtencionLink1.alt = "Copiar al portapapeles";
+            iconoCopiarAtencionLink1.addEventListener("click", function () {
+                copiarAlPortapapeles("11-4872-9000");
+            });
+            atencionLink1Content.appendChild(iconoCopiarAtencionLink1);
+            var atencionLink2Content = document.createElement("div");
+            atencionLink2Content.className = "linkMasBotonCopiarPortapapeles";
+            var atencionLink2 = document.createElement("a");
+            atencionLink2.href = "tel:08105556733";
+            var atencionImg2 = document.createElement("img");
+            atencionImg2.src = "/@api/deki/files/17/telefono.png";
+            var atencionText2 = document.createTextNode("0810.555.6733");
+            atencionLink2.appendChild(atencionImg2);
+            atencionLink2.appendChild(atencionText2);
+            atencionLink2Content.appendChild(atencionLink2);
+            var iconoCopiarAtencionLink2 = document.createElement("img");
+            iconoCopiarAtencionLink2.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
+            iconoCopiarAtencionLink2.className = "iconosCopiarNros";
+            iconoCopiarAtencionLink2.alt = "Copiar al portapapeles";
+            iconoCopiarAtencionLink2.addEventListener("click", function () {
+                copiarAlPortapapeles("0810-555-6733");
+            });
+            atencionLink2Content.appendChild(iconoCopiarAtencionLink2);
+            var atencionLink3Content = document.createElement("div");
+            atencionLink3Content.className = "linkMasBotonCopiarPortapapeles";
 
-            divInternoConsejos.appendChild(ulConsejos);
-            divConsejos.appendChild(divInternoConsejos);
-            setTimeout(function () {
-                aConsejos.addEventListener('click', function () {
-                    ulSubmenu.classList.toggle('consejosDesplegables');
-                    // Cambio la URL de la flecha basado en si el menú está desplegado o no
-                    if (ulSubmenu.classList.contains('consejosDesplegables')) {
-                        imgFlecha.src = '/@api/deki/files/26/downArrowWhite.png';
-                    } else {
-                        imgFlecha.src = '/@api/deki/files/21/upArrowWhite.png';
-                    }
-                });
-            }, 1000);
+            var atencionLink3 = document.createElement("a");
+            atencionLink3.href = "tel:08005556733";
+            var atencionImg3 = document.createElement("img");
+            atencionImg3.src = "/@api/deki/files/17/telefono.png";
+            var atencionText3 = document.createTextNode("0800.555.6733");
+            atencionLink3.appendChild(atencionImg3);
+            atencionLink3.appendChild(atencionText3);
+            atencionLink3Content.appendChild(atencionLink3);
+            var iconoCopiarAtencionLink3 = document.createElement("img");
+            iconoCopiarAtencionLink3.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
+            iconoCopiarAtencionLink3.className = "iconosCopiarNros";
+            iconoCopiarAtencionLink3.alt = "Copiar al portapapeles";
+            iconoCopiarAtencionLink3.addEventListener("click", function () {
+                copiarAlPortapapeles("0800.555.6733");
+            });
+            atencionLink3Content.appendChild(iconoCopiarAtencionLink3);
 
-            /*********************************** MODIFICAR BARRA DE NAVEGACION ***********************************/
-            //SOLO AGREGAR LOS NOMBRES DE LAS CATEGORIAS Y SUS CORRESPONDIENTES GUIAS, TAL CUAL FUERON CREADAS EN SUS RUTAS
+            var atencionLink4 = document.createElement("a");
+            atencionLink4.href =
+                "https://www.osde.com.ar/index.html#!osde-caps-centros-atencion-personalizada.html";
+            var img4 = document.createElement("img");
+            img4.src = "/@api/deki/files/15/calendario.png";
+            var atencionText4 = document.createTextNode("Turnos en sucursal");
+            atencionLink4.appendChild(img4);
+            atencionLink4.appendChild(atencionText4);
 
-            /*Codigos UNICODE para los nombres con tildes:
-            á - \u00E1
-            é - \u00E9
-            í - \u00ED
-            ó - \u00F3
-            ú - \u00FA
-            
-            Á - \u00C1
-            É - \u00C9
-            Í - \u00CD
-            Ó - \u00D3
-            Ú - \u00DA
-            */
+            var atencionMailContent = document.createElement("div");
+            atencionMailContent.className = "linkMasBotonCopiarPortapapeles";
+            var atencionMail = document.createElement("p");
+            atencionMail.className = "pFooter";
+            atencionMail.textContent = "contacto@osde.com.ar";
+            atencionMailContent.appendChild(atencionMail);
+            var iconoCopiarAtencionMail = document.createElement("img");
+            iconoCopiarAtencionMail.src = "/@api/deki/files/305/copiarAlPortapapeles.png";
+            iconoCopiarAtencionMail.className = "iconosCopiarNros";
+            iconoCopiarAtencionMail.alt = "Copiar al portapapeles";
+            iconoCopiarAtencionMail.addEventListener("click", function () {
+                copiarAlPortapapeles("contacto@osde.com.ar");
+            });
+            atencionMailContent.appendChild(iconoCopiarAtencionMail);
+            atencionContent.appendChild(atencionHorarios);
+            atencionContent.appendChild(atencionLink1Content);
+            atencionContent.appendChild(atencionLink2Content);
+            atencionContent.appendChild(atencionLink3Content);
+            atencionContent.appendChild(atencionLink4);
+            atencionContent.appendChild(atencionMailContent);
+            atencion.appendChild(atencionH5);
+            atencion.appendChild(atencionContent);
 
-            //Agregar la nueva categoria al listado, en la ubicacion deseada, mantener el formato ("nombre",). La ultima va sin coma.
-            let categorias = ["Socios y Empresas", "Prestadores"];
+            telefonos.appendChild(asistencia);
+            telefonos.appendChild(riesgo);
+            telefonos.appendChild(atencion);
 
-            /*Agregar las guias pertenecientes a la nueva Categoria, en la MISMA UBICACION QUE PUSIERON LA CATEGORIA (Si agregaron una
-            Categoría luego de Afiliaciones, los corchetes con las guías para esta nueva categoría, irán después de los corchetes que 
-            contienen las guías de Afiliaciones para mantener la concordancia). Mantener el formato (["guiaA1" , "guiaA2"] , ["guiaB1", "GuiaB2"],...).
-            Luego del último grupo de guias, no va la coma.*/
+            colLeft.appendChild(logoLink);
+            colLeft.appendChild(ul);
+            colLeft.appendChild(telefonos);
 
-            let guias = [
-                // "Socios y Empresas"
-                [
-                    "Alta de socio - Modificaci\u00F3n de grupo familiar",
-                    "Facturaci\u00F3n y Cobranzas a Socios",
-                    "Acceso al servicio",
-                    "Empadronamientos a coberturas especiales",
-                    "Solicitud de Autorizaciones",
-                    "Otorgamiento de Reintegro y Pago Directo",
-                    "Baja de socios"
-                ],
-                // Prestadores
-                [
-                    "Aplicaciones",
-                    "Extranet",
-                    "Servicios",
-                    "Validaci\u00F3n de l\u00EDnea"
-                ]
-            ];
+            var colRight = document.createElement("div");
+            colRight.className = "colRight";
+            var copyright = document.createElement("p");
+            copyright.innerHTML =
+                '&copy;OSDE 2023 - Todos los derechos reservados. CUIT: 30-54674125-3 - Av. Leandro N. Alem 1067 - Piso 9 - C1001AAF - Buenos Aires. Superintendencia de Servicios de Salud - &Oacute;rgano de Control de Obras Sociales y Entidades de Medicina Prepaga - 0800-222-SALUD (72583) - www.sssalud.gob.ar - R.N.E.M.P. (Prov.) 1408 - R.N.O.S. 4-0080-0';
+            colRight.appendChild(copyright);
 
-            function agregarCategoria(categoria, guias) {
-                let listItem = document.createElement('li');
-                listItem.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
-                let link = document.createElement('a');
-                link.href = "/" + encodeURIComponent(categoria);
-                link.textContent = categoria;
+            row.appendChild(colLeft);
+            row.appendChild(colRight);
+            container.appendChild(row);
+            footerPropio.appendChild(container);
+            footerDefault.parentNode.replaceChild(footerPropio, footerDefault);
+        }
 
-                // Agregar el icono a la izquierda de cada sección
-                let icono;
-                if (categoria === "Socios y Empresas") {
-                    icono = document.createElement('img');
-                    icono.classList.add('internal', 'imgHome1');
-                    icono.alt = "mindtouch.page#thumbnail";
-                    icono.loading = "lazy";
-                    icono.src =
-                        "https://osde-prod2.mindtouch.us/@api/deki/files/516/mindtouch.page%2523thumbnail?revision=1";
-                } else if (categoria === "Prestadores") {
-                    icono = document.createElement('img');
-                    icono.classList.add('internal', 'imgHome2');
-                    icono.alt = "mindtouch.page#thumbnail";
-                    icono.loading = "lazy";
-                    icono.src =
-                        "https://osde-prod2.mindtouch.us/@api/deki/files/522/mindtouch.page%2523thumbnail?revision=4";
-                }
+        //****************************Barra de navegación**********************************
+        let topLevelNavigation = document.createElement('nav');
+        topLevelNavigation.classList.add('navbar', 'navbar-menu-osde', 'elm-header-logo-menu');
+        let divContenedor = document.createElement('div');
+        divContenedor.classList.add('elm-header-nav-container', 'elm-nav-container');
+        let ulPrincipal = document.createElement('ul');
+        ulPrincipal.classList.add('navbar-header');
 
-                if (icono) {
-                    link.appendChild(icono);
-                }
+        let elementoLogo = document.createElement('li');
+        elementoLogo.classList.add('navbar-header-logo');
+        let linkLogo = document.createElement('a');
+        linkLogo.href = "/";
+        linkLogo.title = "Enlace al inicio";
+        let logoImg = document.createElement('img');
+        logoImg.alt = "Logo de la empresa";
+        logoImg.src = "/@api/deki/files/1036/Biblos_3.0_azul.png";
+        linkLogo.appendChild(logoImg);
+        elementoLogo.appendChild(linkLogo);
+        ulPrincipal.appendChild(elementoLogo);
 
-                link.title = categoria;
-                listItem.appendChild(link);
+        let elementoMenu = document.createElement('li');
+        elementoMenu.classList.add('navbar-header-menu');
+        let inputCheckbox = document.createElement('input');
+        inputCheckbox.classList.add('nav-toggle');
+        inputCheckbox.id = "nav-toggle";
+        inputCheckbox.type = "checkbox";
+        elementoMenu.appendChild(inputCheckbox);
+        let ulSubList = document.createElement('ul');
 
-                let listadoPorCategoria = document.createElement('ul');
-                listadoPorCategoria.classList.add('submenu');
+        let labelResponsive = document.createElement('label');
+        labelResponsive.setAttribute('for', 'nav-toggle');
+        labelResponsive.classList.add('nav-toggle-label');
+        let spanResponsive = document.createElement('span');
+        labelResponsive.appendChild(spanResponsive);
 
-                guias.forEach(function (guia) {
-                    let subListItem = document.createElement('li');
-                    let subLink = document.createElement('a');
-                    subLink.href = "/" + encodeURIComponent(categoria) + "/" + encodeURIComponent(guia);
-                    subLink.textContent = guia;
-                    subLink.title = guia;
-                    subListItem.appendChild(subLink);
-                    listadoPorCategoria.appendChild(subListItem);
-                });
+        let divConsejos = document.createElement('div');
+        divConsejos.classList.add('consejo-busqueda-area');
+        let divInternoConsejos = document.createElement('div');
+        divInternoConsejos.classList.add('elm-content-container');
+        let ulConsejos = document.createElement('ul');
+        ulConsejos.classList.add('navbar-header');
+        let liConsejos = document.createElement('li');
+        liConsejos.classList.add('has-submenu');
+        let aConsejos = document.createElement('a');
+        aConsejos.textContent = 'Tips de b\u00FAsqueda';
+        let ulSubmenu = document.createElement('ul');
+        ulSubmenu.classList.add('consejosDesplegables');
+        let li1 = document.createElement('li');
+        li1.textContent = 'En lugar de frases, us\u00E1 dos o m\u00E1s palabras clave.';
+        let li3 = document.createElement('li');
+        li3.textContent =
+            'Us\u00E1 comillas para buscar frases o palabras exactas.';
+        let li4 = document.createElement('li');
+        li4.textContent =
+            'Una vez que hayas realizado la b\u00FAsqueda, en el margen izquierdo vas a poder filtrar por categor\u00EDa o caracter\u00EDsticas del art\u00EDculo.';
+        let li5 = document.createElement('li');
+        li5.textContent =
+            'Para buscar palabras estando dentro del art\u00EDculo o en la lista de resultados, pod\u00E9s usar CTRL+F.';
+        let li6 = document.createElement('li');
+        let li6Anchor = document.createElement("a");
+        li6Anchor.classList.add('linkBusquedaAvanzada');
+        li6Anchor.href = "https://osde-prod2.mindtouch.us/tutoriales/edicion/opciones_de_busqueda_avanzada";
+        li6Anchor.textContent = 'M\u00E1s tips de b\u00FAsqueda';
+        li6.appendChild(li6Anchor);
+        let contenedorFlecha = document.createElement('div');
+        contenedorFlecha.classList.add('contenedorFlecha');
+        let imgFlecha = document.createElement('img');
+        imgFlecha.classList.add('imgFlecha');
+        imgFlecha.src = '/@api/deki/files/26/downArrowWhite.png';
+        imgFlecha.alt = 'flecha';
+        contenedorFlecha.appendChild(imgFlecha)
+        aConsejos.appendChild(contenedorFlecha);
+        liConsejos.appendChild(aConsejos);
+        ulSubmenu.appendChild(li1);
+        ulSubmenu.appendChild(li3);
+        ulSubmenu.appendChild(li4);
+        ulSubmenu.appendChild(li5);
+        ulSubmenu.appendChild(li6);
+        liConsejos.appendChild(ulSubmenu);
+        ulConsejos.appendChild(liConsejos);
 
-                listItem.appendChild(listadoPorCategoria);
-                ulSubList.appendChild(listItem);
-            }
-
-            for (let i = 0; i < categorias.length; i++) {
-                agregarCategoria(categorias[i], guias[i]);
-            }
-
-            elementoMenu.appendChild(labelResponsive);
-            elementoMenu.appendChild(ulSubList);
-            ulPrincipal.appendChild(elementoMenu);
-            divContenedor.appendChild(ulPrincipal);
-            topLevelNavigation.appendChild(divContenedor);
-            topLevelNavigation.appendChild(divConsejos);
-            let logoContainer = document.querySelector('.elm-header-logo-container');
-            if (logoContainer) {
-                logoContainer.innerHTML = '';
-                logoContainer.appendChild(topLevelNavigation);
-            }
-
-            //*******************************Login********************************
+        if (window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:Search")) {
+            //Quisieron el boton de borrar, en el cuerpo de la pagina de resultados
         } else {
-            var headerLogin = document.querySelector('.elm-header-custom a');
-            if (headerLogin) {
-                headerLogin.style.display = 'none';
+            let liBtnListaResultados = document.createElement('li');
+            liBtnListaResultados.classList.add('navbar-header-menu');
+            let botonIrAListaResultados = document.createElement("button");
+            botonIrAListaResultados.innerHTML = "Lista de Resultados";
+            botonIrAListaResultados.classList.add("botonIrAListaResultados");
+            let linkIrAListaResultados = document.createElement('a');
+            linkIrAListaResultados.href = "https://osde-prod2.mindtouch.us/Special:Search?type=wiki&query=";
+            linkIrAListaResultados.title = "Lista de Resultados";
+            botonIrAListaResultados.appendChild(linkIrAListaResultados);
+            liBtnListaResultados.appendChild(botonIrAListaResultados);
+            ulConsejos.appendChild(liBtnListaResultados);
+            botonIrAListaResultados.addEventListener('click', function () {
+                window.location.href =
+                    "https://osde-prod2.mindtouch.us/Special:Search?type=wiki&query=";
+            });
+        }
+
+        divInternoConsejos.appendChild(ulConsejos);
+        divConsejos.appendChild(divInternoConsejos);
+        setTimeout(function () {
+            aConsejos.addEventListener('click', function () {
+                ulSubmenu.classList.toggle('consejosDesplegables');
+                // Cambio la URL de la flecha basado en si el menú está desplegado o no
+                if (ulSubmenu.classList.contains('consejosDesplegables')) {
+                    imgFlecha.src = '/@api/deki/files/26/downArrowWhite.png';
+                } else {
+                    imgFlecha.src = '/@api/deki/files/21/upArrowWhite.png';
+                }
+            });
+        }, 1000);
+
+        /*********************************** MODIFICAR BARRA DE NAVEGACION ***********************************/
+        //SOLO AGREGAR LOS NOMBRES DE LAS CATEGORIAS Y SUS CORRESPONDIENTES GUIAS, TAL CUAL FUERON CREADAS EN SUS RUTAS
+
+        /*Codigos UNICODE para los nombres con tildes:
+        á - \u00E1
+        é - \u00E9
+        í - \u00ED
+        ó - \u00F3
+        ú - \u00FA
+        
+        Á - \u00C1
+        É - \u00C9
+        Í - \u00CD
+        Ó - \u00D3
+        Ú - \u00DA
+        */
+
+        //Agregar la nueva categoria al listado, en la ubicacion deseada, mantener el formato ("nombre",). La ultima va sin coma.
+        let categorias = ["Socios y Empresas", "Prestadores"];
+
+        /*Agregar las guias pertenecientes a la nueva Categoria, en la MISMA UBICACION QUE PUSIERON LA CATEGORIA (Si agregaron una
+        Categoría luego de Afiliaciones, los corchetes con las guías para esta nueva categoría, irán después de los corchetes que 
+        contienen las guías de Afiliaciones para mantener la concordancia). Mantener el formato (["guiaA1" , "guiaA2"] , ["guiaB1", "GuiaB2"],...).
+        Luego del último grupo de guias, no va la coma.*/
+
+        let guias = [
+            // "Socios y Empresas"
+            [
+                "Alta de socio - Modificaci\u00F3n de grupo familiar",
+                "Facturaci\u00F3n y Cobranzas a Socios",
+                "Acceso al servicio",
+                "Empadronamientos a coberturas especiales",
+                "Solicitud de Autorizaciones",
+                "Otorgamiento de Reintegro y Pago Directo",
+                "Baja de socios"
+            ],
+            // Prestadores
+            [
+                "Aplicaciones",
+                "Extranet",
+                "Servicios",
+                "Validaci\u00F3n de l\u00EDnea"
+            ]
+        ];
+
+        function agregarCategoria(categoria, guias) {
+            let listItem = document.createElement('li');
+            listItem.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+            let link = document.createElement('a');
+            link.href = "/" + encodeURIComponent(categoria);
+            link.textContent = categoria;
+
+            // Agregar el icono a la izquierda de cada sección
+            let icono;
+            if (categoria === "Socios y Empresas") {
+                icono = document.createElement('img');
+                icono.classList.add('internal', 'imgHome1');
+                icono.alt = "mindtouch.page#thumbnail";
+                icono.loading = "lazy";
+                icono.src =
+                    "https://osde-prod2.mindtouch.us/@api/deki/files/516/mindtouch.page%2523thumbnail?revision=1";
+            } else if (categoria === "Prestadores") {
+                icono = document.createElement('img');
+                icono.classList.add('internal', 'imgHome2');
+                icono.alt = "mindtouch.page#thumbnail";
+                icono.loading = "lazy";
+                icono.src =
+                    "https://osde-prod2.mindtouch.us/@api/deki/files/522/mindtouch.page%2523thumbnail?revision=4";
             }
-            var footerLogin = document.querySelector('.elm-footer-custom a');
-            if (footerLogin) {
-                footerLogin.style.display = 'none';
+
+            if (icono) {
+                link.appendChild(icono);
             }
+
+            link.title = categoria;
+            listItem.appendChild(link);
+
+            let listadoPorCategoria = document.createElement('ul');
+            listadoPorCategoria.classList.add('submenu');
+
+            guias.forEach(function (guia) {
+                let subListItem = document.createElement('li');
+                let subLink = document.createElement('a');
+                subLink.href = "/" + encodeURIComponent(categoria) + "/" + encodeURIComponent(guia);
+                subLink.textContent = guia;
+                subLink.title = guia;
+                subListItem.appendChild(subLink);
+                listadoPorCategoria.appendChild(subListItem);
+            });
+
+            listItem.appendChild(listadoPorCategoria);
+            ulSubList.appendChild(listItem);
+        }
+
+        for (let i = 0; i < categorias.length; i++) {
+            agregarCategoria(categorias[i], guias[i]);
+        }
+
+        elementoMenu.appendChild(labelResponsive);
+        elementoMenu.appendChild(ulSubList);
+        ulPrincipal.appendChild(elementoMenu);
+        divContenedor.appendChild(ulPrincipal);
+        topLevelNavigation.appendChild(divContenedor);
+        topLevelNavigation.appendChild(divConsejos);
+        let logoContainer = document.querySelector('.elm-header-logo-container');
+        if (logoContainer) {
+            logoContainer.innerHTML = '';
+            logoContainer.appendChild(topLevelNavigation);
+        }
+
+        //*******************************Login********************************
+        if (window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:UserLogin")) {
+            var botonesNavbarLogin = document.querySelector('li.navbar-header-menu');
+            if (botonesNavbarLogin) {
+                botonesNavbarLogin.style.display = 'none';
+            }
+            var areaConsejos = document.querySelector('div.consejo-busqueda-area');
+            if (areaConsejos) {
+                areaConsejos.style.display = 'none';
+            }
+            //Hasta encontrar el error de por que si se desloguea un No-Admin, no hay permisos sobre las imagenes:
+            var hiddenImgs = document.querySelectorAll('img');
+            hiddenImgs.forEach(function (img) {
+                img.style.display = 'none';
+            });
             var buscadorLogin = document.querySelector('.elm-global-search');
             if (buscadorLogin) {
                 buscadorLogin.style.display = 'none';
@@ -1330,22 +1333,18 @@
             if (tituloLogin) {
                 var divBotonLogin = document.createElement('div');
                 divBotonLogin.className = "btn-login-area";
-
                 tituloLogin.innerHTML = 'Bienvenido a la base de conocimientos de OSDE. ';
                 tituloLogin.className = 'tituloLogin';
-
-                /* var linkLoginTxt = document.createElement('p');
-                linkLoginTxt.innerHTML = 'Para iniciar sesi&oacute;n en Biblos 3.0 con tu cuenta RCPO, utiliz&aacute; el siguiente bot&oacute;n:' */
-
+                var LogoLoginTxt = document.createElement('h2');
+                LogoLoginTxt.innerHTML = 'Biblos 3.0 - OSDE';
+                LogoLoginTxt.className = 'logoLoginTxt';
+                elementoLogo.appendChild(LogoLoginTxt);
                 var linkLoginBiblos = document.createElement('a');
                 linkLoginBiblos.innerHTML = 'Iniciar sesi&oacute;n en Biblos 3.0';
                 linkLoginBiblos.href = 'https://osde-prod2.mindtouch.us/@app/auth/2/login';
                 //linkLoginBiblos.target = '_blank';
                 linkLoginBiblos.className = 'linkLoginBiblos';
-
-                /* divBotonLogin.appendChild(linkLoginTxt) */
                 divBotonLogin.appendChild(linkLoginBiblos);
-
                 tituloLogin.insertAdjacentElement('afterend', divBotonLogin);
             }
         }
