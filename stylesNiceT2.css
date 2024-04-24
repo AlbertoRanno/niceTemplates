@@ -917,7 +917,8 @@ thead {
 	width: 200px;
 	background-color: white;
 }
-.particularidades .navBarLateral ul:not(:has(li)){
+
+.particularidades .navBarLateral ul:not(:has(li)) {
 	margin: 0;
 }
 
@@ -2479,13 +2480,16 @@ li.mt-user-menu-preferences {
 	margin-bottom: 30px !important;
 	display: block;
 }
-.btn-login-area{
+
+.btn-login-area {
 	padding: 0 0 2em;
 }
-.btn-login-area p{
+
+.btn-login-area p {
 	padding-bottom: 2em;
 	text-align: center;
 }
+
 .btn-login-area .linkLoginBiblos {
 	border-radius: 16px;
 	background: var(--primary-blue);
@@ -2494,7 +2498,7 @@ li.mt-user-menu-preferences {
 	font-weight: 700 !important;
 	padding: 13px 48px;
 	text-decoration: none !important;
-	display:block;
+	display: block;
 	max-width: 400px;
 	text-align: center;
 	margin: 0 auto;
@@ -2505,7 +2509,7 @@ li.mt-user-menu-preferences {
 	color: var(--white) !important;
 }
 
-#mt-login-form .ui-button{
+#mt-login-form .ui-button {
 	border-radius: 16px;
 	background: var(--primary-blue);
 	font-size: 18px;
@@ -2515,19 +2519,22 @@ li.mt-user-menu-preferences {
 	height: 48px;
 	border: none !important;
 }
-#mt-login-form .ui-button span{
+
+#mt-login-form .ui-button span {
 	font-size: 18px;
 	line-height: 22px;
 	color: var(--white) !important;
 	font-weight: 700 !important;
 }
+
 #mt-login-form .ui-button:hover {
 	background: linear-gradient(90deg, var(--primary-blue-gradient) 0%, var(--primary-blue) 100%);
 	color: var(--white) !important;
 }
+
 /*Provisorio para Login por error en permisos de imagenes*/
 .logoLoginTxt {
-    font-size: xx-large !important;
+	font-size: xx-large !important;
 }
 
 /* Hasta 650px a Fuente del contenedor a 16px*/
@@ -2541,9 +2548,11 @@ li.mt-user-menu-preferences {
 	.particularidades .navBarLateral {
 		width: 100%;
 	}
-	.navBarLateral>.emptyRegions button:first-child{
+
+	.navBarLateral>.emptyRegions button:first-child {
 		border-top: 2px solid var(--primary-blue);
 	}
+
 	.navBarLateral>.emptyRegions:first-child button:first-child,
 	.navBarLateral>.emptyRegions:last-of-type {
 		border-top: none;
@@ -2587,13 +2596,13 @@ li.mt-user-menu-preferences {
 		border-top: 0;
 	}
 
-	.navBarLateral > .emptyRegions:first-child button:first-child, 
+	.navBarLateral>.emptyRegions:first-child button:first-child,
 	.navBarLateral button:first-child:is(:not(span > button)) {
 		border-radius: 16px 0 0 0;
 	}
 
-	.navBarLateral .emptyRegions:last-of-type:is(:has( + ul)) button:last-child,
-	.navBarLateral :is(.emptyRegions:last-of-type + button:last-of-type){
+	.navBarLateral .emptyRegions:last-of-type:is(:has(+ ul)) button:last-child,
+	.navBarLateral :is(.emptyRegions:last-of-type + button:last-of-type) {
 		border-radius: 0 16px 0 0;
 	}
 

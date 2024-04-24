@@ -1,6 +1,7 @@
 /* Variable colores */
 :root {
 	--primary-blue: #1226aa;
+	--primary-blue-gradient: #121a52;
 	--background-light-blue: #e7e9f7;
 	--background-light-blue-2: #f1f2fa;
 	--secondary-background: #d2d6f0;
@@ -917,6 +918,10 @@ thead {
 	background-color: white;
 }
 
+.particularidades .navBarLateral ul:not(:has(li)) {
+	margin: 0;
+}
+
 .particularidades li {
 	padding: 10px;
 }
@@ -931,73 +936,7 @@ thead {
 	padding: 20px;
 }
 
-/* Hasta 650px a Fuente del contenedor a 16px*/
-@media (max-width: 40.625em) {
-	.particularidades {
-		flex-direction: column;
-		gap: 20px;
-		padding-bottom: 16px;
-	}
 
-	.particularidades .navBarLateral {
-		width: 100%;
-	}
-}
-
-/* Entre 651px y 1010px */
-@media (min-width: 40.6875em) and (max-width: 63.125em) {
-
-	.particularidades {
-		flex-direction: column;
-		gap: 20px;
-		padding-bottom: 16px;
-		border: none;
-	}
-
-	.particularidades .navBarLateral {
-		display: flex;
-		overflow: visible;
-		border: none;
-	}
-
-	.navBarLateral button.regionActiva {
-		border-bottom: 7px solid var(--primary-blue) !important;
-		border-right: 0 !important;
-	}
-
-	.navBarLateral button {
-		outline: 2px solid var(--primary-blue) !important;
-	}
-
-	.navBarLateral button+button {
-		margin-left: -2px;
-	}
-
-	.navBarLateral>.emptyRegions {
-		display: contents !important;
-	}
-
-	.navBarLateral button {
-		border-top: 0 !important;
-	}
-
-	.navBarLateral button:first-of-type:not(span > button) {
-		border-radius: 16px 0 0 0;
-	}
-
-	.navBarLateral button:last-of-type:not(span > button) {
-		border-radius: 0 16px 0 0;
-	}
-
-	.navBarLateral button:not(:first-of-type):not(:last-of-type) {
-		border-radius: 0;
-	}
-
-	/* Establece bordes rectos para los botones dentro de emptyRegions que no son el primero ni el último */
-	.navBarLateral .emptyRegions button:not(:first-child):not(:last-child) {
-		border-radius: 0;
-	}
-}
 
 /* Accordion */
 .accordion {
@@ -2542,16 +2481,132 @@ li.mt-user-menu-preferences {
 	display: block;
 }
 
-.linkLoginBiblos {
-	font-size: 24px;
-	color: var(--secondary-light-blue) !important;
-	text-decoration: none;
-	transition: color 0.3s;
-	display: block;
-	margin-top: 20px;
-	margin-bottom: 20px;
+.btn-login-area {
+	padding: 0 0 2em;
 }
 
-.linkLoginBiblos:hover {
-	color: var(--primary-blue) !important;
+.btn-login-area p {
+	padding-bottom: 2em;
+	text-align: center;
+}
+
+.btn-login-area .linkLoginBiblos {
+	border-radius: 16px;
+	background: var(--primary-blue);
+	color: var(--white);
+	font-size: 22px;
+	font-weight: 700 !important;
+	padding: 13px 48px;
+	text-decoration: none !important;
+	display: block;
+	max-width: 400px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.btn-login-area .linkLoginBiblos:hover {
+	background: linear-gradient(90deg, var(--primary-blue-gradient) 0%, var(--primary-blue) 100%);
+	color: var(--white) !important;
+}
+
+#mt-login-form .ui-button {
+	border-radius: 16px;
+	background: var(--primary-blue);
+	font-size: 18px;
+	line-height: 22px;
+	padding: 0 48px;
+	text-decoration: none !important;
+	height: 48px;
+	border: none !important;
+}
+
+#mt-login-form .ui-button span {
+	font-size: 18px;
+	line-height: 22px;
+	color: var(--white) !important;
+	font-weight: 700 !important;
+}
+
+#mt-login-form .ui-button:hover {
+	background: linear-gradient(90deg, var(--primary-blue-gradient) 0%, var(--primary-blue) 100%);
+	color: var(--white) !important;
+}
+
+/*Provisorio para Login por error en permisos de imagenes*/
+.logoLoginTxt {
+	font-size: xx-large !important;
+}
+
+/* Hasta 650px a Fuente del contenedor a 16px*/
+@media (max-width: 40.625em) {
+	.particularidades {
+		flex-direction: column;
+		gap: 20px;
+		padding-bottom: 16px;
+	}
+
+	.particularidades .navBarLateral {
+		width: 100%;
+	}
+
+	.navBarLateral>.emptyRegions button:first-child {
+		border-top: 2px solid var(--primary-blue);
+	}
+
+	.navBarLateral>.emptyRegions:first-child button:first-child,
+	.navBarLateral>.emptyRegions:last-of-type {
+		border-top: none;
+	}
+}
+
+/* Entre 651px y 1010px */
+@media (min-width: 40.6875em) and (max-width: 63.125em) {
+
+	.particularidades {
+		flex-direction: column;
+		gap: 20px;
+		padding-bottom: 16px;
+		border: none;
+	}
+
+	.particularidades .navBarLateral {
+		display: flex;
+		overflow: visible;
+		border: none;
+	}
+
+	.navBarLateral button.regionActiva {
+		border-bottom: 7px solid var(--primary-blue) !important;
+		border-right: 0 !important;
+	}
+
+	.navBarLateral button {
+		outline: 2px solid var(--primary-blue) !important;
+	}
+
+	.navBarLateral button+button {
+		margin-left: -2px;
+	}
+
+	.navBarLateral>.emptyRegions {
+		display: contents !important;
+	}
+
+	.navBarLateral button {
+		border-top: 0;
+	}
+
+	.navBarLateral>.emptyRegions:first-child button:first-child,
+	.navBarLateral button:first-child:is(:not(span > button)) {
+		border-radius: 16px 0 0 0;
+	}
+
+	.navBarLateral .emptyRegions:last-of-type:is(:has(+ ul)) button:last-child,
+	.navBarLateral :is(.emptyRegions:last-of-type + button:last-of-type) {
+		border-radius: 0 16px 0 0;
+	}
+
+	.navBarLateral .emptyRegions button:not(:first-child):not(:last-child) {
+		border-radius: 0;
+	}
 }
