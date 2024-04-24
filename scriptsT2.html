@@ -427,7 +427,8 @@
         revertirHasContent();
 
         //****************************METRICAS POR AGRUPADOR****************************
-        var selectElement, selectedValue, selectElementOwner, selectElementType, propietario, tipo, articleURL;
+        var selectElement, selectedValue, selectElementOwner, selectElementType, propietario, catalogo, formato,
+            articleURL, nombreIndice;
 
         //Controlo que el codigo se ejecute solo si la pagina contiene la seccion de configuracion de pagina
         if (document.getElementById("live-tag-article-select")) {
@@ -441,15 +442,20 @@
                 selectElementTypeArticle = document.getElementById("live-tag-article-select");
 
                 propietario = selectElementOwner.options[selectElementOwner.selectedIndex].textContent;
-                tipo = selectElementType.options[selectElementType.selectedIndex].textContent;
-                tipoDeArticulo = selectElementTypeArticle.options[selectElementTypeArticle.selectedIndex]
-                    .textContent;
+                catalogo = selectElementType.options[selectElementType.selectedIndex].textContent;
+                formato = selectElementTypeArticle.options[selectElementTypeArticle.selectedIndex].textContent;
                 articleURL = window.location.href;
+                dataLayer.push({
+                    'catalogo': catalogo,
+                    'formato': formato,
+                    'propietario': propietario
+                });
 
-                console.log("URL: " + articleURL + " \nPropietario: " + propietario + " \nTipo: " + tipo +
-                    "\nTipo de articulo: " + tipoDeArticulo);
+                console.log("URL: " + articleURL + " \nPropietario: " + window.propietario + " \nCatalogo: " +
+                    window.catalogo +
+                    "\nFormato: " + window.formato);
 
-                /* if (tipoDeArticulo == "Procedimientos") {
+                /* if (formato == "Procedimientos") {
                      document.getElementById('mt-toc-container').style.display = 'none';
                  } */
             }
@@ -1322,15 +1328,25 @@
             }
             var tituloLogin = document.querySelector('#title');
             if (tituloLogin) {
-                tituloLogin.textContent = 'Bienvenido a la base de conocimientos de OSDE. ';
+                var divBotonLogin = document.createElement('div');
+                divBotonLogin.className = "btn-login-area";
+
+                tituloLogin.innerHTML = 'Bienvenido a la base de conocimientos de OSDE. ';
                 tituloLogin.className = 'tituloLogin';
+
+                /* var linkLoginTxt = document.createElement('p');
+                linkLoginTxt.innerHTML = 'Para iniciar sesi&oacute;n en Biblos 3.0 con tu cuenta RCPO, utiliz&aacute; el siguiente bot&oacute;n:' */
+
                 var linkLoginBiblos = document.createElement('a');
-                linkLoginBiblos.textContent =
-                    'Haz clic aqu\u00ED para iniciar sesi\u00F3n en Biblos 3.0 con tu cuenta RCPO';
+                linkLoginBiblos.innerHTML = 'Iniciar sesi&oacute;n en Biblos 3.0';
                 linkLoginBiblos.href = 'https://osde-prod2.mindtouch.us/@app/auth/2/login';
                 //linkLoginBiblos.target = '_blank';
                 linkLoginBiblos.className = 'linkLoginBiblos';
-                tituloLogin.appendChild(linkLoginBiblos);
+
+                /* divBotonLogin.appendChild(linkLoginTxt) */
+                divBotonLogin.appendChild(linkLoginBiblos);
+
+                tituloLogin.insertAdjacentElement('afterend', divBotonLogin);
             }
         }
 
