@@ -313,6 +313,18 @@ p a {
 	top: -23px;
 }
 
+.columbia-special-userlogin .elm-header-logo-container {
+	height: 40px;
+}
+
+.columbia-special-userlogin .elm-header-logo-menu {
+	position: absolute;
+}
+
+.columbia-special-userlogin .elm-header-logo-menu .navbar-header-logo {
+	display: flex;
+}
+
 @media (min-width: 18.75em) {
 	.page-mode-editor .elm-header-logo-menu {
 		top: -36px;
@@ -1148,12 +1160,12 @@ input[type="submit"].ui-button-primary {
 	pointer-events: inherit;
 }
 
-.contenidosRegiones button:first-child {
-	border-radius: 16px 0 0 0;
+.contenidosRegiones .hasContent button:last-of-type,
+.contenidosRegiones .hasNotContent button:last-of-type {
+	border-right: none;
 }
 
 .contenidosRegiones button:last-of-type {
-	border-radius: 0 16px 0 0;
 	border-right: 2px solid var(--primary-blue);
 }
 

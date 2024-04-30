@@ -159,6 +159,21 @@
             });
         }
 
+        //**************** Ocultar el "Dejar comentario" para calificaciones positivas ****************
+        if (document.querySelector('.mt-rating-button-yes')) {
+            const yesButton = document.querySelector('.mt-rating-button-yes');
+            const noButton = document.querySelector('.mt-rating-button-no');
+            const feedbackForm = document.querySelector('.mt-feedback-form');
+
+            yesButton.addEventListener('click', () => {
+                feedbackForm.style.display = 'none';
+            });
+
+            noButton.addEventListener('click', () => {
+                feedbackForm.style.display = 'block';
+            });
+        }
+
         //*********************Cambiar Nombre en solapa Featured Articles*********************
         function cambiarNombreEnSolapa() {
             var featuredHighestRated = document.querySelector('.noindex .mt-featured-highest-rated');
@@ -407,6 +422,7 @@
         }
         revertirHasContent();
 
+        //***** No corresponden métricas del tenant 1 *****
         // ************************************* Colapsar subniveles índice *************************************
         let liPrincipalesConOlInternos = document.querySelectorAll(
             '#mt-toc-container > nav > ol > li:has(> ol)');
@@ -629,6 +645,7 @@
                     let textoEnNodo = clasificacion.childNodes[0];
                     textoEnNodo.nodeValue = "Caracter\u00EDsticas";
                 }
+                //***** No corresponden métricas del tenant 1 *****
 
                 let filtrosBuscador = document.getElementById('mt-search-spblls-filters');
                 let colapsablesPrincipales = filtrosBuscador.querySelectorAll(

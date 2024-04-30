@@ -1,9 +1,12 @@
 /* Anonymous CSS - Unicamente pantalla de Login */
-#SpecialUserLogin, /*Dejar comentado en tenant 1*/
+/*Dejar comentado en tenant 1*/
+#SpecialUserLogin {
+    display: none !important;
+}
 
 
 /* Community Member CSS */
-.mt-user-menu-user,
+.mt-user-menu-user, /* Dejar comentado en tenant 1 */
 div.mt-new-features-container, /* Actualizaciones Nice */
 .botonIrAListaResultados,
 .mt-search-filters-classification-article,

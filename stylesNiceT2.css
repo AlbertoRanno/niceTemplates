@@ -313,15 +313,18 @@ p a {
 	top: -23px;
 }
 
-.columbia-special-userlogin .elm-header-logo-container{
+.columbia-special-userlogin .elm-header-logo-container {
 	height: 40px;
 }
-.columbia-special-userlogin .elm-header-logo-menu{
+
+.columbia-special-userlogin .elm-header-logo-menu {
 	position: absolute;
 }
-.columbia-special-userlogin .elm-header-logo-menu .navbar-header-logo{
+
+.columbia-special-userlogin .elm-header-logo-menu .navbar-header-logo {
 	display: flex;
 }
+
 @media (min-width: 18.75em) {
 	.page-mode-editor .elm-header-logo-menu {
 		top: -36px;
@@ -1156,10 +1159,12 @@ input[type="submit"].ui-button-primary {
 #editform .contenidosRegiones button:hover {
 	pointer-events: inherit;
 }
+
 .contenidosRegiones .hasContent button:last-of-type,
 .contenidosRegiones .hasNotContent button:last-of-type {
 	border-right: none;
 }
+
 .contenidosRegiones button:last-of-type {
 	border-right: 2px solid var(--primary-blue);
 }
@@ -2603,12 +2608,12 @@ li.mt-user-menu-preferences {
 		border-top: 0;
 	}
 
-	.navBarLateral > .emptyRegions:first-child button:first-child,
+	.navBarLateral>.emptyRegions:first-child button:first-child,
 	.navBarLateral button:first-child:is(:not(span > button)) {
 		border-radius: 16px 0 0 0;
 	}
 
-	.navBarLateral .emptyRegions:last-of-type:is(:has( + ul)) button:last-child,
+	.navBarLateral .emptyRegions:last-of-type:is(:has(+ ul)) button:last-child,
 	.navBarLateral :is(.emptyRegions:last-of-type + button:last-of-type) {
 		border-radius: 0 16px 0 0;
 	}
