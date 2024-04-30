@@ -176,6 +176,21 @@
             });
         }
 
+        //**************** Ocultar el "Dejar comentario" para calificaciones positivas ****************
+        if (document.querySelector('.mt-rating-button-yes')) {
+            const yesButton = document.querySelector('.mt-rating-button-yes');
+            const noButton = document.querySelector('.mt-rating-button-no');
+            const feedbackForm = document.querySelector('.mt-feedback-form');
+
+            yesButton.addEventListener('click', () => {
+                feedbackForm.style.display = 'none';
+            });
+
+            noButton.addEventListener('click', () => {
+                feedbackForm.style.display = 'block';
+            });
+        }
+
         //*********************Cambiar Nombre en solapa Featured Articles*********************
         function cambiarNombreEnSolapa() {
             var featuredHighestRated = document.querySelector('.noindex .mt-featured-highest-rated');
@@ -426,6 +441,21 @@
         }
         revertirHasContent();
 
+        //****************************METRICAS DE NIVEL DE PAGINA****************************
+        const urlActual = window.location.href;
+
+        if (urlActual.startsWith('https://osde-prod2.mindtouch.us/Special:PageRestrictions?id=')) {
+            console.log('Es una pagina de restriccion');
+            var ulElement = document.getElementById("page-restrictions-grant-list");
+            console.log('ulElement: ', ulElement);
+
+            var children = ulElement.children;
+            console.log('children: ', children);
+            console.log('children sub: ', children.HTMLCollection);
+        } else {
+            console.log('No esta en una pagina de restriccion');
+        }
+
         //****************************METRICAS POR AGRUPADOR****************************
         var selectElement, selectedValue, selectElementOwner, selectElementType, propietario, catalogo, formato,
             articleURL, nombreIndice;
@@ -451,9 +481,8 @@
                     'propietario': propietario
                 });
 
-                console.log("URL: " + articleURL + " \nPropietario: " + window.propietario + " \nCatalogo: " +
-                    window.catalogo +
-                    "\nFormato: " + window.formato);
+                console.log("URL: " + articleURL + " \nPropietario: " + propietario + " \nCatalogo: " +
+                    catalogo + "\nFormato: " + formato);
 
                 /* if (formato == "Procedimientos") {
                      document.getElementById('mt-toc-container').style.display = 'none';
@@ -1142,7 +1171,8 @@
         let li6 = document.createElement('li');
         let li6Anchor = document.createElement("a");
         li6Anchor.classList.add('linkBusquedaAvanzada');
-        li6Anchor.href = "https://osde-prod2.mindtouch.us/tutoriales/edicion/opciones_de_busqueda_avanzada";
+        li6Anchor.href =
+            "https://osde-prod2.mindtouch.us/Base_de_conocimiento_interna/Tutoriales/Opciones_de_b%C3%BAsqueda_avanzada";
         li6Anchor.textContent = 'M\u00E1s tips de b\u00FAsqueda';
         li6.appendChild(li6Anchor);
         let contenedorFlecha = document.createElement('div');

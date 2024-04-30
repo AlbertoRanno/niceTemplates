@@ -1,3 +1,28 @@
+/* Anonymous CSS - Unicamente pantalla de Login */
+#SpecialUserLogin, /*Dejar comentado en tenant 1*/
+
+
+/* Community Member CSS */
+.mt-user-menu-user,
+div.mt-new-features-container, /* Actualizaciones Nice */
+.botonIrAListaResultados,
+.mt-search-filters-classification-article,
+.mt-search-filters-classification-propietario,
+.mt-search-filters-classification-tipo-servicios-procedimiento,
+.mt-search-filters-classification-tipo-basico,
+.mt-search-filters-classification-tipo-servicios-2do-nivel,
+.mt-search-filters-classification-tipo-prestaciones-2do-nivel {
+    display: none !important;
+}
+
+/* Icono del menu perfil -Arreglaba la intermitencia de color para los usuarios de roles bajos, pero de momento está oculto todo el menú
+.mt-icon-user-menu::before,
+.mt-icon-user-menu:focus::before,
+.mt-icon-user-menu:active::before {
+    color: white;
+} */
+
+/* Pro Member CSS */
 .EXPAND_COLLAPSE dt {
     border: 2px green solid !important;
     padding: 3px;
@@ -25,41 +50,7 @@
     margin: 5px !important;
 }
 
-/* Se dispuso que los Pro Member vean los filtros
-.botonIrAListaResultados,
-.mt-search-filters-classification-article,
-.mt-search-filters-classification-propietario,
-.mt-search-filters-classification-tipo-servicios-procedimiento,
-.mt-search-filters-classification-tipo-basico,
-.mt-search-filters-classification-tipo-servicios-2do-nivel,
-.mt-search-filters-classification-tipo-prestaciones-2do-nivel, */
-/*#SpecialUserLogin,*/
-/*A diferencia de los community, los Pro tienen acceso a suscripciones y contribuciones en el menu perfil */
-.mt-user-menu-preferences,
-.mt-user-menu-signout {
+/*A diferencia de los community, los Pro tienen acceso a suscripciones y contribuciones en el menu perfil, y se pidio que puedan cerrar sesion */
+.mt-user-menu-preferences {
     display: none !important;
 }
-
-/*********************************************************************************************************************/
-
-/*Anonymous - Community */
-/*#SpecialUserLogin, -Dejar comentado en tenant 1, sino no puedo cambiar de usuario*/
-.mt-user-menu-user,
-.botonIrAListaResultados,
-.mt-search-filters-classification-article,
-.mt-search-filters-classification-propietario,
-.mt-search-filters-classification-tipo-servicios-procedimiento,
-.mt-search-filters-classification-tipo-basico,
-.mt-search-filters-classification-tipo-servicios-2do-nivel,
-.mt-search-filters-classification-tipo-prestaciones-2do-nivel {
-    display: none !important;
-}
-
-/* Icono del menu perfil -Arreglaba la intermitencia de color para los usuarios de roles bajos, pero de momento está oculto todo el menú */
-/*
-.mt-icon-user-menu::before,
-.mt-icon-user-menu:focus::before,
-.mt-icon-user-menu:active::before {
-    color: white;
-} 
-*/
