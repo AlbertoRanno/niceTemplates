@@ -1,0 +1,83 @@
+<script>
+    //****************************METRICAS DE NIVEL DE PAGINA****************************
+    window.addEventListener('load', function () {
+        const urlActual = window.location.href;
+        if (urlActual.startsWith('https://osde-prod1.mindtouch.us/Special:PageRestrictions?id=')) {
+            setTimeout(function () {
+                console.log('Es una pagina de restriccion');
+
+                var listadoDeRestricciones = document.getElementById("page-restrictions-grant-list");
+                console.log('listadoDeRestricciones: ', listadoDeRestricciones);
+
+                if (listadoDeRestricciones) {
+                    var listadoDeRestriccionesChildren = listadoDeRestricciones.children;
+                    console.log('listadoDeRestriccionesChildren: ', listadoDeRestriccionesChildren);
+
+                    var arrayGruposPermitidos = [];
+
+                    if (listadoDeRestriccionesChildren) {
+                        for (var i = 0; i < listadoDeRestriccionesChildren.length; i++) {
+                            var li = listadoDeRestriccionesChildren[i];
+                            console.log('li: ', li);
+
+                            if (li.classList.contains('group')) {
+                                var grupoPermitidoSpan = li.querySelector("span.name");
+                                console.log('grupoPermitidoSpan: ', grupoPermitidoSpan);
+
+                                if (grupoPermitidoSpan) {
+                                    var nombreGrupoPermitido = grupoPermitidoSpan.textContent.trim();
+                                    console.log('nombreGrupoPermitido: ', nombreGrupoPermitido);
+                                    arrayGruposPermitidos.push(nombreGrupoPermitido);
+                                }
+                            }
+                        }
+
+                        console.log('arrayGruposPermitidos: ', arrayGruposPermitidos);
+                    } else {
+                        console.log('listadoDeRestricciones no tiene hijos');
+                    }
+                } else {
+                    console.log('No encontro el id "page-restrictions-grant-list"');
+                }
+            }, 1000);
+        } else {
+            console.log('No es una pagina de restriccion');
+        }
+    });
+</script>
+<script>
+    //****************************METRICAS DE NIVEL DE PAGINA****************************
+    window.addEventListener('load', function () {
+        const urlActual = window.location.href;
+        //Corregir URL acorde al tenant:
+        if (urlActual.startsWith('https://osde-prod1.mindtouch.us/Special:PageRestrictions?id=')) {
+            setTimeout(function () {
+                //console.log('Es una pagina de restriccion');
+                var listadoDeRestricciones = document.getElementById("page-restrictions-grant-list");
+                if (listadoDeRestricciones) {
+                    var listadoDeRestriccionesChildren = listadoDeRestricciones.children;
+                    var arrayGruposPermitidos = [];
+                    if (listadoDeRestriccionesChildren) {
+                        for (var i = 0; i < listadoDeRestriccionesChildren.length; i++) {
+                            var li = listadoDeRestriccionesChildren[i];
+                            if (li.classList.contains('group')) {
+                                var grupoPermitidoSpan = li.querySelector("span.name");
+                                if (grupoPermitidoSpan) {
+                                    var nombreGrupoPermitido = grupoPermitidoSpan.textContent.trim();
+                                    arrayGruposPermitidos.push(nombreGrupoPermitido);
+                                }
+                            }
+                        }
+                        console.log('Grupos permitidos: ', arrayGruposPermitidos);
+                    } else {
+                        //console.log('listadoDeRestricciones no tiene hijos');
+                    }
+                } else {
+                    //console.log('No encontro el id "page-restrictions-grant-list"');
+                }
+            }, 500);
+        } else {
+           //console.log('No es una pagina de restriccion');
+        }
+    });
+</script>
