@@ -442,19 +442,50 @@
         revertirHasContent();
 
         //****************************METRICAS DE NIVEL DE PAGINA****************************
-        const urlActual = window.location.href;
+        window.addEventListener('load', function () {
+            const urlActual = window.location.href;
+            if (urlActual.startsWith('https://osde-prod2.mindtouch.us/Special:PageRestrictions?id=')) {
+                setTimeout(function () {
 
-        if (urlActual.startsWith('https://osde-prod2.mindtouch.us/Special:PageRestrictions?id=')) {
-            console.log('Es una pagina de restriccion');
-            var ulElement = document.getElementById("page-restrictions-grant-list");
-            console.log('ulElement: ', ulElement);
+                    var urlPageLevel = document.querySelector('.or a');
+                    var url = urlPageLevel.getAttribute('href');
+                    var pageName = urlPageLevel.textContent.replace('Volver a ', '');
 
-            var children = ulElement.children;
-            console.log('children: ', children);
-            console.log('children sub: ', children.HTMLCollection);
-        } else {
-            console.log('No esta en una pagina de restriccion');
-        }
+                    var listadoDeRestricciones = document.getElementById(
+                        "page-restrictions-grant-list");
+                    if (listadoDeRestricciones) {
+                        var listadoDeRestriccionesChildren = listadoDeRestricciones.children;
+                        var lista_grupos_permitidos = [];
+                        if (listadoDeRestriccionesChildren) {
+                            for (var i = 0; i < listadoDeRestriccionesChildren.length; i++) {
+                                var li = listadoDeRestriccionesChildren[i];
+                                if (li.classList.contains('group')) {
+                                    var grupoPermitidoSpan = li.querySelector("span.name");
+                                    if (grupoPermitidoSpan) {
+                                        var nombreGrupoPermitido = grupoPermitidoSpan
+                                            .textContent.trim();
+                                        lista_grupos_permitidos.push(nombreGrupoPermitido);
+                                    }
+                                }
+                            }
+                            dataLayer.push({
+                                'titulo_nivel_de_pagina': pageName,
+                                'url_nivel_de_pagina': url,
+                                'lista_grupos_permitidos': lista_grupos_permitidos
+                            });
+                            console.log('Grupos permitidos: ', lista_grupos_permitidos,
+                                ' \nPagina: ', pageName, ' \nUrl: ', url);
+                        } else {
+                            //console.log('listadoDeRestricciones no tiene hijos');
+                        }
+                    } else {
+                        //console.log('No encontro el id "page-restrictions-grant-list"');
+                    }
+                }, 500);
+            } else {
+                //console.log('No es una pagina de restriccion');
+            }
+        });
 
         //****************************METRICAS POR AGRUPADOR****************************
         var selectElement, selectedValue, selectElementOwner, selectElementType, propietario, catalogo, formato,
@@ -1065,7 +1096,7 @@
             atencionLink4.appendChild(img4);
             atencionLink4.appendChild(atencionText4);
 
-            /* "Ya no se usa"... 
+            /* "Ya no se usa"...
             var atencionMailContent = document.createElement("div");
             atencionMailContent.className = "linkMasBotonCopiarPortapapeles";
             var atencionMail = document.createElement("p");
