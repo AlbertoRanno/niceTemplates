@@ -1,4 +1,39 @@
 <script>
+    //****************************METRICAS DE NIVEL DE PAGINA****************************
+    window.addEventListener('load', function () {
+        const urlActual = window.location.href;
+        if (urlActual.startsWith('https://osde-prod1.mindtouch.us/Special:PageRestrictions?id=')) {
+            setTimeout(function () {
+                //console.log('Es una pagina de restriccion');
+                var listadoDeRestricciones = document.getElementById("page-restrictions-grant-list");
+                if (listadoDeRestricciones) {
+                    var listadoDeRestriccionesChildren = listadoDeRestricciones.children;
+                    var arrayGruposPermitidos = [];
+                    if (listadoDeRestriccionesChildren) {
+                        for (var i = 0; i < listadoDeRestriccionesChildren.length; i++) {
+                            var li = listadoDeRestriccionesChildren[i];
+                            if (li.classList.contains('group')) {
+                                var grupoPermitidoSpan = li.querySelector("span.name");
+                                if (grupoPermitidoSpan) {
+                                    var nombreGrupoPermitido = grupoPermitidoSpan.textContent.trim();
+                                    arrayGruposPermitidos.push(nombreGrupoPermitido);
+                                }
+                            }
+                        }
+                        console.log('Grupos permitidos: ', arrayGruposPermitidos);
+                    } else {
+                        //console.log('listadoDeRestricciones no tiene hijos');
+                    }
+                } else {
+                    //console.log('No encontro el id "page-restrictions-grant-list"');
+                }
+            }, 500);
+        } else {
+            //console.log('No es una pagina de restriccion');
+        }
+    });
+</script>
+<script>
     document.addEventListener('DOMContentLoaded', function () {
         const IDsDivs = ['infoApi', 'infoApi1', 'infoApi2'];
 
@@ -498,8 +533,45 @@
         }
 
         //******************METRICAS TABLA DE CONTENIDO******************************** 
-        //No corresponden métricas del tenant 1
+        var elementNav = document.querySelector(".mt-toc-content");
+        var contenido, urlDelSitio;
 
+        elementNav.addEventListener("click", function (e) {
+
+            contenido = e.target.textContent;
+            urlDelSitio = window.location.href;
+            obtenerDatosDeUsuario();
+
+            console.log("Click en: " + contenido + " \nUrl: " + urlDelSitio);
+        });
+
+        function obtenerDatosDeUsuario() {
+            var usuarioActivo, usuarioActivoID, usuarioActivoGrupo;
+
+            usuarioActivo = document.getElementById("usuarioActivoID");
+            usuarioActivoID = usuarioActivo.textContent;
+            usuarioActivoGrupo = obtenerNombreDeGrupo();
+
+            console.log("ID de usuario: ", usuarioActivoID + " \n Grupo al que pertenece: " +
+                usuarioActivoGrupo);
+        }
+
+        function obtenerNombreDeGrupo() {
+            const elementoDiv = document.getElementById('usuarioActivoGrupo');
+            const contenidoDiv = elementoDiv.textContent;
+
+            const objetosGrupo = contenidoDiv.split(',').map(cadenaGrupo => {
+                const cadenaGrupoLimpia = cadenaGrupo.trim();
+
+                return JSON.parse(cadenaGrupoLimpia.replace('/^{|}|)$/g',
+                '')); // Elimina llaves y paréntesis finales
+            });
+
+            const segundoNombreGrupo = objetosGrupo[1].name;
+            console.log('Segundo nombre de grupo:',
+            segundoNombreGrupo); // Resultado: ac-nice-viewers-comercial-low
+        }
+        
         //****************************Lista de resultados************************************
         if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
 

@@ -2040,6 +2040,8 @@ div.meta>div.url {
 
 #usuarioActivoID,
 #usuarioActivoGrupo,
+#usuarioActivoTipo,
+#usuarioActivoProperties,
 #googleTagManager {
 	display: none;
 	width: 0px;

@@ -1,0 +1,11 @@
+.elm-header {
+    border: 5px solid red !important;
+}
+
+.elm-content-container {
+    border: 5px solid green !important;
+}
+
+.elm-footer {
+    border: 5px solid blue !important;
+}
