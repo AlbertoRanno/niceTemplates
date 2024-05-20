@@ -1,0 +1,144 @@
+<!--
+Hoy hice otras pruebas, traer todas las urls individuales de la api, armar cada sector con un h2 previo hardcodeado, e importar cada una donde corresponde, 
+apuntando a tener todo el código individual, y que no se rompa al traer una página..
+https://osde-prod1.mindtouch.us/PruebasVarias/AlbertPruebas/infoAPI_H2_P_Individual
+pero se trajo los sectores vacíos, con eso entendí algo que era obvio, pero se me estaba pasando por alto.. al reutilizar, sin marcar secciones,
+no es que se trae todo el contenido, se trae toda la página! es decir, se trae su JS y está haciendo la conexión a la API en la página desde donde 
+se está reutilizando! => Entonces, surgió una nueva opción, que estoy puliendo, reutilizar en el JS de todas las páginas (que diferencia hay con el head?’)
+y de ahí modificar el script, de DIV, a span, con clase “salusoft”. Y que el script detecte, el nro que sigue a salusoft, y en base a eso complete la url 
+que corresponda…
+-->
+
+<p>Este es el tope de reintegros que da salusoft: <span class="salusoft">$</span></p>
+
+<h2>Api individual 1</h2>
+
+<p><span class="salusoft1"></span></p>
+
+<h2>Api individual 2</h2>
+
+<p><span class="salusoft2">$</span></p>
+
+<h2>Api individual 3</h2>
+
+<p><span class="salusoft3">$</span></p>
+
+<h2>Api individual 4</h2>
+
+<p><span class="salusoft4">$</span></p>
+
+<h2>Api individual 5</h2>
+
+<p><span class="salusoft5">$</span></p>
+
+<h2>Api individual 6</h2>
+
+<p><span class="salusoft6">$</span></p>
+
+<h2>Api individual 7</h2>
+
+<p><span class="salusoft7">$</span></p>
+
+<h2>Api individual 8</h2>
+
+<p><span class="salusoft8">$</span></p>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const spanIDs = ['salusoft', 'salusoft1', 'salusoft2', 'salusoft3', 'salusoft4', 'salusoft5',
+            'salusoft6',
+            'salusoft7'
+        ];
+
+        spanIDs.forEach(spanID => {
+            const spanARecibirInfo = document.getElementsByClassName(spanID);
+            console.log(`Buscando span con ID ${spanID}`);
+
+            if (spanARecibirInfo) {
+                let apiUrl;
+                switch (spanID) {
+                    case 'salusoft':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos';
+                        break;
+                    case 'salusoft1':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/1';
+                        break;
+                    case 'salusoft2':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/2';
+                        break;
+                    case 'salusoft3':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/3';
+                        break;
+                    case 'salusoft4':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/4';
+                        break;
+                    case 'salusoft5':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/5';
+                        break;
+                    case 'salusoft6':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/6';
+                        break;
+                    case 'salusoft7':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/7';
+                        break;
+                    default:
+                        console.warn(`ID de span desconocido: ${spanID}`);
+                        apiUrl = '';
+                }
+                console.log(`Realizando fetch para el span con ID ${spanID} desde la URL: ${apiUrl}`);
+
+                fetch(apiUrl)
+                    .then(response => {
+                        console.log('Respuesta recibida desde la API:', response);
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        throw new Error('No se pudo traer la info desde la API');
+                    })
+                    .then(data => {
+                        console.log(`Datos obtenidos para el span con ID ${spanID}:`, data);
+
+                        if (Array.isArray(data)) {
+                            data.forEach((objeto, index) => {
+                                const h6Api = document.createElement('h2');
+                                h6Api.classList.add('h6Api');
+                                h6Api.textContent = objeto.class;
+                                spanARecibirInfo.appendChild(h6Api);
+
+                                const p1Api = document.createElement('p');
+                                p1Api.classList.add('p1Api');
+                                p1Api.textContent = objeto.title;
+                                spanARecibirInfo.appendChild(p1Api);
+
+                                const p2Api = document.createElement('p');
+                                p2Api.classList.add('p2Api');
+                                p2Api.textContent = objeto.completed ? 'Sí' : 'No';
+                                spanARecibirInfo.appendChild(p2Api);
+                            });
+                        } else {
+                            const h6Api = document.createElement('h2');
+                            h6Api.classList.add('h6Api');
+                            h6Api.textContent = data.class;
+                            spanARecibirInfo.appendChild(h6Api);
+
+                            const p1Api = document.createElement('p');
+                            p1Api.classList.add('p1Api');
+                            p1Api.textContent = data.title;
+                            spanARecibirInfo.appendChild(p1Api);
+
+                            const p2Api = document.createElement('p');
+                            p2Api.classList.add('p2Api');
+                            p2Api.textContent = data.completed ? 'Sí' : 'No';
+                            spanARecibirInfo.appendChild(p2Api);
+                        }
+                    })
+                    .catch(error => {
+                        console.error(`Hubo un problema con fetch para el span con ID ${spanID}:`,
+                            error);
+                    });
+            } else {
+                console.warn(`Span con ID ${spanID} no encontrado`);
+            }
+        });
+    });
+</script>

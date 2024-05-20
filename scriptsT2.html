@@ -191,6 +191,69 @@
             });
         }
 
+        //**************************** Obtener tipo de usuario activo *************************************
+        if (document.getElementById("usuarioActivoTipo")) {
+            var divUsuarioActivoTipo = document.getElementById("usuarioActivoTipo");
+            var tipoDeUsuario = obtenertipoDeUsuario();
+            if (tipoDeUsuario) {
+                divUsuarioActivoTipo.textContent = tipoDeUsuario;
+            }
+        }
+
+        function obtenertipoDeUsuario() {
+            var usuarioActivoTipo;
+            if (document.getElementById('usuarioActivoPro') && document.getElementById('usuarioActivoAdmin')) {
+                if (document.getElementById('usuarioActivoPro').textContent == "true") {
+                    usuarioActivoTipo = "Pro"
+                } else {
+                    usuarioActivoTipo = "Visualizador"
+                }
+                if (document.getElementById('usuarioActivoAdmin').textContent == "true") {
+                    usuarioActivoTipo = "Admin"
+                }
+                return usuarioActivoTipo;
+            }
+        }
+        //****************************METRICAS FEEDBACK****************************
+        if (document.querySelector('.mt-rating-button-yes')) {
+
+            var usuarioActivoGrupo, btnFeedbackSi, btnFeedbackNo, btnEnvioFeedback, textAreaFeedback,
+                comentarioFeedback;
+
+            btnEnvioFeedback = document.querySelector('.mt-feedback-submit');
+            textAreaFeedback = document.getElementById('textarea-feedback');
+            btnFeedbackSi = document.querySelector('.mt-rating-button-yes');
+            btnFeedbackNo = document.querySelector('.mt-rating-button-no');
+            usuarioActivoGrupo = obtenerNombreDeGrupo();
+            const feedbackForm = document.querySelector('.mt-feedback-form');
+
+            btnFeedbackSi.addEventListener('click', () => {
+                feedbackForm.style.display = 'none';
+                dataLayer.push({
+                    'tipo_feedback': 'Si',
+                    'comentario': '',
+                    'usuarioactivo_grupo': usuarioActivoGrupo
+                });
+            });
+
+            btnFeedbackNo.addEventListener('click', () => {
+                feedbackForm.style.display = 'block';
+                dataLayer.push({
+                    'tipo_feedback': 'No',
+                    'comentario': '',
+                    'usuarioactivo_grupo': usuarioActivoGrupo
+                });
+            });
+
+            btnEnvioFeedback.addEventListener('click', function () {
+                comentarioFeedback = textAreaFeedback.value;
+                dataLayer.push({
+                    'tipo_feedback': '',
+                    'comentario': comentarioFeedback,
+                    'usuarioactivo_grupo': usuarioActivoGrupo
+                });
+            });
+        }
         //*********************Cambiar Nombre en solapa Featured Articles*********************
         function cambiarNombreEnSolapa() {
             var featuredHighestRated = document.querySelector('.noindex .mt-featured-highest-rated');
@@ -621,13 +684,14 @@
         }
 
         function obtenerNombreDeGrupo() {
+            if (document.getElementById("usuarioActivoGrupo")) {
+                var divContent = document.getElementById("usuarioActivoGrupo").textContent;
+                var colonIndex = divContent.indexOf(':');
 
-            var divContent = document.getElementById("usuarioActivoGrupo").textContent;
-            var colonIndex = divContent.indexOf(':');
-
-            if (colonIndex !== -1) {
-                var jsonName = divContent.substring(1, colonIndex).trim();
-                return jsonName;
+                if (colonIndex !== -1) {
+                    var jsonName = divContent.substring(1, colonIndex).trim();
+                    return jsonName;
+                }
             }
         }
         //****************************Lista de resultados************************************
@@ -901,7 +965,7 @@
             link4.className = "linkMasBotonCopiarPortapapeles linkMasBotonCopiarPortapapelesLink4";
             var link4P = document.createElement("p");
             link4P.innerHTML =
-                "Para sugerir un nuevo art\u00EDculo, escribinos, desde tu cuenta de email, a contenidos\u0040osde.com.ar";
+                "Para sugerir un nuevo art\u00EDculo, escribinos desde tu email a contenidos\u0040osde.com.ar";
             //link4.setAttribute('title', 'Sugerir un nuevo art\u00EDculo');
             link4.appendChild(link4P);
             var iconoCopiarlink4 = document.createElement("img");
@@ -1276,7 +1340,7 @@
         */
 
         //Agregar la nueva categoria al listado, en la ubicacion deseada, mantener el formato ("nombre",). La ultima va sin coma.
-        let categorias = ["Socios y Empresas", "Prestadores"];
+        let categorias = ["Socios y Empresas", "Prestadores", "Base de conocimiento interna", "Urgencias"];
 
         /*Agregar las guias pertenecientes a la nueva Categoria, en la MISMA UBICACION QUE PUSIERON LA CATEGORIA (Si agregaron una
         Categoría luego de Afiliaciones, los corchetes con las guías para esta nueva categoría, irán después de los corchetes que 
@@ -1286,20 +1350,30 @@
         let guias = [
             // "Socios y Empresas"
             [
-                "Alta de socio - Modificaci\u00F3n de grupo familiar",
-                "Facturaci\u00F3n y Cobranzas a Socios",
+                "Altas y modificaciones de padr\u00F3n",
                 "Acceso al servicio",
-                "Empadronamientos a coberturas especiales",
-                "Solicitud de Autorizaciones",
-                "Otorgamiento de Reintegro y Pago Directo",
-                "Baja de socios"
+                "Facturaci\u00F3n y cobranzas",
+                "Coberturas diferenciales y empadronamientos",
+                "Autorizaciones",
+                "Reintegros y pago Directo",
+                "Bajas"
             ],
             // Prestadores
             [
-                "Aplicaciones",
-                "Extranet",
-                "Servicios",
-                "Validaci\u00F3n de l\u00EDnea"
+                "Postulaci\u00F3n y alta de prestador",
+                "Modificaci\u00F3n y actualizaci\u00F3n de contratos",
+                "Solicitud de autorizaciones",
+                "Otorgamiento del servicio",
+                "Liquidaci\u00F3n de consumos y pagos",
+                "Baja de prestadores"
+            ],
+            // Base de conocimiento interna
+            [
+                "Calidad de atenci\u00F3n",
+            ],
+            // Urgencias
+            [
+                "Servicios y Fichas de codificaci\u00F3n"
             ]
         ];
 
@@ -1326,6 +1400,20 @@
                 icono.loading = "lazy";
                 icono.src =
                     "https://osde-prod2.mindtouch.us/@api/deki/files/522/mindtouch.page%2523thumbnail?revision=4";
+            } else if (categoria === "Base de conocimiento interna") {
+                icono = document.createElement('img');
+                icono.classList.add('internal', 'imgHome3');
+                icono.alt = "mindtouch.page#thumbnail";
+                icono.loading = "lazy";
+                icono.src =
+                    "https://osde-prod2.mindtouch.us/@api/deki/files/991/Administraci%25C3%25B3n.svg";
+            } else if (categoria === "Urgencias") {
+                icono = document.createElement('img');
+                icono.classList.add('internal', 'imgHome6');
+                icono.alt = "mindtouch.page#thumbnail";
+                icono.loading = "lazy";
+                icono.src =
+                    "https://osde-prod2.mindtouch.us/@api/deki/files/997/Urgencias.svg";
             }
 
             if (icono) {

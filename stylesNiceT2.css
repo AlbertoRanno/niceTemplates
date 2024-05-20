@@ -2042,6 +2042,7 @@ div.meta>div.url {
 #usuarioActivoGrupo,
 #usuarioActivoTipo,
 #usuarioActivoAdmin,
+#usuarioActivoPro,
 #googleTagManager {
 	display: none;
 	width: 0px;

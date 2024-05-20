@@ -1,0 +1,90 @@
+<!-- Prueba 4
+Probé cambiar por 4ta vez la lógica, y no traer los datos a un contenedor, sino directo al cuerpo de la página, filtrando, en ese caso, desde el script por la url,
+ o cargando el JS en la página… pero tampoco arma el índice, ni reconoce cada sección individualmente para reutilizar… Traigo datos en al div del contenido 
+ de la pagina:
+https://osde-prod1.mindtouch.us/PruebasVarias/AlbertPruebas/infoAPI_Filtro_P%C3%A1gina
+https://osde-prod1.mindtouch.us/PruebasVarias/AlbertPruebas/infoAPI_Reutilizo_Contenido_de_Filtro_Pagina
+
+-->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const IDsDivs = ['infoApi', 'infoApi1', 'infoApi2', 'pageText'];
+
+        IDsDivs.forEach(IdDiv => {
+            const divARecibirInfo = document.getElementById(IdDiv);
+            console.log(`Buscando div con ID ${IdDiv}`);
+
+            if (divARecibirInfo) {
+                let apiUrl;
+                switch (IdDiv) {
+                    case 'pageText':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos';
+                        break;
+                    case 'infoApi1':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/1';
+                        break;
+                    case 'infoApi2':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/2';
+                        break;
+                    default:
+                        console.warn(`ID de div desconocido: ${IdDiv}`);
+                        apiUrl = '';
+                }
+                console.log(`Realizando fetch para el div con ID ${IdDiv} desde la URL: ${apiUrl}`);
+
+                fetch(apiUrl)
+                    .then(response => {
+                        console.log('Respuesta recibida desde la API:', response);
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        throw new Error('No se pudo traer la info desde la API');
+                    })
+                    .then(data => {
+                        console.log(`Datos obtenidos para el div con ID ${IdDiv}:`, data);
+
+                        if (Array.isArray(data)) {
+                            data.forEach((objeto, index) => {
+                                const h6Api = document.createElement('h2');
+                                h6Api.classList.add('h6Api');
+                                h6Api.textContent = objeto.id;
+                                divARecibirInfo.appendChild(h6Api);
+
+                                const p1Api = document.createElement('p');
+                                p1Api.classList.add('p1Api');
+                                p1Api.textContent = objeto.title;
+                                divARecibirInfo.appendChild(p1Api);
+
+                                const p2Api = document.createElement('p');
+                                p2Api.classList.add('p2Api');
+                                p2Api.textContent = objeto.completed ? 'Sí' : 'No';
+                                divARecibirInfo.appendChild(p2Api);
+                            });
+                        } else {
+                            const h6Api = document.createElement('h2');
+                            h6Api.classList.add('h6Api');
+                            h6Api.textContent = data.id;
+                            divARecibirInfo.appendChild(h6Api);
+
+                            const p1Api = document.createElement('p');
+                            p1Api.classList.add('p1Api');
+                            p1Api.textContent = data.title;
+                            divARecibirInfo.appendChild(p1Api);
+
+                            const p2Api = document.createElement('p');
+                            p2Api.classList.add('p2Api');
+                            p2Api.textContent = data.completed ? 'Sí' : 'No';
+                            divARecibirInfo.appendChild(p2Api);
+                        }
+                    })
+                    .catch(error => {
+                        console.error(`Hubo un problema con fetch para el div con ID ${IdDiv}:`,
+                            error);
+                    });
+            } else {
+                console.warn(`Div con ID ${IdDiv} no encontrado`);
+            }
+        });
+    });
+</script>

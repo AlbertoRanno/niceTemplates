@@ -4,6 +4,8 @@
 
         IDsDivs.forEach(IdDiv => {
             const divARecibirInfo = document.getElementById(IdDiv);
+            console.log(`Buscando div con ID ${IdDiv}`);
+
             if (divARecibirInfo) {
                 let apiUrl;
                 switch (IdDiv) {
@@ -20,26 +22,51 @@
                         console.warn(`ID de div desconocido: ${IdDiv}`);
                         apiUrl = '';
                 }
+                console.log(`Realizando fetch para el div con ID ${IdDiv} desde la URL: ${apiUrl}`);
+
                 fetch(apiUrl)
                     .then(response => {
+                        console.log('Respuesta recibida desde la API:', response);
                         if (response.ok) {
                             return response.json();
                         }
                         throw new Error('No se pudo traer la info desde la API');
                     })
                     .then(data => {
+                        console.log(`Datos obtenidos para el div con ID ${IdDiv}:`, data);
+
                         if (Array.isArray(data)) {
-                            data.forEach(objeto => {
-                                const pContenedor = document.createElement('p');
-                                pContenedor.textContent =
-                                    `Tarea: ${objeto.title}, Completada: ${objeto.completed ? 'Sí' : 'No'}`;
-                                divARecibirInfo.appendChild(pContenedor);
+                            data.forEach((objeto, index) => {
+                                const h6Api = document.createElement('h2');
+                                h6Api.classList.add('h6Api');
+                                h6Api.textContent = objeto.id;
+                                divARecibirInfo.appendChild(h6Api);
+
+                                const p1Api = document.createElement('p');
+                                p1Api.classList.add('p1Api');
+                                p1Api.textContent = objeto.title;
+                                divARecibirInfo.appendChild(p1Api);
+
+                                const p2Api = document.createElement('p');
+                                p2Api.classList.add('p2Api');
+                                p2Api.textContent = objeto.completed ? 'Sí' : 'No';
+                                divARecibirInfo.appendChild(p2Api);
                             });
                         } else {
-                            const pContenedor = document.createElement('p');
-                            pContenedor.textContent =
-                                `Tarea: ${data.title}, Completada: ${data.completed ? 'Sí' : 'No'}`;
-                            divARecibirInfo.appendChild(pContenedor);
+                            const h6Api = document.createElement('h2');
+                            h6Api.classList.add('h6Api');
+                            h6Api.textContent = data.id;
+                            divARecibirInfo.appendChild(h6Api);
+
+                            const p1Api = document.createElement('p');
+                            p1Api.classList.add('p1Api');
+                            p1Api.textContent = data.title;
+                            divARecibirInfo.appendChild(p1Api);
+
+                            const p2Api = document.createElement('p');
+                            p2Api.classList.add('p2Api');
+                            p2Api.textContent = data.completed ? 'Sí' : 'No';
+                            divARecibirInfo.appendChild(p2Api);
                         }
                     })
                     .catch(error => {
@@ -47,7 +74,7 @@
                             error);
                     });
             } else {
-                //console.warn(`Div con ID ${IdDiv} no encontrado`);
+                console.warn(`Div con ID ${IdDiv} no encontrado`);
             }
         });
     });
@@ -574,14 +601,34 @@
                 const cadenaGrupoLimpia = cadenaGrupo.trim();
 
                 return JSON.parse(cadenaGrupoLimpia.replace('/^{|}|)$/g',
-                '')); // Elimina llaves y paréntesis finales
+                    '')); // Elimina llaves y paréntesis finales
             });
 
             const segundoNombreGrupo = objetosGrupo[1].name;
             console.log('Segundo nombre de grupo:',
-            segundoNombreGrupo); // Resultado: ac-nice-viewers-comercial-low
+                segundoNombreGrupo); // Resultado: ac-nice-viewers-comercial-low
         }
-        
+
+        /* WAN... Estaba actualizando el repo, y no sabia cual cambio dejarte..
+        function obtenerNombreDeGrupo() {
+            const objetoOriginal = document.getElementById('usuarioActivoGrupo').textContent;
+
+            function agregarComillasAClaveYValor(clave, valor) {
+                if (typeof valor === 'string') {
+                    return `"${clave}": "${valor}"`;
+                } else {
+                    return `"${clave}": ${ valor }`;
+                }
+            }
+
+            const objetoConComillas = Object.entries(objetoOriginal).reduce((acc, [clave, valor]) => {
+                acc[agregarComillasAClaveYValor(clave, valor)] = valor;
+                return acc;
+            }, {});
+
+            console.log(objetoConComillas);
+        }
+        */
         //****************************Lista de resultados************************************
         if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
 
@@ -1210,7 +1257,7 @@
         */
 
         //Agregar la nueva categoria al listado, en la ubicacion deseada, mantener el formato ("nombre",). La ultima va sin coma.
-        let categorias = ["Socios y Empresas", "Prestadores"];
+        let categorias = ["Socios y Empresas", "Prestadores", "Base de conocimiento interna"];
 
         /*Agregar las guias pertenecientes a la nueva Categoria, en la MISMA UBICACION QUE PUSIERON LA CATEGORIA (Si agregaron una
         Categoría luego de Afiliaciones, los corchetes con las guías para esta nueva categoría, irán después de los corchetes que 
@@ -1234,7 +1281,7 @@
                 "Extranet",
                 "Servicios",
                 "Validaci\u00F3n de l\u00EDnea"
-            ]
+            ],
         ];
 
         function agregarCategoria(categoria, guias) {

@@ -1,0 +1,98 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const spanIDs = ['salusoft', 'salusoft1', 'salusoft2', 'salusoft3', 'salusoft4', 'salusoft5', 'salusoft6',
+            'salusoft7'
+        ];
+
+        spanIDs.forEach(spanID => {
+            const spanARecibirInfo = document.getElementById(spanID);
+            console.log(`Buscando span con ID ${spanID}`);
+
+            if (spanARecibirInfo) {
+                let apiUrl;
+                switch (spanID) {
+                    case 'salusoft':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos';
+                        break;
+                    case 'salusoft1':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/1';
+                        break;
+                    case 'salusoft2':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/2';
+                        break;
+                    case 'salusoft3':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/3';
+                        break;
+                    case 'salusoft4':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/4';
+                        break;
+                    case 'salusoft5':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/5';
+                        break;
+                    case 'salusoft6':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/6';
+                        break;
+                    case 'salusoft7':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/7';
+                        break;
+                    default:
+                        console.warn(`ID de span desconocido: ${spanID}`);
+                        apiUrl = '';
+                }
+                console.log(`Realizando fetch para el span con ID ${spanID} desde la URL: ${apiUrl}`);
+
+                fetch(apiUrl)
+                    .then(response => {
+                        console.log('Respuesta recibida desde la API:', response);
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        throw new Error('No se pudo traer la info desde la API');
+                    })
+                    .then(data => {
+                        console.log(`Datos obtenidos para el span con ID ${spanID}:`, data);
+
+                        if (Array.isArray(data)) {
+                            data.forEach((objeto, index) => {
+                                const h6Api = document.createElement('h2');
+                                h6Api.classList.add('h6Api');
+                                h6Api.textContent = objeto.id;
+                                spanARecibirInfo.appendChild(h6Api);
+
+                                const p1Api = document.createElement('p');
+                                p1Api.classList.add('p1Api');
+                                p1Api.textContent = objeto.title;
+                                spanARecibirInfo.appendChild(p1Api);
+
+                                const p2Api = document.createElement('p');
+                                p2Api.classList.add('p2Api');
+                                p2Api.textContent = objeto.completed ? 'Sí' : 'No';
+                                spanARecibirInfo.appendChild(p2Api);
+                            });
+                        } else {
+                            const h6Api = document.createElement('h2');
+                            h6Api.classList.add('h6Api');
+                            h6Api.textContent = data.id;
+                            spanARecibirInfo.appendChild(h6Api);
+
+                            const p1Api = document.createElement('p');
+                            p1Api.classList.add('p1Api');
+                            p1Api.textContent = data.title;
+                            spanARecibirInfo.appendChild(p1Api);
+
+                            const p2Api = document.createElement('p');
+                            p2Api.classList.add('p2Api');
+                            p2Api.textContent = data.completed ? 'Sí' : 'No';
+                            spanARecibirInfo.appendChild(p2Api);
+                        }
+                    })
+                    .catch(error => {
+                        console.error(`Hubo un problema con fetch para el span con ID ${spanID}:`,
+                            error);
+                    });
+            } else {
+                console.warn(`Span con ID ${spanID} no encontrado`);
+            }
+        });
+    });
+</script>

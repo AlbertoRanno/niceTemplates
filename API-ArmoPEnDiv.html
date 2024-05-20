@@ -1,3 +1,25 @@
+<!-- Prueba 1
+    Retomé el código que había hecho antes de las vacaciones, y en base a lo hablado en la meet, y lo que le consulté a Ani sobre el contenido de Salusoft, armé varias pruebas…
+La url que uso para las pruebas, es de un listado de tareas, viene un array, donde cada tarea es un objeto, que trae su id, el nombre de la tarea, y un booleano para indicar si se
+ completó o no la misma. Previo a las vacaciones, había confirmado que se podía levantar el contenido, ahora le estuve dando forma, y probando varias cosas.
+De entrada, lo que hice es lo siguiente, un script en el head, que lo hace, es escanear cada página, luego de que las mismas se carguen, en busca de un contenedor div, con 
+ciertos ids especiales. En base a estos ids, las urls que consulta para el fetch. (Esto lo puedo limitar a una o pocas páginas, para que no escanee todo el contenido… o, si 
+van a ser casos puntuales, cargar el JS en la misma página, como estuve actualizando y como lo estuve manejando hasta hoy a la mañana..).
+Suponiendo el caso de que encontró el div con un ID de api, comprueba que se traiga bien los datos, y arma toda la estructura interna que va ir dentro del DIV de la página. 
+Igualmente, así, o hardcodeando el html en la página, es válido. Digamos que es un camino posible, en base a como vengan dados los datos…
+Inicialmente, dado que no sé como vendrán los endpoints de salusoft, consideré de la misma API, que se traiga las 200 tareas con una URL, y una tarea específica con otra url
+ (para no tener que buscar otra api y ponerme a investigar…) y que guarde cada tarea , con sus datos, dentro de un <p> cada una… Con esto, probé de reutilizarlo, 
+    y pese a lo que me había quedado de una prueba previa a mis vacaciones… se comparte el contenido! sin tener la necesidad de tener abierta en el navegador la página que carga 
+    la API… Al respecto hicimos unas pruebas de permisos con Ani, donde ella con un usuario no administrador, pudo ver el contenido reutilizado (desde la página con la info,
+     a otra página común con permisos…)
+https://jsonplaceholder.typicode.com/todos
+Traigo datos en <p> dentro de DIV: (Agregar al ID del div, 1 o 2, para que cambie la url)
+https://osde-prod1.mindtouch.us/PruebasVarias/AlbertPruebas/infoApi_CambioDivs
+https://osde-prod1.mindtouch.us/PruebasVarias/AlbertPruebas/infoAPI_Reutilizo_Contenido_de_P
+
+-->
+
+
 <!--Fetch Simplificado-->
 <script>
     fetch('https://jsonplaceholder.typicode.com/todos/1')
@@ -6,7 +28,7 @@
 </script>
 
 <!--Estructura en la que voy a insertar la info-->
-<div class="infoApi">
+<div id="infoApi">
     <!-- La estructura interna que la arme el script -->
 </div>
 
@@ -93,9 +115,9 @@
             }
         });
     });
-  //  } else {
-  //      console.log('No estoy en la p\u00E1gina correcta.');
-  //  }
+    //  } else {
+    //      console.log('No estoy en la p\u00E1gina correcta.');
+    //  }
 </script>
 
 <!-- Comentario previo a la resolución final
@@ -150,7 +172,7 @@ Op2 - ver de guardar la info en el local storage, y redistribuir de ahí a donde
                         } else {
                             const pContenedor = document.createElement('p');
                             pContenedor.textContent =
-                                `Tarea: ${data.title}, Completada: ${data.completed ? 'Sí' : 'No'}`;
+                                `C\u00F3digo: ${data.id}, Tarea: ${data.title}, Completada: ${data.completed ? 'Sí' : 'No'}`;
                             divARecibirInfo.appendChild(pContenedor);
                         }
                     })

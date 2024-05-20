@@ -1,0 +1,50 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const IDsDivs = ['pageText'];
+
+    IDsDivs.forEach(IdDiv => {
+        const divARecibirInfo = document.getElementById(IdDiv);
+        console.log(`Buscando div con ID ${IdDiv}`);
+
+        if (divARecibirInfo) {
+            let apiUrl;
+            switch (IdDiv) {
+                case 'pageText':
+                    apiUrl = 'https://jsonplaceholder.typicode.com/todos';
+                    break;
+                default:
+                    console.warn(`ID de div desconocido: ${IdDiv}`);
+                    apiUrl = '';
+            }
+            console.log(`Realizando fetch para el div con ID ${IdDiv} desde la URL: ${apiUrl}`);
+
+            fetch(apiUrl)
+                .then(response => {
+                    console.log('Respuesta recibida desde la API:', response);
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('No se pudo traer la info desde la API');
+                })
+                .then(data => {
+                    console.log(`Datos obtenidos para el div con ID ${IdDiv}:`, data);
+
+                    if (Array.isArray(data)) {
+                        data.forEach((objeto, index) => {
+                            const h2 = document.createElement('h2');
+                            h2.textContent = objeto.title;
+                            divARecibirInfo.appendChild(h2);
+                        });
+                    } else {
+                        // Manejar el caso de un solo objeto
+                    }
+                })
+                .catch(error => {
+                    console.error(`Hubo un problema con fetch para el div con ID ${IdDiv}:`, error);
+                });
+        } else {
+            console.warn(`Div con ID ${IdDiv} no encontrado`);
+        }
+    });
+});
+</script>

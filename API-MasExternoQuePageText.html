@@ -1,0 +1,89 @@
+<!-- Prueba 5
+Por 5ta prueba, probé insertando directo en section con clase mt-content-container, que es el contenedor de orden más externo de la página, está justo después del aside del índice.. pero lo armaba mal… luego lo coloqué bien donde correspondía, y probé 2 situaciones:
+que el script arme solo los h2, al igual que nice los recibe, y en la misma seccion, para hacer el indice y ofrecer las secciones a reutilizar… pero nada.. 
+tambien generé directamente las secciones con las mismas etiquetas, y los mismos atributos… pero tampoco funciono… se ve bien, como una sucesión luego de los ejemplos… pero no los toma para el indice ni para las secciones…
+https://osde-prod1.mindtouch.us/PruebasVarias/AlbertPruebas/infoAPI_H2_a_Secciones
+https://osde-prod1.mindtouch.us/PruebasVarias/AlbertPruebas/infoAPI_Secciones_directas
+https://osde-prod1.mindtouch.us/PruebasVarias/AlbertPruebas/infoApi_Reuse
+-->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const IDsDivs = ['elm-main-content'];
+
+        IDsDivs.forEach(IdDiv => {
+            const divARecibirInfo = document.getElementById(IdDiv);
+            console.log(`Buscando div con ID ${IdDiv}`);
+
+            if (divARecibirInfo) {
+                let apiUrl;
+                switch (IdDiv) {
+                    case 'elm-main-content':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos';
+                        break;
+                    case 'infoApi1':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/1';
+                        break;
+                    case 'infoApi2':
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/2';
+                        break;
+                    default:
+                        console.warn(`ID de div desconocido: ${IdDiv}`);
+                        apiUrl = '';
+                }
+                console.log(`Realizando fetch para el div con ID ${IdDiv} desde la URL: ${apiUrl}`);
+
+                fetch(apiUrl)
+                    .then(response => {
+                        console.log('Respuesta recibida desde la API:', response);
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        throw new Error('No se pudo traer la info desde la API');
+                    })
+                    .then(data => {
+                        console.log(`Datos obtenidos para el div con ID ${IdDiv}:`, data);
+
+                        if (Array.isArray(data)) {
+                            data.forEach((objeto, index) => {
+                                const h6Api = document.createElement('h2');
+                                h6Api.classList.add('h6Api');
+                                h6Api.textContent = objeto.id;
+                                divARecibirInfo.appendChild(h6Api);
+
+                                const p1Api = document.createElement('p');
+                                p1Api.classList.add('p1Api');
+                                p1Api.textContent = objeto.title;
+                                divARecibirInfo.appendChild(p1Api);
+
+                                const p2Api = document.createElement('p');
+                                p2Api.classList.add('p2Api');
+                                p2Api.textContent = objeto.completed ? 'Sí' : 'No';
+                                divARecibirInfo.appendChild(p2Api);
+                            });
+                        } else {
+                            const h6Api = document.createElement('h2');
+                            h6Api.classList.add('h6Api');
+                            h6Api.textContent = data.id;
+                            divARecibirInfo.appendChild(h6Api);
+
+                            const p1Api = document.createElement('p');
+                            p1Api.classList.add('p1Api');
+                            p1Api.textContent = data.title;
+                            divARecibirInfo.appendChild(p1Api);
+
+                            const p2Api = document.createElement('p');
+                            p2Api.classList.add('p2Api');
+                            p2Api.textContent = data.completed ? 'Sí' : 'No';
+                            divARecibirInfo.appendChild(p2Api);
+                        }
+                    })
+                    .catch(error => {
+                        console.error(`Hubo un problema con fetch para el div con ID ${IdDiv}:`,
+                            error);
+                    });
+            } else {
+                console.warn(`Div con ID ${IdDiv} no encontrado`);
+            }
+        });
+    });
+</script>

@@ -1,0 +1,113 @@
+<!-- Versión Final
+    => Entonces, surgió una nueva opción, que estoy puliendo, reutilizar en el JS de todas las páginas (que diferencia hay con el head?’) y de ahí modificar el script, de DIV, a span, con clase “salusoft”. Y que el script detecte, el nro que sigue a salusoft, y en base a eso complete la url que corresponda…
+<span class="salusoft">$</span> De acá, si fuera pocas opciones, se las deja prearmadas en el listado… si son miles, es para que haga con cuidado el equipo de contenido=>
+=> html => ctrl + f => “salusoft” => “id” que corresponda
+https://osde-prod1.mindtouch.us/PruebasVarias/AlbertPruebas/infoAPI_Empadronamiento_para_Medicamentos_Cr%C3%B3nicos
+Acá quizás se pueda pulir un poco más.. y lo de pasar el JS al gral no lo hice porque tengo muchos articulos con códigos distintos, que a su vez reutilizan… y no quiero romperlos aún, hasta ver por cual camino seguir…
+pero buen… dependo de cómo venga el contenido de su api… 
+(Terminé haciendo un script en T1)
+-->
+
+<script>
+    /* La idea es que los dataEntry/Contenido, carguen la info, y cuando quieran algún dato puntual de salusoft, en el lugar donde lo desean, pongan, el símbolo "$",
+lo pinten y pongan la clase "salusoft". Luego vayan al html, y al final de la misma, (luego de buscarla con control + F), le agreguen el nro del endpoint que necesitan
+en ese caso. Para eso, este código: */
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Selecciono todos los spans cuyas clases comienzan con "salusoft" (dependiendo el nro que sigue a "salusoft", la url a la que se conecta)
+        // Nota, una vez que se carga la página, ya van a estar los "$" con las clases correspondientes. Ej. "salusoft32" , "salusoft24"...
+        const spansSalusoft = document.querySelectorAll('span[class^="salusoft"]');
+
+        // Filtro los spans que contienen el símbolo "$" 
+        //(la idea es que señalen/pinten con la clase "salusoft" el signo "$" para que este sea reemplazado por el contenido de la API)
+        const filteredSpans = Array.from(spansSalusoft).filter(span => span.textContent.includes('$'));
+
+        //De los spans con clase "salusoft", recorro cada uno, y para cada uno voy a determinar la url a la que se conecta
+        filteredSpans.forEach(span => {
+            let apiUrl;
+            const spanClass = span.className; // Obtengo la clase del span con su numero
+            const match = spanClass.match(/\d+/); // Extraigo el número de la clase
+            /* expresión regular:
+            spanClass: será algo como "salusoft1", "salusoft2", etc.
+            El método .match() se utiliza para buscar una coincidencia en una cadena de texto con una expresión regular.
+            \d: Representa cualquier dígito (0-9).
+            +: Significa "uno o más" del carácter precedente. Entonces \d+ busca uno o más dígitos consecutivos.
+            Si se encuentra una coincidencia, match devuelve un array donde el primer elemento es el grupo de dígitos encontrado.
+            Si no se encuentra ningún dígito, devuelve null. */
+
+            const number = match ? match[0] :
+            ''; // Como match devuelve el numero, dentro de un array, si existe, devuelve el primer elemento de ese array,
+            // Si no existe (null), devuelve una cadena vacía
+
+            // Formo la URL en función del número
+            if (number === '') {
+                apiUrl =
+                'https://jsonplaceholder.typicode.com/todos'; //si dejaron "salusoft" solamente, conectar con la api completa, pero ahi tengo que ver que arma...
+            } else {
+                apiUrl = `https://jsonplaceholder.typicode.com/todos/${number}`;
+            }
+
+            console.log(`Realizando fetch para el span con clase ${spanClass} desde la URL: ${apiUrl}`);
+
+            fetch(apiUrl) //Se le podrían pasar, de ser necesarios, parámetros:
+            // https://developer.mozilla.org/en-US/docs/Web/API/fetch
+                .then(response => {
+                    console.log('Respuesta recibida desde la API:', response);
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('No se pudo traer la info desde la API');
+                })
+                .then(data => {
+                    console.log(`Datos obtenidos para el span con clase ${spanClass}:`, data);
+
+                    // Reemplazo el contenido del span con los datos obtenidos
+                    span.textContent = data
+                        .title; // Supongiendo que quiero mostrar el título de la tarea (title), 
+                    // En el caso de "salusoft" solamente, tendria que indicar que recorra todo el array y que muestre de cada uno el titulo... 
+                    // Pero para todos, tengo las otras formas..
+                })
+                .catch(error => {
+                    console.error(`Hubo un problema con fetch para el span con clase ${spanClass}:`,
+                        error);
+                });
+        });
+    });
+</script>
+
+<!-- Versión Limpia -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        //********************* Consumo de API externa a clase "salusoft" *********************
+
+        const spansSalusoft = document.querySelectorAll('span[class^="salusoft"]');
+        const filteredSpans = Array.from(spansSalusoft).filter(span => span.textContent.includes('$'));
+        filteredSpans.forEach(span => {
+            let apiUrl;
+            const spanClass = span.className;
+            const match = spanClass.match(/\d+/);
+            const number = match ? match[0] : '';
+            if (number === '') {
+                apiUrl = 'https://jsonplaceholder.typicode.com/todos';
+            } else {
+                apiUrl = `https://jsonplaceholder.typicode.com/todos/${number}`;
+            }
+            fetch(apiUrl)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('No se pudo traer la info desde la API');
+                })
+                .then(data => {
+                    span.textContent = data.title;
+                })
+                .catch(error => {
+                    console.error(`Hubo un problema con fetch para el span con clase ${spanClass}:`,
+                        error);
+                });
+        });
+
+    });
+</script>

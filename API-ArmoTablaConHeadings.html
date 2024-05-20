@@ -1,0 +1,286 @@
+<!-- Prueba 2 
+Luego de esto (prueba 1), procedí a hacer una tabla, donde cada columna tenía, por un lado el ID (como si fuera el código de salusoft), luego el nombre en otra, y el booleano en la tercera.. 
+Y esto también funciona bien. Salvo por un detalle… que es con lo que más estuve no puedo hacer que se pueda reutilizar SOLO una fila de la pagina, al parecer tanto como cuando arma el índice, como cuando ofrece qué sección reutilizar, utiliza los headings, del h2 al h6… pero, si están dentro de un div especial, con un id, como es el caso, no los toma, ni para una cosa ni para otra…
+probé hacer que arme la tabla, y que antes de cargar el código dentro de la 1er celda de cada fila, lo meta en un heading, es decir, dentro de un h2.. a h6… pero ninguno tomó… no los registra en ese contexto.
+Traigo datos en Tabla, y el contenido de la primer celda dentro de un h2
+https://osde-prod1.mindtouch.us/PruebasVarias/AlbertPruebas/infoApi_Tabla
+https://osde-prod1.mindtouch.us/PruebasVarias/AlbertPruebas/infoAPI_Reutilizo_Contenido_de_Tabla
+-->
+
+<script>
+    // En el articulo, debe haber un DIV ya creado, y la estructura interna la va a armar el script.
+    // Depende el ID que tenga ese DIV el contenido que se le insertara dentro.
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // Por cada url creo un ID, y esos IDs, los guardo en un array
+        const IDsDivs = ['infoApi', 'infoApi1', 'infoApi2'];
+
+        // Carga la pagina, y recorro los elementos de ese array, buscando uno por uno si existen en la pagina actual
+        IDsDivs.forEach(IdDiv => {
+
+            // De existir, capturo el Div mediante su respectivo ID
+            const divARecibirInfo = document.getElementById(IdDiv);
+            console.log(`Buscando div con ID ${IdDiv}`);
+
+            //Para ese ID capturado, chequeo si realmente existe, y si existe, defino que endpoint le toca
+            if (divARecibirInfo) {
+                let apiUrl; // URL del endpoint de la API:
+                switch (IdDiv) {
+                    case 'infoApi': //Si el id que captura es "infoApi", entonces uso la siguiente url, que trae 200 resultados
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos';
+                        break;
+                    case 'infoApi1': //Caso particular 1
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/1';
+                        break;
+                    case 'infoApi2': //Caso particular 2
+                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/2';
+                        break;
+                    default:
+                        console.warn(`ID de div desconocido: ${IdDiv}`);
+                        apiUrl =
+                            ''; // URL por defecto, es decir no asigno ninguna, porque no se condice en la relacion url/ID
+                }
+                console.log(`Realizando fetch para el div con ID ${IdDiv} desde la URL: ${apiUrl}`);
+
+                // Habiendo capturado el elemento, y sabiendo a que URL tiene que ir a buscar la info ese elemento, 
+                // utilizo fetch para realizar la solicitud GET a la API
+                fetch(apiUrl)
+                    .then(response => {
+                        console.log('Respuesta recibida desde la API:', response);
+                        // Verifico si la respuesta es exitosa (código de estado 200)
+                        if (response.ok) {
+                            // Parseo la respuesta como JSON y la retorno
+                            return response.json();
+                        }
+                        // Si la respuesta no es exitosa, lanzo un error
+                        throw new Error('No se pudo traer la info desde la API');
+                    })
+                    // Si todo fue existoso, en el siguiente then, creo la estructura html e inserto el contenido que traje de la api
+                    .then(data => {
+
+                        // muestro la informacion que traje en la consola del navegador
+                        console.log(`Datos obtenidos para el div con ID ${IdDiv}:`, data);
+
+                        // creo la estructura html
+                        const tablaApi = document.createElement('table');
+                        tablaApi.classList.add('tablaApi');
+
+                        const tablaApiHead = document.createElement('thead');
+                        const tablaApiBody = document.createElement('tbody');
+
+                        const filaApiEncabezados = document.createElement('tr');
+
+                        const encabezadoApi1 = document.createElement('th');
+                        const encabezadoApi2 = document.createElement('th');
+                        const encabezadoApi3 = document.createElement('th');
+                        encabezadoApi1.textContent = 'C\u00F3digo';
+                        encabezadoApi2.textContent = 'Tarea';
+                        encabezadoApi3.textContent = 'Completada';
+
+                        filaApiEncabezados.appendChild(encabezadoApi1);
+                        filaApiEncabezados.appendChild(encabezadoApi2);
+                        filaApiEncabezados.appendChild(encabezadoApi3);
+
+                        tablaApiHead.appendChild(filaApiEncabezados);
+
+                        // Verfico si la info que me traigo de la APi, es un array (un listado de objetos)
+                        // Para eso uso el objeto de JS "Array", y su funcion "isArray()" que devuelve un booleano si lo que se pasa en su argumento es o no un obj.
+                        if (Array.isArray(data)) {
+
+                            // Siendo el caso que sea un array, lo recorro, y creo las filas de la tabla con cada uno de sus objetos
+                            data.forEach((objeto, index) => {
+                                // Por cada objeto (elemento en la lista del array), voy a crear una fila, con tantas cantidad de celdas como columnas 
+                                // index es la posicion de ese objeto en el array (por si se necesitara...)
+                                const filaApi = document.createElement('tr');
+
+                                const celdaApi1 = document.createElement('td');
+                                const celdaApi2 = document.createElement('td');
+                                const celdaApi3 = document.createElement('td');
+
+                                // Aca es donde a las celdas, les cargo su contenido:
+
+                                // En este caso particular, el codigo lo invento con numeros sucesivos (no lo traigo de la api)
+                                // celdaApi1.textContent = (index + 1).toString(); 
+                                // index + 1, porque el indice comienza en cero, y lo paso a String
+
+                                celdaApi1.textContent = objeto.id; 
+
+                                // En estos casos, son las propiedades puntuales de estos objetos:
+                                celdaApi2.textContent = objeto.title;
+                                celdaApi3.textContent = objeto.completed ? 'S\u00ED' :
+                                'No'; //El objeto trae True or False => cond. ternario
+
+                                filaApi.appendChild(celdaApi1);
+                                filaApi.appendChild(celdaApi2);
+                                filaApi.appendChild(celdaApi3);
+
+                                tablaApiBody.appendChild(filaApi);
+                            });
+                        } else {
+                            // Si la info que me traje de la API, NO es un array, es solo UN objeto, solo creo, UNA fila
+
+                            const filaApi = document.createElement('tr');
+
+                            const celdaApi1 = document.createElement('td');
+                            const celdaApi2 = document.createElement('td');
+                            const celdaApi3 = document.createElement('td');
+
+                            celdaApi1.textContent = data.id;
+                            celdaApi2.textContent = data.title;
+                            celdaApi3.textContent = data.completed ? 'Sí' : 'No';
+
+                            filaApi.appendChild(celdaApi1);
+                            filaApi.appendChild(celdaApi2);
+                            filaApi.appendChild(celdaApi3);
+
+                            tablaApiBody.appendChild(filaApi);
+                        }
+
+                        tablaApi.appendChild(tablaApiHead);
+                        tablaApi.appendChild(tablaApiBody);
+
+                        // finalmente, agrego la estructura de la tabla con su contenido, en el div que ya estaba en la pagina
+                        divARecibirInfo.appendChild(tablaApi);
+                    })
+                    // Capturo y muestro cualquier error durante la solicitud
+                    .catch(error => {
+                        console.error(`Hubo un problema con fetch para el div con ID ${IdDiv}:`,
+                            error);
+                    });
+            } else {
+                console.warn(`Div con ID ${IdDiv} no encontrado`);
+            }
+        });
+    });
+</script>
+
+<style>
+    .tablaApi {
+        border-collapse: collapse;
+    }
+
+    .tablaApi th,
+    .tablaApi td {
+        border: 1px solid black;
+        padding: 8px;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const IDsDivs = ['infoApi', 'infoApi1', 'infoApi2'];
+
+    IDsDivs.forEach(IdDiv => {
+        const divARecibirInfo = document.getElementById(IdDiv);
+        console.log(`Buscando div con ID ${IdDiv}`);
+
+        if (divARecibirInfo) {
+            let apiUrl;
+            switch (IdDiv) {
+                case 'infoApi':
+                    apiUrl = 'https://jsonplaceholder.typicode.com/todos';
+                    break;
+                case 'infoApi1':
+                    apiUrl = 'https://jsonplaceholder.typicode.com/todos/1';
+                    break;
+                case 'infoApi2':
+                    apiUrl = 'https://jsonplaceholder.typicode.com/todos/2';
+                    break;
+                default:
+                    console.warn(`ID de div desconocido: ${IdDiv}`);
+                    apiUrl = '';
+            }
+            console.log(`Realizando fetch para el div con ID ${IdDiv} desde la URL: ${apiUrl}`);
+
+            fetch(apiUrl)
+                .then(response => {
+                    console.log('Respuesta recibida desde la API:', response);
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('No se pudo traer la info desde la API');
+                })
+                .then(data => {
+                    console.log(`Datos obtenidos para el div con ID ${IdDiv}:`, data);
+
+                    const tablaApi = document.createElement('table');
+                    tablaApi.classList.add('tablaApi');
+
+                    const tablaApiHead = document.createElement('thead');
+                    const tablaApiBody = document.createElement('tbody');
+
+                    const filaApiEncabezados = document.createElement('tr');
+
+                    const encabezadoApi1 = document.createElement('th');
+                    const encabezadoApi2 = document.createElement('th');
+                    const encabezadoApi3 = document.createElement('th');
+                    encabezadoApi1.textContent = 'Código';
+                    encabezadoApi2.textContent = 'Tarea';
+                    encabezadoApi3.textContent = 'Completada';
+
+                    filaApiEncabezados.appendChild(encabezadoApi1);
+                    filaApiEncabezados.appendChild(encabezadoApi2);
+                    filaApiEncabezados.appendChild(encabezadoApi3);
+
+                    tablaApiHead.appendChild(filaApiEncabezados);
+
+                    if (Array.isArray(data)) {
+                        data.forEach((objeto, index) => {
+                            const filaApi = document.createElement('tr');
+
+                            const celdaApi1 = document.createElement('td');
+                            const celdaApi2 = document.createElement('td');
+                            const celdaApi3 = document.createElement('td');
+
+                            const h6Content = document.createElement('h6');
+                            h6Content.classList.add('h6ApiContentReuse');
+                            h6Content.textContent = objeto.id;
+
+                            celdaApi1.appendChild(h6Content);
+                            celdaApi2.textContent = objeto.title;
+                            celdaApi3.textContent = objeto.completed ? 'Sí' : 'No';
+
+                            filaApi.appendChild(celdaApi1);
+                            filaApi.appendChild(celdaApi2);
+                            filaApi.appendChild(celdaApi3);
+
+                            tablaApiBody.appendChild(filaApi);
+                        });
+                    } else {
+                        const filaApi = document.createElement('tr');
+
+                        const celdaApi1 = document.createElement('td');
+                        const celdaApi2 = document.createElement('td');
+                        const celdaApi3 = document.createElement('td');
+
+                        const h6Content = document.createElement('h6');
+                        h6Content.classList.add('h6ApiContentReuse');
+                        h6Content.textContent = data.id;
+
+                        celdaApi1.appendChild(h6Content);
+                        celdaApi2.textContent = data.title;
+                        celdaApi3.textContent = data.completed ? 'Sí' : 'No';
+
+                        filaApi.appendChild(celdaApi1);
+                        filaApi.appendChild(celdaApi2);
+                        filaApi.appendChild(celdaApi3);
+
+                        tablaApiBody.appendChild(filaApi);
+                    }
+
+                    tablaApi.appendChild(tablaApiHead);
+                    tablaApi.appendChild(tablaApiBody);
+
+                    divARecibirInfo.appendChild(tablaApi);
+                })
+                .catch(error => {
+                    console.error(`Hubo un problema con fetch para el div con ID ${IdDiv}:`, error);
+                });
+        } else {
+            console.warn(`Div con ID ${IdDiv} no encontrado`);
+        }
+    });
+});
+
+</script>
