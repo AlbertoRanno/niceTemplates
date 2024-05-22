@@ -1,0 +1,177 @@
+<script>
+    /*********************************** MODIFICAR BARRA DE NAVEGACION ***********************************/
+    // SOLO AGREGAR LOS NOMBRES DE LAS CATEGORIAS Y SUS CORRESPONDIENTES GUIAS, TAL CUAL FUERON CREADAS EN SUS RUTAS
+
+    /* Códigos UNICODE para los nombres con tildes:
+    á - \u00E1
+    é - \u00E9
+    í - \u00ED
+    ó - \u00F3
+    ú - \u00FA
+
+    Á - \u00C1
+    É - \u00C9
+    Í - \u00CD
+    Ó - \u00D3
+    Ú - \u00DA
+    */
+
+    // Agregar la nueva categoría al listado, en la ubicación deseada, mantener el formato ("nombre",). La última va sin coma.
+    let categorias = ["Socios y Empresas", "Prestadores", "Urgencias", "Base de conocimiento interna"];
+
+    /* Agregar las guías pertenecientes a la nueva Categoría, en la MISMA UBICACIÓN QUE PUSIERON LA CATEGORÍA (Si agregaron una
+    Categoría luego de Afiliaciones, los corchetes con las guías para esta nueva categoría, irán después de los corchetes que 
+    contienen las guías de Afiliaciones para mantener la concordancia). Mantener el formato (["guiaA1" , "guiaA2"], ["guiaB1", "GuiaB2"],...).
+    Luego del último grupo de guías, no va la coma.*/
+
+    let guias = [
+        // "Socios y Empresas"
+        [
+            "Altas y modificaciones de padr\u00F3n",
+            "Acceso al servicio",
+            "Facturaci\u00F3n y cobranzas",
+            "Coberturas diferenciales y empadronamientos",
+            "Autorizaciones",
+            "Reintegros y pago Directo",
+            "Bajas"
+        ],
+        // Prestadores
+        [
+            "Postulaci\u00F3n y alta de prestador",
+            "Modificaci\u00F3n y actualizaci\u00F3n de contratos",
+            "Solicitud de autorizaciones",
+            "Otorgamiento del servicio",
+            "Liquidaci\u00F3n de consumos y pagos",
+            "Baja de prestadores"
+        ],
+        // Urgencias
+        [
+            "Servicios y Fichas de codificaci\u00F3n"
+        ],
+        // Base de conocimiento interna
+        [
+            "Calidad de atenci\u00F3n"
+        ]
+    ];
+
+    // Agregar las imágenes de las categorías con el formato ["ID", "NombreDelArchivo", "Formato"]
+    let imagenesCategorias = [
+        ["291", "Prestadores", "svg"],
+        ["292", "SociosYEmpresas", "svg"],
+        ["297", "Administraci\u00F3n", "svg"],
+        ["298", "Urgencias", "svg"]
+    ];
+
+    /*      1- La siguiente funcion se llama abajo de la misma, en el bucle FOR, y por cada nueva categoria, y sus guias, (y ahora tambien imagenes) crea siempre las mismas estructuras:
+
+            Nota: cuando se invoca la funcion agregarCategoria, con 'guias[i]', lo que se le esta pasando por cada categoria, es un array de guias
+
+            for (let i = 0; i < categorias.length; i++) {
+                agregarCategoria(categorias[i], guias[i], imagenesCategorias[i]);
+            }
+            Por cada categoria "i", por ejemplo el primer elemento de ese array, "Socios y Empresas", se pasa el primer elemento del array de guias, que es otro array: 
+            [
+            "Altas y modificaciones de padr\u00F3n",
+            "Acceso al servicio",
+            "Facturaci\u00F3n y cobranzas",
+            "Coberturas diferenciales y empadronamientos",
+            "Autorizaciones",
+            "Reintegros y pago Directo",
+            "Bajas"
+            ]
+            Y lo mismo con las imágenes, es otro array de Strings (ID, nombreDelArchivo, formato): ["291", "Prestadores", "svg"]
+
+            2- Por cada categoria creo un LI, con sus clases, que dentro lleva un link, con su href, nombreVisible, y title, el link se inserta en el LI.
+
+            3- Antes de generar el title (4-), ahora genera la imagen: "imagen", ahora es un array, si existe, creo el elmento img, con sus clases (todas iguales para el navbar), el alt, por si
+            no se carga la imagen, y el: "icono.loading = "lazy";"
+            El valor "lazy" indica que la imagen debe cargarse de manera diferida (lazy loading).
+            Con el lazy loading, la imagen solo se cargará cuando esté a punto de entrar en el viewport del navegador (es decir, cuando el usuario se desplaza hacia abajo y la 
+            imagen está a punto de ser visible). Esto mejora el rendimiento de la página al reducir el tiempo de carga inicial y el uso del ancho de banda.
+            Para cada imagen, todo lo arma igual, salvo el src, que es el que va a armar, en base a los strings del array, para hacer las urls, específicas de cada archivo.
+            imagen[0] + "/" + imagen[1] + "." + imagen[2];      ( == ID/nombre.formato)
+
+            5- Y por cada LI de categoría, se crea un UL, que va a almacenar su submenu (las guias). El UL tiene su clase 'submenu'
+            
+            6- Entonces, de ese array de guias que se recibió, por cada una de ellas, se ejecuta una nueva funcion, anonima en este caso, porque ya
+            la desarrollo ahi mismo. Y la funcion, hace basicamente lo mismo que la funcion agregarCategoria, crea, por cada guia, un LI, con su link,
+            y estos LI se insertan al UL
+
+            (Nota: lo mas dificil fue dar con 'encodeURIComponent(variable)', la cual es una función en JavaScript que se utiliza para codificar 
+            un componente uniforme de recursos (URI), como un String, convirtiendo caracteres especiales en su representación hexadecimal UTF-8. 
+            Esto es útil cuando se necesita incluir una cadena en una URL, ya que algunas cadenas pueden contener caracteres que tienen significados 
+            especiales en una URL y podrían causar problemas si no se codifican correctamente.
+            Por ejemplo, si categoria es una variable que contiene una cadena con espacios u otros caracteres especiales, al aplicar encodeURIComponent(categoria),
+            estos caracteres serán convertidos en su representación hexadecimal, asegurando que la URL resultante sea válida y pueda ser interpretada correctamente por el navegador.
+            Ejemplo práctico:
+
+            var categoria = "Electrónica & Tecnología";
+            var url = "https://ejemplo.com/busqueda?categoria=" + encodeURIComponent(categoria);
+
+            console.log(url);
+            En este ejemplo, si la variable categoria contiene la cadena "Electrónica & Tecnología", al aplicar encodeURIComponent(categoria), la URL resultante será:
+
+            https://ejemplo.com/busqueda?categoria=Electr%C3%B3nica%20%26%20Tecnolog%C3%ADa
+
+            Como se puedes ver, los caracteres especiales como el espacio (" ") y el ampersand ("&") se han convertido en su representación hexadecimal, 
+            lo que asegura que la URL sea válida y pueda ser interpretada correctamente por el navegador.
+            */
+
+    function agregarCategoria(categoria, guias, imagen) {
+        //2-
+        let listItem = document.createElement('li');
+        listItem.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
+        let link = document.createElement('a');
+        link.href = "/" + encodeURIComponent(categoria);
+        link.textContent = categoria;
+
+        //3-
+        // Agregar el icono a la izquierda de cada sección usando el array de imágenes
+        if (imagen) {
+            let icono = document.createElement('img');
+            icono.classList.add('internal', 'imgHome');
+            icono.alt = "mindtouch.page#thumbnail";
+            icono.loading = "lazy";
+            icono.src = "https://osde-prod1.mindtouch.us/@api/deki/files/" + imagen[0] + "/" + imagen[1] +
+                "." + imagen[2];
+            link.appendChild(icono);
+        }
+        //4-
+        link.title = categoria;
+        listItem.appendChild(link);
+        //5- 
+        let listadoPorCategoria = document.createElement('ul');
+        listadoPorCategoria.classList.add('submenu');
+        //6-
+        guias.forEach(function (guia) {
+            let subListItem = document.createElement('li');
+            let subLink = document.createElement('a');
+            subLink.href = "/" + encodeURIComponent(categoria) + "/" + encodeURIComponent(guia); //Lo IMPORTANTE
+            subLink.textContent = guia;
+            subLink.title = guia;
+            subListItem.appendChild(subLink);
+            listadoPorCategoria.appendChild(subListItem);
+        });
+
+        listItem.appendChild(listadoPorCategoria);
+        ulSubList.appendChild(listItem);
+    }
+
+    //1-
+    for (let i = 0; i < categorias.length; i++) {
+        agregarCategoria(categorias[i], guias[i], imagenesCategorias[i]);
+    }
+
+    //... sigue la creación del html previa a esta parte:
+    elementoMenu.appendChild(labelResponsive);
+    elementoMenu.appendChild(ulSubList);
+    ulPrincipal.appendChild(elementoMenu);
+    divContenedor.appendChild(ulPrincipal);
+    topLevelNavigation.appendChild(divContenedor);
+    topLevelNavigation.appendChild(divConsejos);
+    let logoContainer = document.querySelector('.elm-header-logo-container');
+    if (logoContainer) {
+        logoContainer.innerHTML = '';
+        logoContainer.appendChild(topLevelNavigation);
+    }
+</script>
