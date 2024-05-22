@@ -1,57 +1,3 @@
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const IDsDivs = ['infoApi', 'infoApi1', 'infoApi2'];
-
-        IDsDivs.forEach(IdDiv => {
-            const divARecibirInfo = document.getElementById(IdDiv);
-            if (divARecibirInfo) {
-                let apiUrl;
-                switch (IdDiv) {
-                    case 'infoApi':
-                        apiUrl = 'https://jsonplaceholder.typicode.com/todos';
-                        break;
-                    case 'infoApi1':
-                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/1';
-                        break;
-                    case 'infoApi2':
-                        apiUrl = 'https://jsonplaceholder.typicode.com/todos/2';
-                        break;
-                    default:
-                        console.warn(`ID de div desconocido: ${IdDiv}`);
-                        apiUrl = '';
-                }
-                fetch(apiUrl)
-                    .then(response => {
-                        if (response.ok) {
-                            return response.json();
-                        }
-                        throw new Error('No se pudo traer la info desde la API');
-                    })
-                    .then(data => {
-                        if (Array.isArray(data)) {
-                            data.forEach(objeto => {
-                                const pContenedor = document.createElement('p');
-                                pContenedor.textContent =
-                                    `Tarea: ${objeto.title}, Completada: ${objeto.completed ? 'Sí' : 'No'}`;
-                                divARecibirInfo.appendChild(pContenedor);
-                            });
-                        } else {
-                            const pContenedor = document.createElement('p');
-                            pContenedor.textContent =
-                                `Tarea: ${data.title}, Completada: ${data.completed ? 'Sí' : 'No'}`;
-                            divARecibirInfo.appendChild(pContenedor);
-                        }
-                    })
-                    .catch(error => {
-                        console.error(`Hubo un problema con fetch para el div con ID ${IdDiv}:`,
-                            error);
-                    });
-            } else {
-                //console.warn(`Div con ID ${IdDiv} no encontrado`);
-            }
-        });
-    });
-</script>
 <!-- Google Tag Manager -->
 <script>
     (function (w, d, s, l, i) {
@@ -156,6 +102,35 @@
 
     document.addEventListener('DOMContentLoaded', function () {
 
+        //********************* Consumo de API externa a clase "salusoft" *********************
+        const spansSalusoft = document.querySelectorAll('span[class^="salusoft"]');
+        const filteredSpans = Array.from(spansSalusoft).filter(span => span.textContent.includes('$'));
+        filteredSpans.forEach(span => {
+            let apiUrl;
+            const spanClass = span.className;
+            const match = spanClass.match(/\d+/);
+            const number = match ? match[0] : '';
+            if (number === '') {
+                apiUrl = 'https://jsonplaceholder.typicode.com/todos';
+            } else {
+                apiUrl = `https://jsonplaceholder.typicode.com/todos/${number}`;
+            }
+            fetch(apiUrl)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('No se pudo traer la info desde la API');
+                })
+                .then(data => {
+                    span.textContent = data.title;
+                })
+                .catch(error => {
+                    console.error(`Hubo un problema con fetch para el span con clase ${spanClass}:`,
+                        error);
+                });
+        });
+
         //********************* Foco automático en vista mobile de Particularidades *********************
         if (window.innerWidth < 650) {
             document.querySelectorAll('.navBarLateral button').forEach(function (button) {
@@ -176,21 +151,41 @@
             });
         }
 
-        //**************** Ocultar el "Dejar comentario" para calificaciones positivas ****************
-        if (document.querySelector('.mt-rating-button-yes')) {
-            const yesButton = document.querySelector('.mt-rating-button-yes');
-            const noButton = document.querySelector('.mt-rating-button-no');
-            const feedbackForm = document.querySelector('.mt-feedback-form');
+        //********************* METRICAS DE ARCHIVOS POR ARTICULO *********************
+        if (document.querySelectorAll('.ext-pdf, .ext-docx, .ext-jpg, .ext-png, .ext-doc')) {
+            var files = document.querySelectorAll('.ext-pdf, .ext-docx, .ext-jpg, .ext-png, .ext-doc');
+            var fileData = [];
 
-            yesButton.addEventListener('click', () => {
-                feedbackForm.style.display = 'none';
+            files.forEach(function (file) {
+                var fileName = file.getAttribute('title');
+                var fileUrl = file.getAttribute('href');
+                var fileType = '';
+
+                if (file.classList.contains('ext-pdf')) {
+                    fileType = 'PDF';
+                } else if (file.classList.contains('ext-docx') || file.classList.contains('ext-doc')) {
+                    fileType = 'Documento';
+                } else if (file.classList.contains('ext-jpg') || file.classList.contains('ext-png')) {
+                    fileType = 'Imagen';
+                }
+
+                fileData.push({
+                    type: fileType,
+                    name: fileName,
+                    url: fileUrl
+                });
             });
 
-            noButton.addEventListener('click', () => {
-                feedbackForm.style.display = 'block';
+            fileData.forEach(function (file) {
+                dataLayer.push({
+                    'event': 'Archivos por articulo',
+                    'file_type': file.type,
+                    'file_name': file.name,
+                    'file_url': file.url
+                });
+                console.log("fileTipo: ", file.type, "\nfileName: ", file.name, "\nfileName: ", file.url);
             });
         }
-
         //**************************** Obtener tipo de usuario activo *************************************
         if (document.getElementById("usuarioActivoTipo")) {
             var divUsuarioActivoTipo = document.getElementById("usuarioActivoTipo");
@@ -217,41 +212,32 @@
         //****************************METRICAS FEEDBACK****************************
         if (document.querySelector('.mt-rating-button-yes')) {
 
-            var usuarioActivoGrupo, btnFeedbackSi, btnFeedbackNo, btnEnvioFeedback, textAreaFeedback,
-                comentarioFeedback;
+            var btnFeedbackSi, btnFeedbackNo, btnEnvioFeedback, textAreaFeedback,
+                comentarioFeedback, tipo_feedback;
 
             btnEnvioFeedback = document.querySelector('.mt-feedback-submit');
             textAreaFeedback = document.getElementById('textarea-feedback');
             btnFeedbackSi = document.querySelector('.mt-rating-button-yes');
             btnFeedbackNo = document.querySelector('.mt-rating-button-no');
-            usuarioActivoGrupo = obtenerNombreDeGrupo();
             const feedbackForm = document.querySelector('.mt-feedback-form');
 
             btnFeedbackSi.addEventListener('click', () => {
                 feedbackForm.style.display = 'none';
-                dataLayer.push({
-                    'tipo_feedback': 'Si',
-                    'comentario': '',
-                    'usuarioactivo_grupo': usuarioActivoGrupo
-                });
             });
 
             btnFeedbackNo.addEventListener('click', () => {
                 feedbackForm.style.display = 'block';
-                dataLayer.push({
-                    'tipo_feedback': 'No',
-                    'comentario': '',
-                    'usuarioactivo_grupo': usuarioActivoGrupo
-                });
             });
 
             btnEnvioFeedback.addEventListener('click', function () {
+                tipo_feedback = "Comentario";
                 comentarioFeedback = textAreaFeedback.value;
                 dataLayer.push({
-                    'tipo_feedback': '',
-                    'comentario': comentarioFeedback,
-                    'usuarioactivo_grupo': usuarioActivoGrupo
+                    'event': 'Feedback comentario',
+                    'tipo_feedback': tipo_feedback,
+                    'comentario': comentarioFeedback
                 });
+                console.log("Tipo Feedback: ", tipo_feedback, " Comentario: ", comentarioFeedback);
             });
         }
         //*********************Cambiar Nombre en solapa Featured Articles*********************
@@ -1340,7 +1326,7 @@
         */
 
         //Agregar la nueva categoria al listado, en la ubicacion deseada, mantener el formato ("nombre",). La ultima va sin coma.
-        let categorias = ["Socios y Empresas", "Prestadores", "Base de conocimiento interna", "Urgencias"];
+        let categorias = ["Socios y Empresas", "Prestadores", "Urgencias", "Base de conocimiento interna"];
 
         /*Agregar las guias pertenecientes a la nueva Categoria, en la MISMA UBICACION QUE PUSIERON LA CATEGORIA (Si agregaron una
         Categoría luego de Afiliaciones, los corchetes con las guías para esta nueva categoría, irán después de los corchetes que 
@@ -1367,13 +1353,13 @@
                 "Liquidaci\u00F3n de consumos y pagos",
                 "Baja de prestadores"
             ],
-            // Base de conocimiento interna
-            [
-                "Calidad de atenci\u00F3n",
-            ],
             // Urgencias
             [
                 "Servicios y Fichas de codificaci\u00F3n"
+            ],
+            // Base de conocimiento interna
+            [
+                "Calidad de atenci\u00F3n",
             ]
         ];
 
@@ -1483,14 +1469,14 @@
             if (tituloLogin) {
                 var divBotonLogin = document.createElement('div');
                 divBotonLogin.className = "btn-login-area";
-                tituloLogin.innerHTML = 'Bienvenido a la base de conocimientos de OSDE. ';
+                tituloLogin.innerHTML = 'Te damos la bienvenida a la base de conocimientos de OSDE.';
                 tituloLogin.className = 'tituloLogin';
                 var LogoLoginTxt = document.createElement('h2');
-                LogoLoginTxt.innerHTML = 'Biblos 3.0 - OSDE';
+                LogoLoginTxt.innerHTML = 'Biblos 3.0';
                 LogoLoginTxt.className = 'logoLoginTxt';
                 elementoLogo.appendChild(LogoLoginTxt);
                 var linkLoginBiblos = document.createElement('a');
-                linkLoginBiblos.innerHTML = 'Iniciar sesi&oacute;n en Biblos 3.0';
+                linkLoginBiblos.innerHTML = 'Iniciar sesi&oacute;n';
                 linkLoginBiblos.href = 'https://osde-prod2.mindtouch.us/@app/auth/2/login';
                 //linkLoginBiblos.target = '_blank';
                 linkLoginBiblos.className = 'linkLoginBiblos';

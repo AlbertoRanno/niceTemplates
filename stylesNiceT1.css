@@ -2626,3 +2626,11 @@ li.mt-user-menu-preferences {
 		border-radius: 0;
 	}
 }
+
+.mt-responsive-table {
+	border-collapse: collapse;
+}
+
+.mt-responsive-table td {
+	border: 1px solid var(--medium-gray);
+}
