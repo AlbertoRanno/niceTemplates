@@ -183,7 +183,8 @@
                     'file_name': file.name,
                     'file_url': file.url
                 });
-                console.log("fileTipo: ", file.type, "\nfileName: ", file.name, "\nfileName: ", file.url);
+                console.log("fileTipo: ", file.type, "\nfileName: ", file.name, "\nfileName: ", file
+                    .url);
             });
         }
         //**************************** Obtener tipo de usuario activo *************************************
@@ -1309,7 +1310,7 @@
         }, 1000);
 
         /*********************************** MODIFICAR BARRA DE NAVEGACION ***********************************/
-        //SOLO AGREGAR LOS NOMBRES DE LAS CATEGORIAS Y SUS CORRESPONDIENTES GUIAS, TAL CUAL FUERON CREADAS EN SUS RUTAS
+        // SOLO AGREGAR LOS NOMBRES DE LAS CATEGORIAS Y SUS CORRESPONDIENTES GUIAS, TAL CUAL FUERON CREADAS EN SUS RUTAS
 
         /*Codigos UNICODE para los nombres con tildes:
         á - \u00E1
@@ -1359,59 +1360,37 @@
             ],
             // Base de conocimiento interna
             [
-                "Calidad de atenci\u00F3n",
+                "Calidad de atenci\u00F3n"
             ]
         ];
 
-        function agregarCategoria(categoria, guias) {
+        // Agregar las imágenes de las categorías con el formato ["ID", "Nombre del archivo", "Formato"]
+        let imagenesCategorias = [
+            ["1005", "credit-card", "svg"],
+            ["1006", "estetoscopio", "svg"],
+            ["1760", "ambulance", "svg"],
+            ["1759", "clipboard-list", "svg"]
+        ];
+
+        function agregarCategoria(categoria, guias, imagen) {
             let listItem = document.createElement('li');
             listItem.classList.add('has-submenu', 'mt-style-conditional', 'style-wrap');
             let link = document.createElement('a');
             link.href = "/" + encodeURIComponent(categoria);
             link.textContent = categoria;
-
-            // Agregar el icono a la izquierda de cada sección
-            let icono;
-            if (categoria === "Socios y Empresas") {
-                icono = document.createElement('img');
-                icono.classList.add('internal', 'imgHome1');
+            if (imagen) {
+                let icono = document.createElement('img');
+                icono.classList.add('internal', 'imgNavBar');
                 icono.alt = "mindtouch.page#thumbnail";
                 icono.loading = "lazy";
-                icono.src =
-                    "https://osde-prod2.mindtouch.us/@api/deki/files/516/mindtouch.page%2523thumbnail?revision=1";
-            } else if (categoria === "Prestadores") {
-                icono = document.createElement('img');
-                icono.classList.add('internal', 'imgHome2');
-                icono.alt = "mindtouch.page#thumbnail";
-                icono.loading = "lazy";
-                icono.src =
-                    "https://osde-prod2.mindtouch.us/@api/deki/files/522/mindtouch.page%2523thumbnail?revision=4";
-            } else if (categoria === "Base de conocimiento interna") {
-                icono = document.createElement('img');
-                icono.classList.add('internal', 'imgHome3');
-                icono.alt = "mindtouch.page#thumbnail";
-                icono.loading = "lazy";
-                icono.src =
-                    "https://osde-prod2.mindtouch.us/@api/deki/files/991/Administraci%25C3%25B3n.svg";
-            } else if (categoria === "Urgencias") {
-                icono = document.createElement('img');
-                icono.classList.add('internal', 'imgHome6');
-                icono.alt = "mindtouch.page#thumbnail";
-                icono.loading = "lazy";
-                icono.src =
-                    "https://osde-prod2.mindtouch.us/@api/deki/files/997/Urgencias.svg";
-            }
-
-            if (icono) {
+                icono.src = "https://osde-prod2.mindtouch.us/@api/deki/files/" + imagen[0] + "/" + imagen[1] +
+                    "." + imagen[2];
                 link.appendChild(icono);
             }
-
             link.title = categoria;
             listItem.appendChild(link);
-
             let listadoPorCategoria = document.createElement('ul');
             listadoPorCategoria.classList.add('submenu');
-
             guias.forEach(function (guia) {
                 let subListItem = document.createElement('li');
                 let subLink = document.createElement('a');
@@ -1421,13 +1400,12 @@
                 subListItem.appendChild(subLink);
                 listadoPorCategoria.appendChild(subListItem);
             });
-
             listItem.appendChild(listadoPorCategoria);
             ulSubList.appendChild(listItem);
         }
 
         for (let i = 0; i < categorias.length; i++) {
-            agregarCategoria(categorias[i], guias[i]);
+            agregarCategoria(categorias[i], guias[i], imagenesCategorias[i]);
         }
 
         elementoMenu.appendChild(labelResponsive);
