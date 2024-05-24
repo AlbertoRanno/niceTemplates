@@ -1,0 +1,158 @@
+<style>
+    ul,
+    ol {
+        list-style-type: none;
+    }
+
+    ol ol,
+    ul ul {
+        list-style-type: none;
+    }
+
+    ol ol ol,
+    ul ul ul {
+        list-style-type: none;
+    }
+
+    ol,
+    ul {
+        list-style-type: none;
+    }
+
+    li::marker,
+    li::before {
+        display: none;
+    }
+
+    .collapsed {
+        display: none;
+    }
+
+    .mt-content-container #mt-toc-container {
+        position: fixed;
+        right: 10px;
+        top: 10px;
+    }
+
+    #mt-toc-container.collapsed {
+        display: none;
+    }
+
+    .mt-content-container #mt-toc-container .mt-toggle-collapse::before {
+        display: none !important;
+    }
+
+    .mt-content-container #mt-toc-container li::marker {
+        display: none !important;
+    }
+</style>
+
+<script>
+    function esconderIndiceIntegracion() {
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                if (window.location.href.startsWith('https://osde-prod2.mindtouch.us/')) {
+                    const indiceIntegracion = document.querySelector('.indiceIntegracion');
+                    if (indiceIntegracion) {
+                        indiceIntegracion.style.display = 'none';
+                        console.log('El elemento .indiceIntegracion se oculto correctamente.');
+                    } else {
+                        console.log('No se encontro el elemento .indiceIntegracion en el documento.');
+                    }
+                } else {
+                    console.log('La URL no coincide con "https://osde-prod2.mindtouch.us/".');
+                }
+            }, 500);
+        });
+    }
+    esconderIndiceIntegracion();
+</script>
+
+<script>
+    window.addEventListener('load', function () {
+        function encodeSpecialCharacters(text) {
+            return text.replace(/[áÁ]/g, '.C3.A1')
+                .replace(/[éÉ]/g, '.C3.A9')
+                .replace(/[íÍ]/g, '.C3.AD')
+                .replace(/[óÓ]/g, '.C3.B3')
+                .replace(/[úÚ]/g, '.C3.BA')
+                .replace(/\s+/g, '_');
+        }
+        const contenedorPrincipal = document.querySelector('.mt-content-container');
+        const divTocContenedor = document.createElement('div');
+        divTocContenedor.id = 'mt-toc-container';
+        divTocContenedor.dataset.title = 'Índice';
+        divTocContenedor.dataset.collapsed = 'false';
+        divTocContenedor.className = 'mt-toggle-container indiceIntegracion';
+        const tocLista = document.createElement('ol');
+        tocLista.className = 'mt-toc-content mt-collapsible-section';
+        divTocContenedor.appendChild(tocLista);
+        const encabezadosH2 = contenedorPrincipal.querySelectorAll('h2');
+        encabezadosH2.forEach((encabezadoH2) => {
+            const tocLiH2 = document.createElement('li');
+            const tocLinkH2 = document.createElement('a');
+            tocLinkH2.rel = 'internal';
+            tocLinkH2.textContent = encabezadoH2.textContent.trim();
+            const enlaceTextoH2 = encodeSpecialCharacters(encabezadoH2.textContent.trim().replace(
+                /\s+/g, '_'));
+            tocLinkH2.href = `#${enlaceTextoH2}`;
+            tocLiH2.appendChild(tocLinkH2);
+            const encabezadosH3 = encabezadoH2.parentNode.querySelectorAll('h3');
+            if (encabezadosH3.length > 0) {
+                const flechaH2 = document.createElement('img');
+                flechaH2.classList.add('imgFlechaIndice');
+                flechaH2.style.marginLeft = "10px";
+                flechaH2.src = '/@api/deki/files/22/downArrowBlue.png.png';
+                flechaH2.alt = 'Flecha';
+                tocLiH2.appendChild(flechaH2);
+                const listaHermanosH2 = document.createElement('ol');
+                listaHermanosH2.classList.add('collapsed');
+                encabezadosH3.forEach((encabezadoH3) => {
+                    const tocLiH3 = document.createElement('li');
+                    const tocLinkH3 = document.createElement('a');
+                    tocLinkH3.rel = 'internal';
+                    tocLinkH3.textContent = encabezadoH3.textContent.trim();
+                    const enlaceTextoH3 = encodeSpecialCharacters(encabezadoH3.textContent
+                        .trim().replace(/\s+/g, '_'));
+                    tocLinkH3.href = `#${enlaceTextoH3}`;
+                    tocLiH3.appendChild(tocLinkH3);
+                    listaHermanosH2.appendChild(tocLiH3);
+                });
+                tocLiH2.appendChild(listaHermanosH2);
+                flechaH2.addEventListener('click', function () {
+                    listaHermanosH2.classList.toggle('collapsed');
+                    flechaH2.src = listaHermanosH2.classList.contains('collapsed') ?
+                        '/@api/deki/files/22/downArrowBlue.png.png' :
+                        '/@api/deki/files/101/upArrowBlue.png';
+                });
+            }
+            tocLista.appendChild(tocLiH2);
+        });
+        contenedorPrincipal.insertBefore(divTocContenedor, contenedorPrincipal.firstChild);
+        tocLista.addEventListener('click', function (event) {
+            if (event.target.tagName === 'A') {
+                event.preventDefault();
+                const enlace = event.target;
+                const idEncabezado = enlace.getAttribute('href').substring(1);
+                const encabezadoDestino = document.getElementById(idEncabezado);
+                const posicionElemento = encabezadoDestino.offsetTop;
+                const desplazamiento = posicionElemento + 0;
+                window.scrollTo({
+                    top: desplazamiento,
+                    behavior: 'smooth'
+                });
+            }
+        });
+        const botonColapso = document.createElement('button');
+        botonColapso.className = 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-collapse';
+        botonColapso.type = 'button';
+        botonColapso.textContent = 'Índice';
+        divTocContenedor.insertBefore(botonColapso, tocLista);
+        botonColapso.addEventListener('click', function () {
+            divTocContenedor.classList.toggle('collapsed');
+            tocLista.classList.toggle('collapsed');
+            botonColapso.textContent = divTocContenedor.classList.contains('collapsed') ? '+ Índice' :
+                '- Índice';
+        });
+    });
+</script>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    /* Estilos necesarios para visualizar bien el indice cuando se ve desde C4C: */
+
+    /* Estilo para ocultar el marcador de lista de primer nivel */
+    ul,
+    ol {
+        list-style-type: none;
+    }
+
+    /* Estilo para ocultar el marcador de lista de segundo nivel */
+    ol ol,
+    ul ul {
+        list-style-type: none;
+    }
+
+    /* Estilo para ocultar el marcador de lista de tercer nivel */
+    ol ol ol,
+    ul ul ul {
+        list-style-type: none;
+    }
+
+    /* Estilo para ocultar el marcador de lista y el pseudo-elemento ::before de los elementos de lista */
+    ol,
+    ul {
+        list-style-type: none;
+        /* Oculta el marcador de lista */
+    }
+
+    li::marker,
+    li::before {
+        display: none;
+        /* Oculta el marcador de lista y el pseudo-elemento ::before */
+    }
+
+    .collapsed {
+        display: none;
+    }
+
+    .mt-content-container #mt-toc-container {
+        position: fixed;
+        right: 10px;
+        top: 10px;
+    }
+
+    #mt-toc-container.collapsed {
+        display: none;
+        /* Ocultar el índice cuando está colapsado */
+    }
+
+    .mt-content-container #mt-toc-container .mt-toggle-collapse::before {
+        display: none !important;
+    }
+
+    .mt-content-container #mt-toc-container li::marker {
+        display: none !important;
+    }
+
+    /*Los pseudo-elementos ::before y ::marker son utilizados en CSS para agregar contenido o estilos antes o dentro de un elemento, respectivamente.
+    En el caso de .mt-content-container #mt-toc-container .mt-toggle-collapse::before, se está seleccionando el pseudo-elemento ::before de los elementos
+    que tengan la clase mt-toggle-collapse dentro del contenedor con id mt-toc-container que a su vez esté dentro de un elemento con la clase mt-content-container. 
+    Este pseudo-elemento ::before generalmente se usa para agregar contenido o estilos visuales antes del contenido del elemento seleccionado. 
+    En este caso, se está configurando para que se oculte (display: none).
+
+    Por otro lado, .mt-content-container #mt-toc-container li::marker selecciona el marcador de lista (::marker) de los elementos de lista (li)
+    que estén dentro del contenedor con id mt-toc-container que a su vez esté dentro de un elemento con la clase mt-content-container. 
+    El marcador de lista es el elemento que precede a cada elemento de lista en una lista ordenada o no ordenada. En este caso,
+    también se está configurando para que se oculte (display: none) */
+</style>
+
+<body>
+    <div class="mt-content-container">
+        <h2>Encabezado H2 1</h2>
+        <h3>Encabezado H3 1.1</h3>
+        <h4>Encabezado H4 1.1.1</h4>
+        <h4>Encabezado H4 1.1.2</h4>
+        <h3>Encabezado H3 1.2</h3>
+        <h2>Encabezado H2 2</h2>
+        <h3>Encabezado H3 2.1</h3>
+        <h4>Encabezado H4 2.1.1</h4>
+        <h3>Encabezado H3 2.2</h3>
+        <h2>Encabezado H2 3</h2>
+        <h3>Encabezado H3 3.1</h3>
+        <h4>Encabezado H4 3.1.1</h4>
+        <h4>Encabezado H4 3.1.2</h4>
+        <h4>Encabezado H4 3.1.3</h4>
+    </div>
+
+</body>
+
+<script>
+    // Función para ocultar el elemento '.indiceIntegracion' en el head de Nice
+    function esconderIndiceIntegracion() {
+        // Esperar a que la página se haya cargado completamente
+        window.addEventListener('load', function() {
+            // Retrasar la ejecución del código para asegurar que todos los elementos estén disponibles
+            setTimeout(function() {
+                // Verificar si la URL coincide con 'https://osde-prod2.mindtouch.us/'
+                if (window.location.href.startsWith('https://osde-prod2.mindtouch.us/')) {
+                    // Buscar el elemento '.indiceIntegracion'
+                    const indiceIntegracion = document.querySelector('.indiceIntegracion');
+                    // Verificar si se encontró el elemento
+                    if (indiceIntegracion) {
+                        // Ocultar el elemento si se encontró
+                        indiceIntegracion.style.display = 'none';
+                        console.log('El elemento .indiceIntegracion se oculto correctamente.');
+                    } else {
+                        // Mostrar un mensaje de error si no se encontró el elemento
+                        console.log('No se encontro el elemento .indiceIntegracion en el documento.');
+                    }
+                } else {
+                    // Mostrar un mensaje si la URL no coincide
+                    console.log('La URL no coincide con "https://osde-prod2.mindtouch.us/".');
+                }
+            }, 500); // Retrasar la ejecución del código en 1 segundo (1000 milisegundos)
+        });
+    }
+
+    // Llamar a la función para ocultar el elemento
+    esconderIndiceIntegracion();
+</script>
+
+<script>
+    window.addEventListener('load', function () {
+        console.log('La pagina se termino de cargar con scripts, css e imagenes incluidas');
+        /* Hay distintos eventos de carfa de pagina:
+        -DOMContentLoaded: Este se dispara cuando el navegador ha terminado de cargar y analizar el HTML, pero aún no ha terminado de cargar los recursos externos,
+        como imágenes y scripts. Es útil para ejecutar código JavaScript que necesita acceder al DOM tan pronto como sea posible, pero no necesita esperar a que
+        se carguen recursos externos, como imágenes.
+        -load: Este se dispara cuando todos los recursos de la pagina, incluidas imágenes, estilos CSS, y scripts externos, se han cargado completamente.
+        Es útil para realizar acciones que requieren que todos los recursos de la página estén disponibles, como inicializar plugins o cargar contenido dinámico.*/
+
+        // Función para codificar los caracteres especiales
+        function encodeSpecialCharacters(text) {
+            return text.replace(/[áÁ]/g, '.C3.A1')
+                .replace(/[éÉ]/g, '.C3.A9')
+                .replace(/[íÍ]/g, '.C3.AD')
+                .replace(/[óÓ]/g, '.C3.B3')
+                .replace(/[úÚ]/g, '.C3.BA')
+                .replace(/\s+/g, '_');
+        }
+
+
+        // Capturo al contenedor principal, el section que es el mas externo que toma la integracion con C4C
+        const contenedorPrincipal = document.querySelector('.mt-content-container');
+        console.log('Contenedor principal capturado:', contenedorPrincipal);
+
+        // Creo el contenedor del indice
+        const divTocContenedor = document.createElement('div');
+        divTocContenedor.id = 'mt-toc-container';
+        // Mismo que el indice nativo, para que se le aplique el mismo CSS que viene por default, los voy a diferenciar por el contenedor
+        divTocContenedor.dataset.title = 'Índice';
+        divTocContenedor.dataset.collapsed = 'false';
+        divTocContenedor.className = 'mt-toggle-container indiceIntegracion';
+        // Misma clase del nativo, mas una particular por las dudas
+        console.log('Contenedor del indice creado:', divTocContenedor);
+
+        // Creo la lista de contenidos del indice
+        const tocLista = document.createElement('ol');
+        tocLista.className = 'mt-toc-content mt-collapsible-section';
+        divTocContenedor.appendChild(tocLista);
+        console.log('Lista superior del contenido del indice creada:', tocLista);
+
+        // Capturo todos los encabezados h2 dentro del contenedor principal
+        const encabezadosH2 = contenedorPrincipal.querySelectorAll('h2');
+        /* Esto devuelve un NodeList, un objeto NodeList es una colección de nodos (elementos HTML) que se obtiene al realizar ciertas consultas en el DOM 
+        mediante métodos como querySelectorAll() o como resultado de algunas propiedades del DOM, como childNodes. Características importantes de los NodeList:
+        -Colección Ordenada: Los nodos en un NodeList están ordenados según su posición en el DOM. Esto significa que si seleccionas elementos mediante 
+        querySelectorAll() o una propiedad como childNodes, el orden en el que aparecen en el NodeList será el mismo que en el DOM.
+        -Iterabilidad: Aunque no son arrays, los NodeList se pueden recorrer (iterar) de manera similar a los arrays. Puedes usar bucles for, forEach, 
+        o convertirlos a arrays utilizando Array.from() o el operador de propagación (...).
+        -Dinámicos: Los NodeList pueden ser dinámicos o estáticos. Un NodeList dinámico reflejará cambios en el DOM, lo que significa que si se agregan o
+         eliminan nodos después de haber obtenido el NodeList, este se actualizará automáticamente para reflejar esos cambios. Por otro lado, un NodeList 
+         estático no se actualizará, por lo que contendrá los nodos que estaban presentes en el momento en que se creó.
+         -No Array: Aunque se pueden iterar y se comportan de manera similar a los arrays, los NodeList no son arrays. No tienen métodos de array 
+         como push(), pop(), o map(), por lo que si necesitas usar esos métodos, debes convertir el NodeList en un array primero. */
+        console.log('Encabezados h2 encontrados:', encabezadosH2);
+
+        // Recorro todos los encabezados h2, con un bucle, por ser un NodeList
+        encabezadosH2.forEach((encabezadoH2) => {
+            // Por cada h2, creo el LI que lo va a representar en el indice
+            const tocLiH2 = document.createElement('li');
+            const tocLinkH2 = document.createElement(
+                'a'); //su enlace, para que al hacer click lo lleve a esa parte
+            tocLinkH2.rel = 'internal';
+            /* El atributo rel se utiliza para especificar la relación entre el documento actual y el recurso vinculado. 
+                       En este caso, 'internal' se está utilizando para indicar que el enlace apunta a una sección interna del mismo documento. 
+                       Esto puede ser útil para navegadores y otros programas que procesan el HTML para entender cómo se relacionan los distintos elementos del documento entre sí.*/
+            tocLinkH2.textContent = encabezadoH2.textContent
+                .trim(); // Establezco que va a decir el link, Lo mismo que el H2, pero sin los espacios en blanco al comienzo y al final
+            /*Genero el link (href) a donde va a llevar esa etiqueta <a>, pero para generarlo correctamente, tengo que correr la función del comienzo, que trata los caracteres
+            especiales, como los tildes, de modo que se pueda generar el href correctamente.    */
+            const enlaceTextoH2 = encodeSpecialCharacters(encabezadoH2.textContent.trim().replace(
+                /\s+/g, '_'));
+            /* encabezadoH2 es el elemento <h2> del cual se quiere obtener el texto.
+                      textContent es una propiedad que devuelve el contenido textual de un nodo y sus descendientes. El método trim() se utiliza para eliminar los espacios en blanco al comienzo y al final.
+                      .replace(/\s+/g, '_'): Después de eliminar los espacios en blanco alrededor del texto del <h2>, esta parte del código utiliza el método replace() con una expresión regular 
+                      para buscar cualquier secuencia de uno o más espacios en blanco (/\s+/g) y reemplazarlos por guiones bajos (_). Esto es útil para convertir los espacios en blanco dentro 
+                      del texto del <h2> en guiones bajos, lo que puede ser útil en los identificadores de enlace.
+                      encodeSpecialCharacters(): Finalmente, el texto resultante después de realizar las operaciones anteriores se pasa a la función encodeSpecialCharacters(). Esta función sirve
+                      para codificar ciertos caracteres especiales en el texto, como las vocales con acentos, en un formato específico. La función devuelve el texto codificado, que luego se utiliza 
+                      como parte del atributo href del enlace <a>.*/
+            tocLinkH2.href =
+                `#${enlaceTextoH2}`; //a lo que obtuve en el paso anterior, solo le agrego el "#" para formar el href
+            tocLiH2.appendChild(tocLinkH2); // una vez formado el link (<a>), lo paso como hijo del <li>
+            console.log(`Elemento de ítem de lista creado para "${encabezadoH2.textContent.trim()}":`,
+                tocLiH2);
+
+            // Una vez encontró el H2, y lo formo como un LI del indice, con su link interno, es hora de capturar los encabezados h3 dentro de este h2
+            const encabezadosH3 = encabezadoH2.parentNode.querySelectorAll('h3');
+
+            // Verifico si hay encabezados h3
+            if (encabezadosH3.length > 0) { // Otra nodeList, puedo usar length
+                // Si al menos encuentra un elemento h3, el h2 previo, va a tener un hijo, entonces, ya crea la flecha para indicar que es desplegable ese h2
+                const flechaH2 = document.createElement('img');
+                flechaH2.classList.add('imgFlechaIndice'); // Le agrego una clase por las dudas
+                flechaH2.style.marginLeft = "10px";
+                flechaH2.src =
+                    '/@api/deki/files/22/downArrowBlue.png.png'; // Ruta de la imagen de la flecha hacia abajo en el tenant 2
+                flechaH2.alt = 'Flecha';
+                tocLiH2.appendChild(flechaH2);
+
+                // Sabiendo que encontró al menos un h3, creo la lista donde voy a insertar los LI que cree con cada uno de esos h3
+                const listaHermanosH2 = document.createElement('ol');
+                listaHermanosH2.classList.add(
+                    'collapsed'); // Le clase collapsed para indicar que inicialmente esten colapsados
+                /* Sin perder de vista, que este forEach, es interno al de los h2, lo que implica, que por cada h2, voy a recorrer todos SUS h3.
+                Hago, como hice con los h2, ahora recorro todos los h3, y por cada uno creo un LI, con su <a> interno, indico en el "rel" que 
+                es interno, es decir que vincula a otra parte del mismo documento, le quito los espacios, reemplazo los espacios internos por guiones,
+                y reemplazo los acentos por la codificacion correcta para generar el href. Un vez construido todo el elemento, lo agrego a la OL 
+                perteneciente al H2 que estaba recorriendo con el forEach externo    */
+                encabezadosH3.forEach((encabezadoH3) => {
+                    const tocLiH3 = document.createElement('li');
+                    const tocLinkH3 = document.createElement('a');
+                    tocLinkH3.rel = 'internal';
+                    tocLinkH3.textContent = encabezadoH3.textContent.trim();
+                    const enlaceTextoH3 = encodeSpecialCharacters(encabezadoH3.textContent
+                        .trim().replace(/\s+/g, '_'));
+                    tocLinkH3.href = `#${enlaceTextoH3}`;
+                    tocLiH3.appendChild(tocLinkH3);
+                    listaHermanosH2.appendChild(tocLiH3); //Agrego el LI a la OL de este H2
+                    console.log(
+                        `"${encabezadoH3.textContent.trim()}" agregado como hijo de "${encabezadoH2.textContent.trim()}"`
+                    );
+                });
+
+                // Agrego la OL de este H2 justamente al LI de este H2
+                tocLiH2.appendChild(listaHermanosH2);
+
+                // Agregpo el evento de clic a la flecha de h2 para expandir/colapsar los h3
+                flechaH2.addEventListener('click', function () {
+                    listaHermanosH2.classList.toggle(
+                        'collapsed'); // los clicks alternan que esté o no la clase "collapsed"
+                    // con el ternario determino que url de imagen se carga, dependiendo de que este o no la clase:
+                    flechaH2.src = listaHermanosH2.classList.contains('collapsed') ?
+                        '/@api/deki/files/22/downArrowBlue.png.png' :
+                        '/@api/deki/files/101/upArrowBlue.png'; // Cambia la imagen de la flecha
+                });
+            }
+
+            /* Finalmente agrego el LI completo de este H2, el cual contiene su <a>, y su OL interna con todos sus h3, a la lista principal del índice, 
+            es decir, la OL mas externa de todas las del indice*/
+            tocLista.appendChild(tocLiH2);
+        });
+        /* Este doble bucle (Recorro los h2, y por cada h2, recorro todos sus h3) se termina aca. Es decir, luego de esto, ya estan todos los h2, con sus OL llenos de h3
+               insertados en la OL principal del indice.*/
+
+        /* Con todo armado, agrego el contenedor del índice al documento. Es decir, inserto, el divTocContenedor (el contenedor con mi indice), como primer hijo (firstChild),
+        del contenedorPrincipal, que no es mas que el section, que es el contenedor mas externo que toma C4C */
+        contenedorPrincipal.insertBefore(divTocContenedor, contenedorPrincipal.firstChild);
+        console.log('Contenedor del índice agregado al documento.');
+        // Con esto tengo toda la estructura creada, lo que sigue es la funcionalidad de desplazar la pagina hasta la ubicacion de la seccion a la que apunta cada link del indice
+
+        // Agrego el evento de clic para desplazar suavemente a los encabezados, lo explico abajo del mismo.
+        tocLista.addEventListener('click', function (event) {
+            if (event.target.tagName === 'A') {
+                event.preventDefault();
+
+                const enlace = event.target;
+                const idEncabezado = enlace.getAttribute('href').substring(1);
+                const encabezadoDestino = document.getElementById(idEncabezado);
+                const posicionElemento = encabezadoDestino.offsetTop;
+
+                const desplazamiento = posicionElemento + 0;
+
+                // Desplazar suavemente la página al encabezado
+                window.scrollTo({
+                    top: desplazamiento,
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        /*  Esta parte del código agrega un evento de clic al elemento tocLista, que es la OL mas externa del índice.
+        tocLista.addEventListener('click', function (event) { ... });: Este código agrega un "escuchador" de eventos al elemento tocLista que estará atento a los clics del usuario 
+        dentro de esta lista de contenido del índice. Cuando se detecta un clic, se ejecutará la función que viene después de la palabra clave function.
+        if (event.target.tagName === 'A') { ... }: Esta línea verifica si el elemento que desencadenó el evento de clic es una etiqueta <a>, es decir, si el usuario hizo clic en 
+        un enlace dentro de la lista de contenido del índice. event.target devuelve el elemento en el que se hizo clic durante el evento.
+        event.preventDefault();: Esta línea previene el comportamiento predeterminado del enlace, que es llevar al usuario a otra parte de la página o a otra página web.
+        Al llamar a preventDefault(), se evita que el enlace se active de manera estándar.
+        const enlace = event.target;: Aquí se guarda el enlace <a> en la variable enlace.
+        const idEncabezado = enlace.getAttribute('href').substring(1);: Esta línea obtiene el valor del atributo href del enlace y luego elimina el primer carácter ( que es el "#"") del valor obtenido.
+        Esto se hace para obtener el ID del encabezado al que el enlace se refiere.
+        const encabezadoDestino = document.getElementById(idEncabezado);: Con el ID del encabezado obtenido en el paso anterior, esta línea busca el elemento en el documento 
+        que tiene ese ID, es decir, el encabezado al que se hace referencia en el enlace.
+        const posicionElemento = encabezadoDestino.offsetTop;: Esta línea obtiene la posición vertical (en píxeles) del encabezado en relación con el elemento padre más cercano 
+        que tiene una posición diferente de static, es decir, el encabezado que se desea desplazar.
+        const desplazamiento = posicionElemento + 0;: Aquí se define la cantidad de desplazamiento que se aplicará a la página cuando se desplace hacia el encabezado.
+         En este caso, parece que no se aplica ningún desplazamiento adicional (se suma cero).
+         window.scrollTo({ top: desplazamiento, behavior: 'smooth' });: Finalmente, se utiliza window.scrollTo() para desplazar suavemente la página hasta la posición del encabezado, 
+         utilizando la opción behavior: 'smooth' para lograr un desplazamiento suave en lugar de instantáneo. La propiedad top se establece en la posición del encabezado donde se desea desplazar. */
+
+        // Por otra parte, se crea el botón de colapso de todo el índice
+        const botonColapso = document.createElement('button');
+        botonColapso.className = 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-collapse';
+        botonColapso.type = 'button';
+        botonColapso.textContent = 'Índice';
+        divTocContenedor.insertBefore(botonColapso, tocLista);
+
+        // Se agrega el evento de clic para colapsar/expandir el índice al botón de colapso
+        botonColapso.addEventListener('click', function () {
+            divTocContenedor.classList.toggle('collapsed');
+            tocLista.classList.toggle('collapsed');
+            botonColapso.textContent = divTocContenedor.classList.contains('collapsed') ? '+ Índice' :
+                '- Índice';
+        });
+    });
+</script>
+
+</html>
