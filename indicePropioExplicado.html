@@ -138,7 +138,7 @@
         -load: Este se dispara cuando todos los recursos de la pagina, incluidas imágenes, estilos CSS, y scripts externos, se han cargado completamente.
         Es útil para realizar acciones que requieren que todos los recursos de la página estén disponibles, como inicializar plugins o cargar contenido dinámico.*/
 
-        // Función para codificar los caracteres especiales
+        // Función para codificar los caracteres especiales (Explicado al final ***)
         function encodeSpecialCharacters(text) {
             return text.replace(/[áÁ]/g, '.C3.A1')
                 .replace(/[éÉ]/g, '.C3.A9')
@@ -335,5 +335,41 @@
         });
     });
 </script>
+
+<!-- ***  Objetivo de la función
+La función encodeSpecialCharacters toma un texto como entrada y reemplaza ciertos caracteres especiales (acentos) por sus correspondientes codificaciones URL. También reemplaza los espacios en blanco por guiones bajos (_).
+
+function encodeSpecialCharacters(text) {
+    return text.replace(/[áÁ]/g, '.C3.A1')
+        .replace(/[éÉ]/g, '.C3.A9')
+        .replace(/[íÍ]/g, '.C3.AD')
+        .replace(/[óÓ]/g, '.C3.B3')
+        .replace(/[úÚ]/g, '.C3.BA')
+        .replace(/\s+/g, '_');
+}
+Desglose del código:
+-function encodeSpecialCharacters(text) {
+Aquí defino una función llamada encodeSpecialCharacters que toma un parámetro text.
+-Reemplazo de caracteres:
+return text.replace(/[áÁ]/g, '.C3.A1')
+Utiliza el método replace del objeto String para buscar y reemplazar todos los caracteres á y Á (tanto en minúscula como en mayúscula) por la secuencia .C3.A1.
+La expresión regular /[áÁ]/g busca tanto á como Á. La g al final significa "global", es decir, que buscará todas las ocurrencias en el texto, no solo la primera.
+-Reemplazo de otros caracteres:
+De manera similar, se reemplazan los demás caracteres con acento:
+.replace(/[éÉ]/g, '.C3.A9')
+.replace(/[íÍ]/g, '.C3.AD')
+.replace(/[óÓ]/g, '.C3.B3')
+.replace(/[úÚ]/g, '.C3.BA')
+Cada línea sigue la misma estructura: busca los caracteres é, í, ó, ú (en ambas versiones, minúscula y mayúscula) y los reemplaza por sus respectivas secuencias codificadas en URL.
+-Reemplazo de espacios:
+.replace(/\s+/g, '_');
+Esta línea reemplaza uno o más espacios (\s+) por guiones bajos (_). La expresión \s+ significa "uno o más espacios en blanco".
+Ejemplo de uso
+Si llamo a la función con el siguiente texto:
+let resultado = encodeSpecialCharacters("áé íó ú");
+console.log(resultado);
+Obtendré:   .C3.A1.C3.A9_.C3.AD.C3.B3_.C3.BA
+En resumen, la función encodeSpecialCharacters es útil para preparar un texto que contiene caracteres especiales y espacios para ser utilizado en una URL o algún otro contexto donde estos caracteres necesitan ser codificados.
+-->
 
 </html>
