@@ -178,11 +178,11 @@
         -Iterabilidad: Aunque no son arrays, los NodeList se pueden recorrer (iterar) de manera similar a los arrays. Puedes usar bucles for, forEach, 
         o convertirlos a arrays utilizando Array.from() o el operador de propagación (...).
         -Dinámicos: Los NodeList pueden ser dinámicos o estáticos. Un NodeList dinámico reflejará cambios en el DOM, lo que significa que si se agregan o
-         eliminan nodos después de haber obtenido el NodeList, este se actualizará automáticamente para reflejar esos cambios. Por otro lado, un NodeList 
-         estático no se actualizará, por lo que contendrá los nodos que estaban presentes en el momento en que se creó.
-         -No Array: Aunque se pueden iterar y se comportan de manera similar a los arrays, los NodeList no son arrays. No tienen métodos de array 
-         como push(), pop(), o map(), por lo que si necesitas usar esos métodos, debes convertir el NodeList en un array primero. (Como sucede en 
-         el archivo aparte de cambiarOrdenFiltros)*/
+        eliminan nodos después de haber obtenido el NodeList, este se actualizará automáticamente para reflejar esos cambios. Por otro lado, un NodeList 
+        estático no se actualizará, por lo que contendrá los nodos que estaban presentes en el momento en que se creó.
+        -No Array: Aunque se pueden iterar y se comportan de manera similar a los arrays, los NodeList no son arrays. No tienen métodos de array 
+        como push(), pop(), o map(), por lo que si necesitas usar esos métodos, debes convertir el NodeList en un array primero. (Como sucede en 
+        el archivo aparte de cambiarOrdenFiltros)*/
         console.log('Encabezados h2 encontrados:', encabezadosH2);
 
         // Recorro todos los encabezados h2, con un bucle, por ser un NodeList
@@ -193,8 +193,8 @@
                 'a'); //su enlace, para que al hacer click lo lleve a esa parte
             tocLinkH2.rel = 'internal';
             /* El atributo rel se utiliza para especificar la relación entre el documento actual y el recurso vinculado. 
-                       En este caso, 'internal' se está utilizando para indicar que el enlace apunta a una sección interna del mismo documento. 
-                       Esto puede ser útil para navegadores y otros programas que procesan el HTML para entender cómo se relacionan los distintos elementos del documento entre sí.*/
+                    En este caso, 'internal' se está utilizando para indicar que el enlace apunta a una sección interna del mismo documento. 
+                Esto puede ser útil para navegadores y otros programas que procesan el HTML para entender cómo se relacionan los distintos elementos del documento entre sí.*/
             tocLinkH2.textContent = encabezadoH2.textContent
                 .trim(); // Establezco que va a decir el link, Lo mismo que el H2, pero sin los espacios en blanco al comienzo y al final
             /*Genero el link (href) a donde va a llevar esa etiqueta <a>, pero para generarlo correctamente, tengo que correr la función del comienzo, que trata los caracteres
@@ -202,13 +202,13 @@
             const enlaceTextoH2 = encodeSpecialCharacters(encabezadoH2.textContent.trim().replace(
                 /\s+/g, '_'));
             /* encabezadoH2 es el elemento <h2> del cual se quiere obtener el texto.
-                      textContent es una propiedad que devuelve el contenido textual de un nodo y sus descendientes. El método trim() se utiliza para eliminar los espacios en blanco al comienzo y al final.
-                      .replace(/\s+/g, '_'): Después de eliminar los espacios en blanco alrededor del texto del <h2>, esta parte del código utiliza el método replace() con una expresión regular 
-                      para buscar cualquier secuencia de uno o más espacios en blanco (/\s+/g) y reemplazarlos por guiones bajos (_). Esto es útil para convertir los espacios en blanco dentro 
-                      del texto del <h2> en guiones bajos, lo que puede ser útil en los identificadores de enlace.
-                      encodeSpecialCharacters(): Finalmente, el texto resultante después de realizar las operaciones anteriores se pasa a la función encodeSpecialCharacters(). Esta función sirve
-                      para codificar ciertos caracteres especiales en el texto, como las vocales con acentos, en un formato específico. La función devuelve el texto codificado, que luego se utiliza 
-                      como parte del atributo href del enlace <a>.*/
+            textContent es una propiedad que devuelve el contenido textual de un nodo y sus descendientes. El método trim() se utiliza para eliminar los espacios en blanco al comienzo y al final.
+            .replace(/\s+/g, '_'): Después de eliminar los espacios en blanco alrededor del texto del <h2>, esta parte del código utiliza el método replace() con una expresión regular 
+            para buscar cualquier secuencia de uno o más espacios en blanco (/\s+/g) y reemplazarlos por guiones bajos (_). Esto es útil para convertir los espacios en blanco dentro 
+            del texto del <h2> en guiones bajos, lo que puede ser útil en los identificadores de enlace.
+            encodeSpecialCharacters(): Finalmente, el texto resultante después de realizar las operaciones anteriores se pasa a la función encodeSpecialCharacters(). Esta función sirve
+            para codificar ciertos caracteres especiales en el texto, como las vocales con acentos, en un formato específico. La función devuelve el texto codificado, que luego se utiliza 
+            como parte del atributo href del enlace <a>.*/
             tocLinkH2.href =
                 `#${enlaceTextoH2}`; //a lo que obtuve en el paso anterior, solo le agrego el "#" para formar el href
             tocLiH2.appendChild(tocLinkH2); // una vez formado el link (<a>), lo paso como hijo del <li>
@@ -272,7 +272,7 @@
             tocLista.appendChild(tocLiH2);
         });
         /* Este doble bucle (Recorro los h2, y por cada h2, recorro todos sus h3) se termina aca. Es decir, luego de esto, ya estan todos los h2, con sus OL llenos de h3
-               insertados en la OL principal del indice.*/
+        insertados en la OL principal del indice.*/
 
         /* Con todo armado, agrego el contenedor del índice al documento. Es decir, inserto, el divTocContenedor (el contenedor con mi indice), como primer hijo (firstChild),
         del contenedorPrincipal, que no es mas que el section, que es el contenedor mas externo que toma C4C */
@@ -315,9 +315,9 @@
         const posicionElemento = encabezadoDestino.offsetTop;: Esta línea obtiene la posición vertical (en píxeles) del encabezado en relación con el elemento padre más cercano 
         que tiene una posición diferente de static, es decir, el encabezado que se desea desplazar.
         const desplazamiento = posicionElemento + 0;: Aquí se define la cantidad de desplazamiento que se aplicará a la página cuando se desplace hacia el encabezado.
-         En este caso, parece que no se aplica ningún desplazamiento adicional (se suma cero).
-         window.scrollTo({ top: desplazamiento, behavior: 'smooth' });: Finalmente, se utiliza window.scrollTo() para desplazar suavemente la página hasta la posición del encabezado, 
-         utilizando la opción behavior: 'smooth' para lograr un desplazamiento suave en lugar de instantáneo. La propiedad top se establece en la posición del encabezado donde se desea desplazar. */
+        En este caso, parece que no se aplica ningún desplazamiento adicional (se suma cero).
+        window.scrollTo({ top: desplazamiento, behavior: 'smooth' });: Finalmente, se utiliza window.scrollTo() para desplazar suavemente la página hasta la posición del encabezado, 
+        utilizando la opción behavior: 'smooth' para lograr un desplazamiento suave en lugar de instantáneo. La propiedad top se establece en la posición del encabezado donde se desea desplazar. */
 
         // Por otra parte, se crea el botón de colapso de todo el índice
         const botonColapso = document.createElement('button');

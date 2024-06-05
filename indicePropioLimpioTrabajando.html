@@ -98,8 +98,15 @@
             tocLinkH2.href = `#${enlaceTextoH2}`;
             tocLiH2.appendChild(tocLinkH2);
             const encabezadosH3 = encabezadoH2.parentNode.querySelectorAll('h3');
-            if (encabezadosH3.length > 0) {                
-                const listaHermanosH2 = document.createElement('ol');  
+            if (encabezadosH3.length > 0) {
+                const flechaH2 = document.createElement('img');
+                flechaH2.classList.add('imgFlechaIndice');
+                flechaH2.style.marginLeft = "10px";
+                flechaH2.src = '/@api/deki/files/22/downArrowBlue.png.png';
+                flechaH2.alt = 'Flecha';
+                tocLiH2.appendChild(flechaH2);
+                const listaHermanosH2 = document.createElement('ol');
+                listaHermanosH2.classList.add('collapsed');
                 encabezadosH3.forEach((encabezadoH3) => {
                     const tocLiH3 = document.createElement('li');
                     const tocLinkH3 = document.createElement('a');
@@ -111,7 +118,13 @@
                     tocLiH3.appendChild(tocLinkH3);
                     listaHermanosH2.appendChild(tocLiH3);
                 });
-                tocLiH2.appendChild(listaHermanosH2);                
+                tocLiH2.appendChild(listaHermanosH2);
+                flechaH2.addEventListener('click', function () {
+                    listaHermanosH2.classList.toggle('collapsed');
+                    flechaH2.src = listaHermanosH2.classList.contains('collapsed') ?
+                        '/@api/deki/files/22/downArrowBlue.png.png' :
+                        '/@api/deki/files/101/upArrowBlue.png';
+                });
             }
             tocLista.appendChild(tocLiH2);
         });
