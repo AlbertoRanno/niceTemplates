@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nested List with Counters</title>
+    <style>
+        /* Inicializa los contadores en la lista principal */
+        ol {
+            counter-reset: item; /* Resetea el contador 'item' */
+            list-style: none; /* Remueve los estilos por defecto de la lista */
+            padding-left: 0; /* Remueve el padding por defecto de la lista */
+        }
+
+        /* Incrementa el contador para cada elemento de lista */
+        li {
+            counter-increment: item; /* Incrementa el contador 'item' */
+            margin-bottom: 10px; /* Espacio entre los elementos de lista */
+        }
+
+        /* Inserta el valor del contador antes del contenido del li */
+        li::before {
+            content: counters(item, ".") ". "; /* Genera la numeración con los niveles */
+            font-weight: bold; /* Hace el texto del contador en negrita */
+        }
+
+        /* Para listas anidadas, inicializa un nuevo contador */
+        li ol {
+            counter-reset: subitem; /* Resetea el contador 'subitem' */
+            list-style: none; /* Remueve los estilos por defecto de la lista anidada */
+            padding-left: 20px; /* Añade padding a la lista anidada */
+        }
+
+        /* Incrementa el contador de subitem para cada elemento de lista anidada */
+        li ol li {
+            counter-increment: subitem; /* Incrementa el contador 'subitem' */
+        }
+
+        /* Inserta el valor del contador del elemento padre y el subitem antes del contenido del li anidado */
+        li ol li::before {
+            content: counters(item, ".") "." counter(subitem) ". "; /* Genera la numeración con el nivel del elemento padre y del subitem */
+            font-weight: normal; /* Hace el texto del contador en normal */
+        }
+    </style>
+</head>
+<body>
+    <ol>
+        <li> Título
+            <span>chevron</span>
+            <ol>
+                <li>Child 1.1</li>
+                <li>Child 1.2</li>
+                <li>Child 1.3</li>
+            </ol>
+        </li>
+        <li> Título
+            <span>chevron</span>
+            <ol>
+                <li>Child 2.1</li>
+                <li>Child 2.2</li>
+            </ol>
+        </li>
+        <li> Título
+            <span>chevron</span>
+            <ol>
+                <li>Child 3.1</li>
+                <li>Child 3.2</li>
+                <li>Child 3.3</li>
+            </ol>
+        </li>
+    </ol>
+</body>
+</html>
