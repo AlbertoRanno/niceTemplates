@@ -1,0 +1,30 @@
+{
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "git.autofetch": true,
+    "workbench.colorTheme": "Palenight (Mild Contrast)",   
+    "editor.cursorBlinking": "expand",
+    "editor.linkedEditing": true,
+    "workbench.editor.enablePreview": false,
+    "files.autoSave": "afterDelay",
+    "editor.smoothScrolling": true,
+    // "files.autoSaveDelay": 3000,
+    // "files.exclude": {
+    //     "**/.git": true,
+    //     "**/.svn": true,
+    //     "**/.hg": true,
+    //     "**/CVS": true,
+    //     "**/.DS_Store": true,
+    //     "**/Thumbs.db": true
+    // },
+    // "terminal.integrated.fontSize": 20,
+    // "editor.fontSize": 14,
+    // "editor.tabSize": 4,
+    // "editor.rulers": [30,60],
+    "editor.snippetSuggestions": "top",
+    "[html]": {
+        "editor.defaultFormatter":"vscode.html-language-features"
+    },
+    "editor.multiCursorModifier": "ctrlCmd",
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false
+}
