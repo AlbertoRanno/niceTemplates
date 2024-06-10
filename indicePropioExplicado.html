@@ -100,9 +100,9 @@
     // Función para ocultar el elemento '.indiceIntegracion' en el head de Nice
     function esconderIndiceIntegracion() {
         // Esperar a que la página se haya cargado completamente
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             // Retrasar la ejecución del código para asegurar que todos los elementos estén disponibles
-            setTimeout(function() {
+            setTimeout(function () {
                 // Verificar si la URL coincide con 'https://osde-prod2.mindtouch.us/'
                 if (window.location.href.startsWith('https://osde-prod2.mindtouch.us/')) {
                     // Buscar el elemento '.indiceIntegracion'
@@ -136,16 +136,19 @@
         como imágenes y scripts. Es útil para ejecutar código JavaScript que necesita acceder al DOM tan pronto como sea posible, pero no necesita esperar a que
         se carguen recursos externos, como imágenes.
         -load: Este se dispara cuando todos los recursos de la pagina, incluidas imágenes, estilos CSS, y scripts externos, se han cargado completamente.
-        Es útil para realizar acciones que requieren que todos los recursos de la página estén disponibles, como inicializar plugins o cargar contenido dinámico.*/
+        Es útil para realizar acciones que requieren que todos los recursos de la página estén disponibles, como inicializar plugins o cargar contenido dinámico. O... capturar un contenido específico*/
 
         // Función para codificar los caracteres especiales (Explicado al final ***)
         function encodeSpecialCharacters(text) {
-            return text.replace(/[áÁ]/g, '.C3.A1')
-                .replace(/[éÉ]/g, '.C3.A9')
-                .replace(/[íÍ]/g, '.C3.AD')
-                .replace(/[óÓ]/g, '.C3.B3')
-                .replace(/[úÚ]/g, '.C3.BA')
-                .replace(/\s+/g, '_');
+            return text.replace(/[áÁ]/g, '.C3.A1') // Reemplaza 'á' y 'Á' por '.C3.A1'
+                .replace(/[éÉ]/g, '.C3.A9') // Reemplaza 'é' y 'É' por '.C3.A9'
+                .replace(/[íÍ]/g, '.C3.AD') // Reemplaza 'í' y 'Í' por '.C3.AD'
+                .replace(/[óÓ]/g, '.C3.B3') // Reemplaza 'ó' y 'Ó' por '.C3.B3'
+                .replace(/[úÚ]/g, '.C3.BA') // Reemplaza 'ú' y 'Ú' por '.C3.BA'
+                .replace(/\(/g, '.28') // Reemplaza paréntesis de apertura '(' por '.28'
+                .replace(/\)/g, '.29') // Reemplaza paréntesis de cierre ')' por '.29'
+                .replace(/\n/g, '.0A____________') // Reemplaza saltos de línea '\n' por '.0A____________'
+                .replace(/\s+/g, '_'); // Reemplaza espacios ' ' por '_'
         }
 
 
@@ -330,8 +333,8 @@
         botonColapso.addEventListener('click', function () {
             divTocContenedor.classList.toggle('collapsed');
             tocLista.classList.toggle('collapsed');
-            botonColapso.textContent = divTocContenedor.classList.contains('collapsed') ? '+ Índice' :
-                '- Índice';
+            botonColapso.className = divTocContenedor.classList.contains('collapsed') ? 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-expand' :
+                'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-collapse';
         });
     });
 </script>

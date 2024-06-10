@@ -1,0 +1,18 @@
+.collapsed {
+    display: none;
+}
+
+.mt-content-container #mt-toc-container {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+}
+
+#mt-toc-container.collapsed {
+    display: none;
+}
+
+/* Oculta el ::before de los <li> que tienen un <ol> como hijo directo  */
+.mt-content-container #mt-toc-container>ol>li::before {
+    display: none !important;
+}
