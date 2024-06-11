@@ -64,46 +64,64 @@
         tocLista.className = 'mt-toc-content mt-collapsible-section';
         divTocContenedor.appendChild(tocLista);
         const encabezadosH2 = contenedorPrincipal.querySelectorAll('h2');
-        encabezadosH2.forEach((encabezadoH2) => {
-            const tocLiH2 = document.createElement('li');
-            const tocLinkH2 = document.createElement('a');
-            tocLinkH2.rel = 'internal';
-            tocLinkH2.textContent = encabezadoH2.textContent.trim();
-            const enlaceTextoH2 = encodeSpecialCharacters(encabezadoH2.textContent.trim().replace(
-                /\s+/g, '_'));
-            tocLinkH2.href = `#${enlaceTextoH2}`;
-            tocLiH2.appendChild(tocLinkH2);
-            const encabezadosH3 = encabezadoH2.parentNode.querySelectorAll('h3');
-            if (encabezadosH3.length > 0) {
-                const flechaH2 = document.createElement('img');
-                flechaH2.classList.add('imgFlechaIndice');
-                flechaH2.style.marginLeft = "10px";
-                flechaH2.src = '/@api/deki/files/22/downArrowBlue.png.png';
-                flechaH2.alt = 'Flecha';
-                tocLiH2.appendChild(flechaH2);
-                const listaHermanosH2 = document.createElement('ol');
-                listaHermanosH2.classList.add('collapsed');
-                encabezadosH3.forEach((encabezadoH3) => {
-                    const tocLiH3 = document.createElement('li');
-                    const tocLinkH3 = document.createElement('a');
-                    tocLinkH3.rel = 'internal';
-                    tocLinkH3.textContent = encabezadoH3.textContent.trim();
-                    const enlaceTextoH3 = encodeSpecialCharacters(encabezadoH3.textContent
-                        .trim().replace(/\s+/g, '_'));
-                    tocLinkH3.href = `#${enlaceTextoH3}`;
-                    tocLiH3.appendChild(tocLinkH3);
-                    listaHermanosH2.appendChild(tocLiH3);
-                });
-                tocLiH2.appendChild(listaHermanosH2);
-                flechaH2.addEventListener('click', function () {
-                    listaHermanosH2.classList.toggle('collapsed');
-                    flechaH2.src = listaHermanosH2.classList.contains('collapsed') ?
-                        '/@api/deki/files/22/downArrowBlue.png.png' :
-                        '/@api/deki/files/101/upArrowBlue.png';
-                });
-            }
-            tocLista.appendChild(tocLiH2);
-        });
+        if (encabezadosH2.length > 0) {
+            encabezadosH2.forEach((encabezadoH2) => {
+                const tocLiH2 = document.createElement('li');
+                const tocLinkH2 = document.createElement('a');
+                tocLinkH2.rel = 'internal';
+                tocLinkH2.textContent = encabezadoH2.textContent.trim();
+                const enlaceTextoH2 = encodeSpecialCharacters(encabezadoH2.textContent.trim().replace(
+                    /\s+/g, '_'));
+                tocLinkH2.href = `#${enlaceTextoH2}`;
+                tocLiH2.appendChild(tocLinkH2);
+                const encabezadosH3 = encabezadoH2.parentNode.querySelectorAll('h3');
+                if (encabezadosH3.length > 0) {
+                    const flechaH2 = document.createElement('img');
+                    flechaH2.classList.add('imgFlechaIndice');
+                    flechaH2.style.marginLeft = "10px";
+                    flechaH2.src = '/@api/deki/files/22/downArrowBlue.png.png';
+                    flechaH2.alt = 'Flecha';
+                    tocLiH2.appendChild(flechaH2);
+                    const listaHermanosH2 = document.createElement('ol');
+                    listaHermanosH2.classList.add('collapsed');
+                    encabezadosH3.forEach((encabezadoH3) => {
+                        const tocLiH3 = document.createElement('li');
+                        const tocLinkH3 = document.createElement('a');
+                        tocLinkH3.rel = 'internal';
+                        tocLinkH3.textContent = encabezadoH3.textContent.trim();
+                        const enlaceTextoH3 = encodeSpecialCharacters(encabezadoH3.textContent
+                            .trim().replace(/\s+/g, '_'));
+                        tocLinkH3.href = `#${enlaceTextoH3}`;
+                        tocLiH3.appendChild(tocLinkH3);
+                        listaHermanosH2.appendChild(tocLiH3);
+                    });
+                    tocLiH2.appendChild(listaHermanosH2);
+                    flechaH2.addEventListener('click', function () {
+                        listaHermanosH2.classList.toggle('collapsed');
+                        flechaH2.src = listaHermanosH2.classList.contains('collapsed') ?
+                            '/@api/deki/files/22/downArrowBlue.png.png' :
+                            '/@api/deki/files/101/upArrowBlue.png';
+                    });
+                }
+                tocLista.appendChild(tocLiH2);
+            });
+        } else {
+            const encabezadosH3 = contenedorPrincipal.querySelectorAll('h3');
+                if (encabezadosH3.length > 0) {                  
+                    encabezadosH3.forEach((encabezadoH3) => {
+                        const tocLiH3 = document.createElement('li');
+                        const tocLinkH3 = document.createElement('a');
+                        tocLinkH3.rel = 'internal';
+                        tocLinkH3.textContent = encabezadoH3.textContent.trim();
+                        const enlaceTextoH3 = encodeSpecialCharacters(encabezadoH3.textContent
+                            .trim().replace(/\s+/g, '_'));
+                        tocLinkH3.href = `#${enlaceTextoH3}`;
+                        tocLiH3.appendChild(tocLinkH3);
+                        tocLista.appendChild(tocLiH3);
+                    });                   
+                }
+        }
+
         contenedorPrincipal.insertBefore(divTocContenedor, contenedorPrincipal.firstChild);
         tocLista.addEventListener('click', function (event) {
             if (event.target.tagName === 'A') {
