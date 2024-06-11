@@ -1,29 +1,4 @@
 <style>
-    ul,
-    ol {
-        list-style-type: none;
-    }
-
-    ol ol,
-    ul ul {
-        list-style-type: none;
-    }
-
-    ol ol ol,
-    ul ul ul {
-        list-style-type: none;
-    }
-
-    ol,
-    ul {
-        list-style-type: none;
-    }
-
-    li::marker,
-    li::before {
-        display: none;
-    }
-
     .collapsed {
         display: none;
     }
@@ -38,11 +13,8 @@
         display: none;
     }
 
-    .mt-content-container #mt-toc-container .mt-toggle-collapse::before {
-        display: none !important;
-    }
-
-    .mt-content-container #mt-toc-container li::marker {
+    /* Oculta el ::before de los <li> que tienen un <ol> como hijo directo  */
+    .mt-content-container #mt-toc-container>ol>li::before {
         display: none !important;
     }
 </style>
@@ -70,13 +42,17 @@
 
 <script>
     window.addEventListener('load', function () {
+
         function encodeSpecialCharacters(text) {
-            return text.replace(/[áÁ]/g, '.C3.A1')
-                .replace(/[éÉ]/g, '.C3.A9')
-                .replace(/[íÍ]/g, '.C3.AD')
-                .replace(/[óÓ]/g, '.C3.B3')
-                .replace(/[úÚ]/g, '.C3.BA')
-                .replace(/\s+/g, '_');
+            return text.replace(/[áÁ]/g, '.C3.A1') // Reemplaza 'á' y 'Á' por '.C3.A1'
+                .replace(/[éÉ]/g, '.C3.A9') // Reemplaza 'é' y 'É' por '.C3.A9'
+                .replace(/[íÍ]/g, '.C3.AD') // Reemplaza 'í' y 'Í' por '.C3.AD'
+                .replace(/[óÓ]/g, '.C3.B3') // Reemplaza 'ó' y 'Ó' por '.C3.B3'
+                .replace(/[úÚ]/g, '.C3.BA') // Reemplaza 'ú' y 'Ú' por '.C3.BA'
+                .replace(/\(/g, '.28') // Reemplaza paréntesis de apertura '(' por '.28'
+                .replace(/\)/g, '.29') // Reemplaza paréntesis de cierre ')' por '.29'
+                .replace(/\n/g, '.0A____________') // Reemplaza saltos de línea '\n' por '.0A____________'
+                .replace(/\s+/g, '_'); // Reemplaza espacios ' ' por '_'
         }
         const contenedorPrincipal = document.querySelector('.mt-content-container');
         const divTocContenedor = document.createElement('div');
@@ -142,6 +118,19 @@
                     behavior: 'smooth'
                 });
             }
-        });        
+        });
+
+        const botonColapso = document.createElement('button');
+        botonColapso.className = 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-collapse';
+        botonColapso.type = 'button';
+        botonColapso.textContent = 'Índice';
+        divTocContenedor.insertBefore(botonColapso, tocLista);
+
+        botonColapso.addEventListener('click', function () {
+            divTocContenedor.classList.toggle('collapsed');
+            tocLista.classList.toggle('collapsed');
+            botonColapso.className = divTocContenedor.classList.contains('collapsed') ? 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-expand' :
+                'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-collapse';
+        });
     });
 </script>
