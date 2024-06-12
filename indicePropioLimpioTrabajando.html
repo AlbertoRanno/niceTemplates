@@ -44,16 +44,30 @@
     window.addEventListener('load', function () {
 
         function encodeSpecialCharacters(text) {
-            return text.replace(/[áÁ]/g, '.C3.A1') // Reemplaza 'á' y 'Á' por '.C3.A1'
-                .replace(/[éÉ]/g, '.C3.A9') // Reemplaza 'é' y 'É' por '.C3.A9'
-                .replace(/[íÍ]/g, '.C3.AD') // Reemplaza 'í' y 'Í' por '.C3.AD'
-                .replace(/[óÓ]/g, '.C3.B3') // Reemplaza 'ó' y 'Ó' por '.C3.B3'
-                .replace(/[úÚ]/g, '.C3.BA') // Reemplaza 'ú' y 'Ú' por '.C3.BA'
-                .replace(/\(/g, '.28') // Reemplaza paréntesis de apertura '(' por '.28'
-                .replace(/\)/g, '.29') // Reemplaza paréntesis de cierre ')' por '.29'
-                .replace(/\n/g, '.0A____________') // Reemplaza saltos de línea '\n' por '.0A____________'
-                .replace(/\s+/g, '_'); // Reemplaza espacios ' ' por '_'
+            return text.replace(/á/g, '.C3.A1') // á por .C3.A1
+                .replace(/Á/g, '.C3.81') // Á por .C3.81
+                .replace(/é/g, '.C3.A9') // é por .C3.A9
+                .replace(/É/g, '.C3.89') // É por .C3.89
+                .replace(/í/g, '.C3.AD') // í por .C3.AD
+                .replace(/Í/g, '.C3.8D') // Í por .C3.8D
+                .replace(/ó/g, '.C3.B3') // ó por .C3.B3
+                .replace(/Ó/g, '.C3.93') // Ó por .C3.93
+                .replace(/ú/g, '.C3.BA') // ú por .C3.BA
+                .replace(/Ú/g, '.C3.9A') // Ú por .C3.9A
+                .replace(/ñ/g, '.C3.B1') // ñ por .C3.B1
+                .replace(/Ñ/g, '.C3.91') // Ñ por .C3.91
+                .replace(/¿/g, '.C2.BF') // ¿ por .C2.BF
+                .replace(/\//g, '.2F') // / por .2F
+                .replace(/\?/g, '.3F') // ? por .3F
+                .replace(/ /g, '_') // espacio por _
+                .replace(/\n/g, '.0A____________') // salto de línea por .0A____________
+                .replace(/&nbsp;/g, '_') // &nbsp; por _
+                .replace(/,/g, '_') // , por _
+                .replace(/'/g, '.27') // ' por .27
+                .replace(/"/g, '.22'); // " por .22
         }
+
+
         const contenedorPrincipal = document.querySelector('.mt-content-container');
         const divTocContenedor = document.createElement('div');
         divTocContenedor.id = 'mt-toc-container';
@@ -63,6 +77,7 @@
         const tocLista = document.createElement('ol');
         tocLista.className = 'mt-toc-content mt-collapsible-section';
         divTocContenedor.appendChild(tocLista);
+
         const encabezadosH2 = contenedorPrincipal.querySelectorAll('h2');
         if (encabezadosH2.length > 0) {
             encabezadosH2.forEach((encabezadoH2) => {
@@ -70,10 +85,10 @@
                 const tocLinkH2 = document.createElement('a');
                 tocLinkH2.rel = 'internal';
                 tocLinkH2.textContent = encabezadoH2.textContent.trim();
-                const enlaceTextoH2 = encodeSpecialCharacters(encabezadoH2.textContent.trim().replace(
-                    /\s+/g, '_'));
+                const enlaceTextoH2 = encodeSpecialCharacters(encabezadoH2.textContent.trim());
                 tocLinkH2.href = `#${enlaceTextoH2}`;
                 tocLiH2.appendChild(tocLinkH2);
+
                 const encabezadosH3 = encabezadoH2.parentNode.querySelectorAll('h3');
                 if (encabezadosH3.length > 0) {
                     const flechaH2 = document.createElement('img');
@@ -82,6 +97,7 @@
                     flechaH2.src = '/@api/deki/files/22/downArrowBlue.png.png';
                     flechaH2.alt = 'Flecha';
                     tocLiH2.appendChild(flechaH2);
+
                     const listaHermanosH2 = document.createElement('ol');
                     listaHermanosH2.classList.add('collapsed');
                     encabezadosH3.forEach((encabezadoH3) => {
@@ -89,12 +105,12 @@
                         const tocLinkH3 = document.createElement('a');
                         tocLinkH3.rel = 'internal';
                         tocLinkH3.textContent = encabezadoH3.textContent.trim();
-                        const enlaceTextoH3 = encodeSpecialCharacters(encabezadoH3.textContent
-                            .trim().replace(/\s+/g, '_'));
+                        const enlaceTextoH3 = encodeSpecialCharacters(encabezadoH3.textContent.trim());
                         tocLinkH3.href = `#${enlaceTextoH3}`;
                         tocLiH3.appendChild(tocLinkH3);
                         listaHermanosH2.appendChild(tocLiH3);
                     });
+
                     tocLiH2.appendChild(listaHermanosH2);
                     flechaH2.addEventListener('click', function () {
                         listaHermanosH2.classList.toggle('collapsed');
@@ -103,23 +119,23 @@
                             '/@api/deki/files/101/upArrowBlue.png';
                     });
                 }
+
                 tocLista.appendChild(tocLiH2);
             });
         } else {
             const encabezadosH3 = contenedorPrincipal.querySelectorAll('h3');
-                if (encabezadosH3.length > 0) {                  
-                    encabezadosH3.forEach((encabezadoH3) => {
-                        const tocLiH3 = document.createElement('li');
-                        const tocLinkH3 = document.createElement('a');
-                        tocLinkH3.rel = 'internal';
-                        tocLinkH3.textContent = encabezadoH3.textContent.trim();
-                        const enlaceTextoH3 = encodeSpecialCharacters(encabezadoH3.textContent
-                            .trim().replace(/\s+/g, '_'));
-                        tocLinkH3.href = `#${enlaceTextoH3}`;
-                        tocLiH3.appendChild(tocLinkH3);
-                        tocLista.appendChild(tocLiH3);
-                    });                   
-                }
+            if (encabezadosH3.length > 0) {
+                encabezadosH3.forEach((encabezadoH3) => {
+                    const tocLiH3 = document.createElement('li');
+                    const tocLinkH3 = document.createElement('a');
+                    tocLinkH3.rel = 'internal';
+                    tocLinkH3.textContent = encabezadoH3.textContent.trim();
+                    const enlaceTextoH3 = encodeSpecialCharacters(encabezadoH3.textContent.trim());
+                    tocLinkH3.href = `#${enlaceTextoH3}`;
+                    tocLiH3.appendChild(tocLinkH3);
+                    tocLista.appendChild(tocLiH3);
+                });
+            }
         }
 
         contenedorPrincipal.insertBefore(divTocContenedor, contenedorPrincipal.firstChild);

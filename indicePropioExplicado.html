@@ -1,50 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
 <style>
-    /* Estilos necesarios para visualizar bien el indice cuando se ve desde C4C: */
-
-    /* Estilo para ocultar el marcador de lista de primer nivel */
-    ul,
-    ol {
-        list-style-type: none;
-    }
-
-    /* Estilo para ocultar el marcador de lista de segundo nivel */
-    ol ol,
-    ul ul {
-        list-style-type: none;
-    }
-
-    /* Estilo para ocultar el marcador de lista de tercer nivel */
-    ol ol ol,
-    ul ul ul {
-        list-style-type: none;
-    }
-
-    /* Estilo para ocultar el marcador de lista y el pseudo-elemento ::before de los elementos de lista */
-    ol,
-    ul {
-        list-style-type: none;
-        /* Oculta el marcador de lista */
-    }
-
-    li::marker,
-    li::before {
-        display: none;
-        /* Oculta el marcador de lista y el pseudo-elemento ::before */
-    }
-
     .collapsed {
         display: none;
     }
 
+    /* Para que permanezca en la posición correcta dentro de la integracion */
     .mt-content-container #mt-toc-container {
         position: fixed;
         right: 10px;
@@ -53,27 +12,30 @@
 
     #mt-toc-container.collapsed {
         display: none;
-        /* Ocultar el índice cuando está colapsado */
     }
 
-    .mt-content-container #mt-toc-container .mt-toggle-collapse::before {
+    /* Oculta el ::before de los <li> que tienen un <ol> como hijo directo - Dado que dejé un mix de 
+        -Los nros externos son de la lista ordenada
+        -Los internos son de los contadores, pero omito el 2.1, porque me fue complicado dadas las propiedas
+        sobre los contadores que ya trae Nice, más las de nuestro de CSS. Entonces quedan:
+        2 - Blablabla...
+            1 - Blablabla... (no 2.1)
+            2 - Blablabla... (no 2.2)
+        3 - Blablabla...
+            1 - Blablabla... (no 3.1)      */
+    .mt-content-container #mt-toc-container>ol>li::before {
         display: none !important;
     }
 
-    .mt-content-container #mt-toc-container li::marker {
-        display: none !important;
-    }
-
-    /*Los pseudo-elementos ::before y ::marker son utilizados en CSS para agregar contenido o estilos antes o dentro de un elemento, respectivamente.
-    En el caso de .mt-content-container #mt-toc-container .mt-toggle-collapse::before, se está seleccionando el pseudo-elemento ::before de los elementos
+    /* Las explicaciones siguientes las pasé a ejemplos, porque simplifiqué el css y quedó mejor
+    Los pseudo-elementos ::before y ::marker son utilizados en CSS para agregar contenido o estilos antes o dentro de un elemento, respectivamente.
+    Por ej en el caso de .mt-content-container #mt-toc-container .mt-toggle-collapse::before, se está seleccionando el pseudo-elemento ::before de los elementos
     que tengan la clase mt-toggle-collapse dentro del contenedor con id mt-toc-container que a su vez esté dentro de un elemento con la clase mt-content-container. 
     Este pseudo-elemento ::before generalmente se usa para agregar contenido o estilos visuales antes del contenido del elemento seleccionado. 
-    En este caso, se está configurando para que se oculte (display: none).
-
-    Por otro lado, .mt-content-container #mt-toc-container li::marker selecciona el marcador de lista (::marker) de los elementos de lista (li)
+    
+    Otro ej, .mt-content-container #mt-toc-container li::marker selecciona el marcador de lista (::marker) de los elementos de lista (li)
     que estén dentro del contenedor con id mt-toc-container que a su vez esté dentro de un elemento con la clase mt-content-container. 
-    El marcador de lista es el elemento que precede a cada elemento de lista en una lista ordenada o no ordenada. En este caso,
-    también se está configurando para que se oculte (display: none) */
+    El marcador de lista es el elemento que precede a cada elemento de lista en una lista ordenada o no ordenada.  */
 </style>
 
 <body>
@@ -120,7 +82,8 @@
                     // Mostrar un mensaje si la URL no coincide
                     console.log('La URL no coincide con "https://osde-prod2.mindtouch.us/".');
                 }
-            }, 500); // Retrasar la ejecución del código en 1 segundo (1000 milisegundos)
+            }, 500);
+            // Retrasar la ejecución del código en 1 segundo (1000 milisegundos)
         });
     }
 
@@ -130,6 +93,7 @@
 
 <script>
     window.addEventListener('load', function () {
+
         console.log('La pagina se termino de cargar con scripts, css e imagenes incluidas');
         /* Hay distintos eventos de carfa de pagina:
         -DOMContentLoaded: Este se dispara cuando el navegador ha terminado de cargar y analizar el HTML, pero aún no ha terminado de cargar los recursos externos,
@@ -138,17 +102,29 @@
         -load: Este se dispara cuando todos los recursos de la pagina, incluidas imágenes, estilos CSS, y scripts externos, se han cargado completamente.
         Es útil para realizar acciones que requieren que todos los recursos de la página estén disponibles, como inicializar plugins o cargar contenido dinámico. O... capturar un contenido específico*/
 
-        // Función para codificar los caracteres especiales (Explicado al final ***)
-        function encodeSpecialCharacters(text) {
-            return text.replace(/[áÁ]/g, '.C3.A1') // Reemplaza 'á' y 'Á' por '.C3.A1'
-                .replace(/[éÉ]/g, '.C3.A9') // Reemplaza 'é' y 'É' por '.C3.A9'
-                .replace(/[íÍ]/g, '.C3.AD') // Reemplaza 'í' y 'Í' por '.C3.AD'
-                .replace(/[óÓ]/g, '.C3.B3') // Reemplaza 'ó' y 'Ó' por '.C3.B3'
-                .replace(/[úÚ]/g, '.C3.BA') // Reemplaza 'ú' y 'Ú' por '.C3.BA'
-                .replace(/\(/g, '.28') // Reemplaza paréntesis de apertura '(' por '.28'
-                .replace(/\)/g, '.29') // Reemplaza paréntesis de cierre ')' por '.29'
-                .replace(/\n/g, '.0A____________') // Reemplaza saltos de línea '\n' por '.0A____________'
-                .replace(/\s+/g, '_'); // Reemplaza espacios ' ' por '_'
+        // Función para codificar los caracteres especiales (Explicado al final, de forma general *** SPOILER: Nice hace config especial)
+        function encodeSpecialCharacters(text) { // QueReemplaza por queExpresion
+            return text.replace(/á/g, '.C3.A1') // á por .C3.A1
+                .replace(/Á/g, '.C3.81') // Á por .C3.81
+                .replace(/é/g, '.C3.A9') // é por .C3.A9
+                .replace(/É/g, '.C3.89') // É por .C3.89
+                .replace(/í/g, '.C3.AD') // í por .C3.AD
+                .replace(/Í/g, '.C3.8D') // Í por .C3.8D
+                .replace(/ó/g, '.C3.B3') // ó por .C3.B3
+                .replace(/Ó/g, '.C3.93') // Ó por .C3.93
+                .replace(/ú/g, '.C3.BA') // ú por .C3.BA
+                .replace(/Ú/g, '.C3.9A') // Ú por .C3.9A
+                .replace(/ñ/g, '.C3.B1') // ñ por .C3.B1
+                .replace(/Ñ/g, '.C3.91') // Ñ por .C3.91
+                .replace(/¿/g, '.C2.BF') // ¿ por .C2.BF
+                .replace(/\//g, '.2F') // / por .2F
+                .replace(/\?/g, '.3F') // ? por .3F
+                .replace(/ /g, '_') // espacio por _
+                .replace(/\n/g, '.0A____________') // salto de línea por .0A____________
+                .replace(/&nbsp;/g, '_') // &nbsp; por _
+                .replace(/,/g, '_') // , por _
+                .replace(/'/g, '.27') // ' por .27
+                .replace(/"/g, '.22'); // " por .22
         }
 
 
@@ -174,111 +150,137 @@
 
         // Capturo todos los encabezados h2 dentro del contenedor principal
         const encabezadosH2 = contenedorPrincipal.querySelectorAll('h2');
-        /* Esto devuelve un NodeList, un objeto NodeList es una colección de nodos (elementos HTML) que se obtiene al realizar ciertas consultas en el DOM 
-        mediante métodos como querySelectorAll() o como resultado de algunas propiedades del DOM, como childNodes. Características importantes de los NodeList:
-        -Colección Ordenada: Los nodos en un NodeList están ordenados según su posición en el DOM. Esto significa que si seleccionas elementos mediante 
-        querySelectorAll() o una propiedad como childNodes, el orden en el que aparecen en el NodeList será el mismo que en el DOM.
-        -Iterabilidad: Aunque no son arrays, los NodeList se pueden recorrer (iterar) de manera similar a los arrays. Puedes usar bucles for, forEach, 
-        o convertirlos a arrays utilizando Array.from() o el operador de propagación (...).
-        -Dinámicos: Los NodeList pueden ser dinámicos o estáticos. Un NodeList dinámico reflejará cambios en el DOM, lo que significa que si se agregan o
-        eliminan nodos después de haber obtenido el NodeList, este se actualizará automáticamente para reflejar esos cambios. Por otro lado, un NodeList 
-        estático no se actualizará, por lo que contendrá los nodos que estaban presentes en el momento en que se creó.
-        -No Array: Aunque se pueden iterar y se comportan de manera similar a los arrays, los NodeList no son arrays. No tienen métodos de array 
-        como push(), pop(), o map(), por lo que si necesitas usar esos métodos, debes convertir el NodeList en un array primero. (Como sucede en 
-        el archivo aparte de cambiarOrdenFiltros)*/
-        console.log('Encabezados h2 encontrados:', encabezadosH2);
+        if (encabezadosH2.length > 0) {
+            //Tuve que agregar consideraciones para los casos donde solo había h3, sin un h2 padre, por eso el condificonal.
+            /* Esto devuelve un NodeList, un objeto NodeList es una colección de nodos (elementos HTML) que se obtiene al realizar ciertas consultas en el DOM 
+            mediante métodos como querySelectorAll() o como resultado de algunas propiedades del DOM, como childNodes. Características importantes de los NodeList:
+            -Colección Ordenada: Los nodos en un NodeList están ordenados según su posición en el DOM. Esto significa que si seleccionas elementos mediante 
+            querySelectorAll() o una propiedad como childNodes, el orden en el que aparecen en el NodeList será el mismo que en el DOM.
+            -Iterabilidad: Aunque no son arrays, los NodeList se pueden recorrer (iterar) de manera similar a los arrays. Puedes usar bucles for, forEach, 
+            o convertirlos a arrays utilizando Array.from() o el operador de propagación (...).
+            -Dinámicos: Los NodeList pueden ser dinámicos o estáticos. Un NodeList dinámico reflejará cambios en el DOM, lo que significa que si se agregan o
+            eliminan nodos después de haber obtenido el NodeList, este se actualizará automáticamente para reflejar esos cambios. Por otro lado, un NodeList 
+            estático no se actualizará, por lo que contendrá los nodos que estaban presentes en el momento en que se creó.
+            -No Array: Aunque se pueden iterar y se comportan de manera similar a los arrays, los NodeList no son arrays. No tienen métodos de array 
+            como push(), pop(), o map(), por lo que si necesitas usar esos métodos, debes convertir el NodeList en un array primero. (Como sucede en 
+            el archivo aparte de cambiarOrdenFiltros)*/
+            console.log('Encabezados h2 encontrados:', encabezadosH2);
 
-        // Recorro todos los encabezados h2, con un bucle, por ser un NodeList
-        encabezadosH2.forEach((encabezadoH2) => {
-            // Por cada h2, creo el LI que lo va a representar en el indice
-            const tocLiH2 = document.createElement('li');
-            const tocLinkH2 = document.createElement(
-                'a'); //su enlace, para que al hacer click lo lleve a esa parte
-            tocLinkH2.rel = 'internal';
-            /* El atributo rel se utiliza para especificar la relación entre el documento actual y el recurso vinculado. 
-                    En este caso, 'internal' se está utilizando para indicar que el enlace apunta a una sección interna del mismo documento. 
-                Esto puede ser útil para navegadores y otros programas que procesan el HTML para entender cómo se relacionan los distintos elementos del documento entre sí.*/
-            tocLinkH2.textContent = encabezadoH2.textContent
-                .trim(); // Establezco que va a decir el link, Lo mismo que el H2, pero sin los espacios en blanco al comienzo y al final
-            /*Genero el link (href) a donde va a llevar esa etiqueta <a>, pero para generarlo correctamente, tengo que correr la función del comienzo, que trata los caracteres
-            especiales, como los tildes, de modo que se pueda generar el href correctamente.    */
-            const enlaceTextoH2 = encodeSpecialCharacters(encabezadoH2.textContent.trim().replace(
-                /\s+/g, '_'));
-            /* encabezadoH2 es el elemento <h2> del cual se quiere obtener el texto.
-            textContent es una propiedad que devuelve el contenido textual de un nodo y sus descendientes. El método trim() se utiliza para eliminar los espacios en blanco al comienzo y al final.
-            .replace(/\s+/g, '_'): Después de eliminar los espacios en blanco alrededor del texto del <h2>, esta parte del código utiliza el método replace() con una expresión regular 
-            para buscar cualquier secuencia de uno o más espacios en blanco (/\s+/g) y reemplazarlos por guiones bajos (_). Esto es útil para convertir los espacios en blanco dentro 
-            del texto del <h2> en guiones bajos, lo que puede ser útil en los identificadores de enlace.
-            encodeSpecialCharacters(): Finalmente, el texto resultante después de realizar las operaciones anteriores se pasa a la función encodeSpecialCharacters(). Esta función sirve
-            para codificar ciertos caracteres especiales en el texto, como las vocales con acentos, en un formato específico. La función devuelve el texto codificado, que luego se utiliza 
-            como parte del atributo href del enlace <a>.*/
-            tocLinkH2.href =
-                `#${enlaceTextoH2}`; //a lo que obtuve en el paso anterior, solo le agrego el "#" para formar el href
-            tocLiH2.appendChild(tocLinkH2); // una vez formado el link (<a>), lo paso como hijo del <li>
-            console.log(`Elemento de ítem de lista creado para "${encabezadoH2.textContent.trim()}":`,
-                tocLiH2);
+            // Recorro todos los encabezados h2, con un bucle, por ser un NodeList
+            encabezadosH2.forEach((encabezadoH2) => {
+                // Por cada h2, creo el LI que lo va a representar en el indice
+                const tocLiH2 = document.createElement('li');
+                const tocLinkH2 = document.createElement('a');
+                //su enlace, para que al hacer click lo lleve a esa parte
+                tocLinkH2.rel = 'internal';
+                /* El atributo rel se utiliza para especificar la relación entre el documento actual y el recurso vinculado. 
+                        En este caso, 'internal' se está utilizando para indicar que el enlace apunta a una sección interna del mismo documento. 
+                    Esto puede ser útil para navegadores y otros programas que procesan el HTML para entender cómo se relacionan los distintos elementos del documento entre sí.*/
+                tocLinkH2.textContent = encabezadoH2.textContent.trim();
+                // Establezco que va a decir el link, Lo mismo que el H2, pero sin los espacios en blanco al comienzo y al final
+                /*Genero el link (href) a donde va a llevar esa etiqueta <a>, pero para generarlo correctamente, tengo que correr la función del comienzo, que trata los caracteres
+                especiales, como los tildes, de modo que se pueda generar el href correctamente.    */
+                const enlaceTextoH2 = encodeSpecialCharacters(encabezadoH2.textContent.trim());
+                //textContent.trim().replace(/\s+/g, '_')); De esta expresión,quité la parte de .replace(/\s+/g, '_'), dado que es una codificación de reemplazo, por lo que la dejé en la función que se encarga de eso
+                /* encabezadoH2 es el elemento <h2> del cual se quiere obtener el texto.
+                textContent es una propiedad que devuelve el contenido textual de un nodo y sus descendientes. El método trim() se utiliza para eliminar los espacios en blanco al comienzo y al final.
+                .replace(/\s+/g, '_'): Después de eliminar los espacios en blanco alrededor del texto del <h2>, esta parte del código utiliza el método replace() con una expresión regular 
+                para buscar cualquier secuencia de uno o más espacios en blanco (/\s+/g) y reemplazarlos por guiones bajos (_). Esto es útil para convertir los espacios en blanco dentro 
+                del texto del <h2> en guiones bajos, lo que puede ser útil en los identificadores de enlace.
+                encodeSpecialCharacters(): Finalmente, el texto resultante después de realizar las operaciones anteriores se pasa a la función encodeSpecialCharacters(). Esta función sirve
+                para codificar ciertos caracteres especiales en el texto, como las vocales con acentos, en un formato específico. La función devuelve el texto codificado, que luego se utiliza 
+                como parte del atributo href del enlace <a>.*/
+                tocLinkH2.href = `#${enlaceTextoH2}`;
+                //a lo que obtuve en el paso anterior, solo le agrego el "#" para formar el href
+                tocLiH2.appendChild(tocLinkH2);
+                // una vez formado el link (<a>), lo paso como hijo del <li>
+                console.log(`Elemento de ítem de lista creado para "${encabezadoH2.textContent.trim()}":`,
+                    tocLiH2);
 
-            // Una vez encontró el H2, y lo formo como un LI del indice, con su link interno, es hora de capturar los encabezados h3 dentro de este h2
-            const encabezadosH3 = encabezadoH2.parentNode.querySelectorAll('h3');
+                // Una vez encontró el H2, y lo formo como un LI del indice, con su link interno, es hora de capturar los encabezados h3 dentro de este h2
+                const encabezadosH3 = encabezadoH2.parentNode.querySelectorAll('h3');
 
-            // Verifico si hay encabezados h3
-            if (encabezadosH3.length > 0) { // Otra nodeList, puedo usar length
-                // Si al menos encuentra un elemento h3, el h2 previo, va a tener un hijo, entonces, ya crea la flecha para indicar que es desplegable ese h2
-                const flechaH2 = document.createElement('img');
-                flechaH2.classList.add('imgFlechaIndice'); // Le agrego una clase por las dudas
-                flechaH2.style.marginLeft = "10px";
-                flechaH2.src =
-                    '/@api/deki/files/22/downArrowBlue.png.png'; // Ruta de la imagen de la flecha hacia abajo en el tenant 2
-                flechaH2.alt = 'Flecha';
-                tocLiH2.appendChild(flechaH2);
+                // Verifico si hay encabezados h3
+                if (encabezadosH3.length > 0) {
+                    // Otra nodeList, puedo usar length
+                    // Si al menos encuentra un elemento h3, el h2 previo, va a tener un hijo, entonces, ya crea la flecha para indicar que es desplegable ese h2
+                    const flechaH2 = document.createElement('img');
+                    flechaH2.classList.add('imgFlechaIndice');
+                    // Le agrego una clase por las dudas
+                    flechaH2.style.marginLeft = "10px";
+                    flechaH2.src = '/@api/deki/files/22/downArrowBlue.png.png';
+                    // Ruta de la imagen de la flecha hacia abajo en el tenant 2
+                    flechaH2.alt = 'Flecha';
+                    tocLiH2.appendChild(flechaH2);
 
-                // Sabiendo que encontró al menos un h3, creo la lista donde voy a insertar los LI que cree con cada uno de esos h3
-                const listaHermanosH2 = document.createElement('ol');
-                listaHermanosH2.classList.add(
-                    'collapsed'); // Le clase collapsed para indicar que inicialmente esten colapsados
-                /* Sin perder de vista, que este forEach, es interno al de los h2, lo que implica, que por cada h2, voy a recorrer todos SUS h3.
-                Hago, como hice con los h2, ahora recorro todos los h3, y por cada uno creo un LI, con su <a> interno, indico en el "rel" que 
-                es interno, es decir que vincula a otra parte del mismo documento, le quito los espacios, reemplazo los espacios internos por guiones,
-                y reemplazo los acentos por la codificacion correcta para generar el href. Un vez construido todo el elemento, lo agrego a la OL 
-                perteneciente al H2 que estaba recorriendo con el forEach externo    */
+                    // Sabiendo que encontró al menos un h3, creo la lista donde voy a insertar los LI que cree con cada uno de esos h3
+                    const listaHermanosH2 = document.createElement('ol');
+                    listaHermanosH2.classList.add('collapsed');
+                    // Le clase collapsed para indicar que inicialmente esten colapsados
+                    /* Sin perder de vista, que este forEach, es interno al de los h2, lo que implica, que por cada h2, voy a recorrer todos SUS h3.
+                    Hago, como hice con los h2, ahora recorro todos los h3, y por cada uno creo un LI, con su <a> interno, indico en el "rel" que 
+                    es interno, es decir que vincula a otra parte del mismo documento, le quito los espacios, reemplazo los espacios internos por guiones,
+                    y reemplazo los acentos por la codificacion correcta para generar el href. Un vez construido todo el elemento, lo agrego a la OL 
+                    perteneciente al H2 que estaba recorriendo con el forEach externo    */
+                    encabezadosH3.forEach((encabezadoH3) => {
+                        const tocLiH3 = document.createElement('li');
+                        const tocLinkH3 = document.createElement('a');
+                        tocLinkH3.rel = 'internal';
+                        tocLinkH3.textContent = encabezadoH3.textContent.trim();
+                        const enlaceTextoH3 = encodeSpecialCharacters(encabezadoH3.textContent.trim());
+                        tocLinkH3.href = `#${enlaceTextoH3}`;
+                        tocLiH3.appendChild(tocLinkH3);
+                        listaHermanosH2.appendChild(tocLiH3);
+                        //Agrego el LI a la OL de este H2
+                        console.log(
+                            `"${encabezadoH3.textContent.trim()}" agregado como hijo de "${encabezadoH2.textContent.trim()}"`
+                        );
+                    });
+
+                    // Agrego la OL de este H2 justamente al LI de este H2
+                    tocLiH2.appendChild(listaHermanosH2);
+
+                    // Agregpo el evento de clic a la flecha de h2 para expandir/colapsar los h3
+                    flechaH2.addEventListener('click', function () {
+                        listaHermanosH2.classList.toggle('collapsed');
+                        // los clicks alternan que esté o no la clase "collapsed"
+                        // con el ternario determino que url de imagen se carga, dependiendo de que este o no la clase:
+                        flechaH2.src = listaHermanosH2.classList.contains('collapsed') ?
+                            '/@api/deki/files/22/downArrowBlue.png.png' :
+                            '/@api/deki/files/101/upArrowBlue.png';
+                        // Cambia la imagen de la flecha
+                    });
+                }
+
+
+                /* Finalmente agrego el LI completo de este H2, el cual contiene su <a>, y su OL interna con todos sus h3, a la lista principal del índice, 
+                es decir, la OL mas externa de todas las del indice*/
+                tocLista.appendChild(tocLiH2);
+            });
+            /* Este doble bucle (Recorro los h2, y por cada h2, recorro todos sus h3) se termina aca. Es decir, luego de esto, ya estan todos los h2, con sus OL llenos de h3
+            insertados en la OL principal del indice.*/
+
+            /* Con todo armado, agrego el contenedor del índice al documento. Es decir, inserto, el divTocContenedor (el contenedor con mi indice), como primer hijo (firstChild),
+            del contenedorPrincipal, que no es mas que el section, que es el contenedor mas externo que toma C4C 
+            
+            La explicación hasta acá, fue sin considerar el caso de que había páginas con h3, sin un h2 padre, por eso, el condicional del comienzo,
+            y ahora el siguiente else, que considera el caso de solo h3 en el índice:*/
+        } else {
+            const encabezadosH3 = contenedorPrincipal.querySelectorAll('h3');
+            if (encabezadosH3.length > 0) {
                 encabezadosH3.forEach((encabezadoH3) => {
                     const tocLiH3 = document.createElement('li');
                     const tocLinkH3 = document.createElement('a');
                     tocLinkH3.rel = 'internal';
                     tocLinkH3.textContent = encabezadoH3.textContent.trim();
-                    const enlaceTextoH3 = encodeSpecialCharacters(encabezadoH3.textContent
-                        .trim().replace(/\s+/g, '_'));
+                    const enlaceTextoH3 = encodeSpecialCharacters(encabezadoH3.textContent.trim());
                     tocLinkH3.href = `#${enlaceTextoH3}`;
                     tocLiH3.appendChild(tocLinkH3);
-                    listaHermanosH2.appendChild(tocLiH3); //Agrego el LI a la OL de este H2
-                    console.log(
-                        `"${encabezadoH3.textContent.trim()}" agregado como hijo de "${encabezadoH2.textContent.trim()}"`
-                    );
-                });
-
-                // Agrego la OL de este H2 justamente al LI de este H2
-                tocLiH2.appendChild(listaHermanosH2);
-
-                // Agregpo el evento de clic a la flecha de h2 para expandir/colapsar los h3
-                flechaH2.addEventListener('click', function () {
-                    listaHermanosH2.classList.toggle(
-                        'collapsed'); // los clicks alternan que esté o no la clase "collapsed"
-                    // con el ternario determino que url de imagen se carga, dependiendo de que este o no la clase:
-                    flechaH2.src = listaHermanosH2.classList.contains('collapsed') ?
-                        '/@api/deki/files/22/downArrowBlue.png.png' :
-                        '/@api/deki/files/101/upArrowBlue.png'; // Cambia la imagen de la flecha
+                    tocLista.appendChild(tocLiH3);
                 });
             }
+        }
 
-            /* Finalmente agrego el LI completo de este H2, el cual contiene su <a>, y su OL interna con todos sus h3, a la lista principal del índice, 
-            es decir, la OL mas externa de todas las del indice*/
-            tocLista.appendChild(tocLiH2);
-        });
-        /* Este doble bucle (Recorro los h2, y por cada h2, recorro todos sus h3) se termina aca. Es decir, luego de esto, ya estan todos los h2, con sus OL llenos de h3
-        insertados en la OL principal del indice.*/
-
-        /* Con todo armado, agrego el contenedor del índice al documento. Es decir, inserto, el divTocContenedor (el contenedor con mi indice), como primer hijo (firstChild),
-        del contenedorPrincipal, que no es mas que el section, que es el contenedor mas externo que toma C4C */
         contenedorPrincipal.insertBefore(divTocContenedor, contenedorPrincipal.firstChild);
         console.log('Contenedor del índice agregado al documento.');
         // Con esto tengo toda la estructura creada, lo que sigue es la funcionalidad de desplazar la pagina hasta la ubicacion de la seccion a la que apunta cada link del indice
@@ -339,7 +341,7 @@
     });
 </script>
 
-<!-- ***  Objetivo de la función
+<!-- ***  Objetivo de la función (Acá explico la función original, la cual después mejoré. Debajo de esta copiaré algo interesante que entendí de Nice ****)
 La función encodeSpecialCharacters toma un texto como entrada y reemplaza ciertos caracteres especiales (acentos) por sus correspondientes codificaciones URL. También reemplaza los espacios en blanco por guiones bajos (_).
 
 function encodeSpecialCharacters(text) {
@@ -375,4 +377,49 @@ Obtendré:   .C3.A1.C3.A9_.C3.AD.C3.B3_.C3.BA
 En resumen, la función encodeSpecialCharacters es útil para preparar un texto que contiene caracteres especiales y espacios para ser utilizado en una URL o algún otro contexto donde estos caracteres necesitan ser codificados.
 -->
 
-</html>
+<!-- **** Explicación de codificaciones, general, y en NIce:
+¿Por qué es necesaria la codificación de URLs?
+Las URLs (Uniform Resource Locators) tienen ciertas restricciones sobre qué caracteres pueden incluirse directamente. Algunos caracteres tienen significados especiales en una URL, como ?, &, y #. Para incluir estos caracteres en las URLs sin causar problemas, deben ser codificados.
+
+¿Qué es la codificación de URL?
+La codificación de URL (URL encoding) reemplaza caracteres no seguros con una secuencia de caracteres seguros. Este proceso implica convertir los caracteres a su representación hexadecimal precedida por un %.
+
+Estándares de Codificación
+La codificación de URL sigue el estándar establecido en el RFC 3986. Según este estándar, los caracteres seguros incluyen:
+
+Letras (A-Z, a-z)
+Números (0-9)
+Algunos caracteres especiales: -, _, ., ~
+Cualquier otro carácter debe ser codificado.
+
+Ejemplos de Codificación
+Espacio ( ) se convierte en %20 o +
+á se convierte en %C3%A1
+& se convierte en %26
+En el contexto del CMS Nice
+En tu caso específico, el CMS Nice ha decidido usar una forma particular de codificación para ciertas letras acentuadas y caracteres especiales. Por ejemplo, en lugar de usar la representación hexadecimal común %C3%A1 para á, usa .C3.A1. Esta es una decisión de diseño tomada por los desarrolladores del CMS para mantener consistencia interna o por algún requisito técnico específico.
+
+¿Es arbitrario?
+En cierta medida, sí. La representación de Nice (.C3.A1 en lugar de %C3%A1) es una convención que han decidido usar. Mientras que el RFC 3986 define cómo deben ser codificados los caracteres para ser seguros en una URL, cómo exactamente se implementa puede variar.
+
+Evaluación y Codificación
+La evaluación y codificación de caracteres se hace carácter por carácter. Cada carácter que no es seguro se convierte a su representación codificada. Hay librerías y funciones en muchos lenguajes de programación que manejan esta codificación automáticamente, siguiendo el estándar RFC 3986.
+
+Herramientas de Codificación
+En JavaScript, por ejemplo, puedes usar encodeURIComponent para codificar una URL de manera estándar:
+
+javascript
+Copiar código
+const text = "áéíóú ñ & ? /";
+// Result: %C3%A1%C3%A9%C3%AD%C3%B3%C3%BA%20%C3%B1%20%26%20%3F%20%2F
+const encodedText = encodeURIComponent(text);
+Sin embargo, en tu caso, debido a las convenciones específicas de Nice, has creado una función personalizada encodeSpecialCharacters para manejar su estilo particular de codificación.
+
+Resumen
+Necesidad de codificación: Para que las URLs sean seguras y funcionen correctamente.
+Estándares: RFC 3986 define qué caracteres deben ser codificados.
+Decisiones de Nice: La convención específica (.C3.A1) es una decisión de diseño que sigue sus propias reglas internas.
+Implementación: Evaluación y codificación carácter por carácter.
+En resumen, la codificación de URLs es esencial para mantener la integridad y funcionalidad de los enlaces. Aunque hay un estándar general, las implementaciones específicas pueden variar según los requisitos y decisiones de diseño de cada sistema, como en el caso de tu CMS Nice.
+
+-->
