@@ -20,19 +20,31 @@
 </style>
 
 <script>
+    /* Integracion C4C - Captura y oculta en Nice, el indice generado para la integracion */
     function esconderIndiceIntegracion() {
+        /* Encapsular el código en una función y luego ejecutarlo mejora la organización, legibilidad, y mantenimiento del código. Además, evita la contaminación del espacio de nombres global y facilita la reutilización del código. Por estas razones, generalmente es una buena práctica encapsular tu lógica dentro de funciones.  (Scope) Las variables declaradas dentro de la función no afectan el ámbito global, reduciendo el riesgo de errores por variables compartidas.*/
         window.addEventListener('load', function () {
             setTimeout(function () {
-                if (window.location.href.startsWith('https://osde-prod2.mindtouch.us/')) {
+                const urlActual = window.location.href;
+                const estaEnUnIframe = window !== window.top;
+                /* window: Este objeto representa la ventana (o el marco) en el que se ejecuta el script. Cada pestaña del navegador, cada ventana emergente y cada iframe tiene su propio objeto window.
+                window.top: Este objeto representa la ventana más externa (la raíz) en la jerarquía de ventanas. Si la página actual está dentro de un iframe, window.top apuntará a la ventana que contiene ese iframe.
+                Comparación window !== window.top: Esta comparación verifica si la ventana actual (la página donde se ejecuta el script) es la misma que la ventana más externa. Y en el caso que sea desde la integracion, no será así, dado que, la info la carga en un iframe (el cual tendra su objeto window, y
+                será diferente del objeto window.top, que será el marco padre donde se carga la app de la integracion)*/
+
+                console.log(`URL actual: ${urlActual}`);
+                console.log(`El contenido est\u00E1 en un Iframe\u003F: ${estaEnUnIframe}`);
+
+                if (urlActual.startsWith('https://osde-prod2.mindtouch.us/') && !estaEnUnIframe) {
                     const indiceIntegracion = document.querySelector('.indiceIntegracion');
                     if (indiceIntegracion) {
                         indiceIntegracion.style.display = 'none';
-                        console.log('El elemento .indiceIntegracion se oculto correctamente.');
+                        console.log('El \u00EDndice se ocult\u00F3 porque detecta que est\u00E1 en Nice');
                     } else {
-                        console.log('No se encontro el elemento .indiceIntegracion en el documento.');
+                        console.log('No encontr\u00F3 ning\u00EDn elemento con clase .indiceIntegracion');
                     }
                 } else {
-                    console.log('La URL no coincide con "https://osde-prod2.mindtouch.us/".');
+                    console.log('La URL no coincide con "https://osde-prod2.mindtouch.us/" o se est\u00E1 mostrando en un iframe, por lo tanto, no se oculta el \u00EDndice');
                 }
             }, 500);
         });
@@ -41,148 +53,148 @@
 </script>
 
 <script>
-  window.addEventListener('load', function () {
-    // Función para codificar caracteres especiales en los encabezados
-    function encodeSpecialCharacters(text) {
-        // Eliminar espacios adicionales alrededor de los saltos de línea
-        text = text.replace(/\s*\n\s*/g, '\n');
-        return text.replace(/á/g, '.C3.A1')
-            .replace(/Á/g, '.C3.81')
-            .replace(/é/g, '.C3.A9')
-            .replace(/É/g, '.C3.89')
-            .replace(/í/g, '.C3.AD')
-            .replace(/Í/g, '.C3.8D')
-            .replace(/ó/g, '.C3.B3')
-            .replace(/Ó/g, '.C3.93')
-            .replace(/ú/g, '.C3.BA')
-            .replace(/Ú/g, '.C3.9A')
-            .replace(/ñ/g, '.C3.B1')
-            .replace(/Ñ/g, '.C3.91')
-            .replace(/¿/g, '.C2.BF')
-            .replace(/\//g, '.2F')
-            .replace(/\?/g, '.3F')
-            .replace(/ /g, '_')
-            .replace(/\n/g, '.0A____________')
-            .replace(/&nbsp;/g, '_')
-            .replace(/,/g, '_')
-            .replace(/'/g, '.27')
-            .replace(/"/g, '.22');
-    }
-
-    // Función para asegurar que todos los encabezados tengan un ID único
-    function setUniqueIdsToHeaders(headers) {
-        headers.forEach((header) => {
-            const encodedText = encodeSpecialCharacters(header.textContent.trim());
-            // Asignar el ID codificado al encabezado si no tiene uno
-            if (!header.id) {
-                header.id = encodedText;
-            }
-        });
-    }
-
-    const contenedorPrincipal = document.querySelector('.mt-content-container');
-    const divTocContenedor = document.createElement('div');
-    divTocContenedor.id = 'mt-toc-container';
-    divTocContenedor.dataset.title = 'Índice';
-    divTocContenedor.dataset.collapsed = 'false';
-    divTocContenedor.className = 'mt-toggle-container indiceIntegracion';
-    const tocLista = document.createElement('ol');
-    tocLista.className = 'mt-toc-content mt-collapsible-section';
-    divTocContenedor.appendChild(tocLista);
-
-    // Seleccionar todos los encabezados H2 y H3 en el contenedor principal
-    const encabezadosH2 = contenedorPrincipal.querySelectorAll('h2');
-    const encabezadosH3 = contenedorPrincipal.querySelectorAll('h3');
-
-    // Asignar IDs únicos a todos los encabezados H2 y H3
-    setUniqueIdsToHeaders(encabezadosH2);
-    setUniqueIdsToHeaders(encabezadosH3);
-
-    // Crear el índice basado en los encabezados H2 y H3
-    if (encabezadosH2.length > 0) {
-        encabezadosH2.forEach((encabezadoH2) => {
-            const tocLiH2 = document.createElement('li');
-            const tocLinkH2 = document.createElement('a');
-            tocLinkH2.rel = 'internal';
-            tocLinkH2.textContent = encabezadoH2.textContent.trim();
-            tocLinkH2.href = `#${encabezadoH2.id}`;
-            tocLiH2.appendChild(tocLinkH2);
-
-            // Buscar los encabezados H3 que están en el mismo contenedor que el H2 actual
-            const h3InSameContainer = Array.from(encabezadoH2.parentNode.querySelectorAll('h3')).filter(h3 => h3.compareDocumentPosition(encabezadoH2) & Node.DOCUMENT_POSITION_FOLLOWING);
-            if (h3InSameContainer.length > 0) {
-                const flechaH2 = document.createElement('img');
-                flechaH2.classList.add('imgFlechaIndice');
-                flechaH2.style.marginLeft = "10px";
-                flechaH2.src = '/@api/deki/files/22/downArrowBlue.png.png';
-                flechaH2.alt = 'Flecha';
-                tocLiH2.appendChild(flechaH2);
-
-                const listaHermanosH2 = document.createElement('ol');
-                listaHermanosH2.classList.add('collapsed');
-                h3InSameContainer.forEach((encabezadoH3) => {
-                    const tocLiH3 = document.createElement('li');
-                    const tocLinkH3 = document.createElement('a');
-                    tocLinkH3.rel = 'internal';
-                    tocLinkH3.textContent = encabezadoH3.textContent.trim();
-                    tocLinkH3.href = `#${encabezadoH3.id}`;
-                    tocLiH3.appendChild(tocLinkH3);
-                    listaHermanosH2.appendChild(tocLiH3);
-                });
-
-                tocLiH2.appendChild(listaHermanosH2);
-                flechaH2.addEventListener('click', function () {
-                    listaHermanosH2.classList.toggle('collapsed');
-                    flechaH2.src = listaHermanosH2.classList.contains('collapsed') ? '/@api/deki/files/22/downArrowBlue.png.png' : '/@api/deki/files/101/upArrowBlue.png';
-                });
-            }
-
-            tocLista.appendChild(tocLiH2);
-        });
-    } else {
-        // Si no hay encabezados H2, crear el índice solo con los encabezados H3
-        encabezadosH3.forEach((encabezadoH3) => {
-            const tocLiH3 = document.createElement('li');
-            const tocLinkH3 = document.createElement('a');
-            tocLinkH3.rel = 'internal';
-            tocLinkH3.textContent = encabezadoH3.textContent.trim();
-            tocLinkH3.href = `#${encabezadoH3.id}`;
-            tocLiH3.appendChild(tocLinkH3);
-            tocLista.appendChild(tocLiH3);
-        });
-    }
-
-    // Insertar el contenedor del índice en el DOM
-    contenedorPrincipal.insertBefore(divTocContenedor, contenedorPrincipal.firstChild);
-    tocLista.addEventListener('click', function (event) {
-        if (event.target.tagName === 'A') {
-            event.preventDefault();
-            const enlace = event.target;
-            const idEncabezado = enlace.getAttribute('href').substring(1);
-            const encabezadoDestino = document.getElementById(idEncabezado);
-            if (encabezadoDestino) {
-                // Desplazarse suavemente al encabezado correspondiente
-                const posicionElemento = encabezadoDestino.getBoundingClientRect().top + window.pageYOffset;
-                window.scrollTo({
-                    top: posicionElemento,
-                    behavior: 'smooth'
-                });
-            }
+    window.addEventListener('load', function () {
+        // Función para codificar caracteres especiales en los encabezados
+        function encodeSpecialCharacters(text) {
+            // Eliminar espacios adicionales alrededor de los saltos de línea
+            text = text.replace(/\s*\n\s*/g, '\n');
+            return text.replace(/á/g, '.C3.A1')
+                .replace(/Á/g, '.C3.81')
+                .replace(/é/g, '.C3.A9')
+                .replace(/É/g, '.C3.89')
+                .replace(/í/g, '.C3.AD')
+                .replace(/Í/g, '.C3.8D')
+                .replace(/ó/g, '.C3.B3')
+                .replace(/Ó/g, '.C3.93')
+                .replace(/ú/g, '.C3.BA')
+                .replace(/Ú/g, '.C3.9A')
+                .replace(/ñ/g, '.C3.B1')
+                .replace(/Ñ/g, '.C3.91')
+                .replace(/¿/g, '.C2.BF')
+                .replace(/\//g, '.2F')
+                .replace(/\?/g, '.3F')
+                .replace(/ /g, '_')
+                .replace(/\n/g, '.0A____________')
+                .replace(/&nbsp;/g, '_')
+                .replace(/,/g, '_')
+                .replace(/'/g, '.27')
+                .replace(/"/g, '.22');
         }
-    });
 
-    // Crear el botón para colapsar o expandir el índice
-    const botonColapso = document.createElement('button');
-    botonColapso.className = 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-collapse';
-    botonColapso.type = 'button';
-    botonColapso.textContent = 'Índice';
-    divTocContenedor.insertBefore(botonColapso, tocLista);
+        // Función para asegurar que todos los encabezados tengan un ID único
+        function setUniqueIdsToHeaders(headers) {
+            headers.forEach((header) => {
+                const encodedText = encodeSpecialCharacters(header.textContent.trim());
+                // Asignar el ID codificado al encabezado si no tiene uno
+                if (!header.id) {
+                    header.id = encodedText;
+                }
+            });
+        }
 
-    botonColapso.addEventListener('click', function () {
-        divTocContenedor.classList.toggle('collapsed');
-        tocLista.classList.toggle('collapsed');
-        botonColapso.className = divTocContenedor.classList.contains('collapsed') ? 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-expand' : 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-collapse';
+        const contenedorPrincipal = document.querySelector('.mt-content-container');
+        const divTocContenedor = document.createElement('div');
+        divTocContenedor.id = 'mt-toc-container';
+        divTocContenedor.dataset.title = 'Índice';
+        divTocContenedor.dataset.collapsed = 'false';
+        divTocContenedor.className = 'mt-toggle-container indiceIntegracion';
+        const tocLista = document.createElement('ol');
+        tocLista.className = 'mt-toc-content mt-collapsible-section';
+        divTocContenedor.appendChild(tocLista);
+
+        // Seleccionar todos los encabezados H2 y H3 en el contenedor principal
+        const encabezadosH2 = contenedorPrincipal.querySelectorAll('h2');
+        const encabezadosH3 = contenedorPrincipal.querySelectorAll('h3');
+
+        // Asignar IDs únicos a todos los encabezados H2 y H3
+        setUniqueIdsToHeaders(encabezadosH2);
+        setUniqueIdsToHeaders(encabezadosH3);
+
+        // Crear el índice basado en los encabezados H2 y H3
+        if (encabezadosH2.length > 0) {
+            encabezadosH2.forEach((encabezadoH2) => {
+                const tocLiH2 = document.createElement('li');
+                const tocLinkH2 = document.createElement('a');
+                tocLinkH2.rel = 'internal';
+                tocLinkH2.textContent = encabezadoH2.textContent.trim();
+                tocLinkH2.href = `#${encabezadoH2.id}`;
+                tocLiH2.appendChild(tocLinkH2);
+
+                // Buscar los encabezados H3 que están en el mismo contenedor que el H2 actual
+                const h3InSameContainer = Array.from(encabezadoH2.parentNode.querySelectorAll('h3')).filter(h3 => h3.compareDocumentPosition(encabezadoH2) & Node.DOCUMENT_POSITION_FOLLOWING);
+                if (h3InSameContainer.length > 0) {
+                    const flechaH2 = document.createElement('img');
+                    flechaH2.classList.add('imgFlechaIndice');
+                    flechaH2.style.marginLeft = "10px";
+                    flechaH2.src = '/@api/deki/files/22/downArrowBlue.png.png';
+                    flechaH2.alt = 'Flecha';
+                    tocLiH2.appendChild(flechaH2);
+
+                    const listaHermanosH2 = document.createElement('ol');
+                    listaHermanosH2.classList.add('collapsed');
+                    h3InSameContainer.forEach((encabezadoH3) => {
+                        const tocLiH3 = document.createElement('li');
+                        const tocLinkH3 = document.createElement('a');
+                        tocLinkH3.rel = 'internal';
+                        tocLinkH3.textContent = encabezadoH3.textContent.trim();
+                        tocLinkH3.href = `#${encabezadoH3.id}`;
+                        tocLiH3.appendChild(tocLinkH3);
+                        listaHermanosH2.appendChild(tocLiH3);
+                    });
+
+                    tocLiH2.appendChild(listaHermanosH2);
+                    flechaH2.addEventListener('click', function () {
+                        listaHermanosH2.classList.toggle('collapsed');
+                        flechaH2.src = listaHermanosH2.classList.contains('collapsed') ? '/@api/deki/files/22/downArrowBlue.png.png' : '/@api/deki/files/101/upArrowBlue.png';
+                    });
+                }
+
+                tocLista.appendChild(tocLiH2);
+            });
+        } else {
+            // Si no hay encabezados H2, crear el índice solo con los encabezados H3
+            encabezadosH3.forEach((encabezadoH3) => {
+                const tocLiH3 = document.createElement('li');
+                const tocLinkH3 = document.createElement('a');
+                tocLinkH3.rel = 'internal';
+                tocLinkH3.textContent = encabezadoH3.textContent.trim();
+                tocLinkH3.href = `#${encabezadoH3.id}`;
+                tocLiH3.appendChild(tocLinkH3);
+                tocLista.appendChild(tocLiH3);
+            });
+        }
+
+        // Insertar el contenedor del índice en el DOM
+        contenedorPrincipal.insertBefore(divTocContenedor, contenedorPrincipal.firstChild);
+        tocLista.addEventListener('click', function (event) {
+            if (event.target.tagName === 'A') {
+                event.preventDefault();
+                const enlace = event.target;
+                const idEncabezado = enlace.getAttribute('href').substring(1);
+                const encabezadoDestino = document.getElementById(idEncabezado);
+                if (encabezadoDestino) {
+                    // Desplazarse suavemente al encabezado correspondiente
+                    const posicionElemento = encabezadoDestino.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({
+                        top: posicionElemento,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+
+        // Crear el botón para colapsar o expandir el índice
+        const botonColapso = document.createElement('button');
+        botonColapso.className = 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-collapse';
+        botonColapso.type = 'button';
+        botonColapso.textContent = 'Índice';
+        divTocContenedor.insertBefore(botonColapso, tocLista);
+
+        botonColapso.addEventListener('click', function () {
+            divTocContenedor.classList.toggle('collapsed');
+            tocLista.classList.toggle('collapsed');
+            botonColapso.className = divTocContenedor.classList.contains('collapsed') ? 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-expand' : 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-collapse';
+        });
     });
-});
 
 </script>
