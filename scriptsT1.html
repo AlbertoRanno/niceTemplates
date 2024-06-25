@@ -1,3 +1,23 @@
+<script>
+    /******************************** Orden Filtros en Lista de Resultados *******************************/
+    window.addEventListener("load", function () {
+        if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
+            setTimeout(function () {
+                let divPrincipalFiltros = document.getElementById('mt-search-spblls-filters');
+                let ulPrincipalFiltros = divPrincipalFiltros.querySelector(
+                    '.mt-search-filters-options');
+                let arrayLiPrincipalesFiltros = Array.from(ulPrincipalFiltros.children);
+                if (arrayLiPrincipalesFiltros.length >= 3) {
+                    let segundoLi = arrayLiPrincipalesFiltros[1];
+                    let tercerLi = arrayLiPrincipalesFiltros[2];
+                    let cuartoLi = arrayLiPrincipalesFiltros[3];
+                    ulPrincipalFiltros.insertBefore(tercerLi, segundoLi);
+                    ulPrincipalFiltros.insertBefore(segundoLi, cuartoLi);
+                }
+            }, 500);
+        }
+    })
+</script>
 <!--No corresponden métricas del tenant 1 -->
 <script src="https://unpkg.com/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.min.js"></script>
@@ -477,7 +497,7 @@
                         "page-restrictions-grant-list");
                     if (listadoDeRestricciones) {
                         var listadoDeRestriccionesChildren = listadoDeRestricciones.children;
-                        var lista_grupos_permitidos = [];
+                        var lista_grupos_permitidos = "";
                         if (listadoDeRestriccionesChildren) {
                             for (var i = 0; i < listadoDeRestriccionesChildren.length; i++) {
                                 var li = listadoDeRestriccionesChildren[i];
@@ -486,15 +506,16 @@
                                     if (grupoPermitidoSpan) {
                                         var nombreGrupoPermitido = grupoPermitidoSpan
                                             .textContent.trim();
-                                        lista_grupos_permitidos.push(nombreGrupoPermitido);
+                                        lista_grupos_permitidos += nombreGrupoPermitido + ', ';
                                     }
                                 }
                             }
-                            dataLayer.push({
-                                'titulo_nivel_de_pagina': pageName,
-                                'url_nivel_de_pagina': url,
-                                'lista_grupos_permitidos': lista_grupos_permitidos
-                            });
+                            lista_grupos_permitidos = lista_grupos_permitidos.slice(0, -2);
+                            /* dataLayer.push({
+                                 'titulo_nivel_de_pagina': pageName,
+                                 'url_nivel_de_pagina': url,
+                                 'lista_grupos_permitidos': lista_grupos_permitidos
+                             });*/
                             console.log('Grupos permitidos: ', lista_grupos_permitidos,
                                 ' \nPagina: ', pageName, ' \nUrl: ', url);
                         } else {
@@ -509,6 +530,50 @@
             }
         });
 
+        //************METRICAS POR AGRUPADOR Y NOTIFICACION DE CONFIGURACION DE PAGINA************
+        var selectElement, selectedValue, selectElementOwner, selectElementType, propietario, catalogo, formato,
+            articleURL, nombreIndice;
+        localStorage.setItem("mostrarAlerta", true);
+        location.reload;
+        //Controlo que el codigo se ejecute solo si la pagina contiene la seccion de configuracion de pagina
+        if (document.getElementById("live-tag-article-select")) {
+            selectElement = document.getElementById("live-tag-article-select");
+            selectedValue = selectElement.options[selectElement.selectedIndex].value;
+
+            //Controlo que obtenga los datos solo si esta a nivel documento/articulo
+            if (selectedValue !== "article:topic-category" && selectedValue !== "article:topic-guide") {
+                selectElementOwner = document.getElementById("live-tag-propietario-select");
+                selectElementType = document.getElementById("live-tag-tipo-select");
+                selectElementTypeArticle = document.getElementById("live-tag-article-select");
+
+                propietario = selectElementOwner.options[selectElementOwner.selectedIndex].textContent;
+                catalogo = selectElementType.options[selectElementType.selectedIndex].textContent;
+                formato = selectElementTypeArticle.options[selectElementTypeArticle.selectedIndex].textContent;
+
+                console.log("URL: " + articleURL + " \nPropietario: " + propietario + " \nCatalogo: " +
+                    catalogo + "\nFormato: " + formato);
+
+                /* if (formato == "Procedimientos") {
+                     document.getElementById('mt-toc-container').style.display = 'none';
+                 } */
+            }
+        }
+        window.onload = function () {
+            if (localStorage.getItem("mostrarAlerta")) {
+                if (propietario == "(no definidas)" || catalogo == "(no definidas)" || formato == "(no definidas)") {
+                    mostrarAlerta();
+                }
+                localStorage.removeItem("mostrarAlerta");
+            }
+        }
+
+        function mostrarAlerta() {
+            document.getElementById("alerta-config-page").style.visibility = "visible";
+        }
+
+        function cerrarAlerta() {
+            document.getElementById("alerta-config-page").style.visibility = "hidden";
+        }
         // ************************************* Colapsar subniveles índice *************************************
         let liPrincipalesConOlInternos = document.querySelectorAll(
             '#mt-toc-container > nav > ol > li:has(> ol)');
@@ -608,20 +673,37 @@
         }
 
         function obtenerNombreDeGrupo() {
-            if (document.getElementById("usuarioActivoGrupo")) {
-                var divContent = document.getElementById("usuarioActivoGrupo").textContent;
-                var colonIndex = divContent.indexOf(':');
 
-                if (colonIndex !== -1) {
-                    var jsonName = divContent.substring(1, colonIndex).trim();
-                    return jsonName;
-                }
-            }
+            const input = document.getElementById("usuarioActivoGrupo").textContent;
+            const regex = /"ac-nice-[^"]?"\s:/g;
+            const matches = input.match(regex);
+
+            const result = matches ? matches.map(match => match.slice(1, -1).trim()) : [];
+            console.log("result ", result);
+            /* var divContent = document.getElementById("usuarioActivoGrupo").textContent;
+            var colonIndex = divContent.indexOf(':');
+            
+            if (colonIndex !== -1) {
+                var jsonName = divContent.substring(1, colonIndex).trim();
+                return jsonName;
+            } */
+
         }
         //****************************Lista de resultados************************************
         if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
 
+            function obtenerTerminoDeBusqueda() {
+                let urlBusqueda, queryIndex, terminoBuscado, termino;
+
+                urlBusqueda = window.location.href;
+                queryIndex = urlBusqueda.split('&query=');
+                terminoBuscado = queryIndex[1].toString();
+                termino = terminoBuscado.replace(/\+/g, '');
+                console.log("queryIndex: ", termino);
+            }
+
             function ejecutarCorreccion2Llaves() {
+                obtenerTerminoDeBusqueda();
                 let resultadosLista = document.querySelectorAll('.mt-search-partial-content');
                 resultadosLista.forEach(function (elemento) {
                     let textoSummary = elemento.textContent.trim();
@@ -1195,6 +1277,8 @@
         ulConsejos.appendChild(liConsejos);
 
         if (window.location.href.startsWith("https://osde-prod1.mindtouch.us/Special:Search")) {
+            let cont = 0;
+            console.log("Se ejecuta la busqueda ", cont++);
             //Quisieron el boton de borrar, en el cuerpo de la pagina de resultados
         } else {
             let liBtnListaResultados = document.createElement('li');
