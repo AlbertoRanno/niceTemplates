@@ -6,7 +6,7 @@
 
 
 /* Community Member CSS */
-.mt-user-menu-user, /* Dejar comentado en tenant 1 */
+.mt-user-menu-user,
 div.mt-new-features-container, /* Actualizaciones Nice */
 .botonIrAListaResultados,
 .mt-search-filters-classification-article,
@@ -14,7 +14,9 @@ div.mt-new-features-container, /* Actualizaciones Nice */
 .mt-search-filters-classification-tipo-servicios-procedimiento,
 .mt-search-filters-classification-tipo-basico,
 .mt-search-filters-classification-tipo-servicios-2do-nivel,
-.mt-search-filters-classification-tipo-prestaciones-2do-nivel {
+.mt-search-filters-classification-tipo-prestaciones-2do-nivel,
+.mt-search-filters-classification-tipo-basico-papers
+{
     display: none !important;
 }
 
