@@ -1,21 +1,59 @@
-<!-- Google Tag Manager -->
 <script>
-    (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-            'gtm.start': new Date().getTime(),
-            event: 'gtm.js'
+    /******************************** Esconder Indice generado para la integracion con C4C *******************************/
+    function esconderIndiceIntegracion() {
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                const urlActual = window.location.href;
+                const estaEnUnIframe = window !== window.top;
+                if (urlActual.startsWith('https://osde-prod2.mindtouch.us/') && !estaEnUnIframe) {
+                    const indiceIntegracion = document.querySelector('.indiceIntegracion');
+                    if (indiceIntegracion) {
+                        indiceIntegracion.style.display = 'none';
+                    }
+                }
+            }, 500);
         });
-        var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s),
-            dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src =
-            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-P9XLPPW2');
+    }
+    esconderIndiceIntegracion();
 </script>
-<!-- End Google Tag Manager -->
+<script>
+    /******************************** Orden Filtros en Lista de Resultados *******************************/
+    window.addEventListener("load", function () {
+        if (window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:Search")) {
+            setTimeout(function () {
+                let divPrincipalFiltros = document.getElementById('mt-search-spblls-filters');
+                let ulPrincipalFiltros = divPrincipalFiltros.querySelector(
+                    '.mt-search-filters-options');
+                let arrayLiPrincipalesFiltros = Array.from(ulPrincipalFiltros.children);
+                if (arrayLiPrincipalesFiltros.length >= 3) {
+                    let segundoLi = arrayLiPrincipalesFiltros[1];
+                    let tercerLi = arrayLiPrincipalesFiltros[2];
+                    let cuartoLi = arrayLiPrincipalesFiltros[3];
+                    ulPrincipalFiltros.insertBefore(tercerLi, segundoLi);
+                    ulPrincipalFiltros.insertBefore(segundoLi, cuartoLi);
+                }
+            }, 500);
+        }
+    })
+</script>
+<script>
+        /******************************** Google Tag Manager *******************************/
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-P9XLPPW2');
+</script>
+<!-- Librerias: Popper.js y Tippy.js para colocar iconos en los tooltips -->
 <script src="https://unpkg.com/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.min.js"></script>
 <script>
@@ -232,7 +270,7 @@
 
             btnEnvioFeedback.addEventListener('click', function () {
                 tipo_feedback = "Comentario";
-                comentarioFeedback = textAreaFeedback.value;
+                comentarioFeedback = textAreaFeedback.value.toString();
                 dataLayer.push({
                     'event': 'Feedback comentario',
                     'tipo_feedback': tipo_feedback,
@@ -505,7 +543,7 @@
                         "page-restrictions-grant-list");
                     if (listadoDeRestricciones) {
                         var listadoDeRestriccionesChildren = listadoDeRestricciones.children;
-                        var lista_grupos_permitidos = [];
+                        var lista_grupos_permitidos = "";
                         if (listadoDeRestriccionesChildren) {
                             for (var i = 0; i < listadoDeRestriccionesChildren.length; i++) {
                                 var li = listadoDeRestriccionesChildren[i];
@@ -514,10 +552,12 @@
                                     if (grupoPermitidoSpan) {
                                         var nombreGrupoPermitido = grupoPermitidoSpan
                                             .textContent.trim();
-                                        lista_grupos_permitidos.push(nombreGrupoPermitido);
+                                        lista_grupos_permitidos += nombreGrupoPermitido + ', ';
                                     }
                                 }
                             }
+                            lista_grupos_permitidos = lista_grupos_permitidos.slice(0, -2);
+
                             dataLayer.push({
                                 'titulo_nivel_de_pagina': pageName,
                                 'url_nivel_de_pagina': url,
@@ -683,6 +723,31 @@
         }
         //****************************Lista de resultados************************************
         if (window.location.href.startsWith("https://osde-prod2.mindtouch.us/Special:Search")) {
+            let urlPrevia;
+            urlPrevia = window.location.href;
+
+            function obtenerTerminoDeBusqueda(urlActual) {
+                let queryUrl, queryIndex, query, termino, terminoBuscado, tipoDeCatalogo;
+
+                queryUrl = urlActual.split('query=');
+                queryIndex = queryUrl[1].toString();
+                query = queryIndex.replace(/\+/g, ' ');
+                termino = query.split('&type=wiki');
+                terminoBuscado = termino[0].toString();
+                console.log("terminoBuscado: ", terminoBuscado);
+
+                if (query.includes("classifications")) {
+                    const tipoCheckboxes = document.querySelectorAll('.mt-search-filters-classification-tipo input[type="checkbox"]');
+
+                    for (let i = 0; i < tipoCheckboxes.length; i++) {
+                        const checkbox = tipoCheckboxes[i];
+                        checkbox.addEventListener('click', (event) => {
+                            tipoDeCatalogo = event.target.value.split(':');
+                            console.log('El usuario hizo clic en el checkbox con valor:', tipoDeCatalogo[1]);
+                        });
+                    }
+                }
+            }
 
             function ejecutarCorreccion2Llaves() {
                 let resultadosLista = document.querySelectorAll('.mt-search-partial-content');
@@ -694,7 +759,13 @@
                 });
             }
             setInterval(function () {
+                let urlActual = window.location.href;
                 ejecutarCorreccion2Llaves();
+
+                if (urlActual !== urlPrevia) {
+                    obtenerTerminoDeBusqueda(urlActual);
+                    urlPrevia = urlActual;
+                }
             }, 1000);
 
             document.addEventListener('click', function (event) {
@@ -827,21 +898,24 @@
                     textoEnNodo.nodeValue = "Caracter\u00EDsticas";
                 }
                 //******************METRICAS FILTROS DE BUSQUEDA******************************** 
-                const tipoCheckboxes = document.querySelectorAll(
-                    '.mt-search-filters-classification-tipo input[type="checkbox"]');
+                const tipoCheckboxes = document.querySelectorAll('.mt-search-filters-classification-tipo input[type="checkbox"]');
+                let terminoBuscado;
+                if (tipoCheckboxes) {
 
-                for (let i = 0; i < tipoCheckboxes.length; i++) {
-                    const checkbox = tipoCheckboxes[i];
-                    checkbox.addEventListener('click', (event) => {
-                        const tipoDeCatalogo = event.target.value.split(':');
-                        console.log('El usuario hizo clic en el checkbox con valor:',
-                            tipoDeCatalogo[1]);
-
-                        dataLayer.push({
-                            'event': 'filtro',
-                            'filtro_categoria': 'Catalogo',
-                            'filtro_nombre': tipoDeCatalogo[1],
+                    for (let i = 0; i < tipoCheckboxes.length; i++) {
+                        const checkbox = tipoCheckboxes[i];
+                        checkbox.addEventListener('click', (event) => {
+                            const tipoDeCatalogo = event.target.value.split(':');
+                            console.log('El usuario hizo clic en el checkbox con valor:', tipoDeCatalogo[1]);
                         });
+                    }
+                    terminoBuscado = obtenerTerminoDeBusqueda();
+                    console.log("terminoBuscado: ", terminoBuscado);
+                    dataLayer.push({
+                        'event': 'Buscador',
+                        'termino_buscado': terminoBuscado,
+                        'filtro_categoria': '',
+                        'filtro_nombre': ''
                     });
                 }
 
