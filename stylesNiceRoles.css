@@ -3,6 +3,24 @@
 #SpecialUserLogin {
     display: none !important;
 }
+/* Lo siguiente fue para prueba de Sitio publico en T1
+.elm-user-menu, 
+div.mt-new-features-container,
+.botonIrAListaResultados,
+.mt-search-filters-classification-article,
+.mt-search-filters-classification-propietario,
+.mt-search-filters-classification-tipo-servicios-procedimiento,
+.mt-search-filters-classification-tipo-basico,
+.mt-search-filters-classification-tipo-basico-papers,
+.mt-search-filters-classification-tipo-servicios-2do-nivel,
+.mt-search-filters-classification-tipo-prestaciones-2do-nivel  {
+    display: none !important;
+}
+
+#mt-site-search-input {
+display: block !important;
+}
+*/
 
 
 /* Community Member CSS */
