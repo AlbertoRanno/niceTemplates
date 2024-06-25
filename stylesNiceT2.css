@@ -773,6 +773,7 @@ td {
 .definitionBox,
 .warningRegistration,
 .warningChannels,
+.warningImportantPatologia,
 .warningImportant {
 	padding: 8px 10px;
 	color: var(--primary-black);
@@ -790,6 +791,7 @@ td {
 	}
 }
 
+.warningImportantPatologia,
 .warningImportant {
 	padding-left: 50px;
 	background-color: var(--error-background);
@@ -806,8 +808,28 @@ td {
 	width: 20px;
 	height: 20px;
 	position: absolute;
-	top: 16px;
 	left: 16px;
+}
+
+.warningImportantPatologia::before {
+	content: "";
+	background-image: url(/@api/deki/files/11/exclamationCircleRed.png);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-size: contain;
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	top: 12px;
+	left: 16px;
+}
+
+.warningImportantPatologia p,
+.warningImportantPatologia div,
+.warningImportantPatologia li,
+.warningImportantPatologia h2,
+.warningImportantPatologia h3 {
+	font-size: 24px;
 }
 
 .warningChannels {
@@ -2043,6 +2065,7 @@ div.meta>div.url {
 #usuarioActivoTipo,
 #usuarioActivoAdmin,
 #usuarioActivoPro,
+#usuarioActivoEmail,
 #usuarioActivoProperties,
 #googleTagManager {
 	display: none;
@@ -2633,4 +2656,58 @@ li.mt-user-menu-preferences {
 
 .mt-responsive-table td {
 	border: 1px solid var(--medium-gray);
+}
+
+/* Tablas IVR */
+.tablaIVR {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+.tablaIVR th,
+.tablaIVR td {
+    padding: 8px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.tablaIVR th:nth-child(1),
+.tablaIVR td:nth-child(1) {
+    width: 8%;
+}
+
+.tablaIVR th:nth-child(2),
+.tablaIVR td:nth-child(2) {
+    width: 8%;
+}
+
+.tablaIVR th:nth-child(3),
+.tablaIVR td:nth-child(3) {
+    width: 8%;
+}
+
+.tablaIVR th:nth-child(4),
+.tablaIVR td:nth-child(4) {
+    width: 13%;
+}
+
+.tablaIVR th:nth-child(5),
+.tablaIVR td:nth-child(5) {
+    width: 40% !important;
+}
+
+.tablaIVR th:nth-child(6),
+.tablaIVR td:nth-child(6) {
+    width: 10% !important;
+}
+
+.tablaIVR th:nth-child(7),
+.tablaIVR td:nth-child(7) {
+    width: 3%;
+}
+
+.tablaIVR th:nth-child(8),
+.tablaIVR td:nth-child(8) {
+    width: 10%;
 }
