@@ -141,6 +141,9 @@
                     // Si ese header,no tiene aún ID, le asigno el texto codificado a forma válida de URL, como el ID
                     header.id = textoCodificado;
                     // Si tiene ID previo, hardcodeado, o agregado por Nice, se le respeta ese, pero aún así será agregado al índice.
+                    /* IMPORTANTE! Estos IDs de los headings, luego los usaré para redireccionar,
+                    con el desplazamiento suave, a la sección de la página, donde se encuentran
+                    estos encabezados! (Ver al final donde dice **** IMPORTANTE ****/
                 }
             });
         }
@@ -201,7 +204,7 @@
                         En este caso, 'internal' se está utilizando para indicar que el enlace apunta a una sección interna del mismo documento. 
                     Esto puede ser útil para navegadores y otros programas que procesan el HTML para entender cómo se relacionan los distintos elementos del documento entre sí.*/
                 tocLinkH2.textContent = encabezadoH2.textContent.trim();
-                /* Lo siguiente fue modificado, ahora creo la url, se la asigno como id, a cada header, y con eso armo los href, y dejo cada elemento con su id, lo cual es una nueva practica.
+                /* Lo siguiente fue modificado, ahora creo la url, se la asigno como id, a cada header, y con eso armo los href, y dejo cada elemento con su id, lo cual es una buena practica.
 
                 ----viejo:
                 // Establezco que va a decir el link, Lo mismo que el H2, pero sin los espacios en blanco al comienzo y al final
@@ -262,7 +265,7 @@
                */
                 
                 if (h3EnMismoContenedor.length > 0) {
-                    // Otra nodeList, puedo usar length
+                    // Un array, porque así definí la variable, puedo usar length
                     // Si al menos encuentra un elemento h3, el h2 previo, va a tener un hijo, entonces, ya crea la flecha para indicar que es desplegable ese h2
                     const flechaH2 = document.createElement('img');
                     flechaH2.classList.add('imgFlechaIndice');
@@ -280,7 +283,7 @@
                     /* Sin perder de vista, que este forEach, es interno al de los h2, lo que implica, que por cada h2, voy a recorrer todos SUS h3.
                     Hago, como hice con los h2, ahora recorro todos los h3, y por cada uno creo un LI, con su <a> interno, indico en el "rel" que 
                     es interno, es decir que vincula a otra parte del mismo documento, le quito los espacios, reemplazo los espacios internos por guiones,
-                    y reemplazo los acentos por la codificacion correcta para generar el href. Un vez construido todo el elemento, lo agrego a la OL 
+                    y reemplazo los caracteres especiales por la codificacion correcta para generar el href. Un vez construido todo el elemento, lo agrego a la OL 
                     perteneciente al H2 que estaba recorriendo con el forEach externo    */
                     h3EnMismoContenedor.forEach((encabezadoH3) => {
                         const tocLiH3 = document.createElement('li');
@@ -384,6 +387,9 @@
         Al llamar a preventDefault(), se evita que el enlace se active de manera estándar.
         const enlace = event.target;: Aquí se guarda el enlace <a> en la variable enlace.
         const idEncabezado = enlace.getAttribute('href').substring(1);: Esta línea obtiene el valor del atributo href del enlace y luego elimina el primer carácter ( que es el "#"") del valor obtenido.
+
+            ****************** IMPORTANTE!: ******************
+
         Esto se hace para obtener el ID del encabezado al que el enlace se refiere.
         const encabezadoDestino = document.getElementById(idEncabezado);: Con el ID del encabezado obtenido en el paso anterior, esta línea busca el elemento en el documento 
         que tiene ese ID, es decir, el encabezado al que se hace referencia en el enlace.
