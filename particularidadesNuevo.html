@@ -1,160 +1,191 @@
-<div class="mt-contentreuse-widget" data-page="Contenido_a_Reutilizar/Funcionalidades/Globales" data-section=""
-    data-show="false">
-    <pre class="script">
-    wiki.page("Contenido_a_Reutilizar/Funcionalidades/Globales", NULL)</pre>
-</div>
+<p class="mt-script-comment">Permite la edición, mediante la interfaz de carga, de los contenidos colapsables</p>
 
 <pre class="script-css">
-    /* Oculta los contenidos */
-                    .contenidosRegiones .collapse {
-                        display: none;
-                    }
-                    
-                    /* Muestra los contenidos cuando están activos */
-                    .contenidosRegiones .collapse.active {
-                        display: block;
-                    }
-                    
-                    /* Para distinguir los botones que van a quedar SIN contenido */
-                    span.noContent button {
-                      background-color: red;
-                    }
-    
-    
-    .filialesNodos ul {
-        display: flex;
-        flex-wrap: wrap;
-        /*list-style-type: none;*/
-        padding: 0;
-        margin: 0;
-    }
-    
-    .filialesNodos li {
-        list-style-position: inside;
-        margin-right: 15px; 
-    }</pre>
+.contenidosRegiones .collapse {
+            display: none;
+        }
+        .contenidosRegiones .collapse.active {
+            display: block;
+        }</pre>
+
+<div class="comment">
+<div class="mt-comment-meta">
+<div class="mt-comment-author">Alberto</div>
+<time class="mt-comment-datetime" datetime="2024-07-01T16:29:16.849Z">1 jul 2024, 13:29</time></div>
+
+<div class="mt-comment-content">
+<p><strong style="font-family: var(--font-family-secondary);"><strong>Indicaciones para la carga</strong></strong></p>
+
+<p>Favor de borrar desde renglones vacios, señalando o no el contenido a eliminar, pero con Retroceso, <strong>evitando el uso de Suprimir</strong> dado que puede borrar las etiquetas de apertura de algún contenido sin que lo noten a priori.</p>
+
+<p>El contenido debe cargarse, reemplazando en cada opción la parte indicada, por ejemplo, "contenidoMetropolitana".</p>
+
+<p>Para ayudar con la carga, se visualizan solo para usuarios Pro Members (Editores), los bordes de las diferentes secciones en colores, de no verlos, favor de avisar.</p>
+
+<p>Cuando una región no tiene contenido en ninguna de sus filiales, debe seleccionarse y aplicarse la clase "emptyRegions" al nombre de la misma.</p>
+
+<p>Cuando una región, que había sido establecida como vacía ("emptyRegions"), vuelve a tener contenido, se la debe seleccionar, y aplicar la clase "nonEmptyRegion". Tener presente que <u>desde la interfaz de carga, este cambio no será percibido</u>, pero sí una vez que se guarde el artículo.</p>
+
+<p>Otro tipo de superposición de clases, no tiene efecto. Por lo tanto, en caso de error manejarse con Ctrl+Z / deshacer.</p>
+
+<p>Cualquier inconveniente,&nbsp;avísenme al chat. Gracias!</p>
+</div>
+</div>
+
+<p><br />
+&nbsp;</p>
 
 <div class="particularidades">
-    <nav class="navBarLateral"><button onclick="alternarCollapse('contenidoMetropolitana')"
-            type="button">Metropolitana</button><button onclick="alternarCollapse('contenidoCuyo')"
-            type="button">Cuyo</button><button onclick="alternarCollapse('contenidoNOA')"
-            type="button">NOA</button><button onclick="alternarCollapse('contenidoCentro')"
-            type="button">Centro</button><button onclick="alternarCollapse('contenidoPatagoniaSur')"
-            type="button">Patagonia Sur</button><button onclick="alternarCollapse('contenidoPatagoniaNorte')"
-            type="button">Patagonia Norte</button><button onclick="alternarCollapse('contenidoLitoralNorte')"
-            type="button">Litoral Norte</button><button onclick="alternarCollapse('contenidoLitoralSur')"
-            type="button">Litoral Sur</button><button onclick="alternarCollapse('contenidoBuenosAiresSur')"
-            type="button">Buenos Aires Sur</button><button onclick="alternarCollapse('contenidoBuenosAiresNorte')"
-            type="button">Buenos Aires Norte</button></nav>
+<nav class="navBarLateral"><button onclick="alternarCollapse('contenidoMetropolitana')" type="button">Metropolitana</button><button onclick="alternarCollapse('contenidoCuyo')" type="button">Cuyo</button><button onclick="alternarCollapse('contenidoNOA')" type="button">NOA</button><button onclick="alternarCollapse('contenidoCentro')" type="button">Centro</button><button onclick="alternarCollapse('contenidoPatagoniaSur')" type="button">Patagonia Sur</button><button onclick="alternarCollapse('contenidoPatagoniaNorte')" type="button">Patagonia Norte</button><button onclick="alternarCollapse('contenidoLitoralNorte')" type="button">Litoral Norte</button><button onclick="alternarCollapse('contenidoLitoralSur')" type="button">Litoral Sur</button><button onclick="alternarCollapse('contenidoBuenosAiresSur')" type="button">Buenos Aires Sur</button><button onclick="alternarCollapse('contenidoBuenosAiresNorte')" type="button">Buenos Aires Norte</button></nav>
 
-    <div class="contenidosRegiones">
-        <div class="collapse" id="contenidoMetropolitana">
-            <div class="warningRegistration style-wrap filialesNodos">
-                <ul>
-                    <li><u>Metropolitana</u></li>
-                </ul>
-            </div>
-        </div>
+<div class="contenidosRegiones">
+<div class="collapse" id="contenidoMetropolitana">
+<div class="warningRegistration style-wrap filialesNodos">
+<ul>
+    <li><u>Metropolitana</u></li>
+</ul>
+<img alt="Mapa Metropolitana" src="/@api/deki/files/1959/Metropolitana.png" /></div>
 
-        <div class="collapse" id="contenidoCuyo">
-            <div class="warningRegistration style-wrap filialesNodos">
-                <ul>
-                    <li>San Luis</li>
-                    <li>San Juan</li>
-                    <li><u>Mendoza</u></li>
-                </ul>
-            </div>
-        </div>
+<div class="particularidadNodo">
+<p>contenidoMetropolitana</p>
+</div>
+</div>
 
-        <div class="collapse" id="contenidoNOA">
-            <div class="warningRegistration style-wrap filialesNodos">
-                <ul>
-                    <li><u>Salta</u></li>
-                    <li>Jujuy</li>
-                    <li>Tucumán</li>
-                    <li>Santiago del Estero</li>
-                    <li>La Rioja</li>
-                    <li>Catamarca</li>
-                </ul>
-            </div>
-        </div>
+<div class="collapse" id="contenidoCuyo">
+<div class="warningRegistration style-wrap filialesNodos">
+<ul>
+    <li>San Luis</li>
+    <li>San Juan</li>
+    <li><u>Mendoza</u></li>
+</ul>
+<img alt="Mapa Cuyo" src="/@api/deki/files/1955/Cuyo.png" /></div>
 
-        <div class="collapse" id="contenidoCentro">
-            <div class="warningRegistration style-wrap filialesNodos">
-                <ul>
-                    <li><u>Córdoba</u></li>
-                    <li>Villa María</li>
-                    <li>Río Cuarto</li>
-                </ul>
-            </div>
-        </div>
+<div class="particularidadNodo">
+<p>contenidoCuyo</p>
+</div>
+</div>
 
-        <div class="collapse" id="contenidoPatagoniaSur">
-            <div class="warningRegistration style-wrap filialesNodos">
-                <ul>
-                    <li>Santa Cruz</li>
-                    <li>Tierra del Fuego</li>
-                    <li><u>Comodoro Rivadavia</u></li>
-                    <li>Trelew</li>
-                </ul>
-            </div>
-        </div>
+<div class="collapse" id="contenidoNOA">
+<div class="warningRegistration style-wrap filialesNodos">
+<ul>
+    <li><u>Salta</u></li>
+    <li>Jujuy</li>
+    <li>Tucumán</li>
+    <li>Santiago del Estero</li>
+    <li>La Rioja</li>
+    <li>Catamarca</li>
+</ul>
+<img alt="Mapa NOA" src="/@api/deki/files/1956/NOA.png" /></div>
 
-        <div class="collapse" id="contenidoPatagoniaNorte">
-            <div class="warningRegistration style-wrap filialesNodos">
-                <ul>
-                    <li>Bariloche</li>
-                    <li><u>Norpatagónica</u></li>
-                    <li>La Pampa</li>
-                </ul>
-            </div>
-        </div>
+<div class="particularidadNodo">
+<p>contenidoNOA</p>
+</div>
+</div>
 
-        <div class="collapse" id="contenidoLitoralNorte">
-            <div class="warningRegistration style-wrap filialesNodos">
-                <ul>
-                    <li><u>Chaco</u></li>
-                    <li>Formosa</li>
-                    <li>Corrientes</li>
-                    <li>Misiones</li>
-                </ul>
-            </div>
-        </div>
+<div class="collapse" id="contenidoCentro">
+<div class="warningRegistration style-wrap filialesNodos">
+<ul>
+    <li><u>Córdoba</u></li>
+    <li>Villa María</li>
+    <li>Río Cuarto</li>
+</ul>
+<img alt="Mapa Centro" src="/@api/deki/files/1958/Centro.png" /></div>
 
-        <div class="collapse" id="contenidoLitoralSur">
-            <div class="warningRegistration style-wrap filialesNodos">
-                <ul>
-                    <li><u>Rosario</u></li>
-                    <li>Santa Fe</li>
-                    <li>Del Paraná</li>
-                    <li>Río Uruguay</li>
-                </ul>
-            </div>
-        </div>
+<div class="particularidadNodo">
+<p>contenidoCentro</p>
+</div>
+</div>
 
-        <div class="collapse" id="contenidoBuenosAiresSur">
-            <div class="warningRegistration style-wrap filialesNodos">
-                <ul>
-                    <li>Buenos Aires Centro</li>
-                    <li>Bahía Blanca</li>
-                    <li><u>Mar del Plata</u></li>
-                    <li>La Plata</li>
-                    <li>Lobos</li>
-                </ul>
-            </div>
-        </div>
+<div class="collapse" id="contenidoPatagoniaSur">
+<div class="warningRegistration style-wrap filialesNodos">
+<ul>
+    <li>Santa Cruz</li>
+    <li>Tierra del Fuego</li>
+    <li><u>Comodoro Rivadavia</u></li>
+    <li>Trelew</li>
+</ul>
+<img alt="Mapa Patagonia Sur" src="/@api/deki/files/1953/PatagoniaSur.png" /></div>
 
-        <div class="collapse" id="contenidoBuenosAiresNorte">
-            <div class="warningRegistration style-wrap filialesNodos">
-                <ul>
-                    <li><u>Pergamino</u></li>
-                    <li>Junín</li>
-                    <li>Chivilcoy</li>
-                    <li>Trenque Lauquen</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+<div class="particularidadNodo">
+<p>contenidoPatagoniaSur</p>
+</div>
+</div>
+
+<div class="collapse" id="contenidoPatagoniaNorte">
+<div class="warningRegistration style-wrap filialesNodos">
+<ul>
+    <li>Bariloche</li>
+    <li><u>Norpatagónica</u></li>
+    <li>La Pampa</li>
+</ul>
+<img alt="Mapa Patagonia Norte" src="/@api/deki/files/1951/PatagoniaNorte.png" /></div>
+
+<div class="particularidadNodo">
+<p>contenidoPatagoniaNorte</p>
+</div>
+</div>
+
+<div class="collapse" id="contenidoLitoralNorte">
+<div class="warningRegistration style-wrap filialesNodos">
+<ul>
+    <li><u>Chaco</u></li>
+    <li>Formosa</li>
+    <li>Corrientes</li>
+    <li>Misiones</li>
+</ul>
+<img alt="Mapa Litoral Norte" src="/@api/deki/files/1954/LitoralNorte.png" /></div>
+
+<div class="particularidadNodo">
+<p>contenidoLitoralNorte</p>
+</div>
+</div>
+
+<div class="collapse" id="contenidoLitoralSur">
+<div class="warningRegistration style-wrap filialesNodos">
+<ul>
+    <li><u>Rosario</u></li>
+    <li>Santa Fe</li>
+    <li>Del Paraná</li>
+    <li>Río Uruguay</li>
+</ul>
+<img alt="Mapa Litoral Sur" src="/@api/deki/files/1960/LitoralSur.png" /></div>
+
+<div class="particularidadNodo">
+<p>contenidoLitoralSur</p>
+</div>
+</div>
+
+<div class="collapse" id="contenidoBuenosAiresSur">
+<div class="warningRegistration style-wrap filialesNodos">
+<ul>
+    <li>Buenos Aires Centro</li>
+    <li>Bahía Blanca</li>
+    <li><u>Mar del Plata</u></li>
+    <li>La Plata</li>
+    <li>Lobos</li>
+</ul>
+<img alt="Mapa Buenos Aires Sur" src="/@api/deki/files/1952/BuenosAiresSur.png" /></div>
+
+<div class="particularidadNodo">
+<p>contenidoBuenosAiresSur</p>
+</div>
+</div>
+
+<div class="collapse" id="contenidoBuenosAiresNorte">
+<div class="warningRegistration style-wrap filialesNodos">
+<ul>
+    <li><u>Pergamino</u></li>
+    <li>Junín</li>
+    <li>Chivilcoy</li>
+    <li>Trenque Lauquen</li>
+</ul>
+<img alt="Mapa Buenos Aires Norte" src="/@api/deki/files/1957/BuenosAiresNorte.png" /></div>
+
+<div class="particularidadNodo">
+<p>contenidoBuenosAiresNorte</p>
+</div>
+</div>
+</div>
 </div>
 
 <p>&nbsp;</p>
