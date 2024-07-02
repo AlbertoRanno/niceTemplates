@@ -1,16 +1,41 @@
 <style>
+    /* Al comienzo use el mismo ID que el default para omitir generar todas las propiedades CSS, pero ya lo omití y generé las mismas, que son las siguientes. Ademas, en lugar de replicar el id original, le genere el propio: #indiceIntegracion, por lo que cambie todos los selectores, para usar el ID o la clase */
     .collapsed {
         display: none;
     }
 
-    /* Para que permanezca en la posición correcta dentro de la integracion */
-    .mt-content-container #mt-toc-container {
+    .mt-content-container #indiceIntegracion {
+        z-index: 1000;
+        /*Para que los LI le pasen por debajo al escrolear*/
+        display: block;
+        /*sin esto no se veia el div con el boton cuando se colapsaba - el original lo trae tambien*/
+        max-width: 30%;
+        /*porcentaje de ancho de la pagina*/
+        max-height: 70vh;
+        /*Hace que el contenedor no siga verticalmente mas alla de lo visible*/
+        overflow: auto;
+        /*Genera la barra de desplazamiento cuando son muchos LI*/
         position: fixed;
+        /*Para que permanezca en la posición correcta dentro de la integracion */
         right: 10px;
+        /*puede permanece igual en Nice*/
         top: 10px;
+        /*debe cambiar a 100 para verse Nice*/
+        border: 1px solid #ccc;
+        /**/
     }
 
-    #mt-toc-container.collapsed {
+    #indiceIntegracion li a {
+        font-weight: 400;
+        /*Para que los LI no se vean en negrita*/
+    }
+
+    #indiceIntegracion ol li::marker {
+        color: var(--primary-blue);
+        /*Para que los nros de la OL sean del mismo color que los LI, y no del negro que viene por default*/
+    }
+
+    div.indiceIntegracion.collapsed {
         display: none;
     }
 
@@ -23,8 +48,27 @@
             2 - Blablabla... (no 2.2)
         3 - Blablabla...
             1 - Blablabla... (no 3.1)      */
-    .mt-content-container #mt-toc-container>ol>li::before {
+    .mt-content-container div.indiceIntegracion>ol>li::before {
         display: none !important;
+    }
+
+    /*Envolví, desde el script, al boton en un DIV. Esto el original no lo trae. Y lo use, para algo que el orginal no hace tampoco, que es que, el div, con su boton interno que permite colapsar todo el indice, permanezca siempre visible, de modo que cuando el indice es extenso, no se tenga que volver a scrolear hacia arriba para buscarlo y colapsarlo*/
+    .divBotonIndice {
+        position: sticky;
+        /*Pegado al contenedor - siempre visible*/
+        top: -10px;
+        /*Desplazo el div hacia arriba, de modo que por encima del div, no se vean los LI que se van escroleando*/
+        padding: 10px 10px 0 10px;
+        margin-left: -10px;
+        /*Lo mismo, para que no se vean los LI escroleados*/
+        background-color: var(--background-light-blue);
+        box-sizing: border-box;
+        min-width: 10em;
+        /*Sin un minimo, la palabra 'indice' se iba debajo del '+' cuando esta colapsado*/
+    }
+
+    .divBotonIndice button.mt-toggle {
+        z-index: 1000;
     }
 
     /* Las explicaciones siguientes las pasé a ejemplos, porque simplifiqué el css y quedó mejor
@@ -85,7 +129,7 @@
                 } else {
                     console.log('La URL no coincide con "https://osde-prod2.mindtouch.us/" o se est\u00E1 mostrando en un iframe, por lo tanto, no se oculta el \u00EDndice');
                 }
-            }, 500);
+            }, 1);
         });
     }
     esconderIndiceIntegracion();
@@ -100,10 +144,11 @@
         como imágenes y scripts. Es útil para ejecutar código JavaScript que necesita acceder al DOM tan pronto como sea posible, pero no necesita esperar a que
         se carguen recursos externos, como imágenes.
         -load: Este se dispara cuando todos los recursos de la pagina, incluidas imágenes, estilos CSS, y scripts externos, se han cargado completamente.
-        Es útil para realizar acciones que requieren que todos los recursos de la página estén disponibles, como inicializar plugins o cargar contenido dinámico. O... capturar un contenido específico*/
+        Es útil para realizar acciones que requieren que todos los recursos de la página estén disponibles, como inicializar plugins o cargar contenido dinámico. O... capturar un contenido específico generado justamente por un script...*/
 
         // Función para codificar los caracteres especiales (Explicado al final, de forma general *** SPOILER: Nice hace config especial)
-        function codificarCaracteresEspeciales(text) { // QueReemplaza por queExpresion
+        function codificarCaracteresEspeciales(text) { 
+            // QueReemplaza por queExpresion
             // Eliminar espacios adicionales alrededor de los saltos de línea
             text = text.replace(/\s*\n\s*/g, '\n');
             return text.replace(/á/g, '.C3.A1') // á por .C3.A1
@@ -154,7 +199,9 @@
 
         // Creo el contenedor del indice
         const divTocContenedor = document.createElement('div');
-        divTocContenedor.id = 'mt-toc-container';
+        divTocContenedor.id = 'indiceIntegracion';
+        //Aquí usaba el índice default, pero luego pasé al propio
+        //divTocContenedor.id = 'mt-toc-container';
         // Mismo que el indice nativo, para que se le aplique el mismo CSS que viene por default, los voy a diferenciar por el contenedor, en un ambiente controlado.
         divTocContenedor.dataset.title = 'Índice';
         divTocContenedor.dataset.collapsed = 'false';
@@ -234,7 +281,9 @@
 
                 // Una vez encontró el H2, y lo formo como un LI del indice, con su link interno, es hora de capturar los encabezados h3 dentro de este h2
                 // Buscar los encabezados H3 que están en el mismo contenedor que el H2 actual
-                const h3EnMismoContenedor = Array.from(encabezadoH2.parentNode.querySelectorAll('h3')).filter(h3 => h3.compareDocumentPosition(encabezadoH2) & Node.DOCUMENT_POSITION_FOLLOWING);
+                const h3EnMismoContenedor = Array.from(encabezadoH2.parentNode.querySelectorAll('h3'));
+                // Lo de arriba seguia, en lugar de con el ';' con: .filter(h3 => h3.compareDocumentPosition(encabezadoH2) & Node.DOCUMENT_POSITION_FOLLOWING); ... Pero como eso no entendí que aportaba, lo saqué, y funciona bien así.
+
                 /*  Resumen:
                 La variable h3EnMismoContenedor contiene todos los elementos h3 que están en el mismo contenedor que encabezadoH2 y que están posicionados después de encabezadoH2 en el árbol de documentos. Esto es útil para agrupar los encabezados h3 que pertenecen al mismo contexto que un encabezado h2 específico y están ordenados lógicamente después de él en la estructura de la página.
 
@@ -263,7 +312,7 @@
                 
                 filter() crea un nuevo array (h3EnMismoContenedor) que contiene solo los elementos h3 que cumplen con la condición especificada, es decir, aquellos que están después de encabezadoH2 en el árbol de documentos.              
                */
-                
+
                 if (h3EnMismoContenedor.length > 0) {
                     // Un array, porque así definí la variable, puedo usar length
                     // Si al menos encuentra un elemento h3, el h2 previo, va a tener un hijo, entonces, ya crea la flecha para indicar que es desplegable ese h2
@@ -290,7 +339,6 @@
                         const tocLinkH3 = document.createElement('a');
                         tocLinkH3.rel = 'internal';
                         tocLinkH3.textContent = encabezadoH3.textContent.trim();
-                        const enlaceTextoH3 = encodeSpecialCharacters(encabezadoH3.textContent.trim());
                         tocLinkH3.href = `#${encabezadoH3.id}`;
                         tocLiH3.appendChild(tocLinkH3);
                         listaHermanosH2.appendChild(tocLiH3);
@@ -308,9 +356,7 @@
                         listaHermanosH2.classList.toggle('collapsed');
                         // los clicks alternan que esté o no la clase "collapsed"
                         // con el ternario determino que url de imagen se carga, dependiendo de que este o no la clase:
-                        flechaH2.src = listaHermanosH2.classList.contains('collapsed') ?
-                            '/@api/deki/files/22/downArrowBlue.png.png' :
-                            '/@api/deki/files/101/upArrowBlue.png';
+                        flechaH2.src = listaHermanosH2.classList.contains('collapsed') ? '/@api/deki/files/22/downArrowBlue.png.png' : '/@api/deki/files/101/upArrowBlue.png';
                         // Cambia la imagen de la flecha
                     });
                 }
@@ -329,6 +375,7 @@
             La explicación hasta acá, fue sin considerar el caso de que había páginas con h3, sin un h2 padre, por eso, el condicional del comienzo,
             y ahora el siguiente else, que considera el caso de solo h3 en el índice:*/
         } else {
+            if (encabezadosH3.length > 0) {
             // Si no hay encabezados H2, crear el índice solo con los encabezados H3
             encabezadosH3.forEach((encabezadoH3) => {
                 const tocLiH3 = document.createElement('li');
@@ -340,6 +387,10 @@
                 tocLista.appendChild(tocLiH3);
             });
         }
+        }
+
+        const offset = 20;
+        //Con offset regulo la altura a la que el desplazamiento suave deja los encabezados
 
         // Insertar el contenedor del índice en el DOM
         contenedorPrincipal.insertBefore(divTocContenedor, contenedorPrincipal.firstChild);
@@ -367,11 +418,11 @@
                 }
                 }); **** Fin de viejo, pero la explicacion de esto esta abajo*/
 
-        if (encabezadoDestino) {
+                if (encabezadoDestino) {
                     // Desplazarse suavemente al encabezado correspondiente
                     const posicionElemento = encabezadoDestino.getBoundingClientRect().top + window.pageYOffset;
                     window.scrollTo({
-                        top: posicionElemento,
+                        top: posicionElemento - offset,
                         behavior: 'smooth'
                     });
                 }
@@ -400,19 +451,23 @@
         window.scrollTo({ top: desplazamiento, behavior: 'smooth' });: Finalmente, se utiliza window.scrollTo() para desplazar suavemente la página hasta la posición del encabezado, 
         utilizando la opción behavior: 'smooth' para lograr un desplazamiento suave en lugar de instantáneo. La propiedad top se establece en la posición del encabezado donde se desea desplazar. */
 
-        // Por otra parte, se crea el botón de colapso de todo el índice
+        // Por otra parte, se crea el botón de colapso de todo el índice, pero antes,y por lo explicado al comienzo del CSS, tambien creo un div que contenga a este boton (Para poder dejarlo fijo, y ocultar con su fondo, los LI que pasan al escrolear)
+        const divBotonIndice = document.createElement('div');
+        divBotonIndice.className = 'divBotonIndice';
+            
         const botonColapso = document.createElement('button');
         botonColapso.className = 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-collapse';
         botonColapso.type = 'button';
         botonColapso.textContent = 'Índice';
-        divTocContenedor.insertBefore(botonColapso, tocLista);
+
+        divBotonIndice.appendChild(botonColapso);
+        divTocContenedor.insertBefore(divBotonIndice, tocLista);
 
         // Se agrega el evento de clic para colapsar/expandir el índice al botón de colapso
         botonColapso.addEventListener('click', function () {
             divTocContenedor.classList.toggle('collapsed');
             tocLista.classList.toggle('collapsed');
-            botonColapso.className = divTocContenedor.classList.contains('collapsed') ? 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-expand' :
-                'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-collapse';
+            botonColapso.className = divTocContenedor.classList.contains('collapsed') ? 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-expand' : 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-collapse';
         });
     });
 </script>

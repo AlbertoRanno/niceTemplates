@@ -11,7 +11,7 @@
         overflow: auto;
         position: fixed;
         right: 10px;
-        top: 100px;
+        top: 10px;
         border: 1px solid #ccc;
     }
 
@@ -50,18 +50,15 @@
     function esconderIndiceIntegracion() {
         window.addEventListener('load', function () {
             setTimeout(function () {
-                if (window.location.href.startsWith('https://osde-prod2.mindtouch.us/')) {
+                const urlActual = window.location.href;
+                const estaEnUnIframe = window !== window.top;
+                if (urlActual.startsWith('https://osde-prod2.mindtouch.us/') && !estaEnUnIframe) {
                     const indiceIntegracion = document.querySelector('.indiceIntegracion');
                     if (indiceIntegracion) {
                         indiceIntegracion.style.display = 'none';
-                        console.log('El elemento .indiceIntegracion se oculto correctamente.');
-                    } else {
-                        console.log('No se encontro el elemento .indiceIntegracion en el documento.');
                     }
-                } else {
-                    console.log('La URL no coincide con "https://osde-prod2.mindtouch.us/".');
                 }
-            }, 500);
+            }, 1);
         });
     }
     esconderIndiceIntegracion();
@@ -70,7 +67,7 @@
 <script>
     window.addEventListener('load', function () {
 
-        function encodeSpecialCharacters(text) {
+        function codificarCaracteresEspeciales(text) {
             text = text.replace(/\s*\n\s*/g, '\n');
             return text.replace(/á/g, '.C3.A1')
                 .replace(/Á/g, '.C3.81')
@@ -95,11 +92,11 @@
                 .replace(/"/g, '.22');
         }
 
-        function setUniqueIdsToHeaders(headers) {
+        function establezcoIDParaCadaHeader(headers) {
             headers.forEach((header) => {
-                const encodedText = encodeSpecialCharacters(header.textContent.trim());
+                const textoCodificado = codificarCaracteresEspeciales(header.textContent.trim());
                 if (!header.id) {
-                    header.id = encodedText;
+                    header.id = textoCodificado;
                 }
             });
         }
@@ -117,8 +114,8 @@
         const encabezadosH2 = contenedorPrincipal.querySelectorAll('h2');
         const encabezadosH3 = contenedorPrincipal.querySelectorAll('h3');
 
-        setUniqueIdsToHeaders(encabezadosH2);
-        setUniqueIdsToHeaders(encabezadosH3);
+        establezcoIDParaCadaHeader(encabezadosH2);
+        establezcoIDParaCadaHeader(encabezadosH3);
 
         if (encabezadosH2.length > 0) {
             encabezadosH2.forEach((encabezadoH2) => {
@@ -129,8 +126,8 @@
                 tocLinkH2.href = `#${encabezadoH2.id}`;
                 tocLiH2.appendChild(tocLinkH2);
 
-                const h3InSameContainer = Array.from(encabezadoH2.parentNode.querySelectorAll('h3'));
-                if (h3InSameContainer.length > 0) {
+                const h3EnMismoContenedor = Array.from(encabezadoH2.parentNode.querySelectorAll('h3'));
+                if (h3EnMismoContenedor.length > 0) {
                     const flechaH2 = document.createElement('img');
                     flechaH2.classList.add('imgFlechaIndice');
                     flechaH2.style.marginLeft = "10px";
@@ -140,7 +137,7 @@
 
                     const listaHermanosH2 = document.createElement('ol');
                     listaHermanosH2.classList.add('collapsed');
-                    h3InSameContainer.forEach((encabezadoH3) => {
+                    h3EnMismoContenedor.forEach((encabezadoH3) => {
                         const tocLiH3 = document.createElement('li');
                         const tocLinkH3 = document.createElement('a');
                         tocLinkH3.rel = 'internal';
@@ -192,8 +189,6 @@
             }
         });
 
-
-
         const divBotonIndice = document.createElement('div');
         divBotonIndice.className = 'divBotonIndice';
 
@@ -201,7 +196,7 @@
         botonColapso.className = 'mt-toggle mt-summary-toggle ui-button-icon mt-toggle-collapse';
         botonColapso.type = 'button';
         botonColapso.textContent = 'Índice';
-
+        
         divBotonIndice.appendChild(botonColapso);
         divTocContenedor.insertBefore(divBotonIndice, tocLista);
 
